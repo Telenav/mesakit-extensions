@@ -1,0 +1,63 @@
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                                                                                                                 -->
+<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
+<!--  Licensed under Apache License, Version 2.0                                                                     -->
+<!--                                                                                                                 -->
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.telenav.mesakit</groupId>
+        <artifactId>mesakit-tools-applications</artifactId>
+        <version>0.9.8-alpha-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mesakit-tools-applications-pbf-comparator</artifactId>
+    <packaging>jar</packaging>
+    <name>MesaKit - Tools - Applications - PBF Comparator</name>
+
+    <dependencies>
+
+        <!-- MesaKit -->
+
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-core-application</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-graph-core</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-filesystems-hdfs</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-filesystems-s3fs</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+
+        <!-- HTTP -->
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+</project>

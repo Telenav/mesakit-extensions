@@ -1,0 +1,62 @@
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                                                                                                                 -->
+<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
+<!--  Licensed under Apache License, Version 2.0                                                                     -->
+<!--                                                                                                                 -->
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.telenav.mesakit</groupId>
+        <artifactId>mesakit-tools</artifactId>
+        <version>0.9.8-alpha-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mesakit-tools-applications</artifactId>
+    <packaging>pom</packaging>
+    <name>MesaKit - Tools - Applications</name>
+
+    <modules>
+
+        <!-- Graph -->
+
+        <module>graph-analyzer</module>
+        <module>graph-double-digitized-ways-extractor</module>
+        <module>graph-dumper</module>
+        <module>graph-slicer</module>
+        <module>graph-verifier</module>
+        <module>graph-to-pbf-converter</module>
+
+        <!-- PBF -->
+
+        <module>pbf-analyzer</module>
+        <module>pbf-comparator</module>
+        <module>pbf-dumper</module>
+        <module>pbf-metadata</module>
+        <module>pbf-region-extractor</module>
+        <module>pbf-to-graph-converter</module>
+        <module>pbf-world-graph-extractor</module>
+        <module>pbf-filter</module>
+
+        <!-- CODECS -->
+
+        <module>codec-generator</module>
+
+        <!-- Logging -->
+
+        <module>log-viewer</module>
+
+        <!-- Services -->
+
+        <module>service-registry</module>
+
+        <!-- Region -->
+
+        <module>region-information</module>
+
+    </modules>
+
+</project>

@@ -1,0 +1,52 @@
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                                                                                                                 -->
+<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
+<!--  Licensed under Apache License, Version 2.0                                                                     -->
+<!--                                                                                                                 -->
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.telenav.mesakit</groupId>
+        <artifactId>mesakit-plugins-josm</artifactId>
+        <version>0.9.8-alpha-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mesakit-plugins-josm-library</artifactId>
+    <packaging>jar</packaging>
+    <name>MesaKit - Plugins - JOSM - Library</name>
+
+    <dependencies>
+
+        <!-- MesaKit -->
+
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-navigation-routing</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-utilities-geojson</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-ui-swing</artifactId>
+            <version>${mesakit.version}</version>
+        </dependency>
+
+        <!-- JOSM -->
+
+        <dependency>
+            <groupId>org.openstreetmap.josm</groupId>
+            <artifactId>josm</artifactId>
+            <version>${josm.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
