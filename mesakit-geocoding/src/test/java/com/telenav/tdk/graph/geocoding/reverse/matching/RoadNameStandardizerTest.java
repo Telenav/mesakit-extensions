@@ -16,13 +16,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.geocoding.reverse.matching;
+package com.telenav.kivakit.graph.geocoding.reverse.matching;
 
-import com.telenav.tdk.map.geography.project.TdkMapGeographyUnitTest;
-import com.telenav.tdk.map.region.locale.MapLocale;
-import com.telenav.tdk.map.road.model.RoadName;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer.Mode;
+import com.telenav.kivakit.map.geography.project.KivaKitMapGeographyUnitTest;
+import com.telenav.kivakit.map.region.locale.MapLocale;
+import com.telenav.kivakit.map.road.model.RoadName;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer.Mode;
 
 /**
  * This class implements
@@ -31,7 +31,7 @@ import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer.Mode;
  * @version 1.0.0 2012-7-6
  */
 @Ignore
-public class RoadNameStandardizerTest extends TdkMapGeographyUnitTest
+public class RoadNameStandardizerTest extends KivaKitMapGeographyUnitTest
 {
     // @Test
     public void testStandardizeBR()

@@ -16,30 +16,29 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.json;
+package com.telenav.kivakit.graph.json;
 
 import com.google.gson.GsonBuilder;
-import com.telenav.tdk.core.kernel.language.string.formatting.Separators;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.scalars.bytes.Bytes;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.scalars.identifiers.Identifier;
-import com.telenav.tdk.core.kernel.scalars.levels.Priority;
-import com.telenav.tdk.core.kernel.time.LocalTime;
-import com.telenav.tdk.core.utilities.locale.Language;
-import com.telenav.tdk.graph.identifiers.collections.*;
-import com.telenav.tdk.graph.json.serializers.*;
-import com.telenav.tdk.graph.map.MapEdgeIdentifier;
-import com.telenav.tdk.graph.metadata.DataBuild;
-import com.telenav.tdk.map.geography.*;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.map.measurements.*;
-import com.telenav.tdk.map.region.*;
-import com.telenav.tdk.map.road.model.*;
-import com.telenav.tdk.map.road.model.converters.RoadNameConverter;
-import com.telenav.tdk.utilities.json.gson.GsonFactory;
+import com.telenav.kivakit.graph.identifiers.collections.*;
+import com.telenav.kivakit.graph.json.serializers.*;
+import com.telenav.kivakit.graph.map.MapEdgeIdentifier;
+import com.telenav.kivakit.graph.metadata.DataBuild;
+import com.telenav.kivakit.kernel.language.string.formatting.Separators;
+import com.telenav.kivakit.kernel.scalars.bytes.Bytes;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
+import com.telenav.kivakit.kernel.scalars.levels.Priority;
+import com.telenav.kivakit.kernel.time.LocalTime;
+import com.telenav.kivakit.map.geography.*;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.map.measurements.*;
+import com.telenav.kivakit.map.region.*;
+import com.telenav.kivakit.map.road.model.*;
+import com.telenav.kivakit.map.road.model.converters.RoadNameConverter;
+import com.telenav.kivakit.utilities.json.gson.GsonFactory;
+import com.telenav.kivakit.utilities.locale.Language;
 
-public class TdkGraphCoreGsonFactory extends GsonFactory
+public class KivaKitGraphCoreGsonFactory extends GsonFactory
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 

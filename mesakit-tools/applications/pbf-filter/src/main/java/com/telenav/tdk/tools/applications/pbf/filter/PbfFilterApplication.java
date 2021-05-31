@@ -16,26 +16,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.pbf.filter;
 
-package com.telenav.tdk.tools.applications.pbf.filter;
-
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.collections.primitive.set.LongSet;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.SwitchParser;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.data.formats.pbf.model.tags.*;
-import com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.data.formats.pbf.processing.readers.*;
-import com.telenav.tdk.data.formats.pbf.processing.writers.PbfWriter;
-import com.telenav.tdk.data.formats.pbf.project.TdkDataFormatsPbf;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.collections.primitive.set.LongSet;
+import com.telenav.kivakit.data.formats.pbf.model.tags.*;
+import com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.data.formats.pbf.processing.readers.*;
+import com.telenav.kivakit.data.formats.pbf.processing.writers.PbfWriter;
+import com.telenav.kivakit.data.formats.pbf.project.KivaKitDataFormatsPbf;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.kernel.time.Time;
 import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
 
-import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Result.*;
+import static com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor.Result.*;
 
 /**
  * PbfFilters the given PBF input file to the output file with the given tag filter. A way filter and/or relation filter
@@ -43,7 +43,7 @@ import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Resul
  *
  * @author jonathanl (shibo)
  */
-public class PbfFilterApplication extends TdkApplication
+public class PbfFilterApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -133,7 +133,7 @@ public class PbfFilterApplication extends TdkApplication
 
     private PbfFilterApplication()
     {
-        super(TdkDataFormatsPbf.get());
+        super(KivaKitDataFormatsPbf.get());
     }
 
     @Override

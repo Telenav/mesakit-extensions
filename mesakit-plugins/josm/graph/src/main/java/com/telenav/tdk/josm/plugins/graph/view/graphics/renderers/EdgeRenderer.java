@@ -16,20 +16,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.graph.Edge;
-import com.telenav.tdk.josm.plugins.graph.model.Selection.Type;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.road.model.RoadType;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.tdk.map.ui.swing.map.graphics.drawables.Line;
-import com.telenav.tdk.map.ui.swing.map.theme.Styles;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.*;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.road.model.RoadType;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Line;
+import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.*;
 
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.Edge.*;
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.Road;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Edge.*;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Road;
 
 /**
  * Draws edges in the appropriate color for zoom level
@@ -124,7 +124,7 @@ public class EdgeRenderer extends Renderer
 
             case UNKNOWN:
             default:
-                color = TdkColors.UNSPECIFIED;
+                color = KivaKitColors.UNSPECIFIED;
                 break;
         }
         return line.withFill(color);

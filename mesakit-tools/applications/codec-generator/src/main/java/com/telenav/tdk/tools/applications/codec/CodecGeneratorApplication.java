@@ -16,19 +16,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.codec;
+package com.telenav.kivakit.tools.applications.codec;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.tools.applications.codec.polyline.HuffmanCodecGenerator;
-import com.telenav.tdk.tools.applications.codec.roadname.RoadNameCodecGenerator;
-import com.telenav.tdk.tools.applications.codec.tag.TagCodecGenerator;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.tools.applications.codec.polyline.HuffmanCodecGenerator;
+import com.telenav.kivakit.tools.applications.codec.roadname.RoadNameCodecGenerator;
+import com.telenav.kivakit.tools.applications.codec.tag.TagCodecGenerator;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Dumps graph resources. A specific edge, vertex, relation, way or place can be shown. The spatial index can also be
@@ -36,7 +37,7 @@ import java.util.*;
  *
  * @author jonathanl (shibo)
  */
-public class CodecGeneratorApplication extends TdkApplication
+public class CodecGeneratorApplication extends KivaKitApplication
 {
     public static final ArgumentParser<File> INPUT =
             File.argumentParser("The input .graph or .osm.pbf file")
@@ -108,7 +109,7 @@ public class CodecGeneratorApplication extends TdkApplication
 
     protected CodecGeneratorApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

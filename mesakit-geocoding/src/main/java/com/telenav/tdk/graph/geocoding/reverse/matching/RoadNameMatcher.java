@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.geocoding.reverse.matching;
+package com.telenav.kivakit.graph.geocoding.reverse.matching;
 
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.map.road.model.RoadName;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.road.model.RoadName;
 
 public interface RoadNameMatcher
 {

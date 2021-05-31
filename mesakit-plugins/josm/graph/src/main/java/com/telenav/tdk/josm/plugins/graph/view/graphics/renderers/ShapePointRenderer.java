@@ -16,17 +16,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.graph.Edge;
-import com.telenav.tdk.graph.Graph;
-import com.telenav.tdk.graph.ShapePoint;
-import com.telenav.tdk.graph.specifications.common.shapepoint.HeavyWeightShapePoint;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.graph.Graph;
+import com.telenav.kivakit.graph.ShapePoint;
+import com.telenav.kivakit.graph.specifications.common.shapepoint.HeavyWeightShapePoint;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.ShapePoint.NORMAL;
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.ShapePoint.SELECTED;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.ShapePoint.NORMAL;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.ShapePoint.SELECTED;
 
 /**
  * Draws the shape points of an edge. Shape points are selectable objects with details when a graph supports full node

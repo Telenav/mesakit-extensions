@@ -1,16 +1,19 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.tags;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags;
 
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.graph.Graph;
-import com.telenav.tdk.josm.plugins.graph.view.*;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing.*;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.component.searchlist.SearchList;
-import com.telenav.tdk.utilities.ui.swing.layout.*;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.graph.Graph;
+import com.telenav.kivakit.josm.plugins.graph.view.*;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing.*;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
+import com.telenav.kivakit.utilities.ui.swing.layout.*;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import java.util.Collections;
 
 /**
@@ -44,7 +47,7 @@ public class TagPanel extends JPanel
 
         Components.border(this, 10);
 
-        searchViewAreaOnly = TdkTheme.get().newCheckBox("Index tags in view area only");
+        searchViewAreaOnly = KivaKitTheme.get().newCheckBox("Index tags in view area only");
         searchViewAreaOnly.setAlignmentX(JCheckBox.LEFT_ALIGNMENT);
         searchViewAreaOnly.addActionListener(event -> refresh());
         searchViewAreaOnly.setSelected(true);

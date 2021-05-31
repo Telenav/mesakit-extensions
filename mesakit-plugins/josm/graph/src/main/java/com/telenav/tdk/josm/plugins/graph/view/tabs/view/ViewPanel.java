@@ -1,11 +1,11 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.view;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.view;
 
-import com.telenav.tdk.graph.EdgeRelation;
-import com.telenav.tdk.graph.Place;
-import com.telenav.tdk.josm.plugins.graph.view.GraphPanel;
-import com.telenav.tdk.map.road.model.RoadType;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.layout.HorizontalBoxLayout;
+import com.telenav.kivakit.graph.EdgeRelation;
+import com.telenav.kivakit.graph.Place;
+import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
+import com.telenav.kivakit.map.road.model.RoadType;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.layout.HorizontalBoxLayout;
 
 import javax.swing.*;
 import java.awt.*;

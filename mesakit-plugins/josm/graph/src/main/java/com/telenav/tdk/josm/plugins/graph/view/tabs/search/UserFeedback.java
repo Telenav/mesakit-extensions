@@ -1,7 +1,7 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.search;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.search;
 
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.messaging.Message;
 
 /**
  * @author jonathanl (shibo)

@@ -16,23 +16,23 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.core.kernel.scalars.counts.Maximum;
-import com.telenav.tdk.graph.Edge;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.josm.plugins.graph.model.Selection;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.measurements.Distance;
-import com.telenav.tdk.map.road.model.RoadType;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.josm.plugins.graph.model.Selection;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.kivakit.map.road.model.RoadType;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
 
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import static com.telenav.tdk.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode.RELATIONS;
-import static com.telenav.tdk.map.ui.swing.map.graphics.canvas.Scale.CITY;
+import static com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode.RELATIONS;
+import static com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale.CITY;
 
 /**
  * @author jonathanl (shibo)

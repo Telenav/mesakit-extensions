@@ -16,14 +16,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.mesakit.tools.applications.graph.analyzer;
 
-package com.telenav.tdk.tools.applications.graph.analyzer;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.kernel.interfaces.object.Matcher;
+import com.telenav.kivakit.kernel.language.string.StringList;
 
-import com.telenav.tdk.core.kernel.interfaces.object.Matcher;
-import com.telenav.tdk.core.kernel.language.string.StringList;
-import com.telenav.tdk.graph.Edge;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Matches edges that are usable in "HERE" statistics

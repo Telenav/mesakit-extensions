@@ -1,12 +1,14 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.routing;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.routing;
 
-import com.telenav.tdk.graph.Vertex;
-import com.telenav.tdk.josm.plugins.graph.view.GraphPanel;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.graph.Vertex;
+import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
 
 /**
  * @author jonathanl (shibo)
@@ -25,7 +27,7 @@ public class RoutingPanel extends JPanel
 
     public RoutingPanel(final GraphPanel graphPanel)
     {
-        final var theme = TdkTheme.get();
+        final var theme = KivaKitTheme.get();
         final var from = theme.newButton("set from vertex");
         final var to = theme.newButton("set to vertex");
         final var route = theme.newButton("find route");

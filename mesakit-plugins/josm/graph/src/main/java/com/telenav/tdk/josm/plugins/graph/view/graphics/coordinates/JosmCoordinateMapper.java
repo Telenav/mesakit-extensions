@@ -1,10 +1,10 @@
-package com.telenav.tdk.josm.plugins.graph.view.graphics.coordinates;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.coordinates;
 
-import com.telenav.tdk.core.kernel.language.primitive.Doubles;
-import com.telenav.tdk.map.geography.Latitude;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.Longitude;
-import com.telenav.tdk.map.ui.swing.map.coordinates.mappers.CoordinateMapper;
+import com.telenav.kivakit.kernel.language.primitive.Doubles;
+import com.telenav.kivakit.map.geography.Latitude;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.Longitude;
+import com.telenav.kivakit.map.ui.swing.map.coordinates.mappers.CoordinateMapper;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.MapView;
 

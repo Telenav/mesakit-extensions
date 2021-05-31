@@ -1,4 +1,4 @@
-open module tdk.josm.plugins.graph
+open module mesakit.josm.plugins.graph
 {
     requires java.desktop;
 
@@ -6,5 +6,5 @@ open module tdk.josm.plugins.graph
     requires tdk.josm.plugins.library;
     requires tdk.navigation.routing;
 
-    exports com.telenav.tdk.josm.plugins.graph;
+    exports com.telenav.kivakit.josm.plugins.graph;
 }

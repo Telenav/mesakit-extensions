@@ -1,12 +1,14 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.tags;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags;
 
-import com.telenav.tdk.core.kernel.conversion.language.IdentityConverter;
-import com.telenav.tdk.core.kernel.messaging.Listener;
-import com.telenav.tdk.utilities.ui.swing.component.searchlist.SearchList;
-import com.telenav.tdk.utilities.ui.swing.layout.*;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.kernel.conversion.language.IdentityConverter;
+import com.telenav.kivakit.kernel.messaging.Listener;
+import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
+import com.telenav.kivakit.utilities.ui.swing.layout.*;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * @author jonathanl (shibo)
@@ -20,7 +22,7 @@ public class KeysColumn extends JPanel
         tagPanel.keysList = new SearchList<>(new IdentityConverter(Listener.NULL));
         tagPanel.keysList.addSelectionListener(tagPanel::updateValues);
 
-        tagPanel.keysLabel = TdkTheme.get().configure(new JLabel(""));
+        tagPanel.keysLabel = KivaKitTheme.get().configure(new JLabel(""));
 
         new VerticalBoxLayout(this)
                 .add(Layouts.leftJustify(tagPanel.keysLabel))

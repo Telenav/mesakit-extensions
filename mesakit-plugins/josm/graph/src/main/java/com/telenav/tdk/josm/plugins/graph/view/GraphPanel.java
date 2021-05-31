@@ -16,31 +16,35 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view;
+package com.telenav.kivakit.josm.plugins.graph.view;
 
-import com.telenav.tdk.core.kernel.project.Tdk;
-import com.telenav.tdk.core.kernel.time.Duration;
-import com.telenav.tdk.graph.Vertex;
-import com.telenav.tdk.josm.plugins.graph.GraphPlugin;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.query.QueryPanel;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.routing.RoutingPanel;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.search.SearchPanel;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.tags.TagPanel;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.view.ViewPanel;
-import com.telenav.tdk.josm.plugins.library.BaseJosmPanel;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.component.status.*;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.TdkColors;
-import com.telenav.tdk.utilities.ui.swing.graphics.font.Fonts;
-import com.telenav.tdk.utilities.ui.swing.theme.*;
+import com.telenav.kivakit.graph.Vertex;
+import com.telenav.kivakit.josm.plugins.graph.GraphPlugin;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.query.QueryPanel;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.routing.RoutingPanel;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.SearchPanel;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.TagPanel;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.view.ViewPanel;
+import com.telenav.kivakit.josm.plugins.library.BaseJosmPanel;
+import com.telenav.kivakit.kernel.project.KivaKit;
+import com.telenav.kivakit.kernel.time.Duration;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.component.status.*;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
+import com.telenav.kivakit.utilities.ui.swing.graphics.font.Fonts;
+import com.telenav.kivakit.utilities.ui.swing.theme.*;
 import org.jetbrains.annotations.NotNull;
 import org.openstreetmap.josm.gui.layer.Layer;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.Collections;
 
-import static com.telenav.tdk.utilities.ui.swing.component.status.StatusPanel.Display.NO_HEALTH_PANEL;
+import static com.telenav.kivakit.utilities.ui.swing.component.status.StatusPanel.Display.NO_HEALTH_PANEL;
 
 /**
  * The JOSM panel showing graph information and providing search functionality.
@@ -51,7 +55,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 {
     static
     {
-        TdkTheme.set(new TdkVanHelsingTheme());
+        KivaKitTheme.set(new KivaKitVanHelsingTheme());
     }
 
     private JTabbedPane tabbedPane;
@@ -76,7 +80,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
         createLayout(container(), false, Collections.emptyList());
 
-        say(Tdk.version() + " - " + Tdk.build());
+        say(KivaKit.version() + " - " + KivaKit.build());
 
         SwingUtilities.invokeLater(() ->
                 Components.children(this, component -> component.setFont(Fonts.component(Font.PLAIN, 12))));
@@ -149,7 +153,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         if (tabbedPane == null)
         {
             tabbedPane = new JTabbedPane();
-            tabbedPane.setForeground(TdkColors.DARK_GRAY.asAwtColor());
+            tabbedPane.setForeground(KivaKitColors.DARK_GRAY.asAwtColor());
             tabbedPane.addTab("home", searchPanel());
             tabbedPane.addTab("query", queryPanel());
             tabbedPane.addTab("view", viewPanel());

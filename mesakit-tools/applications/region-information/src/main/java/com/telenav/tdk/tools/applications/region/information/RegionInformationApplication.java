@@ -16,22 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.region.information;
+package com.telenav.kivakit.tools.applications.region.information;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.language.pattern.*;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.language.string.formatting.IndentingStringBuilder;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.scalars.counts.Maximum;
-import com.telenav.tdk.map.region.*;
-import com.telenav.tdk.map.region.project.TdkMapRegion;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.language.pattern.*;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.language.string.formatting.IndentingStringBuilder;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.map.region.*;
+import com.telenav.kivakit.map.region.project.KivaKitMapRegion;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
-import static com.telenav.tdk.core.kernel.language.string.formatting.IndentingStringBuilder.Indentation;
-import static com.telenav.tdk.core.kernel.language.string.formatting.IndentingStringBuilder.Style.TEXT;
+import static com.telenav.kivakit.kernel.language.string.formatting.IndentingStringBuilder.Indentation;
+import static com.telenav.kivakit.kernel.language.string.formatting.IndentingStringBuilder.Style.TEXT;
 
 /**
  * Shows information about a region matching the pattern given as an argument
@@ -39,7 +39,7 @@ import static com.telenav.tdk.core.kernel.language.string.formatting.IndentingSt
  * @author jonathanl (shibo)
  */
 @SuppressWarnings({ "rawtypes", "ConstantConditions", "UseOfSystemOutOrSystemErr" })
-public class RegionInformationApplication extends TdkApplication
+public class RegionInformationApplication extends KivaKitApplication
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
@@ -91,7 +91,7 @@ public class RegionInformationApplication extends TdkApplication
 
     public RegionInformationApplication()
     {
-        super(TdkMapRegion.get());
+        super(KivaKitMapRegion.get());
     }
 
     @Override

@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.json.serializers;
+package com.telenav.kivakit.graph.json.serializers;
 
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
 public class CountGsonSerializer extends PrimitiveGsonSerializer<Count, Integer>
 {

@@ -1,10 +1,10 @@
-package com.telenav.tdk.tools.applications.codec.tag;
+package com.telenav.kivakit.tools.applications.codec.tag;
 
-import com.telenav.tdk.core.kernel.commandline.CommandLine;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.tdk.data.formats.pbf.model.tags.compression.PbfTagCodecBuilder;
-import com.telenav.tdk.tools.applications.codec.CodecGeneratorApplication;
+import com.telenav.kivakit.kernel.commandline.CommandLine;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.data.formats.pbf.model.tags.compression.PbfTagCodecBuilder;
+import com.telenav.kivakit.tools.applications.codec.CodecGeneratorApplication;
 
 /**
  * @author jonathanl (shibo)

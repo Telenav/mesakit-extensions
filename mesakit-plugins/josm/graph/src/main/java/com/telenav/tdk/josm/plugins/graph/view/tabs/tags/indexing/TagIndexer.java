@@ -1,12 +1,12 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing;
 
-import com.telenav.tdk.core.kernel.language.string.StringList;
-import com.telenav.tdk.core.kernel.language.thread.TdkThread;
-import com.telenav.tdk.core.kernel.language.thread.latches.CompletionLatch;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.language.thread.KivaKitThread;
+import com.telenav.kivakit.kernel.language.thread.latches.CompletionLatch;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.time.Time;
 
 import java.util.HashSet;
 
@@ -24,7 +24,7 @@ public class TagIndexer extends BaseRepeater<Message>
 
     public TagIndexer()
     {
-        listenTo(new TdkThread("Tag Indexer", () ->
+        listenTo(new KivaKitThread("Tag Indexer", () ->
         {
             while (true)
             {

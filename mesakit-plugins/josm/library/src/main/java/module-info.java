@@ -1,4 +1,4 @@
-open module tdk.josm.plugins.library
+open module mesakit.josm.plugins.library
 {
     requires transitive tdk.map.utilities.geojson;
     requires transitive tdk.map.ui;
@@ -8,7 +8,7 @@ open module tdk.josm.plugins.library
     requires transitive josm;
     requires transitive gson;
 
-    exports com.telenav.tdk.josm.plugins.library;
-    exports com.telenav.tdk.josm.plugins.library.tile;
-    exports com.telenav.tdk.josm.plugins.library.tile.vector;
+    exports com.telenav.kivakit.josm.plugins.library;
+    exports com.telenav.kivakit.josm.plugins.library.tile;
+    exports com.telenav.kivakit.josm.plugins.library.tile.vector;
 }

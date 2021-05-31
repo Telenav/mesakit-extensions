@@ -1,25 +1,28 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.search;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.search;
 
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.josm.plugins.graph.view.GraphPanel;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.component.console.OutputPanel;
-import com.telenav.tdk.utilities.ui.swing.component.icon.search.MagnifyingGlass;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.TdkColors;
-import com.telenav.tdk.utilities.ui.swing.layout.*;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.component.console.OutputPanel;
+import com.telenav.kivakit.utilities.ui.swing.component.icon.search.MagnifyingGlass;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
+import com.telenav.kivakit.utilities.ui.swing.layout.*;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 
-import static com.telenav.tdk.utilities.ui.swing.component.console.OutputPanel.Type;
+import static com.telenav.kivakit.utilities.ui.swing.component.console.OutputPanel.Type;
 
 /**
  * @author jonathanl (shibo)
  */
 public class SearchPanel extends JPanel
 {
-    private final JTextField searchField = TdkTheme.get().newTextField();
+    private final JTextField searchField = KivaKitTheme.get().newTextField();
 
     private OutputPanel console;
 
@@ -52,7 +55,7 @@ public class SearchPanel extends JPanel
         };
 
         final var searchButton = new JButton("search");
-        searchButton.setFont(TdkTheme.get().componentFont());
+        searchButton.setFont(KivaKitTheme.get().componentFont());
         searchButton.addActionListener(searchAction);
 
         searchField.addActionListener(searchAction);
@@ -64,7 +67,7 @@ public class SearchPanel extends JPanel
                 .add(searchField)
                 .add(searchButton);
 
-        UIManager.getDefaults().put("TextPane.background", TdkColors.DARK_GRAY.asAwtColor());
+        UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_GRAY.asAwtColor());
 
         new VerticalBoxLayout(this)
                 .add(searchTools)

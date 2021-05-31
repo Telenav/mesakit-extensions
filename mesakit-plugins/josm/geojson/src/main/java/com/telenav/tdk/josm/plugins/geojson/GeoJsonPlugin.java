@@ -16,10 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.josm.plugins.geojson;
 
-package com.telenav.tdk.josm.plugins.geojson;
-
-import com.telenav.tdk.josm.plugins.library.BaseJosmPlugin;
+import com.telenav.kivakit.josm.plugins.library.BaseJosmPlugin;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.data.osm.IPrimitive;
 import org.openstreetmap.josm.io.OsmServerWriter;

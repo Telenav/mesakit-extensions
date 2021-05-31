@@ -16,24 +16,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.pbf.comparator;
 
-package com.telenav.tdk.tools.applications.pbf.comparator;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.collections.set.SetDifferencer;
+import com.telenav.kivakit.data.formats.pbf.model.tags.*;
+import com.telenav.kivakit.data.formats.pbf.osm.Osm;
+import com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor;
+import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
+import com.telenav.kivakit.data.formats.pbf.project.KivaKitDataFormatsPbf;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.time.Time;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.collections.set.SetDifferencer;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.SwitchParser;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.data.formats.pbf.model.tags.*;
-import com.telenav.tdk.data.formats.pbf.osm.Osm;
-import com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor;
-import com.telenav.tdk.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.tdk.data.formats.pbf.project.TdkDataFormatsPbf;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.util.*;
-
-import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
+import static com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
 
 /**
  * Compares two PBF files
@@ -41,7 +41,7 @@ import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Resul
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class PbfComparatorApplication extends TdkApplication
+public class PbfComparatorApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -90,7 +90,7 @@ public class PbfComparatorApplication extends TdkApplication
 
     protected PbfComparatorApplication()
     {
-        super(TdkDataFormatsPbf.get());
+        super(KivaKitDataFormatsPbf.get());
     }
 
     public void compare(final File before, final File after)

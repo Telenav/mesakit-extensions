@@ -16,31 +16,32 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.pbf.metadata;
+package com.telenav.kivakit.tools.applications.pbf.metadata;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.data.formats.pbf.processing.filters.osm.*;
-import com.telenav.tdk.data.formats.pbf.processing.filters.unidb.*;
-import com.telenav.tdk.graph.Metadata;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
-import com.telenav.tdk.map.geography.Precision;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.*;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.unidb.*;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.Metadata;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.map.geography.Precision;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
-import static com.telenav.tdk.graph.specifications.library.pbf.PbfFileMetadataAnnotator.Mode;
+import static com.telenav.kivakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator.Mode;
 
 /**
  * View or add/replace metadata in a PBF file
  *
  * @author jonathanl (shibo)
  */
-public class PbfMetadataApplication extends TdkApplication
+public class PbfMetadataApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -92,7 +93,7 @@ public class PbfMetadataApplication extends TdkApplication
 
     private PbfMetadataApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

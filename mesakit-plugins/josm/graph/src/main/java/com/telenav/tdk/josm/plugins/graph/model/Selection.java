@@ -16,24 +16,28 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.josm.plugins.graph.model;
 
-package com.telenav.tdk.josm.plugins.graph.model;
-
-import com.telenav.tdk.core.kernel.language.object.Objects;
-import com.telenav.tdk.core.kernel.scalars.counts.Estimate;
-import com.telenav.tdk.graph.*;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.graph.matching.snapping.GraphSnapper;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.Polyline;
-import com.telenav.tdk.map.measurements.Distance;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.graph.*;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.graph.matching.snapping.GraphSnapper;
+import com.telenav.kivakit.kernel.scalars.counts.Estimate;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.Polyline;
+import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 import org.openstreetmap.josm.gui.layer.Layer;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Shape;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Holds information about the currently selected objects and the stack of objects beneath the selection. Various
@@ -124,7 +128,8 @@ public class Selection
         placeForShape.clear();
     }
 
-    public List<Edge> edgesForPoint(final MapCanvas canvas, final Graph graph, final Point point, final boolean snapToNearby)
+    public List<Edge> edgesForPoint(final MapCanvas canvas, final Graph graph, final Point point,
+                                    final boolean snapToNearby)
     {
         final List<Edge> edges = new ArrayList<>();
         for (final var entry : edgeForShape.entrySet())

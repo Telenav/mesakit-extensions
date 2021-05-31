@@ -16,19 +16,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.graph.converter;
+package com.telenav.kivakit.tools.applications.graph.converter;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.*;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.graph.Graph;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.graph.io.save.PbfGraphSaver;
-import com.telenav.tdk.graph.project.TdkGraphCore;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.graph.Graph;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.graph.io.save.PbfGraphSaver;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.resource.path.Extension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Converts a graph back to a PBF. This is only going to produce the exact original PBF file if the graph contains full
@@ -37,7 +38,7 @@ import java.util.*;
  * @author jonathanl (shibo)
  * @see Graph#supportsFullPbfNodeInformation()
  */
-public class GraphToPbfConverterApplication extends TdkApplication
+public class GraphToPbfConverterApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -60,7 +61,7 @@ public class GraphToPbfConverterApplication extends TdkApplication
 
     public GraphToPbfConverterApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

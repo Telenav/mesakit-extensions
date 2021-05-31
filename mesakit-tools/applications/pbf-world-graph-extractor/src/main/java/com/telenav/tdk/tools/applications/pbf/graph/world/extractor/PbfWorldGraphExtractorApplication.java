@@ -16,30 +16,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.pbf.graph.world.extractor;
 
-package com.telenav.tdk.tools.applications.pbf.graph.world.extractor;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.configuration.Deployment;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.OsmNavigableWayFilter;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.Metadata;
+import com.telenav.kivakit.graph.specifications.library.pbf.PbfDataSourceFactory;
+import com.telenav.kivakit.graph.world.*;
+import com.telenav.kivakit.graph.world.project.KivaKitGraphWorld;
+import com.telenav.kivakit.graph.world.repository.*;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.tools.applications.pbf.graph.world.extractor.conversion.WorldConversion;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.configuration.Deployment;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.data.formats.pbf.processing.filters.osm.OsmNavigableWayFilter;
-import com.telenav.tdk.graph.Metadata;
-import com.telenav.tdk.graph.specifications.library.pbf.PbfDataSourceFactory;
-import com.telenav.tdk.graph.world.*;
-import com.telenav.tdk.graph.world.project.TdkGraphWorld;
-import com.telenav.tdk.graph.world.repository.*;
-import com.telenav.tdk.tools.applications.pbf.graph.world.extractor.conversion.WorldConversion;
+import java.util.List;
+import java.util.Set;
 
-import java.util.*;
-
-import static com.telenav.tdk.graph.specifications.library.pbf.PbfDataSourceFactory.Type.*;
+import static com.telenav.kivakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.*;
 
 /**
  * Application to split an input PBF file into "world graph", which is a grid of sub-graphs in cells of a given width
@@ -47,7 +47,7 @@ import static com.telenav.tdk.graph.specifications.library.pbf.PbfDataSourceFact
  *
  * @author jonathanl (shibo)
  */
-public class PbfWorldGraphExtractorApplication extends TdkApplication
+public class PbfWorldGraphExtractorApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -106,7 +106,7 @@ public class PbfWorldGraphExtractorApplication extends TdkApplication
                     .optional()
                     .build();
 
-    /** The deployment (see com.telenav.tdk.graph.world.configuration) */
+    /** The deployment (see com.telenav.kivakit.graph.world.configuration) */
     private SwitchParser<Deployment> DEPLOYMENT;
 
     private final SwitchParser<Boolean> OVERWRITE =
@@ -156,7 +156,7 @@ public class PbfWorldGraphExtractorApplication extends TdkApplication
 
     private PbfWorldGraphExtractorApplication()
     {
-        super(TdkGraphWorld.get());
+        super(KivaKitGraphWorld.get());
     }
 
     @Override
@@ -327,7 +327,8 @@ public class PbfWorldGraphExtractorApplication extends TdkApplication
     /**
      * @return The repository install folder specified on the command line
      */
-    private WorldGraphRepositoryFolder repositoryInstallFolder(final CommandLine commandLine, final Metadata metadata, final Mode mode)
+    private WorldGraphRepositoryFolder repositoryInstallFolder(final CommandLine commandLine, final Metadata metadata,
+                                                               final Mode mode)
     {
         // Get any repository that was specified
         final var repository = commandLine.get(WORLD_GRAPH_REPOSITORY);

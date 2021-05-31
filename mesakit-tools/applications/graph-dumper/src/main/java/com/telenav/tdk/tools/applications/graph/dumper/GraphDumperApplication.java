@@ -16,26 +16,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.graph.dumper;
 
-package com.telenav.tdk.tools.applications.graph.dumper;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.model.identifiers.PbfWayIdentifier;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.GraphElement;
+import com.telenav.kivakit.graph.identifiers.*;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.language.iteration.Streams;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.resource.path.Extension;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.language.iteration.Streams;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.data.formats.pbf.model.identifiers.PbfWayIdentifier;
-import com.telenav.tdk.graph.GraphElement;
-import com.telenav.tdk.graph.identifiers.*;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Dumps graph resources. A specific edge, vertex, relation, way or place can be shown. The spatial index can also be
@@ -43,7 +43,7 @@ import java.util.*;
  *
  * @author jonathanl (shibo)
  */
-public class GraphDumperApplication extends TdkApplication
+public class GraphDumperApplication extends KivaKitApplication
 {
     private static final ArgumentParser<SmartGraphLoader> INPUT =
             SmartGraphLoader.argumentParser("The graph to dump")
@@ -104,7 +104,7 @@ public class GraphDumperApplication extends TdkApplication
 
     protected GraphDumperApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

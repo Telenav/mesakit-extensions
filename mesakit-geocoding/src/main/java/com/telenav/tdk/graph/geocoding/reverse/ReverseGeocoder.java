@@ -16,18 +16,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.geocoding.reverse;
+package com.telenav.kivakit.graph.geocoding.reverse;
 
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;
-import com.telenav.tdk.graph.geocoding.reverse.matching.RoadNameMatcher;
-import com.telenav.tdk.graph.specifications.osm.graph.edge.model.attributes.OsmEdgeAttributes;
-import com.telenav.tdk.graph.traffic.roadsection.*;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.*;
-import com.telenav.tdk.map.measurements.*;
-import com.telenav.tdk.map.road.model.RoadName;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;
+import com.telenav.kivakit.graph.geocoding.reverse.matching.RoadNameMatcher;
+import com.telenav.kivakit.graph.specifications.osm.graph.edge.model.attributes.OsmEdgeAttributes;
+import com.telenav.kivakit.graph.traffic.roadsection.*;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.*;
+import com.telenav.kivakit.map.measurements.*;
+import com.telenav.kivakit.map.road.model.RoadName;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
 
 import java.util.Set;
 

@@ -16,12 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.graph.json.serializers;
 
-package com.telenav.tdk.graph.json.serializers;
-
-import com.google.gson.*;
-import com.telenav.tdk.map.geography.Longitude;
-import com.telenav.tdk.utilities.json.gson.GsonSerializer;
+import com.telenav.kivakit.map.geography.Longitude;
+import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
 
 import java.lang.reflect.Type;
 

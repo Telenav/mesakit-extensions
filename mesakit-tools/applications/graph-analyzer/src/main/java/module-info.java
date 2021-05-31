@@ -1,7 +1,7 @@
-open module tdk.tools.applications.graph.analyzer
+open module mesakit.tools.applications.graph.analyzer
 {
-    requires transitive tdk.core.application;
-    requires transitive tdk.graph.core;
+    requires transitive kivakit.application;
+    requires transitive mesakit.graph.core;
 
-    exports com.telenav.tdk.tools.applications.graph.analyzer;
+    exports com.telenav.mesakit.tools.applications.graph.analyzer;
 }

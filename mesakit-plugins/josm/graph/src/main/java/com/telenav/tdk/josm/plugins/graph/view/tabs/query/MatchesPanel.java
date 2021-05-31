@@ -1,14 +1,18 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.query;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.query;
 
-import com.telenav.tdk.graph.Route;
-import com.telenav.tdk.josm.plugins.graph.view.GraphPanel;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.graph.Route;
+import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 import java.util.Set;
 
-import static javax.swing.ScrollPaneConstants.*;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 /**
  * @author jonathanl (shibo)
@@ -19,7 +23,7 @@ public class MatchesPanel extends JPanel
 
     public MatchesPanel(final GraphPanel graphPanel)
     {
-        matches = TdkTheme.get().configure(new JList<>());
+        matches = KivaKitTheme.get().configure(new JList<>());
         matches.setModel(new DefaultListModel<>());
 
         final var scrollPane = new JScrollPane(matches, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);

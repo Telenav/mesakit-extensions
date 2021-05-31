@@ -16,23 +16,38 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.kivakit.josm.plugins.geojson;
 
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.josm.plugins.library.BaseJosmPanel;
-import com.telenav.tdk.map.utilities.geojson.GeoJsonFeature;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.josm.plugins.library.BaseJosmPanel;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.gui.*;
 import org.openstreetmap.josm.gui.layer.Layer;
 import org.openstreetmap.josm.tools.Shortcut;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.*;
 
 public class GeoJsonPanel extends BaseJosmPanel
 {

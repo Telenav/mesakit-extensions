@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.json.serializers;
+package com.telenav.kivakit.graph.json.serializers;
 
-import com.telenav.tdk.core.kernel.scalars.levels.Priority;
-import com.telenav.tdk.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.kernel.scalars.levels.Priority;
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
 public class PriorityGsonSerializer extends PrimitiveGsonSerializer<Priority, Double>
 {

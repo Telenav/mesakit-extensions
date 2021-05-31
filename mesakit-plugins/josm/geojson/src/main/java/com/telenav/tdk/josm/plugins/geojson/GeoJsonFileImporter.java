@@ -16,16 +16,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.josm.plugins.geojson;
 
-package com.telenav.tdk.josm.plugins.geojson;
-
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.map.utilities.geojson.GeoJsonDocument;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.map.utilities.geojson.GeoJsonDocument;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
-import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.ProgressMonitor;
 
 public class GeoJsonFileImporter extends FileImporter
 {

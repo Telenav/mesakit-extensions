@@ -1,11 +1,11 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing;
 
-import com.telenav.tdk.core.collections.map.multi.MultiMap;
-import com.telenav.tdk.core.kernel.language.collections.list.ObjectList;
-import com.telenav.tdk.core.kernel.language.string.StringList;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.graph.identifiers.EdgeIdentifier;
+import com.telenav.kivakit.collections.map.multi.MultiMap;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.graph.identifiers.EdgeIdentifier;
+import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
+import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
 
 /**
  * @author jonathanl (shibo)

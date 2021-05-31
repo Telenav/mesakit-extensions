@@ -16,33 +16,33 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.pbf.converter;
+package com.telenav.kivakit.tools.applications.pbf.converter;
 
-import com.telenav.tdk.core.filesystem.*;
-import com.telenav.tdk.core.kernel.commandline.CommandLine;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.scalars.counts.Maximum;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.data.formats.pbf.processing.filters.osm.OsmNavigableWayFilter;
-import com.telenav.tdk.graph.Metadata;
-import com.telenav.tdk.graph.io.archive.GraphArchive;
-import com.telenav.tdk.graph.specifications.common.edge.EdgeAttributes;
-import com.telenav.tdk.graph.specifications.common.element.GraphElementAttributes;
-import com.telenav.tdk.graph.specifications.common.graph.loader.*;
-import com.telenav.tdk.graph.specifications.osm.graph.converter.OsmPbfToGraphConverter;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.map.region.*;
+import com.telenav.kivakit.filesystem.*;
+import com.telenav.kivakit.kernel.commandline.CommandLine;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.logging.*;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.OsmNavigableWayFilter;
+import com.telenav.kivakit.graph.Metadata;
+import com.telenav.kivakit.graph.io.archive.GraphArchive;
+import com.telenav.kivakit.graph.specifications.common.edge.EdgeAttributes;
+import com.telenav.kivakit.graph.specifications.common.element.GraphElementAttributes;
+import com.telenav.kivakit.graph.specifications.common.graph.loader.*;
+import com.telenav.kivakit.graph.specifications.osm.graph.converter.OsmPbfToGraphConverter;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.map.region.*;
 
-import static com.telenav.tdk.core.resource.compression.archive.ZipArchive.Mode.*;
-import static com.telenav.tdk.graph.specifications.common.graph.loader.PbfToGraphConverter.Configuration;
-import static com.telenav.tdk.graph.specifications.library.pbf.PbfDataAnalysis.AnalysisType.*;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.*;
+import static com.telenav.kivakit.graph.specifications.common.graph.loader.PbfToGraphConverter.Configuration;
+import static com.telenav.kivakit.graph.specifications.library.pbf.PbfDataAnalysis.AnalysisType.*;
 
 /**
  * Performs a single conversion from PBF to graph.

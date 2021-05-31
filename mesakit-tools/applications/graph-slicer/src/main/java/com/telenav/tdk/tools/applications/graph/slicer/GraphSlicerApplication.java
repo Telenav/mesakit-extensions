@@ -16,22 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.graph.slicer;
+package com.telenav.kivakit.tools.applications.graph.slicer;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.SwitchParser;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.resource.compression.codecs.GzipCodec;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.graph.io.archive.GraphArchive;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.io.archive.GraphArchive;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
+import com.telenav.kivakit.resource.path.Extension;
 
 import java.util.Set;
 
-import static com.telenav.tdk.core.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
 
 /**
  * Slice a graph to a given rectangle
@@ -39,7 +39,7 @@ import static com.telenav.tdk.core.resource.compression.archive.ZipArchive.Mode.
  * @author matthieun
  * @author jonathanl (shibo)
  */
-public class GraphSlicerApplication extends TdkApplication
+public class GraphSlicerApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -63,7 +63,7 @@ public class GraphSlicerApplication extends TdkApplication
 
     protected GraphSlicerApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

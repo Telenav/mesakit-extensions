@@ -16,17 +16,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view;
+package com.telenav.kivakit.josm.plugins.graph.view;
 
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.josm.plugins.graph.view.graphics.renderers.*;
-import com.telenav.tdk.map.measurements.Heading;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.tdk.map.ui.swing.map.theme.Styles;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.*;
+import com.telenav.kivakit.map.measurements.Heading;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
 
-import static com.telenav.tdk.josm.plugins.graph.model.Selection.Type.SELECTED;
-import static com.telenav.tdk.josm.plugins.graph.model.Selection.Type.*;
-import static com.telenav.tdk.map.ui.swing.map.theme.Labels.*;
+import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.HIGHLIGHTED;
+import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.INACTIVE;
+import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.RESTRICTED;
+import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.SELECTED;
+import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.UNSELECTED;
+import static com.telenav.kivakit.map.ui.swing.map.theme.Labels.*;
 
 /**
  * Paints the {@link ViewModel} for the loaded graph on a {@link MapCanvas}.

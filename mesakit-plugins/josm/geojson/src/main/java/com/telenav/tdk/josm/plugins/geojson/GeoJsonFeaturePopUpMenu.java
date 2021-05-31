@@ -16,13 +16,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.kivakit.josm.plugins.geojson;
 
-import com.telenav.tdk.data.formats.library.map.identifiers.MapIdentifier;
-import com.telenav.tdk.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.kivakit.data.formats.library.map.identifiers.MapIdentifier;
+import com.telenav.kivakit.map.utilities.geojson.GeoJsonFeature;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.Desktop;
 import java.net.URI;
 
 class GeoJsonFeaturePopUpMenu extends JPopupMenu

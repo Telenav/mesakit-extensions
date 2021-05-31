@@ -1,19 +1,19 @@
-package com.telenav.tdk.tools.applications.codec.polyline;
+package com.telenav.kivakit.tools.applications.codec.polyline;
 
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.CommandLine;
-import com.telenav.tdk.core.kernel.conversion.primitive.IntegerConverter;
-import com.telenav.tdk.core.kernel.language.collections.map.CountMap;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.map.geography.polyline.compression.huffman.HuffmanPolylineCodec;
-import com.telenav.tdk.tools.applications.codec.CodecGeneratorApplication;
-import com.telenav.tdk.utilities.compression.codecs.huffman.HuffmanCodec;
-import com.telenav.tdk.utilities.compression.codecs.huffman.tree.Symbols;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.commandline.CommandLine;
+import com.telenav.kivakit.kernel.conversion.primitive.IntegerConverter;
+import com.telenav.kivakit.kernel.language.collections.map.CountMap;
+import com.telenav.kivakit.kernel.logging.*;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.map.geography.polyline.compression.huffman.HuffmanPolylineCodec;
+import com.telenav.kivakit.tools.applications.codec.CodecGeneratorApplication;
+import com.telenav.kivakit.utilities.compression.codecs.huffman.HuffmanCodec;
+import com.telenav.kivakit.utilities.compression.codecs.huffman.tree.Symbols;
 
 /**
  * @author jonathanl (shibo)

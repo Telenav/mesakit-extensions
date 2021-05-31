@@ -16,20 +16,21 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph;
+package com.telenav.kivakit.josm.plugins.graph;
 
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.messaging.messages.MessageList;
-import com.telenav.tdk.core.kernel.operation.progress.*;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.scalars.counts.Maximum;
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.core.kernel.scalars.mutable.MutableValue;
-import com.telenav.tdk.core.resource.compression.archive.ZipArchive;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.josm.plugins.graph.view.GraphLayer;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.josm.plugins.graph.view.GraphLayer;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.kernel.messaging.messages.MessageList;
+import com.telenav.kivakit.kernel.operation.progress.*;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
+import com.telenav.kivakit.resource.compression.archive.ZipArchive;
 import org.jetbrains.annotations.NotNull;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
@@ -37,7 +38,7 @@ import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
 import java.io.IOException;
 
-import static com.telenav.tdk.core.kernel.messaging.Message.Status.COMPLETED;
+import static com.telenav.kivakit.kernel.messaging.Message.Status.COMPLETED;
 
 /**
  * Imports a Graph file, creating a GraphLayer in JOSM.

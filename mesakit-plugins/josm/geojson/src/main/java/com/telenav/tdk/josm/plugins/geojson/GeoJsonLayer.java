@@ -16,27 +16,31 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.josm.plugins.geojson;
 
-package com.telenav.tdk.josm.plugins.geojson;
-
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.interfaces.naming.NamedObject;
-import com.telenav.tdk.core.kernel.logging.Logger;
-import com.telenav.tdk.core.kernel.logging.LoggerFactory;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.josm.plugins.library.BaseJosmLayer;
-import com.telenav.tdk.map.geography.indexing.rtree.RTreeSettings;
-import com.telenav.tdk.map.geography.indexing.rtree.RTreeSpatialIndex;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.map.measurements.Distance;
-import com.telenav.tdk.map.utilities.geojson.*;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.ColorConverter;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
+import com.telenav.kivakit.kernel.interfaces.naming.NamedObject;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.geography.indexing.rtree.RTreeSettings;
+import com.telenav.kivakit.map.geography.indexing.rtree.RTreeSpatialIndex;
+import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.kivakit.map.utilities.geojson.*;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.ColorConverter;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
 import org.openstreetmap.josm.gui.MapView;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
@@ -306,7 +310,8 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return null;
     }
 
-    private void drawFeatures(final Graphics2D graphics, final Bounds bounds, final GeoJsonPanel panel, final boolean drawPoints)
+    private void drawFeatures(final Graphics2D graphics, final Bounds bounds, final GeoJsonPanel panel,
+                              final boolean drawPoints)
     {
         for (final var feature : spatialIndex.intersecting(rectangle(bounds)))
         {
@@ -332,7 +337,8 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
 
     @SuppressWarnings({ "SuspiciousNameCombination" })
     private void drawGeometry(final Graphics2D graphics, final GeoJsonFeature feature,
-                              final GeoJsonGeometry geometry, final Color color, final Color annotationBackground, final Color annotationText,
+                              final GeoJsonGeometry geometry, final Color color, final Color annotationBackground,
+                              final Color annotationText,
                               final boolean drawTitle)
     {
         final var width = (int) strokeWidth();

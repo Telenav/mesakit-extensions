@@ -16,19 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.pbf.dumper;
+package com.telenav.kivakit.tools.applications.pbf.dumper;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.ArgumentParser;
-import com.telenav.tdk.data.formats.pbf.model.tags.*;
-import com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor;
-import com.telenav.tdk.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.tdk.data.formats.pbf.project.TdkDataFormatsPbf;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.model.tags.*;
+import com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor;
+import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
+import com.telenav.kivakit.data.formats.pbf.project.KivaKitDataFormatsPbf;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.commandline.ArgumentParser;
 
 import java.util.List;
 
-import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
+import static com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
 
 /**
  * Dumps the given identifier from the given input file
@@ -36,7 +36,7 @@ import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Resul
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class PbfDumperApplication extends TdkApplication
+public class PbfDumperApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -73,7 +73,7 @@ public class PbfDumperApplication extends TdkApplication
 
     private PbfDumperApplication()
     {
-        super(TdkDataFormatsPbf.get());
+        super(KivaKitDataFormatsPbf.get());
     }
 
     @Override

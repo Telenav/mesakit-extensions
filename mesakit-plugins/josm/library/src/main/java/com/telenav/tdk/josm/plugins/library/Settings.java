@@ -16,9 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.library;
+package com.telenav.kivakit.josm.plugins.library;
 
-import com.telenav.tdk.core.kernel.time.Duration;
+import com.telenav.kivakit.kernel.time.Duration;
 
 public class Settings
 {

@@ -16,25 +16,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.pbf.converter;
 
-package com.telenav.tdk.tools.applications.pbf.converter;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.map.region.Region;
+import com.telenav.kivakit.map.region.locale.MapLocale;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.resource.path.Extension;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.*;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.language.collections.list.ObjectList;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.time.Time;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.data.formats.pbf.processing.filters.*;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.map.region.Region;
-import com.telenav.tdk.map.region.locale.MapLocale;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer;
-
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Converts PBF files under some data specification to .graph archives. Usage help is available by running the program.
@@ -42,7 +41,7 @@ import java.util.*;
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("rawtypes")
-public class PbfToGraphConverterApplication extends TdkApplication
+public class PbfToGraphConverterApplication extends KivaKitApplication
 {
     /**
      * Program entrypoint. Parses command line arguments and switches, constructs application object and calls the run
@@ -146,7 +145,7 @@ public class PbfToGraphConverterApplication extends TdkApplication
 
     private PbfToGraphConverterApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

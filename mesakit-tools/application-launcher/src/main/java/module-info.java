@@ -1,4 +1,4 @@
-open module tdk.application.launcher
+open module mesakit.application.launcher
 {
     requires tdk.tools.applications.codec;
     requires tdk.tools.applications.graph.analyzer;

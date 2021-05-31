@@ -16,17 +16,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.graph.Vertex;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.graph.Vertex;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-import static com.telenav.tdk.core.kernel.language.string.conversion.StringFormat.USER_LABEL;
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.Debug.*;
+import static com.telenav.kivakit.kernel.language.string.conversion.StringFormat.USER_LABEL;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Debug.*;
 
 /**
  * Draws edges in the appropriate color for zoom level

@@ -16,23 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.core.kernel.debug.Debug;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.graph.*;
-import com.telenav.tdk.graph.navigation.navigators.NamedRoadNavigator;
-import com.telenav.tdk.josm.plugins.graph.model.Selection.Type;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.measurements.Distance;
-import com.telenav.tdk.map.road.model.*;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.*;
+import com.telenav.kivakit.graph.*;
+import com.telenav.kivakit.graph.navigation.navigators.NamedRoadNavigator;
+import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.kernel.debug.Debug;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.kivakit.map.road.model.*;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.Road.*;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Road.*;
 
 /**
  * Renders the labels on edges that show road names
@@ -49,11 +53,11 @@ public class EdgeLabelRenderer extends Renderer
 
     static
     {
-        roadFunctionalClassToColor.put(RoadFunctionalClass.MAIN, TdkColors.BRIGHT_WHITE);
-        roadFunctionalClassToColor.put(RoadFunctionalClass.FIRST_CLASS, TdkColors.BRIGHT_WHITE);
-        roadFunctionalClassToColor.put(RoadFunctionalClass.SECOND_CLASS, TdkColors.BRIGHT_WHITE);
-        roadFunctionalClassToColor.put(RoadFunctionalClass.THIRD_CLASS, TdkColors.BRIGHT_WHITE);
-        roadFunctionalClassToColor.put(RoadFunctionalClass.FOURTH_CLASS, TdkColors.BRIGHT_WHITE);
+        roadFunctionalClassToColor.put(RoadFunctionalClass.MAIN, KivaKitColors.BRIGHT_WHITE);
+        roadFunctionalClassToColor.put(RoadFunctionalClass.FIRST_CLASS, KivaKitColors.BRIGHT_WHITE);
+        roadFunctionalClassToColor.put(RoadFunctionalClass.SECOND_CLASS, KivaKitColors.BRIGHT_WHITE);
+        roadFunctionalClassToColor.put(RoadFunctionalClass.THIRD_CLASS, KivaKitColors.BRIGHT_WHITE);
+        roadFunctionalClassToColor.put(RoadFunctionalClass.FOURTH_CLASS, KivaKitColors.BRIGHT_WHITE);
     }
 
     public EdgeLabelRenderer(final MapCanvas canvas, final ViewModel model)

@@ -16,13 +16,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.library.tile.vector;
+package com.telenav.kivakit.josm.plugins.library.tile.vector;
 
-import com.telenav.tdk.graph.traffic.roadsection.RoadSectionCode;
-import com.telenav.tdk.map.geography.polyline.Polyline;
-import com.telenav.tdk.map.measurements.Speed;
+import com.telenav.kivakit.graph.traffic.roadsection.RoadSectionCode;
+import com.telenav.kivakit.map.geography.polyline.Polyline;
+import com.telenav.kivakit.map.measurements.Speed;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class RoadFeature
 {

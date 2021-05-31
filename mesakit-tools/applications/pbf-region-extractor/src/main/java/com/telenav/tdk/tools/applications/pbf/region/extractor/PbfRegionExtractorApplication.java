@@ -16,26 +16,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.pbf.region.extractor;
+package com.telenav.kivakit.tools.applications.pbf.region.extractor;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.*;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.data.formats.pbf.processing.filters.WayFilter;
-import com.telenav.tdk.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.tdk.map.cutter.PbfRegionCutter;
-import com.telenav.tdk.map.region.*;
-import com.telenav.tdk.map.region.project.TdkMapRegion;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.pbf.processing.filters.WayFilter;
+import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.map.cutter.PbfRegionCutter;
+import com.telenav.kivakit.map.region.*;
+import com.telenav.kivakit.map.region.project.KivaKitMapRegion;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Extracts regions from a PBF file into an output folder.
  *
  * @author jonathanl (shibo)
  */
-public class PbfRegionExtractorApplication extends TdkApplication
+public class PbfRegionExtractorApplication extends KivaKitApplication
 {
     private static final SwitchParser<Count> THREADS = Count.threadCountSwitchParser(Count._16);
 
@@ -71,7 +71,7 @@ public class PbfRegionExtractorApplication extends TdkApplication
 
     protected PbfRegionExtractorApplication()
     {
-        super(TdkMapRegion.get());
+        super(KivaKitMapRegion.get());
     }
 
     @Override

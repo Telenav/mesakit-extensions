@@ -1,19 +1,21 @@
-package com.telenav.tdk.tools.applications.pbf.analyzer;
+package com.telenav.kivakit.tools.applications.pbf.analyzer;
 
-import com.telenav.tdk.core.collections.primitive.map.split.SplitLongToLongMap;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.CommandLine;
-import com.telenav.tdk.core.kernel.language.string.*;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.data.formats.pbf.model.tags.*;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.PolylineBuilder;
-import com.telenav.tdk.map.measurements.Distance;
+import com.telenav.kivakit.collections.primitive.map.split.SplitLongToLongMap;
+import com.telenav.kivakit.data.formats.pbf.model.tags.*;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.commandline.CommandLine;
+import com.telenav.kivakit.kernel.language.string.*;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.PolylineBuilder;
+import com.telenav.kivakit.map.measurements.Distance;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.telenav.tdk.tools.applications.pbf.analyzer.PbfAnalyzerApplication.*;
+import static com.telenav.kivakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.INPUT;
+import static com.telenav.kivakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.WAY_FILTER;
 
 /**
  * @author jonathanl (shibo)

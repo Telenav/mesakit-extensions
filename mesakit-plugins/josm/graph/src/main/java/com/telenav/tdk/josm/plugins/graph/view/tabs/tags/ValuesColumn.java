@@ -1,17 +1,21 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.tags;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags;
 
-import com.telenav.tdk.core.kernel.conversion.language.IdentityConverter;
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.messaging.Listener;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.utilities.ui.swing.component.searchlist.SearchList;
-import com.telenav.tdk.utilities.ui.swing.layout.*;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.kernel.conversion.language.IdentityConverter;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.messaging.Listener;
+import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
+import com.telenav.kivakit.utilities.ui.swing.layout.*;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.awt.Component;
 
-import static com.telenav.tdk.josm.plugins.graph.view.GraphLayer.Show.*;
+import static com.telenav.kivakit.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
+import static com.telenav.kivakit.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_ONLY;
 
 /**
  * @author jonathanl (shibo)
@@ -43,7 +47,7 @@ public class ValuesColumn extends JPanel
             }
         });
 
-        tagPanel.valuesLabel = TdkTheme.get().configure(new JLabel(""));
+        tagPanel.valuesLabel = KivaKitTheme.get().configure(new JLabel(""));
         tagPanel.valuesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         new VerticalBoxLayout(this)

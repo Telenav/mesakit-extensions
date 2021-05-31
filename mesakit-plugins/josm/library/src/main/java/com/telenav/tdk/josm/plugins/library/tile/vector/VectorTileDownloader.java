@@ -16,17 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.library.tile.vector;
+package com.telenav.kivakit.josm.plugins.library.tile.vector;
 
-import com.telenav.tdk.core.kernel.language.collections.map.VariableMap;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.network.core.*;
-import com.telenav.tdk.core.network.http.HttpNetworkLocation;
-import com.telenav.tdk.josm.plugins.library.tile.*;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.*;
+import com.telenav.kivakit.josm.plugins.library.tile.*;
+import com.telenav.kivakit.kernel.language.collections.map.VariableMap;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.*;
+import com.telenav.kivakit.network.http.HttpNetworkLocation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class VectorTileDownloader extends AbstractTileDownloader<VectorTileRequest, VectorTile>
 {

@@ -1,25 +1,28 @@
-package com.telenav.tdk.josm.plugins.graph.view.tabs.query;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.query;
 
-import com.telenav.tdk.core.kernel.language.string.Strings;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.kernel.operation.progress.reporters.Progress;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.core.kernel.scalars.mutable.MutableValue;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.graph.query.GraphQuery;
-import com.telenav.tdk.josm.plugins.graph.view.*;
-import com.telenav.tdk.josm.plugins.graph.view.tabs.search.UserFeedback;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.utilities.ui.swing.component.Components;
-import com.telenav.tdk.utilities.ui.swing.component.icon.search.MagnifyingGlass;
-import com.telenav.tdk.utilities.ui.swing.component.progress.ProgressPanel;
-import com.telenav.tdk.utilities.ui.swing.component.stack.CardPanel;
-import com.telenav.tdk.utilities.ui.swing.graphics.color.TdkColors;
-import com.telenav.tdk.utilities.ui.swing.layout.*;
-import com.telenav.tdk.utilities.ui.swing.theme.TdkTheme;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.graph.query.GraphQuery;
+import com.telenav.kivakit.josm.plugins.graph.view.*;
+import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.UserFeedback;
+import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
+import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.utilities.ui.swing.component.icon.search.MagnifyingGlass;
+import com.telenav.kivakit.utilities.ui.swing.component.progress.ProgressPanel;
+import com.telenav.kivakit.utilities.ui.swing.component.stack.CardPanel;
+import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
+import com.telenav.kivakit.utilities.ui.swing.layout.*;
+import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 
 /**
@@ -123,7 +126,7 @@ public class QueryPanel extends JPanel
 
     private HorizontalBox queryTools()
     {
-        final var theme = TdkTheme.get();
+        final var theme = KivaKitTheme.get();
 
         graphPanel.overrideMenuAcceleratorKeys(searchField());
 
@@ -173,10 +176,10 @@ public class QueryPanel extends JPanel
     {
         if (searchField == null)
         {
-            searchField = TdkTheme.get().newTextField();
+            searchField = KivaKitTheme.get().newTextField();
             Components.border(searchField, 8);
             Components.preferredWidth(searchField, 1_000);
-            UIManager.getDefaults().put("TextPane.background", TdkColors.DARK_GRAY.asAwtColor());
+            UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_GRAY.asAwtColor());
         }
         return searchField;
     }

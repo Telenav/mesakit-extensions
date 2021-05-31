@@ -16,22 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.graph.Place;
-import com.telenav.tdk.josm.plugins.graph.model.Selection.Type;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.measurements.Distance;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.tdk.map.ui.swing.map.graphics.drawables.Dot;
-import com.telenav.tdk.map.ui.swing.map.theme.Labels;
+import com.telenav.kivakit.graph.Place;
+import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Width;
+import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Dot;
+import com.telenav.kivakit.map.ui.swing.map.theme.Labels;
 
-import static com.telenav.tdk.map.ui.swing.map.theme.Dots.TRANSLUCENT_YELLOW;
-import static com.telenav.tdk.map.ui.swing.map.theme.MapStyles.Place.PLACE;
+import static com.telenav.kivakit.map.ui.swing.map.theme.Dots.TRANSLUCENT_YELLOW;
+import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Place.PLACE;
 
 /**
  * Draws dots where places are located

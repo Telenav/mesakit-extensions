@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.graph.json.serializers;
+package com.telenav.kivakit.graph.json.serializers;
 
-import com.telenav.tdk.map.road.model.SpeedCategory;
-import com.telenav.tdk.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.map.road.model.SpeedCategory;
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
 public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCategory, Integer>
 {

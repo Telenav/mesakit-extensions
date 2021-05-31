@@ -16,14 +16,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.library.tile;
+package com.telenav.kivakit.josm.plugins.library.tile;
 
-import com.telenav.tdk.core.collections.set.ConcurrentHashSet;
-import com.telenav.tdk.core.kernel.language.thread.Threads;
-import com.telenav.tdk.core.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.tdk.core.kernel.logging.Logger;
-import com.telenav.tdk.core.kernel.logging.LoggerFactory;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
+import com.telenav.kivakit.collections.set.ConcurrentHashSet;
+import com.telenav.kivakit.kernel.language.thread.Threads;
+import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
 
 import java.util.Collection;
 import java.util.concurrent.ArrayBlockingQueue;

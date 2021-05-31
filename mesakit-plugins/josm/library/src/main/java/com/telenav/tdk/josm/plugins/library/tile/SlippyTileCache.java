@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.library.tile;
+package com.telenav.kivakit.josm.plugins.library.tile;
 
-import com.telenav.tdk.core.collections.map.CacheMap;
-import com.telenav.tdk.core.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.collections.map.CacheMap;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
 
 import java.util.Map;
 

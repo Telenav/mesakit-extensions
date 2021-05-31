@@ -16,39 +16,39 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view.tabs.search;
+package com.telenav.kivakit.josm.plugins.graph.view.tabs.search;
 
-import com.telenav.tdk.core.kernel.language.object.Objects;
-import com.telenav.tdk.core.kernel.language.pattern.Pattern;
-import com.telenav.tdk.core.kernel.language.primitive.Ints;
-import com.telenav.tdk.core.kernel.language.string.StringList;
-import com.telenav.tdk.core.kernel.language.string.formatting.Separators;
-import com.telenav.tdk.core.kernel.messaging.Listener;
-import com.telenav.tdk.core.kernel.project.Tdk;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.data.formats.library.map.identifiers.*;
-import com.telenav.tdk.data.formats.pbf.model.identifiers.*;
-import com.telenav.tdk.data.formats.pbf.model.tags.PbfTags;
-import com.telenav.tdk.graph.*;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.graph.identifiers.*;
-import com.telenav.tdk.graph.map.MapEdgeIdentifier;
-import com.telenav.tdk.graph.traffic.roadsection.RoadSectionCode;
-import com.telenav.tdk.graph.world.*;
-import com.telenav.tdk.josm.plugins.graph.view.*;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.Polyline;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.map.region.locale.MapLocale;
-import com.telenav.tdk.map.road.model.RoadName;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer;
-import com.telenav.tdk.map.road.name.standardizer.RoadNameStandardizer.Mode;
+import com.telenav.kivakit.data.formats.library.map.identifiers.*;
+import com.telenav.kivakit.data.formats.pbf.model.identifiers.*;
+import com.telenav.kivakit.data.formats.pbf.model.tags.PbfTags;
+import com.telenav.kivakit.graph.*;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.graph.identifiers.*;
+import com.telenav.kivakit.graph.map.MapEdgeIdentifier;
+import com.telenav.kivakit.graph.traffic.roadsection.RoadSectionCode;
+import com.telenav.kivakit.graph.world.*;
+import com.telenav.kivakit.josm.plugins.graph.view.*;
+import com.telenav.kivakit.kernel.language.object.Objects;
+import com.telenav.kivakit.kernel.language.pattern.Pattern;
+import com.telenav.kivakit.kernel.language.primitive.Ints;
+import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.language.string.formatting.Separators;
+import com.telenav.kivakit.kernel.messaging.Listener;
+import com.telenav.kivakit.kernel.project.Tdk;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.Polyline;
+import com.telenav.kivakit.map.region.locale.MapLocale;
+import com.telenav.kivakit.map.road.model.RoadName;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer.Mode;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
+import java.awt.Desktop;
+import java.awt.Rectangle;
 import java.net.URI;
 
-import static com.telenav.tdk.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
+import static com.telenav.kivakit.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
 
 /**
  * The search portion of the {@link GraphPanel}
@@ -61,7 +61,7 @@ public class Searcher
     {
         final var help = new StringList();
 
-        help.add("<span class='section0'>TDK $ Graph Plugin</span>", Tdk.version());
+        help.add("<span class='section0'>TDK $ Graph Plugin</span>", KivaKit.version());
         help.add("<p class='aqua'>To make a graph active, double click on it in the view area or select it in the Layers panel.</p>" +
                 "<p class='aqua'>Select edges, vertexes and relations of an active graph to see their details.</p> " +
                 "<p class= 'aqua'>Select a rectangle to zoom in. " +
@@ -111,7 +111,7 @@ public class Searcher
     {
         final var help = new StringList();
 
-        help.add("<span class='section0'>TDK $ Graph Query Help</span>", Tdk.version());
+        help.add("<span class='section0'>TDK $ Graph Query Help</span>", KivaKit.version());
         help.add("<p class='aqua'>Graph queries can be entered into the search box as 'select [query-string]', " +
                 "where the query string is composed<br/>of operators, attributes and scalar constants.</p>");
         help.add("<p class='aqua'>For example, the query \"edge.roadName contains 'Lomas'\" would find " +
@@ -231,7 +231,7 @@ public class Searcher
         }
         if (searchString.equals("version"))
         {
-            return UserFeedback.html(Tdk.version() + " - " + Tdk.build());
+            return UserFeedback.html(KivaKit.version() + " - " + KivaKit.build());
         }
 
         final var viewBounds = layer.model().bounds();

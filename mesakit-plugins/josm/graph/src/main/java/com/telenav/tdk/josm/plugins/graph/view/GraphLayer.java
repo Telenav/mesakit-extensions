@@ -16,45 +16,48 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.graph.view;
+package com.telenav.kivakit.josm.plugins.graph.view;
 
-import com.telenav.tdk.core.kernel.language.string.StringList;
-import com.telenav.tdk.core.kernel.logging.*;
-import com.telenav.tdk.core.kernel.messaging.Message;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.kernel.scalars.counts.Count;
-import com.telenav.tdk.core.kernel.scalars.levels.Percentage;
-import com.telenav.tdk.data.formats.library.map.identifiers.*;
-import com.telenav.tdk.graph.*;
-import com.telenav.tdk.graph.collections.EdgeSet;
-import com.telenav.tdk.graph.identifiers.*;
-import com.telenav.tdk.graph.io.load.GraphConstraints;
-import com.telenav.tdk.graph.map.MapEdgeIdentifier;
-import com.telenav.tdk.josm.plugins.graph.GraphPlugin;
-import com.telenav.tdk.josm.plugins.graph.model.*;
-import com.telenav.tdk.josm.plugins.graph.view.graphics.coordinates.JosmCoordinateMapper;
-import com.telenav.tdk.josm.plugins.graph.view.graphics.renderers.VisibleEdges;
-import com.telenav.tdk.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode;
-import com.telenav.tdk.josm.plugins.library.BaseJosmLayer;
-import com.telenav.tdk.map.geography.polyline.Polyline;
-import com.telenav.tdk.map.geography.rectangle.Rectangle;
-import com.telenav.tdk.map.measurements.*;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.tdk.navigation.routing.*;
-import com.telenav.tdk.navigation.routing.bidijkstra.*;
-import com.telenav.tdk.navigation.routing.cost.functions.heuristic.SpeedCostFunction;
-import com.telenav.tdk.navigation.routing.debuggers.SwingRoutingDebugger;
-import com.telenav.tdk.navigation.routing.limiters.CpuTimeRoutingLimiter;
-import com.telenav.tdk.utilities.time.PreciseDuration;
+import com.telenav.kivakit.data.formats.library.map.identifiers.*;
+import com.telenav.kivakit.graph.*;
+import com.telenav.kivakit.graph.collections.EdgeSet;
+import com.telenav.kivakit.graph.identifiers.*;
+import com.telenav.kivakit.graph.io.load.GraphConstraints;
+import com.telenav.kivakit.graph.map.MapEdgeIdentifier;
+import com.telenav.kivakit.josm.plugins.graph.GraphPlugin;
+import com.telenav.kivakit.josm.plugins.graph.model.*;
+import com.telenav.kivakit.josm.plugins.graph.view.graphics.coordinates.JosmCoordinateMapper;
+import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges;
+import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode;
+import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
+import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.logging.Logger;
+import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.map.geography.polyline.Polyline;
+import com.telenav.kivakit.map.measurements.*;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.kivakit.navigation.routing.*;
+import com.telenav.kivakit.navigation.routing.bidijkstra.*;
+import com.telenav.kivakit.navigation.routing.cost.functions.heuristic.SpeedCostFunction;
+import com.telenav.kivakit.navigation.routing.debuggers.SwingRoutingDebugger;
+import com.telenav.kivakit.navigation.routing.limiters.CpuTimeRoutingLimiter;
+import com.telenav.kivakit.utilities.time.PreciseDuration;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.*;
 
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static com.telenav.tdk.core.kernel.language.string.conversion.StringFormat.HTML;
-import static com.telenav.tdk.map.road.model.RoadFunctionalClass.*;
+import static com.telenav.kivakit.kernel.language.string.conversion.StringFormat.HTML;
+import static com.telenav.kivakit.map.road.model.RoadFunctionalClass.*;
 
 /**
  * Handles painting by rendering the graph's {@link ViewModel} on the {@link Canvas} using a {@link GraphLayerRenderer}

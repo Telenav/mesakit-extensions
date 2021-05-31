@@ -16,23 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.tools.applications.graph.ways.extractor;
 
-package com.telenav.tdk.tools.applications.graph.ways.extractor;
-
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.Folder;
-import com.telenav.tdk.core.kernel.commandline.SwitchParser;
-import com.telenav.tdk.core.kernel.operation.progress.ProgressReporter;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.graph.Edge;
-import com.telenav.tdk.graph.io.archive.GraphArchive;
-import com.telenav.tdk.graph.io.load.*;
-import com.telenav.tdk.graph.library.osm.change.PbfSaver;
-import com.telenav.tdk.graph.project.TdkGraphCore;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.graph.io.archive.GraphArchive;
+import com.telenav.kivakit.graph.io.load.*;
+import com.telenav.kivakit.graph.library.osm.change.PbfSaver;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.resource.path.Extension;
 
 import java.util.Set;
 
-import static com.telenav.tdk.core.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
 
 /**
  * Creates a graph containing only the double-digitized ways in the input graph. If full node information is available,
@@ -40,7 +39,7 @@ import static com.telenav.tdk.core.resource.compression.archive.ZipArchive.Mode.
  *
  * @author jonathanl (shibo)
  */
-public class DoubleDigitizedWaysExtractorApplication extends TdkApplication
+public class DoubleDigitizedWaysExtractorApplication extends KivaKitApplication
 {
     private static final SwitchParser<SmartGraphLoader> GRAPH =
             SmartGraphLoader.switchParser()
@@ -59,7 +58,7 @@ public class DoubleDigitizedWaysExtractorApplication extends TdkApplication
 
     private DoubleDigitizedWaysExtractorApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override

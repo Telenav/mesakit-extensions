@@ -16,28 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
 
-package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
-
-import com.telenav.tdk.graph.Edge;
-import com.telenav.tdk.josm.plugins.graph.model.ViewModel;
-import com.telenav.tdk.map.geography.Location;
-import com.telenav.tdk.map.geography.polyline.Polyline;
-import com.telenav.tdk.map.road.model.RoadFunctionalClass;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Style;
-import com.telenav.tdk.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.tdk.map.ui.swing.map.graphics.drawables.Dot;
-import com.telenav.tdk.map.ui.swing.map.theme.Styles;
+import com.telenav.kivakit.graph.Edge;
+import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.map.geography.Location;
+import com.telenav.kivakit.map.geography.polyline.Polyline;
+import com.telenav.kivakit.map.road.model.RoadFunctionalClass;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Style;
+import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Width;
+import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Dot;
+import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.telenav.tdk.map.road.model.RoadFunctionalClass.*;
-import static com.telenav.tdk.map.ui.swing.map.graphics.canvas.Scale.*;
+import static com.telenav.kivakit.map.road.model.RoadFunctionalClass.*;
+import static com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale.*;
 
 /**
  * Base class for renderers which holds the canvas to draw on and the model to draw.

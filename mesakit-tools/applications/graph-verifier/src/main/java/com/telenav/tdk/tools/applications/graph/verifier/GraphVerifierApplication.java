@@ -16,26 +16,28 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.applications.graph.verifier;
+package com.telenav.kivakit.tools.applications.graph.verifier;
 
-import com.telenav.tdk.core.application.TdkApplication;
-import com.telenav.tdk.core.filesystem.File;
-import com.telenav.tdk.core.kernel.commandline.*;
-import com.telenav.tdk.core.kernel.comparison.Differences;
-import com.telenav.tdk.core.kernel.scalars.counts.*;
-import com.telenav.tdk.core.resource.path.Extension;
-import com.telenav.tdk.data.formats.library.map.identifiers.*;
-import com.telenav.tdk.data.formats.pbf.model.tags.*;
-import com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor;
-import com.telenav.tdk.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.tdk.graph.*;
-import com.telenav.tdk.graph.io.load.SmartGraphLoader;
-import com.telenav.tdk.graph.project.TdkGraphCore;
-import com.telenav.tdk.map.utilities.geojson.*;
+import com.telenav.kivakit.application.KivaKitApplication;
+import com.telenav.kivakit.data.formats.library.map.identifiers.*;
+import com.telenav.kivakit.data.formats.pbf.model.tags.*;
+import com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor;
+import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.graph.*;
+import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
+import com.telenav.kivakit.graph.project.KivaKitGraphCore;
+import com.telenav.kivakit.kernel.commandline.*;
+import com.telenav.kivakit.kernel.comparison.Differences;
+import com.telenav.kivakit.kernel.scalars.counts.*;
+import com.telenav.kivakit.map.utilities.geojson.*;
+import com.telenav.kivakit.resource.path.Extension;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
+import static com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor.Result.ACCEPTED;
 
 /**
  * Converts a PBF input file into a graph then compares the graph against the PBF file. If a graph file is specified as
@@ -44,7 +46,7 @@ import static com.telenav.tdk.data.formats.pbf.processing.PbfDataProcessor.Resul
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class GraphVerifierApplication extends TdkApplication
+public class GraphVerifierApplication extends KivaKitApplication
 {
     public static void main(final String[] arguments)
     {
@@ -65,7 +67,7 @@ public class GraphVerifierApplication extends TdkApplication
 
     private GraphVerifierApplication()
     {
-        super(TdkGraphCore.get());
+        super(KivaKitGraphCore.get());
     }
 
     @Override
