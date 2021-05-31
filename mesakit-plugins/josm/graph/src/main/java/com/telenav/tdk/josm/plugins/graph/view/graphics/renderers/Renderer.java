@@ -16,19 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.Edge;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.geography.polyline.Polyline;
-import com.telenav.kivakit.map.road.model.RoadFunctionalClass;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Style;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Dot;
-import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Style;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Width;
+import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Dot;
+import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;

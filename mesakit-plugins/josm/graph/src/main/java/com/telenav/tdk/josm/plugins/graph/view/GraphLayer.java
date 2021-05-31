@@ -16,14 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view;
+package com.telenav.tdk.josm.plugins.graph.view;
 
 import com.telenav.kivakit.data.formats.library.map.identifiers.*;
-import com.telenav.kivakit.graph.*;
-import com.telenav.kivakit.graph.collections.EdgeSet;
-import com.telenav.kivakit.graph.identifiers.*;
-import com.telenav.kivakit.graph.io.load.GraphConstraints;
-import com.telenav.kivakit.graph.map.MapEdgeIdentifier;
 import com.telenav.kivakit.josm.plugins.graph.GraphPlugin;
 import com.telenav.kivakit.josm.plugins.graph.model.*;
 import com.telenav.kivakit.josm.plugins.graph.view.graphics.coordinates.JosmCoordinateMapper;
@@ -35,17 +30,29 @@ import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.geography.polyline.Polyline;
-import com.telenav.kivakit.map.measurements.*;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.navigation.routing.*;
 import com.telenav.kivakit.navigation.routing.bidijkstra.*;
 import com.telenav.kivakit.navigation.routing.cost.functions.heuristic.SpeedCostFunction;
 import com.telenav.kivakit.navigation.routing.debuggers.SwingRoutingDebugger;
 import com.telenav.kivakit.navigation.routing.limiters.CpuTimeRoutingLimiter;
 import com.telenav.kivakit.utilities.time.PreciseDuration;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.EdgeRelation;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.GraphElement;
+import com.telenav.mesakit.graph.Place;
+import com.telenav.mesakit.graph.Route;
+import com.telenav.mesakit.graph.ShapePoint;
+import com.telenav.mesakit.graph.Vertex;
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
+import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
+import com.telenav.mesakit.graph.io.load.GraphConstraints;
+import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
+import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.*;
 
@@ -173,7 +180,7 @@ public class GraphLayer extends BaseJosmLayer
         {
             canvas = new MapCanvas(graphics, bounds(), Scale.of(view.getScale()), new JosmCoordinateMapper(view));
 
-            model().bounds(bounds().expanded(Percentage.of(5)));
+            model().bounds(bounds().expanded(Percent.of(5)));
             model().graph(graph);
 
             switch (canvas.scale())
@@ -242,7 +249,7 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    public void show(final WayIdentifier identifier)
+    public void show(final PbfWayIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
@@ -343,7 +350,7 @@ public class GraphLayer extends BaseJosmLayer
     {
         if (bounds != null)
         {
-            var expanded = bounds.expanded(new Percentage(10));
+            var expanded = bounds.expanded(new Percent(10));
             if (expanded.widthAtBase().isLessThan(Distance._100_METERS))
             {
                 expanded = expanded.expandedLeft(Distance.meters(50));

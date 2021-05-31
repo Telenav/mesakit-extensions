@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.verifier;
+package com.telenav.tdk.tools.applications.graph.verifier;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.library.map.identifiers.*;
@@ -24,14 +24,17 @@ import com.telenav.kivakit.data.formats.pbf.model.tags.*;
 import com.telenav.kivakit.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.*;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.*;
-import com.telenav.kivakit.kernel.comparison.Differences;
+import com.telenav.kivakit.kernel.data.comparison.Differences;
 import com.telenav.kivakit.kernel.scalars.counts.*;
-import com.telenav.kivakit.map.utilities.geojson.*;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonPolyline;
 
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +70,7 @@ public class GraphVerifierApplication extends KivaKitApplication
 
     private GraphVerifierApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override
@@ -178,7 +181,7 @@ public class GraphVerifierApplication extends KivaKitApplication
     private void verify(final Graph graph, final SerialPbfReader reader)
     {
         final var nodes = new MutableCount();
-        final Set<WayIdentifier> ways = new HashSet<>();
+        final Set<PbfWayIdentifier> ways = new HashSet<>();
         final var nodeTagDifferences = new MutableCount();
         final var wayTagDifferences = new MutableCount();
         final Set<NodeIdentifier> nodeIdentifiers = new HashSet<>();

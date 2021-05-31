@@ -16,18 +16,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.slicer;
+package com.telenav.tdk.tools.applications.graph.slicer;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.io.archive.GraphArchive;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
 import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.io.archive.GraphArchive;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.map.geography.rectangle.Rectangle;
 
 import java.util.Set;
 
@@ -63,7 +63,7 @@ public class GraphSlicerApplication extends KivaKitApplication
 
     protected GraphSlicerApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

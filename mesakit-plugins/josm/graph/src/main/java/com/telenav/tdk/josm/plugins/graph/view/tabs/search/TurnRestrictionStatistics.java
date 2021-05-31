@@ -16,11 +16,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.search;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.search;
 
 import com.telenav.kivakit.kernel.language.string.StringList;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.graph.EdgeRelation;
+import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.mesakit.graph.EdgeRelation;
 
 public class TurnRestrictionStatistics
 {
@@ -177,22 +177,22 @@ public class TurnRestrictionStatistics
     public StringList summary()
     {
         final var turns = new StringList();
-        turns.add("restrictions = " + Count.of(restrictions));
-        turns.add("no lefts = " + Count.of(noLefts));
-        turns.add("no rights = " + Count.of(noRights));
-        turns.add("no straight ons = " + Count.of(noStraightOns));
-        turns.add("no u-turns = " + Count.of(noUs));
-        turns.add("only lefts = " + Count.of(onlyLefts));
-        turns.add("only rights = " + Count.of(onlyRights));
-        turns.add("only straight ons = " + Count.of(onlyStraightOns));
-        turns.add("bad restrictions = " + Count.of(badRestrictions));
-        turns.add("bad no lefts = " + Count.of(badNoLefts));
-        turns.add("bad no rights = " + Count.of(badNoRights));
-        turns.add("bad no straight ons = " + Count.of(badNoStraightOns));
-        turns.add("bad no u-turns = " + Count.of(badNoUs));
-        turns.add("bad only lefts = " + Count.of(badOnlyLefts));
-        turns.add("bad only rights = " + Count.of(badOnlyRights));
-        turns.add("bad only straight ons = " + Count.of(badOnlyStraightOns));
+        turns.add("restrictions = " + Count.count(restrictions));
+        turns.add("no lefts = " + Count.count(noLefts));
+        turns.add("no rights = " + Count.count(noRights));
+        turns.add("no straight ons = " + Count.count(noStraightOns));
+        turns.add("no u-turns = " + Count.count(noUs));
+        turns.add("only lefts = " + Count.count(onlyLefts));
+        turns.add("only rights = " + Count.count(onlyRights));
+        turns.add("only straight ons = " + Count.count(onlyStraightOns));
+        turns.add("bad restrictions = " + Count.count(badRestrictions));
+        turns.add("bad no lefts = " + Count.count(badNoLefts));
+        turns.add("bad no rights = " + Count.count(badNoRights));
+        turns.add("bad no straight ons = " + Count.count(badNoStraightOns));
+        turns.add("bad no u-turns = " + Count.count(badNoUs));
+        turns.add("bad only lefts = " + Count.count(badOnlyLefts));
+        turns.add("bad only rights = " + Count.count(badOnlyRights));
+        turns.add("bad only straight ons = " + Count.count(badOnlyStraightOns));
         return turns;
     }
 

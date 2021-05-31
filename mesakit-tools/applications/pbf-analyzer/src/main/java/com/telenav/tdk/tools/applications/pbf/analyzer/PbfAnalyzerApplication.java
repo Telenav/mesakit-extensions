@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.pbf.analyzer;
+package com.telenav.tdk.tools.applications.pbf.analyzer;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.model.tags.*;

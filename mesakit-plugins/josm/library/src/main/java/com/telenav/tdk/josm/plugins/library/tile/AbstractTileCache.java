@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library.tile;
+package com.telenav.tdk.josm.plugins.library.tile;
 
 public abstract class AbstractTileCache<Request extends AbstractTileRequest, Tile extends AbstractTile>
 {

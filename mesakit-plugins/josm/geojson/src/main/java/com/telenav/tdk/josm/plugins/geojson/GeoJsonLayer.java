@@ -16,20 +16,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.geojson;
+package com.telenav.tdk.josm.plugins.geojson;
 
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
 import com.telenav.kivakit.kernel.interfaces.naming.NamedObject;
+import com.telenav.kivakit.kernel.language.values.Count;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.geography.indexing.rtree.RTreeSettings;
-import com.telenav.kivakit.map.geography.indexing.rtree.RTreeSpatialIndex;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.utilities.geojson.*;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.utilities.ui.swing.graphics.color.ColorConverter;
+import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSettings;
+import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSpatialIndex;
+import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonGeometry;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonPoint;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonPolyline;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
 import org.openstreetmap.josm.gui.MapView;
@@ -186,7 +190,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             final var bounds = feature.bounds();
             if (bounds != null)
             {
-                plugin().zoomTo(bounds.expanded(new Percentage(50)));
+                plugin().zoomTo(bounds.expanded(new Percent(50)));
             }
             selectedFeature = feature;
         }
@@ -426,7 +430,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         final Map<Rectangle, Count> counts = new HashMap<>();
         for (final var cell : bounds().cells(size))
         {
-            final var count = Count.of(spatialIndex.intersecting(cell));
+            final var count = Count.count(spatialIndex.intersecting(cell));
             maximum = maximum.maximum(count);
             counts.put(cell, count);
         }

@@ -16,27 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
+import com.telenav.kivakit.kernel.scalars.levels.Priority;
 import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
-public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier, Long>
+public class PriorityGsonSerializer extends PrimitiveGsonSerializer<Priority, Double>
 {
-    public IdentifierGsonSerializer()
+    public PriorityGsonSerializer()
     {
-        super(Long.class);
+        super(Double.class);
     }
 
     @Override
-    protected Identifier toObject(final Long scalar)
+    protected Priority toObject(final Double scalar)
     {
-        return new Identifier(scalar);
+        return Priority.forDouble(scalar);
     }
 
     @Override
-    protected Long toPrimitive(final Identifier object)
+    protected Double toPrimitive(final Priority object)
     {
-        return object.asLong();
+        return object.value();
     }
 }

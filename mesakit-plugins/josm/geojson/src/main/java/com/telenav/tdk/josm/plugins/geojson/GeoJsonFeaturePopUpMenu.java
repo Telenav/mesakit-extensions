@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.geojson;
+package com.telenav.tdk.josm.plugins.geojson;
 
 import com.telenav.kivakit.data.formats.library.map.identifiers.MapIdentifier;
-import com.telenav.kivakit.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;

@@ -16,20 +16,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.pbf.metadata;
+package com.telenav.tdk.tools.applications.pbf.metadata;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
 import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.*;
 import com.telenav.kivakit.data.formats.pbf.processing.filters.unidb.*;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.Metadata;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
-import com.telenav.kivakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
 import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.map.geography.Precision;
+import com.telenav.mesakit.graph.Metadata;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
+import com.telenav.mesakit.map.geography.Precision;
 
 import java.util.List;
 import java.util.Set;
@@ -93,7 +93,7 @@ public class PbfMetadataApplication extends KivaKitApplication
 
     private PbfMetadataApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

@@ -16,16 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.model;
+package com.telenav.tdk.josm.plugins.graph.model;
 
-import com.telenav.kivakit.graph.*;
-import com.telenav.kivakit.graph.collections.EdgeSet;
-import com.telenav.kivakit.graph.matching.snapping.GraphSnapper;
 import com.telenav.kivakit.kernel.scalars.counts.Estimate;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.geography.polyline.Polyline;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.EdgeRelation;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.GraphElement;
+import com.telenav.mesakit.graph.Place;
+import com.telenav.mesakit.graph.ShapePoint;
+import com.telenav.mesakit.graph.Vertex;
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.graph.matching.snapping.GraphSnapper;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 import org.openstreetmap.josm.gui.layer.Layer;
 
 import java.awt.Point;

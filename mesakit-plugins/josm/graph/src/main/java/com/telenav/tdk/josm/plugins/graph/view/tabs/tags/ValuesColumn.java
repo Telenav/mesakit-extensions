@@ -1,12 +1,12 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.tags;
 
-import com.telenav.kivakit.graph.collections.EdgeSet;
 import com.telenav.kivakit.kernel.conversion.language.IdentityConverter;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.messaging.Listener;
 import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
 import com.telenav.kivakit.utilities.ui.swing.layout.*;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.mesakit.graph.collections.EdgeSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;

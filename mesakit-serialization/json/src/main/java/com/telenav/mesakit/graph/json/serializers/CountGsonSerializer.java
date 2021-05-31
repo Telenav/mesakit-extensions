@@ -16,12 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.geocoding.reverse.matching;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.road.model.RoadName;
+import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
-public interface RoadNameMatcher
+public class CountGsonSerializer extends PrimitiveGsonSerializer<Count, Integer>
 {
-    Percentage matches(final RoadName candidate, final RoadName desired);
+    public CountGsonSerializer()
+    {
+        super(Integer.class);
+    }
+
+    @Override
+    protected Count toObject(final Integer scalar)
+    {
+        return Count.count(scalar);
+    }
+
+    @Override
+    protected Integer toPrimitive(final Count object)
+    {
+        return object.asInt();
+    }
 }

@@ -16,9 +16,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view;
+package com.telenav.tdk.josm.plugins.graph.view;
 
-import com.telenav.kivakit.graph.Vertex;
 import com.telenav.kivakit.josm.plugins.graph.GraphPlugin;
 import com.telenav.kivakit.josm.plugins.graph.view.tabs.query.QueryPanel;
 import com.telenav.kivakit.josm.plugins.graph.view.tabs.routing.RoutingPanel;
@@ -33,6 +32,7 @@ import com.telenav.kivakit.utilities.ui.swing.component.status.*;
 import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
 import com.telenav.kivakit.utilities.ui.swing.graphics.font.Fonts;
 import com.telenav.kivakit.utilities.ui.swing.theme.*;
+import com.telenav.mesakit.graph.Vertex;
 import org.jetbrains.annotations.NotNull;
 import org.openstreetmap.josm.gui.layer.Layer;
 

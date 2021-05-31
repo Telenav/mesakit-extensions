@@ -16,23 +16,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.dumper;
+package com.telenav.tdk.tools.applications.graph.dumper;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.GraphElement;
-import com.telenav.kivakit.graph.identifiers.*;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.language.iteration.Streams;
 import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.language.values.Count;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.GraphElement;
+import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
+import com.telenav.mesakit.graph.identifiers.PlaceIdentifier;
+import com.telenav.mesakit.graph.identifiers.RelationIdentifier;
+import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.map.geography.rectangle.Rectangle;
 
 import java.util.List;
 import java.util.Set;
@@ -104,7 +107,7 @@ public class GraphDumperApplication extends KivaKitApplication
 
     protected GraphDumperApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

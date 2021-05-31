@@ -16,27 +16,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.scalars.levels.Priority;
-import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
+import com.telenav.mesakit.map.geography.Longitude;
 
-public class PriorityGsonSerializer extends PrimitiveGsonSerializer<Priority, Double>
+import java.lang.reflect.Type;
+
+public class LongitudeGsonSerializer implements GsonSerializer<Longitude>
 {
-    public PriorityGsonSerializer()
+    @Override
+    public Longitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+            throws JsonParseException
     {
-        super(Double.class);
+        return Longitude.degrees(context.deserialize(json, Double.class));
     }
 
     @Override
-    protected Priority toObject(final Double scalar)
+    public JsonElement serialize(final Longitude longitude, final Type typeOfSrc,
+                                 final JsonSerializationContext context)
     {
-        return Priority.forDouble(scalar);
-    }
-
-    @Override
-    protected Double toPrimitive(final Priority object)
-    {
-        return object.value();
+        return context.serialize(longitude.asDegrees());
     }
 }

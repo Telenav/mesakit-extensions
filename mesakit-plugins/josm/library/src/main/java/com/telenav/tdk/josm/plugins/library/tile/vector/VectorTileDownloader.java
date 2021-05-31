@@ -16,14 +16,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library.tile.vector;
+package com.telenav.tdk.josm.plugins.library.tile.vector;
 
 import com.telenav.kivakit.josm.plugins.library.tile.*;
 import com.telenav.kivakit.kernel.language.collections.map.VariableMap;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.geography.polyline.*;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.polyline.*;
 import com.telenav.kivakit.network.http.HttpNetworkLocation;
 
 import java.util.ArrayList;

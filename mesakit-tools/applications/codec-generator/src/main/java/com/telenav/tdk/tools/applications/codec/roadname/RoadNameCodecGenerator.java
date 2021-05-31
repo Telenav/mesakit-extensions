@@ -1,7 +1,6 @@
-package com.telenav.kivakit.tools.applications.codec.roadname;
+package com.telenav.tdk.tools.applications.codec.roadname;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
 import com.telenav.kivakit.kernel.commandline.CommandLine;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
@@ -10,11 +9,12 @@ import com.telenav.kivakit.kernel.scalars.counts.*;
 import com.telenav.kivakit.tools.applications.codec.CodecGeneratorApplication;
 import com.telenav.kivakit.utilities.compression.codecs.huffman.character.*;
 import com.telenav.kivakit.utilities.compression.codecs.huffman.string.*;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 
 /**
  * @author jonathanl (shibo)
  */
-public class RoadNameCodecGenerator extends BaseRepeater<Message>
+public class RoadNameCodecGenerator extends BaseRepeater
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 

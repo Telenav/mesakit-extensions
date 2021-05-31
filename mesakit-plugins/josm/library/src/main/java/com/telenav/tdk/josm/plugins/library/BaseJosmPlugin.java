@@ -16,9 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library;
+package com.telenav.tdk.josm.plugins.library;
 
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MapFrame;

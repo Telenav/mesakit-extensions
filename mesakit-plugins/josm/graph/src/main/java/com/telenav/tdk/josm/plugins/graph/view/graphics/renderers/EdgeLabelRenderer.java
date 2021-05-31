@@ -16,20 +16,23 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.*;
-import com.telenav.kivakit.graph.navigation.navigators.NamedRoadNavigator;
 import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.kernel.debug.Debug;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.road.model.*;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
 import com.telenav.kivakit.utilities.ui.swing.graphics.color.*;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Route;
+import com.telenav.mesakit.graph.RouteBuilder;
+import com.telenav.mesakit.graph.navigation.navigators.NamedRoadNavigator;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
+import com.telenav.mesakit.map.road.model.RoadType;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
 
 import java.util.HashMap;
 import java.util.HashSet;

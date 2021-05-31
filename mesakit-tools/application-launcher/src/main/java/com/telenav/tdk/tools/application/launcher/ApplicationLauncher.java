@@ -16,13 +16,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.application.launcher;
+package com.telenav.tdk.tools.application.launcher;
 
 import com.telenav.kivakit.kernel.logging.loggers.LogServiceLoader;
 import com.telenav.kivakit.kernel.time.Duration;
 import com.telenav.kivakit.logs.server.ServerLog;
 import com.telenav.kivakit.tools.applications.codec.CodecGeneratorApplication;
-import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
 import com.telenav.kivakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
 import com.telenav.kivakit.tools.applications.graph.dumper.GraphDumperApplication;
 import com.telenav.kivakit.tools.applications.graph.slicer.GraphSlicerApplication;
@@ -37,6 +36,7 @@ import com.telenav.kivakit.tools.applications.pbf.metadata.PbfMetadataApplicatio
 import com.telenav.kivakit.tools.applications.pbf.region.extractor.PbfRegionExtractorApplication;
 import com.telenav.kivakit.tools.applications.region.information.RegionInformationApplication;
 import com.telenav.kivakit.tools.applications.service.registry.ServiceRegistryViewerApplication;
+import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
 
 import java.util.Arrays;
 

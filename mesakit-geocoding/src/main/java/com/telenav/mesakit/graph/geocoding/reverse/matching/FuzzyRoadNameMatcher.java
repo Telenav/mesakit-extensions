@@ -16,21 +16,21 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.geocoding.reverse.matching;
+package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
 import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.road.model.RoadName;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
+import com.telenav.mesakit.map.road.model.RoadName;
 
 public class FuzzyRoadNameMatcher implements RoadNameMatcher
 {
     @Override
-    public Percentage matches(final RoadName candidate, final RoadName desired)
+    public Percent matches(final RoadName candidate, final RoadName desired)
     {
         // If the candidate precisely matches (ignoring case) the name we're looking for
         if (candidate.equals(desired))
         {
-            return Percentage._100;
+            return Percent._100;
         }
 
         // If directions were specified and they don't match
@@ -39,7 +39,7 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
         if (candidateDirection != null && desiredDirection != null && !candidateDirection.equals(desiredDirection))
         {
             // then the road names don't match
-            return Percentage._0;
+            return Percent._0;
         }
 
         // compute the edit distance between the two names
@@ -58,6 +58,6 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
             percentage = 100;
         }
 
-        return new Percentage(percentage);
+        return new Percent(percentage);
     }
 }

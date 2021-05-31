@@ -16,12 +16,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.Vertex;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.graph.Vertex;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 
 import java.util.HashSet;
 import java.util.Set;

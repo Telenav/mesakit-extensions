@@ -16,16 +16,16 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.converter;
+package com.telenav.tdk.tools.applications.graph.converter;
 
 import com.telenav.kivakit.application.KivaKitApplication;
-import com.telenav.kivakit.graph.Graph;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.io.save.PbfGraphSaver;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.*;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
+import com.telenav.mesakit.graph.project.GraphCore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class GraphToPbfConverterApplication extends KivaKitApplication
 
     public GraphToPbfConverterApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

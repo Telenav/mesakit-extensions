@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.pbf.dumper;
+package com.telenav.tdk.tools.applications.pbf.dumper;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.model.tags.*;

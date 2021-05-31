@@ -16,17 +16,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.Edge;
 import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.road.model.RoadType;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Line;
-import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.utilities.ui.swing.graphics.color.*;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.map.road.model.RoadType;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Line;
+import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
 
 import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Edge.*;
 import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Road;
@@ -43,23 +43,23 @@ public class EdgeRenderer extends Renderer
         switch (edge.roadFunctionalClass())
         {
             case MAIN:
-                return line.fattened(Percentage.of(200));
+                return line.fattened(Percent.of(200));
 
             case FIRST_CLASS:
                 if (edge.roadType() == RoadType.HIGHWAY)
                 {
-                    return line.fattened(Percentage.of(100));
+                    return line.fattened(Percent.of(100));
                 }
                 else
                 {
-                    return line.fattened(Percentage.of(50));
+                    return line.fattened(Percent.of(50));
                 }
 
             case SECOND_CLASS:
-                return line.fattened(Percentage.of(30));
+                return line.fattened(Percent.of(30));
 
             case THIRD_CLASS:
-                return line.fattened(Percentage.of(5));
+                return line.fattened(Percent.of(5));
 
             case UNKNOWN:
             case FOURTH_CLASS:

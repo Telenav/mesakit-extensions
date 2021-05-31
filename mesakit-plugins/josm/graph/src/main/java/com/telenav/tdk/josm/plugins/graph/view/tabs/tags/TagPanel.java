@@ -1,14 +1,14 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.tags;
 
-import com.telenav.kivakit.graph.Graph;
 import com.telenav.kivakit.josm.plugins.graph.view.*;
 import com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing.*;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
 import com.telenav.kivakit.utilities.ui.swing.component.Components;
 import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
 import com.telenav.kivakit.utilities.ui.swing.layout.*;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.map.geography.rectangle.Rectangle;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;

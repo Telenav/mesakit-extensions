@@ -1,12 +1,11 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
 
 import com.telenav.kivakit.kernel.language.string.StringList;
 import com.telenav.kivakit.kernel.language.thread.KivaKitThread;
 import com.telenav.kivakit.kernel.language.thread.latches.CompletionLatch;
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.values.count.Count;
 
 import java.util.HashSet;
 
@@ -14,7 +13,7 @@ import java.util.HashSet;
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("InfiniteLoopStatement")
-public class TagIndexer extends BaseRepeater<Message>
+public class TagIndexer extends BaseRepeater
 {
     private TagIndexRequest request;
 
@@ -88,7 +87,7 @@ public class TagIndexer extends BaseRepeater<Message>
                 {
                     return null;
                 }
-                final var values = index.keyToValues.get(key).first(Count.of(500));
+                final var values = index.keyToValues.get(key).first(Count.count(500));
                 final var sorted = new StringList(values.asSet()).sorted();
                 index.keyToValues.put(key, sorted);
             }

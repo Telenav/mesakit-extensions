@@ -18,9 +18,9 @@
 
 package com.telenav.mesakit.tools.applications.graph.analyzer;
 
-import com.telenav.kivakit.graph.Edge;
-import com.telenav.kivakit.kernel.interfaces.object.Matcher;
+import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
 import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.mesakit.graph.Edge;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;

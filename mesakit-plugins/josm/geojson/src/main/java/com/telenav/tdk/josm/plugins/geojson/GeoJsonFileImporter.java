@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.geojson;
+package com.telenav.tdk.josm.plugins.geojson;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.map.utilities.geojson.GeoJsonDocument;
+import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
 

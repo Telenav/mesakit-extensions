@@ -16,25 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.map.geography.Latitude;
-import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.mesakit.map.road.model.SpeedCategory;
 
-import java.lang.reflect.Type;
-
-public class LatitudeGsonSerializer implements GsonSerializer<Latitude>
+public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCategory, Integer>
 {
-    @Override
-    public Latitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-            throws JsonParseException
+    public SpeedCategoryGsonSerializer()
     {
-        return Latitude.degrees(context.deserialize(json, Double.class));
+        super(Integer.class);
     }
 
     @Override
-    public JsonElement serialize(final Latitude latitude, final Type typeOfSrc, final JsonSerializationContext context)
+    protected SpeedCategory toObject(final Integer scalar)
     {
-        return context.serialize(latitude.asDegrees());
+        return SpeedCategory.forIdentifier(scalar);
+    }
+
+    @Override
+    protected Integer toPrimitive(final SpeedCategory object)
+    {
+        return object.identifier();
     }
 }

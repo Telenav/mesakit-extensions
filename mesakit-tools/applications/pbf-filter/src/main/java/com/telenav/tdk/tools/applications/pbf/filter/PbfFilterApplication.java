@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.pbf.filter;
+package com.telenav.tdk.tools.applications.pbf.filter;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.collections.primitive.set.LongSet;
@@ -29,7 +29,7 @@ import com.telenav.kivakit.data.formats.pbf.project.KivaKitDataFormatsPbf;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
 import com.telenav.kivakit.kernel.scalars.counts.*;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.time.Time;
 import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
 import java.util.ArrayList;

@@ -16,18 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.geocoding.reverse;
+package com.telenav.mesakit.graph.geocoding.reverse;
 
-import com.telenav.kivakit.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;
-import com.telenav.kivakit.graph.geocoding.reverse.matching.RoadNameMatcher;
-import com.telenav.kivakit.graph.specifications.osm.graph.edge.model.attributes.OsmEdgeAttributes;
-import com.telenav.kivakit.graph.traffic.roadsection.*;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.geography.polyline.*;
-import com.telenav.kivakit.map.measurements.*;
-import com.telenav.kivakit.map.road.model.RoadName;
-import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.polyline.*;
+import com.telenav.mesakit.map.measurements.*;
+import com.telenav.mesakit.map.road.model.RoadName;
+import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.mesakit.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;
+import com.telenav.mesakit.graph.geocoding.reverse.matching.RoadNameMatcher;
+import com.telenav.mesakit.graph.specifications.osm.graph.edge.model.attributes.OsmEdgeAttributes;
+import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCode;
+import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCodingSystem;
 
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public class ReverseGeocoder
 
         private RoadNameStandardizer roadNameStandardizer;
 
-        private Percentage roadNameCloseness;
+        private Percent roadNameCloseness;
 
         private RoadSectionCodingSystem roadSectionCodingSystem = RoadSectionCodingSystem.TMC;
 
@@ -76,7 +77,7 @@ public class ReverseGeocoder
             this.headingTolerance = headingTolerance;
         }
 
-        public Percentage roadNameCloseness()
+        public Percent roadNameCloseness()
         {
             return roadNameCloseness;
         }
@@ -93,7 +94,7 @@ public class ReverseGeocoder
          * Given this, if your roadNameCloseness in this configuration was 70%, the two names would be considered
          * equivalent.
          */
-        public void roadNameCloseness(final Percentage roadNameCloseness)
+        public void roadNameCloseness(final Percent roadNameCloseness)
         {
             this.roadNameCloseness = roadNameCloseness;
         }
@@ -186,7 +187,7 @@ public class ReverseGeocoder
 
         private final PolylineSnap snap;
 
-        private Percentage percentage = Percentage._0;
+        private Percent percentage = Percent._0;
 
         Response(final Edge edge, final RoadSectionCode roadSectionCode, final PolylineSnap snap)
         {
@@ -196,7 +197,7 @@ public class ReverseGeocoder
         }
 
         Response(final Edge edge, final RoadSectionCode roadSectionCode, final PolylineSnap snap,
-                 final Percentage percentage)
+                 final Percent percentage)
         {
             this(edge, roadSectionCode, snap);
             this.percentage = percentage;
@@ -207,7 +208,7 @@ public class ReverseGeocoder
             return edge;
         }
 
-        public Percentage percentage()
+        public Percent percentage()
         {
             return percentage;
         }
@@ -249,7 +250,7 @@ public class ReverseGeocoder
 
         var closestDistance = Distance.MAXIMUM;
         Response response = null;
-        var highestRoadNameCloseness = Percentage._0;
+        var highestRoadNameCloseness = Percent._0;
 
         // Go through each edge within the given distance of the requested location
         for (final var edge : graph.edgesIntersecting(location.within(configuration.within())))
@@ -258,7 +259,7 @@ public class ReverseGeocoder
             // looking for,
             if (heading == null || edge.heading().isClose(heading, configuration.headingTolerance()))
             {
-                var roadNameCloseness = Percentage._100;
+                var roadNameCloseness = Percent._100;
                 if (desired != null)
                 {
                     roadNameCloseness = matches(edge.roadNames(), desired, standardizer, edge.heading());
@@ -283,10 +284,10 @@ public class ReverseGeocoder
         return response;
     }
 
-    private Percentage matches(final Set<RoadName> roadNames, final RoadName desired,
-                               final RoadNameStandardizer standardizer, final Heading edgeHeading)
+    private Percent matches(final Set<RoadName> roadNames, final RoadName desired,
+                            final RoadNameStandardizer standardizer, final Heading edgeHeading)
     {
-        var highestScore = Percentage._0;
+        var highestScore = Percent._0;
         for (var roadName : roadNames)
         {
             // and if the edge is named,

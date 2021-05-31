@@ -16,14 +16,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph;
+package com.telenav.tdk.josm.plugins.graph;
 
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphLayer;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
 import com.telenav.kivakit.josm.plugins.library.BaseJosmPanel;
 import com.telenav.kivakit.josm.plugins.library.BaseJosmPlugin;
-import com.telenav.kivakit.map.region.Region;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.map.region.Region;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.layer.Layer;
 import org.openstreetmap.josm.plugins.PluginInformation;
@@ -45,7 +45,7 @@ public class GraphPlugin extends BaseJosmPlugin
         ExtensionFileFilter.addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        KivaKitGraphCore.get().install();
+        GraphCore.get().install();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();

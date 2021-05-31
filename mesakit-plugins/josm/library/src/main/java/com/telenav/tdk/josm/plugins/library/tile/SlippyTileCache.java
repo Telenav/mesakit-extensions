@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library.tile;
+package com.telenav.tdk.josm.plugins.library.tile;
 
 import com.telenav.kivakit.collections.map.CacheMap;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;

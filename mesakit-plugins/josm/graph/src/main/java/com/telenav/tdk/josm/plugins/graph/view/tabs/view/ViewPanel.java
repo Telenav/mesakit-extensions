@@ -1,14 +1,19 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.view;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.view;
 
-import com.telenav.kivakit.graph.EdgeRelation;
-import com.telenav.kivakit.graph.Place;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.map.road.model.RoadType;
+import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.kivakit.utilities.ui.swing.component.Components;
 import com.telenav.kivakit.utilities.ui.swing.layout.HorizontalBoxLayout;
+import com.telenav.mesakit.graph.EdgeRelation;
+import com.telenav.mesakit.graph.Place;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;

@@ -16,22 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.kernel.interfaces.object.Matcher;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.scalars.counts.Estimate;
-import com.telenav.kivakit.kernel.scalars.counts.Maximum;
-import com.telenav.kivakit.graph.EdgeRelation;
-import com.telenav.kivakit.graph.Route;
-import com.telenav.kivakit.graph.collections.EdgeSet;
-import com.telenav.kivakit.graph.collections.RelationSet;
 import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Line;
+import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
+import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.scalars.counts.Estimate;
+import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.mesakit.graph.EdgeRelation;
+import com.telenav.mesakit.graph.Route;
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.graph.collections.RelationSet;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Width;
+import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Line;
 
 import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.*;
 import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Relation;
@@ -43,9 +43,9 @@ import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Relation;
  */
 public class RelationRenderer
 {
-    private final Maximum MAXIMUM_RENDERED_NON_RESTRICTIONS = Maximum.of(500);
+    private final Maximum MAXIMUM_RENDERED_NON_RESTRICTIONS = Maximum.maximum(500);
 
-    private final Maximum MAXIMUM_RENDERED_RESTRICTIONS = Maximum.of(500);
+    private final Maximum MAXIMUM_RENDERED_RESTRICTIONS = Maximum.maximum(500);
 
     private final MapCanvas canvas;
 
@@ -109,7 +109,7 @@ public class RelationRenderer
         if (canvas.scale().isZoomedIn(Scale.NEIGHBORHOOD))
         {
             final var relations = relations((relation) -> isVisible(relation) && !relation.isRestriction());
-            if (Count.of(relations).isLessThan(MAXIMUM_RENDERED_NON_RESTRICTIONS))
+            if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_NON_RESTRICTIONS))
             {
                 for (final var relation : relations)
                 {
@@ -164,7 +164,7 @@ public class RelationRenderer
     private void drawRestrictions(final Type type)
     {
         final var relations = relations((relation) -> isVisible(relation) && relation.isRestriction());
-        if (Count.of(relations).isLessThan(MAXIMUM_RENDERED_RESTRICTIONS))
+        if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_RESTRICTIONS))
         {
             for (final var relation : relations)
             {

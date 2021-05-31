@@ -1,22 +1,22 @@
-package com.telenav.kivakit.tools.applications.pbf.graph.world.extractor.conversion;
+package com.telenav.tdk.tools.applications.pbf.graph.world.extractor.conversion;
 
-import com.telenav.kivakit.graph.Metadata;
-import com.telenav.kivakit.graph.world.grid.WorldCell;
-import com.telenav.kivakit.graph.world.grid.WorldGrid;
-import com.telenav.kivakit.graph.world.repository.WorldGraphRepositoryFolder;
 import com.telenav.kivakit.kernel.commandline.CommandLine;
 import com.telenav.kivakit.kernel.debug.Debug;
 import com.telenav.kivakit.kernel.language.string.StringList;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.language.thread.Threads;
+import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.scalars.bytes.Bytes;
 import com.telenav.kivakit.kernel.scalars.counts.ConcurrentMutableCount;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
+import com.telenav.mesakit.graph.Metadata;
+import com.telenav.mesakit.graph.world.grid.WorldCell;
+import com.telenav.mesakit.graph.world.grid.WorldGrid;
+import com.telenav.mesakit.graph.world.repository.WorldGraphRepositoryFolder;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
@@ -197,7 +197,7 @@ public class WorldConversion
                                     worldCell.worldGrid().index().index(worldCell, cellGraph);
 
                                     // Add to total size
-                                    if (DEBUG.isEnabled())
+                                    if (DEBUG.isDebugOn())
                                     {
                                         final var size = cellGraph.estimatedMemorySize();
                                         if (size != null)

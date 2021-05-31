@@ -16,13 +16,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.geocoding.reverse.matching;
+package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
-import com.telenav.kivakit.map.geography.project.KivaKitMapGeographyUnitTest;
-import com.telenav.kivakit.map.region.locale.MapLocale;
-import com.telenav.kivakit.map.road.model.RoadName;
-import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer;
-import com.telenav.kivakit.map.road.name.standardizer.RoadNameStandardizer.Mode;
+import com.telenav.mesakit.map.geography.project.KivaKitMapGeographyUnitTest;
+import com.telenav.mesakit.map.region.locale.MapLocale;
+import com.telenav.mesakit.map.road.model.RoadName;
+import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer.Mode;
 
 /**
  * This class implements

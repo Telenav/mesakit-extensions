@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.region.information;
+package com.telenav.tdk.tools.applications.region.information;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.kernel.commandline.*;
@@ -24,8 +24,9 @@ import com.telenav.kivakit.kernel.language.pattern.*;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.language.string.formatting.IndentingStringBuilder;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;
-import com.telenav.kivakit.map.region.*;
-import com.telenav.kivakit.map.region.project.KivaKitMapRegion;
+import com.telenav.mesakit.map.region.Region;
+import com.telenav.mesakit.map.region.RegionSet;
+import com.telenav.mesakit.map.region.project.KivaKitMapRegion;
 
 import java.util.List;
 import java.util.Set;

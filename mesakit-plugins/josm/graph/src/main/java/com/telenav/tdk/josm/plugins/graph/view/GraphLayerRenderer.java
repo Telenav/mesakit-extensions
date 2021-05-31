@@ -16,13 +16,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view;
+package com.telenav.tdk.josm.plugins.graph.view;
 
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.*;
-import com.telenav.kivakit.map.measurements.Heading;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.kivakit.map.ui.swing.map.theme.Styles;
+import com.telenav.mesakit.map.measurements.Heading;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
+import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
 
 import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.HIGHLIGHTED;
 import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.INACTIVE;

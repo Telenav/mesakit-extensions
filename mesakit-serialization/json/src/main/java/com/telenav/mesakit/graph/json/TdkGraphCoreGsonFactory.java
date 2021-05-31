@@ -16,27 +16,35 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json;
+package com.telenav.mesakit.graph.json;
 
 import com.google.gson.GsonBuilder;
-import com.telenav.kivakit.graph.identifiers.collections.*;
-import com.telenav.kivakit.graph.json.serializers.*;
-import com.telenav.kivakit.graph.map.MapEdgeIdentifier;
-import com.telenav.kivakit.graph.metadata.DataBuild;
 import com.telenav.kivakit.kernel.language.string.formatting.Separators;
+import com.telenav.kivakit.kernel.language.values.Count;
 import com.telenav.kivakit.kernel.scalars.bytes.Bytes;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
 import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
 import com.telenav.kivakit.kernel.scalars.levels.Priority;
 import com.telenav.kivakit.kernel.time.LocalTime;
-import com.telenav.kivakit.map.geography.*;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
-import com.telenav.kivakit.map.measurements.*;
-import com.telenav.kivakit.map.region.*;
-import com.telenav.kivakit.map.road.model.*;
-import com.telenav.kivakit.map.road.model.converters.RoadNameConverter;
 import com.telenav.kivakit.utilities.json.gson.GsonFactory;
 import com.telenav.kivakit.utilities.locale.Language;
+import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
+import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
+import com.telenav.mesakit.graph.json.serializers.CountGsonSerializer;
+import com.telenav.mesakit.graph.json.serializers.IdentifierGsonSerializer;
+import com.telenav.mesakit.graph.json.serializers.LatitudeGsonSerializer;
+import com.telenav.mesakit.graph.json.serializers.LongitudeGsonSerializer;
+import com.telenav.mesakit.graph.json.serializers.PriorityGsonSerializer;
+import com.telenav.mesakit.graph.json.serializers.SpeedCategoryGsonSerializer;
+import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
+import com.telenav.mesakit.graph.metadata.DataBuild;
+import com.telenav.mesakit.map.geography.Latitude;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.Longitude;
+import com.telenav.mesakit.map.geography.rectangle.Rectangle;
+import com.telenav.mesakit.map.region.Region;
+import com.telenav.mesakit.map.road.model.RoadName;
+import com.telenav.mesakit.map.road.model.SpeedCategory;
+import com.telenav.mesakit.map.road.model.converters.RoadNameConverter;
 
 public class KivaKitGraphCoreGsonFactory extends GsonFactory
 {

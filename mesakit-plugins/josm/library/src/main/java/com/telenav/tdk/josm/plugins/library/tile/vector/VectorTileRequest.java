@@ -16,12 +16,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library.tile.vector;
+package com.telenav.tdk.josm.plugins.library.tile.vector;
 
 import com.telenav.kivakit.josm.plugins.library.tile.AbstractTileRequest;
 import com.telenav.kivakit.josm.plugins.library.tile.MapData;
 import com.telenav.kivakit.kernel.language.object.Hash;
-import com.telenav.kivakit.map.ui.swing.map.tiles.SlippyTile;
+import com.telenav.mesakit.map.ui.swing.map.tiles.SlippyTile;
 
 public class VectorTileRequest extends AbstractTileRequest
 {

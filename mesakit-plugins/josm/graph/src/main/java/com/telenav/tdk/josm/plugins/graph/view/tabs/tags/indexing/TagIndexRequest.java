@@ -1,7 +1,7 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.graph.Graph;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import java.util.Objects;
 import java.util.function.Consumer;

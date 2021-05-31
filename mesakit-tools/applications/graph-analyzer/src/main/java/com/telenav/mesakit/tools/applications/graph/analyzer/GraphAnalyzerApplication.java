@@ -21,21 +21,23 @@ package com.telenav.mesakit.tools.applications.graph.analyzer;
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.osm.OsmHighwayTag;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.graph.*;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
-import com.telenav.kivakit.graph.specifications.common.edge.EdgeAttributes;
-import com.telenav.kivakit.graph.specifications.common.relation.RelationAttributes;
 import com.telenav.kivakit.kernel.commandline.*;
-import com.telenav.kivakit.kernel.interfaces.object.Matcher;
+import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
 import com.telenav.kivakit.kernel.language.matching.All;
 import com.telenav.kivakit.kernel.language.string.*;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.*;
 import com.telenav.kivakit.kernel.time.Time;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.road.model.RoadType;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.EdgeRelation;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.specifications.common.edge.EdgeAttributes;
+import com.telenav.mesakit.graph.specifications.common.relation.RelationAttributes;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
+import com.telenav.mesakit.map.road.model.RoadType;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -110,7 +112,7 @@ public class GraphAnalyzerApplication extends KivaKitApplication
 
     protected GraphAnalyzerApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override
@@ -412,19 +414,19 @@ public class GraphAnalyzerApplication extends KivaKitApplication
                         + ofType[RoadType.URBAN_HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
         result.add("LOCAL_ROAD + LOW_SPEED_ROAD", miles(
                 ofType[RoadType.LOCAL_ROAD.identifier()] + ofType[RoadType.LOW_SPEED_ROAD.identifier()], total));
-        result.add("NO LEFT TURN", Count.of(noLeftTurn).toCommaSeparatedString());
-        result.add("NO RIGHT TURN", Count.of(noRightTurn).toCommaSeparatedString());
-        result.add("NO U-TURN", Count.of(noUTurn).toCommaSeparatedString());
-        result.add("NO STRAIGHT ON", Count.of(noStraightOn).toCommaSeparatedString());
-        result.add("ONLY LEFT TURN", Count.of(onlyLeftTurn).toCommaSeparatedString());
-        result.add("ONLY RIGHT TURN", Count.of(onlyRightTurn).toCommaSeparatedString());
-        result.add("ONLY STRAIGHT ON", Count.of(onlyStraightOn).toCommaSeparatedString());
-        result.add("OTHER TURN RESTRICTIONS", Count.of(otherTurnRestriction).toCommaSeparatedString());
-        result.add("TURN RESTRICTIONS", Count.of(turnRestrictions).toCommaSeparatedString());
+        result.add("NO LEFT TURN", Count.count(noLeftTurn).toCommaSeparatedString());
+        result.add("NO RIGHT TURN", Count.count(noRightTurn).toCommaSeparatedString());
+        result.add("NO U-TURN", Count.count(noUTurn).toCommaSeparatedString());
+        result.add("NO STRAIGHT ON", Count.count(noStraightOn).toCommaSeparatedString());
+        result.add("ONLY LEFT TURN", Count.count(onlyLeftTurn).toCommaSeparatedString());
+        result.add("ONLY RIGHT TURN", Count.count(onlyRightTurn).toCommaSeparatedString());
+        result.add("ONLY STRAIGHT ON", Count.count(onlyStraightOn).toCommaSeparatedString());
+        result.add("OTHER TURN RESTRICTIONS", Count.count(otherTurnRestriction).toCommaSeparatedString());
+        result.add("TURN RESTRICTIONS", Count.count(turnRestrictions).toCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.turnRestrictions()",
-                Count.of(turnRestrictionsByEdgeTurnRestrictions).toCommaSeparatedString());
+                Count.count(turnRestrictionsByEdgeTurnRestrictions).toCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.getRelations()",
-                Count.of(turnRestrictionsByEdgeGetRelations).toCommaSeparatedString());
+                Count.count(turnRestrictionsByEdgeGetRelations).toCommaSeparatedString());
 
         all.removeAll(restrictions);
         var i = 0;
@@ -517,7 +519,7 @@ public class GraphAnalyzerApplication extends KivaKitApplication
 
     private String miles(final double miles)
     {
-        return Count.of((int) Math.round(miles)).toCommaSeparatedString() + " miles";
+        return Count.count((int) Math.round(miles)).toCommaSeparatedString() + " miles";
     }
 
     private String miles(final double miles, final double total)

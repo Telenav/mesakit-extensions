@@ -16,10 +16,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library;
+package com.telenav.tdk.josm.plugins.library;
 
-import com.telenav.kivakit.map.geography.*;
-import com.telenav.kivakit.map.measurements.*;
+import com.telenav.mesakit.map.geography.*;
+import com.telenav.mesakit.map.measurements.*;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;

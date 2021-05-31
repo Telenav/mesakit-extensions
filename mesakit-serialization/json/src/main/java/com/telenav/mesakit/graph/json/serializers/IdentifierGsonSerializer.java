@@ -16,26 +16,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.map.geography.Longitude;
-import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
+import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
+import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
-import java.lang.reflect.Type;
-
-public class LongitudeGsonSerializer implements GsonSerializer<Longitude>
+public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier, Long>
 {
-    @Override
-    public Longitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-            throws JsonParseException
+    public IdentifierGsonSerializer()
     {
-        return Longitude.degrees(context.deserialize(json, Double.class));
+        super(Long.class);
     }
 
     @Override
-    public JsonElement serialize(final Longitude longitude, final Type typeOfSrc,
-                                 final JsonSerializationContext context)
+    protected Identifier toObject(final Long scalar)
     {
-        return context.serialize(longitude.asDegrees());
+        return new Identifier(scalar);
+    }
+
+    @Override
+    protected Long toPrimitive(final Identifier object)
+    {
+        return object.asLong();
     }
 }

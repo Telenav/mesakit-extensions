@@ -1,11 +1,11 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
 
 import com.telenav.kivakit.collections.map.multi.MultiMap;
-import com.telenav.kivakit.graph.collections.EdgeSet;
-import com.telenav.kivakit.graph.identifiers.EdgeIdentifier;
 import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
 import com.telenav.kivakit.kernel.language.string.StringList;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
+import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 
 /**
  * @author jonathanl (shibo)
@@ -43,7 +43,7 @@ public class TagIndex
 
     public Count keyCount()
     {
-        return Count.of(keyToValues.size());
+        return Count.count(keyToValues.size());
     }
 
     public synchronized StringList keys()
@@ -53,7 +53,7 @@ public class TagIndex
 
     public Count valueCount()
     {
-        return Count.of(keyToValues.totalValues());
+        return Count.count(keyToValues.totalValues());
     }
 
     public synchronized ObjectList<String> values(final String key)

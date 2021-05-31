@@ -1,8 +1,8 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.query;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.query;
 
-import com.telenav.kivakit.graph.Route;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.mesakit.graph.Route;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;

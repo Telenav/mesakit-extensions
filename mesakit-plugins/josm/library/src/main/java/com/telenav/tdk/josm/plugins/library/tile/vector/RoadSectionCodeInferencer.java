@@ -16,11 +16,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.library.tile.vector;
+package com.telenav.tdk.josm.plugins.library.tile.vector;
 
-import com.telenav.kivakit.graph.traffic.roadsection.RoadSectionCode;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCode;
 
 public class RoadSectionCodeInferencer
 {

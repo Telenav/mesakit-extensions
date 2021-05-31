@@ -16,17 +16,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.codec;
+package com.telenav.tdk.tools.applications.codec;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.scalars.counts.*;
 import com.telenav.kivakit.tools.applications.codec.polyline.HuffmanCodecGenerator;
 import com.telenav.kivakit.tools.applications.codec.roadname.RoadNameCodecGenerator;
 import com.telenav.kivakit.tools.applications.codec.tag.TagCodecGenerator;
+import com.telenav.mesakit.graph.project.GraphCore;
 
 import java.util.List;
 import java.util.Set;
@@ -109,7 +109,7 @@ public class CodecGeneratorApplication extends KivaKitApplication
 
     protected CodecGeneratorApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

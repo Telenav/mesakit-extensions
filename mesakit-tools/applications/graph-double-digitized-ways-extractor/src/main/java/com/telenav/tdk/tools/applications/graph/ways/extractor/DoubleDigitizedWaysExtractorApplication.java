@@ -16,18 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.ways.extractor;
+package com.telenav.tdk.tools.applications.graph.ways.extractor;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.graph.Edge;
-import com.telenav.kivakit.graph.io.archive.GraphArchive;
-import com.telenav.kivakit.graph.io.load.*;
-import com.telenav.kivakit.graph.library.osm.change.PbfSaver;
-import com.telenav.kivakit.graph.project.KivaKitGraphCore;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
 import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.io.archive.GraphArchive;
+import com.telenav.mesakit.graph.io.load.GraphConstraints;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.library.osm.change.PbfSaver;
+import com.telenav.mesakit.graph.project.GraphCore;
 
 import java.util.Set;
 
@@ -58,7 +59,7 @@ public class DoubleDigitizedWaysExtractorApplication extends KivaKitApplication
 
     private DoubleDigitizedWaysExtractorApplication()
     {
-        super(KivaKitGraphCore.get());
+        super(GraphCore.get());
     }
 
     @Override

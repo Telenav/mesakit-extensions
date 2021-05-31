@@ -1,4 +1,4 @@
-package com.telenav.kivakit.tools.applications.pbf.analyzer;
+package com.telenav.tdk.tools.applications.pbf.analyzer;
 
 import com.telenav.kivakit.collections.primitive.map.split.SplitLongToLongMap;
 import com.telenav.kivakit.data.formats.pbf.model.tags.*;
@@ -6,9 +6,9 @@ import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.commandline.CommandLine;
 import com.telenav.kivakit.kernel.language.string.*;
 import com.telenav.kivakit.kernel.scalars.counts.*;
-import com.telenav.kivakit.map.geography.Location;
-import com.telenav.kivakit.map.geography.polyline.PolylineBuilder;
-import com.telenav.kivakit.map.measurements.Distance;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.polyline.PolylineBuilder;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -210,9 +210,9 @@ public class Analyzer
     {
         final var report = new StringList();
 
-        report.add("nodes = " + Count.of(nodes));
-        report.add("ways = " + Count.of(ways));
-        report.add("relations = " + Count.of(relations));
+        report.add("nodes = " + Count.count(nodes));
+        report.add("ways = " + Count.count(ways));
+        report.add("relations = " + Count.count(relations));
 
         report.add(Strings.line());
 
@@ -222,8 +222,8 @@ public class Analyzer
         report.add("relations / byte = " + (double) relations / input.size().asBytes());
 
         report.add(Strings.line());
-        report.add("places = " + Count.of(places));
-        report.add("places with population = " + Count.of(placesWithPopulation));
+        report.add("places = " + Count.count(places));
+        report.add("places with population = " + Count.count(placesWithPopulation));
 
         report.add(Strings.line());
         report.add("bad turn restrictions = " + badTurnRestrictions);

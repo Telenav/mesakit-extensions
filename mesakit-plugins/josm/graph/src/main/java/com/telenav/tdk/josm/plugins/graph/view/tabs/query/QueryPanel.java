@@ -1,7 +1,5 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.query;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.query;
 
-import com.telenav.kivakit.graph.collections.EdgeSet;
-import com.telenav.kivakit.graph.query.GraphQuery;
 import com.telenav.kivakit.josm.plugins.graph.view.*;
 import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.UserFeedback;
 import com.telenav.kivakit.kernel.language.string.Strings;
@@ -9,7 +7,6 @@ import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.*;
 import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
 import com.telenav.kivakit.utilities.ui.swing.component.Components;
 import com.telenav.kivakit.utilities.ui.swing.component.icon.search.MagnifyingGlass;
 import com.telenav.kivakit.utilities.ui.swing.component.progress.ProgressPanel;
@@ -17,6 +14,9 @@ import com.telenav.kivakit.utilities.ui.swing.component.stack.CardPanel;
 import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
 import com.telenav.kivakit.utilities.ui.swing.layout.*;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.graph.query.GraphQuery;
+import com.telenav.mesakit.map.geography.rectangle.Rectangle;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.JPanel;
@@ -204,7 +204,7 @@ public class QueryPanel extends JPanel
                 graphQuery = new GraphQuery();
                 searchProgress.reset();
                 searchProgress.steps(count.asMaximum());
-                final var result = graphQuery.execute(searchProgress, candidates, query, Maximum.of(1_000), error::set);
+                final var result = graphQuery.execute(searchProgress, candidates, query, Maximum.maximum(1_000), error::set);
                 if (error.get() != null)
                 {
                     feedback(UserFeedback.status(error.get()));

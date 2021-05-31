@@ -16,19 +16,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.Place;
 import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.kivakit.map.ui.swing.map.graphics.drawables.Dot;
-import com.telenav.kivakit.map.ui.swing.map.theme.Labels;
+import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
+import com.telenav.mesakit.graph.Place;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Width;
+import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Dot;
+import com.telenav.mesakit.map.ui.swing.map.theme.Labels;
 
 import static com.telenav.kivakit.map.ui.swing.map.theme.Dots.TRANSLUCENT_YELLOW;
 import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Place.PLACE;
@@ -76,7 +76,7 @@ public class PlaceRenderer
     private void draw(final RenderPass pass, final Place place)
     {
         // If we're zoomed in or the place is important
-        if (canvas.scale().closerThan(Scale.STATE) || place.isCity() || place.population().isGreaterThan(Count.of(10_000)))
+        if (canvas.scale().closerThan(Scale.STATE) || place.isCity() || place.population().isGreaterThan(Count.count(10_000)))
         {
             // True if the place is selected
             final var isSelected = model.selection().isSelected(place);
@@ -89,7 +89,7 @@ public class PlaceRenderer
                 final var width = Width.of(base
                         .add(base.scaledBy(Math.abs(Math.log10(place.population().asInt())))));
 
-                final var normal = new Dot(width, PLACE, width.scaled(Percentage.of(10)), PLACE);
+                final var normal = new Dot(width, PLACE, width.scaled(Percent.of(10)), PLACE);
                 final var selected = TRANSLUCENT_YELLOW.withWidth(width);
 
                 final var dot = isSelected ? selected : normal;

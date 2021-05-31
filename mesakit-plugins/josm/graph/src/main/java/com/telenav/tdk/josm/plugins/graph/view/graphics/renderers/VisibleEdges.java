@@ -16,17 +16,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers;
+package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.graph.Edge;
-import com.telenav.kivakit.graph.collections.EdgeSet;
 import com.telenav.kivakit.josm.plugins.graph.model.Selection;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;
-import com.telenav.kivakit.map.measurements.Distance;
-import com.telenav.kivakit.map.road.model.RoadType;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.collections.EdgeSet;
+import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.road.model.RoadType;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
 
 import java.awt.geom.Point2D;
 import java.util.List;

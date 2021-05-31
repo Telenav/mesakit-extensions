@@ -16,27 +16,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
-import com.telenav.kivakit.map.road.model.SpeedCategory;
-import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
+import com.telenav.mesakit.map.road.model.RoadName;
 
-public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCategory, Integer>
+public interface RoadNameMatcher
 {
-    public SpeedCategoryGsonSerializer()
-    {
-        super(Integer.class);
-    }
-
-    @Override
-    protected SpeedCategory toObject(final Integer scalar)
-    {
-        return SpeedCategory.forIdentifier(scalar);
-    }
-
-    @Override
-    protected Integer toPrimitive(final SpeedCategory object)
-    {
-        return object.identifier();
-    }
+    Percent matches(final RoadName candidate, final RoadName desired);
 }

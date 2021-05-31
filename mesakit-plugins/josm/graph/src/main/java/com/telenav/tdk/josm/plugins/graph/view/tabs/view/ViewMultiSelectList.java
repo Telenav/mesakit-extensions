@@ -1,9 +1,9 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.view;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.view;
 
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
 
-import javax.swing.*;
+import javax.swing.JList;
 
 /**
  * @author jonathanl (shibo)

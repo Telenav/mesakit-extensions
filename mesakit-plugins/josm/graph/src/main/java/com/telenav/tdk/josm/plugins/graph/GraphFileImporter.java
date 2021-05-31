@@ -16,10 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph;
+package com.telenav.tdk.josm.plugins.graph;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphLayer;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.logging.Logger;
@@ -28,9 +27,10 @@ import com.telenav.kivakit.kernel.messaging.messages.MessageList;
 import com.telenav.kivakit.kernel.operation.progress.*;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
 import com.telenav.kivakit.resource.compression.archive.ZipArchive;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import org.jetbrains.annotations.NotNull;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
@@ -82,7 +82,7 @@ public class GraphFileImporter extends FileImporter
                     layer.add();
 
                     plugin.panel().showPanel();
-                    plugin.zoomTo(graph.bounds().expanded(new Percentage(10)));
+                    plugin.zoomTo(graph.bounds().expanded(new Percent(10)));
                     layer.forceRepaint();
                     plugin.panel().layer(layer);
                 }

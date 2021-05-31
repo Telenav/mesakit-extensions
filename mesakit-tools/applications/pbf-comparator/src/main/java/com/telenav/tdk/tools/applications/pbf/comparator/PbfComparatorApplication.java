@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.pbf.comparator;
+package com.telenav.tdk.tools.applications.pbf.comparator;
 
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.collections.set.SetDifferencer;
@@ -28,7 +28,7 @@ import com.telenav.kivakit.data.formats.pbf.project.KivaKitDataFormatsPbf;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.time.Time;
 
 import java.util.HashSet;
 import java.util.Set;

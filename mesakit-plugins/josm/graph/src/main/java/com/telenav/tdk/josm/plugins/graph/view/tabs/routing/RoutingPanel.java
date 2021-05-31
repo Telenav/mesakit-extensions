@@ -1,9 +1,9 @@
-package com.telenav.kivakit.josm.plugins.graph.view.tabs.routing;
+package com.telenav.tdk.josm.plugins.graph.view.tabs.routing;
 
-import com.telenav.kivakit.graph.Vertex;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
 import com.telenav.kivakit.utilities.ui.swing.component.Components;
 import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.mesakit.graph.Vertex;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;

@@ -16,22 +16,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.tools.applications.graph.verifier;
+package com.telenav.tdk.tools.applications.graph.verifier;
 
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.graph.Edge;
-import com.telenav.kivakit.graph.Graph;
-import com.telenav.kivakit.graph.io.load.SmartGraphLoader;
-import com.telenav.kivakit.graph.specifications.common.edge.EdgeAttributes;
-import com.telenav.kivakit.graph.specifications.library.attributes.Attribute;
 import com.telenav.kivakit.kernel.commandline.CommandLineParser;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.kernel.scalars.levels.Percentage;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
+import com.telenav.mesakit.graph.specifications.common.edge.EdgeAttributes;
+import com.telenav.mesakit.graph.specifications.library.attributes.Attribute;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -137,7 +137,7 @@ public class EdgeAttributeChecker
             final Writer writer = outputFolder.file("failed-statistics.txt").printWriter();
 
             writer.write("total " + failed + " of " + graph.edgeCount() + " ("
-                    + Count.of(failed).percentOf(graph.edgeCount()) + ") failed \n");
+                    + Count.count(failed).percentOf(graph.edgeCount()) + ") failed \n");
 
             for (final var entry : attributeTypeCount.entrySet())
             {
@@ -404,7 +404,7 @@ public class EdgeAttributeChecker
 
                 if (i % 1000000 == 0)
                 {
-                    LOGGER.information("Finished ${debug} ${debug}", i, new Percentage(i * 100.0 / total.asInt()));
+                    LOGGER.information("Finished ${debug} ${debug}", i, new Percent(i * 100.0 / total.asInt()));
                 }
             }
 

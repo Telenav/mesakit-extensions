@@ -16,27 +16,25 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.graph.json.serializers;
+package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.scalars.counts.Count;
-import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
+import com.telenav.mesakit.map.geography.Latitude;
 
-public class CountGsonSerializer extends PrimitiveGsonSerializer<Count, Integer>
+import java.lang.reflect.Type;
+
+public class LatitudeGsonSerializer implements GsonSerializer<Latitude>
 {
-    public CountGsonSerializer()
+    @Override
+    public Latitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+            throws JsonParseException
     {
-        super(Integer.class);
+        return Latitude.degrees(context.deserialize(json, Double.class));
     }
 
     @Override
-    protected Count toObject(final Integer scalar)
+    public JsonElement serialize(final Latitude latitude, final Type typeOfSrc, final JsonSerializationContext context)
     {
-        return Count.of(scalar);
-    }
-
-    @Override
-    protected Integer toPrimitive(final Count object)
-    {
-        return object.asInt();
+        return context.serialize(latitude.asDegrees());
     }
 }

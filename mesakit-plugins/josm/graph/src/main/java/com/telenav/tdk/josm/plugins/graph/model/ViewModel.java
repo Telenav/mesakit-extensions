@@ -16,16 +16,16 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.kivakit.josm.plugins.graph.model;
+package com.telenav.tdk.josm.plugins.graph.model;
 
-import com.telenav.kivakit.graph.Edge;
-import com.telenav.kivakit.graph.Graph;
-import com.telenav.kivakit.graph.collections.EdgeSequence;
-import com.telenav.kivakit.graph.world.WorldGraph;
 import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
 import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges;
-import com.telenav.kivakit.kernel.interfaces.object.Matcher;
-import com.telenav.kivakit.map.geography.rectangle.Rectangle;
+import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Graph;
+import com.telenav.mesakit.graph.collections.EdgeSequence;
+import com.telenav.mesakit.graph.world.WorldGraph;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import java.awt.geom.Rectangle2D;
 import java.util.HashSet;
