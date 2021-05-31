@@ -3,7 +3,7 @@ package com.telenav.tdk.josm.plugins.graph.view.tabs.tags.indexing;
 import com.telenav.kivakit.collections.map.multi.MultiMap;
 import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
 import com.telenav.kivakit.kernel.language.string.StringList;
-import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 

@@ -25,12 +25,12 @@ import com.telenav.kivakit.josm.plugins.graph.view.graphics.coordinates.JosmCoor
 import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges;
 import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode;
 import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.language.values.Count;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.values.Count
 import com.telenav.kivakit.kernel.scalars.levels.Percent;
 import com.telenav.kivakit.navigation.routing.*;
 import com.telenav.kivakit.navigation.routing.bidijkstra.*;
@@ -51,7 +51,7 @@ import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
-import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
 import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.*;

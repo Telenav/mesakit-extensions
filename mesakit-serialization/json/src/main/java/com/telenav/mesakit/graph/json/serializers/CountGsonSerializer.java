@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
 
 public class CountGsonSerializer extends PrimitiveGsonSerializer<Count, Integer>

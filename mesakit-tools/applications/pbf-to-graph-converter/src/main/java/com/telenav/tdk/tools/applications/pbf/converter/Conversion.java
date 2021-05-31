@@ -23,7 +23,7 @@ import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.OsmNavigableW
 import com.telenav.kivakit.kernel.commandline.CommandLine;
 import com.telenav.kivakit.kernel.language.string.Strings;
 import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;
 import com.telenav.kivakit.resource.path.Extension;

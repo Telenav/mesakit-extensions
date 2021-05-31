@@ -29,7 +29,7 @@ import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.Maximum;
 import com.telenav.kivakit.kernel.validation.Validate;
@@ -193,7 +193,7 @@ public class Conversion extends BaseRepeater
     {
         final var converter = (PbfToGraphConverter) metadata.dataSpecification().newGraphConverter(metadata);
         final var outer = this;
-        converter.broadcastTo(message ->
+        converter.addListener(message ->
         {
             // We don't want to show all the validation failures unless DEBUG mode is on
             if (!(message instanceof Validate.ValidateFailure) || DEBUG.isDebugOn())

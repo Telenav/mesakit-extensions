@@ -21,7 +21,7 @@ package com.telenav.tdk.josm.plugins.graph.view.graphics.renderers;
 import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
 import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
 import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;

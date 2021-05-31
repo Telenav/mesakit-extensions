@@ -22,7 +22,7 @@ import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.kivakit.data.formats.pbf.processing.readers.SerialPbfReader;
 import com.telenav.kivakit.kernel.commandline.*;
-import com.telenav.kivakit.kernel.language.values.Count
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.RegionSet;

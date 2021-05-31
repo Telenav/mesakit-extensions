@@ -29,7 +29,7 @@ import com.telenav.mesakit.graph.Vertex;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.matching.snapping.GraphSnapper;
 import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
 import com.telenav.mesakit.map.measurements.Distance;
 import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
 import org.openstreetmap.josm.gui.layer.Layer;

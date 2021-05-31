@@ -8,7 +8,7 @@ import com.telenav.kivakit.kernel.language.thread.Threads;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.scalars.bytes.Bytes;
 import com.telenav.kivakit.kernel.scalars.counts.ConcurrentMutableCount;
 import com.telenav.kivakit.kernel.language.values.count.Count;

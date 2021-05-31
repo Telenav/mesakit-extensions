@@ -20,10 +20,10 @@ package com.telenav.tdk.josm.plugins.library.tile;
 
 import com.telenav.kivakit.collections.set.ConcurrentHashSet;
 import com.telenav.kivakit.kernel.language.thread.Threads;
+import com.telenav.kivakit.kernel.language.values.Count;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.language.values.Count
 
 import java.util.Collection;
 import java.util.concurrent.ArrayBlockingQueue;

@@ -3,7 +3,7 @@ package com.telenav.tdk.josm.plugins.graph.view.tabs.query;
 import com.telenav.kivakit.josm.plugins.graph.view.*;
 import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.UserFeedback;
 import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.scalars.counts.*;
 import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;

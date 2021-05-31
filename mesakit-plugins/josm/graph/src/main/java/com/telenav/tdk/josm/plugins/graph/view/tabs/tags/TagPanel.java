@@ -43,7 +43,7 @@ public class TagPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        indexer.broadcastTo(message -> graphPanel.say(message.formatted()));
+        indexer.addListener(message -> graphPanel.say(message.formatted()));
 
         Components.border(this, 10);
 

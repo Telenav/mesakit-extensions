@@ -21,7 +21,7 @@ package com.telenav.tdk.josm.plugins.geojson;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
 import com.telenav.kivakit.kernel.interfaces.naming.NamedObject;
-import com.telenav.kivakit.kernel.language.values.Count;
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.scalars.levels.Percent;

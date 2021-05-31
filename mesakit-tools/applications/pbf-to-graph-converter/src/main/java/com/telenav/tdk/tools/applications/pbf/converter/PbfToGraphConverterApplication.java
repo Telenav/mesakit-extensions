@@ -23,7 +23,7 @@ import com.telenav.kivakit.data.formats.pbf.processing.filters.*;
 import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
 import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.kernel.language.values.Count;
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.kivakit.time.Time;

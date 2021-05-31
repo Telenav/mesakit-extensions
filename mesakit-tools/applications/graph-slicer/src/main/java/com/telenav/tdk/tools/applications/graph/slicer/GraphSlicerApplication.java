@@ -21,7 +21,7 @@ package com.telenav.tdk.tools.applications.graph.slicer;
 import com.telenav.kivakit.application.KivaKitApplication;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.commandline.SwitchParser;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;

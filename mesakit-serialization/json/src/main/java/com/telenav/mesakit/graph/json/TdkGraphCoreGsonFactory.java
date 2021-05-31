@@ -20,7 +20,7 @@ package com.telenav.mesakit.graph.json;
 
 import com.google.gson.GsonBuilder;
 import com.telenav.kivakit.kernel.language.string.formatting.Separators;
-import com.telenav.kivakit.kernel.language.values.Count;
+import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.scalars.bytes.Bytes;
 import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
 import com.telenav.kivakit.kernel.scalars.levels.Priority;

@@ -25,7 +25,7 @@ import com.telenav.kivakit.data.formats.pbf.processing.filters.osm.OsmNavigableW
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.operation.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.resource.path.Extension;

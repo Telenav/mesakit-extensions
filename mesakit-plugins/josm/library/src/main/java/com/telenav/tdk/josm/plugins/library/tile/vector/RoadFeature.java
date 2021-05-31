@@ -19,7 +19,7 @@
 package com.telenav.tdk.josm.plugins.library.tile.vector;
 
 import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCode;
-import com.telenav.mesakit.map.geography.polyline.Polyline;
+import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
 import com.telenav.mesakit.map.measurements.Speed;
 
 import java.awt.Color;
