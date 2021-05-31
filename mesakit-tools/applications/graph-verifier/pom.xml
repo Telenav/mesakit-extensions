@@ -21,13 +21,26 @@
 
     <dependencies>
 
-        <!-- MesaKit -->
+        <!-- KivaKit -->
 
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-core-application</artifactId>
-            <version>${mesakit.version}</version>
+            <groupId>com.telenav.kivakit</groupId>
+            <artifactId>kivakit-application</artifactId>
+            <version>${kivakit.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.telenav.kivakit</groupId>
+            <artifactId>kivakit-filesystems-hdfs</artifactId>
+            <version>${kivakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.kivakit</groupId>
+            <artifactId>kivakit-filesystems-s3fs</artifactId>
+            <version>${kivakit.version}</version>
+        </dependency>
+
+        <!-- MesaKit -->
+
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-core</artifactId>
