@@ -86,7 +86,7 @@ public class DoubleDigitizedWaysExtractorApplication extends KivaKitApplication
             final var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
 
             // Save graph file
-            try (final var archive = new GraphArchive(base.withExtension(Extension.GRAPH), ProgressReporter.NULL, WRITE))
+            try (final var archive = new GraphArchive(base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
             {
                 filtered.save(archive);
             }

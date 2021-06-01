@@ -18,14 +18,16 @@
 
 package com.telenav.mesakit.tools.applications.graph.dumper;
 
+import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.iteration.Streams;
-import com.telenav.kivakit.kernel.language.strings.Strings;
+import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
 import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphElement;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 import com.telenav.mesakit.graph.identifiers.PlaceIdentifier;
@@ -36,7 +38,6 @@ import com.telenav.mesakit.graph.project.GraphCore;
 import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
-import java.security.cert.Extension;
 import java.util.List;
 import java.util.Set;
 
@@ -90,12 +91,12 @@ public class GraphDumperApplication extends Application
                     .build();
 
     private static final SwitchParser<File> DUMP_HEAP =
-            File.switchParser("dump-heap-to", "Force load all data and dump graph heap to the given file")
+            File.fileSwitch("dump-heap-to", "Force load all data and dump graph heap to the given file")
                     .optional()
                     .build();
 
     private static final SwitchParser<Count> LIMIT =
-            Count.switchParser("entity-limit", "The maximum number of edges, vertexes and relations to dump")
+            SwitchParser.countSwitch("entity-limit", "The maximum number of edges, vertexes and relations to dump")
                     .optional()
                     .defaultValue(Count.MAXIMUM)
                     .build();
@@ -200,7 +201,7 @@ public class GraphDumperApplication extends Application
 
     private void dump(final GraphElement element)
     {
-        information(Strings.line(element.name()));
+        information(AsciiArt.line(element.name()));
         information(element.asString());
     }
 }

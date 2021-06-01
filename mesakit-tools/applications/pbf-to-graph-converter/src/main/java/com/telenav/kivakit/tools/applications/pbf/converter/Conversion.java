@@ -117,7 +117,7 @@ public class Conversion extends BaseRepeater
                 else
                 {
                     // save the graph to disk,
-                    try (final var archive = new GraphArchive(output, ProgressReporter.NULL, WRITE))
+                    try (final var archive = new GraphArchive(output, WRITE, ProgressReporter.NULL))
                     {
                         final var start = Time.now();
                         information(Strings.topLine(20, "Saving $", archive));
@@ -128,7 +128,7 @@ public class Conversion extends BaseRepeater
                     // and verify it if we're were asked to.
                     if (configuration.verify())
                     {
-                        try (final var archive = new GraphArchive(output, ProgressReporter.NULL, READ))
+                        try (final var archive = new GraphArchive(output, READ, ProgressReporter.NULL))
                         {
                             final var start = Time.now();
                             information(Strings.topLine("Verifying graph"));

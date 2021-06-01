@@ -159,7 +159,7 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     private PbfWorldGraphExtractorApplication()
     {
-        super(GraphWorldProject.get());
+        super(TdkGraphWorld.get());
     }
 
     @Override
