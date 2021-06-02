@@ -20,13 +20,16 @@ package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
 import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Line;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
 import com.telenav.mesakit.graph.Edge;
-import com.telenav.mesakit.graph.Road;
 import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.theme.MapColors;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
 import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.INACTIVE;
 
@@ -91,34 +94,34 @@ public class EdgeRenderer extends Renderer
 
         final Color color;
 
-        final var zoomedIn = canvas.scale().isZoomedIn(Scale.CITY);
+        final var zoomedIn = canvas.scale().isZoomedIn(MapScale.CITY);
         switch (edge.roadFunctionalClass())
         {
             case MAIN:
-                color = zoomedIn ? Road.FREEWAY : Road.FREEWAY_ZOOMED_OUT;
+                color = zoomedIn ? MapColors.FREEWAY : MapColors.FREEWAY_ZOOMED_OUT;
                 break;
 
             case FIRST_CLASS:
                 if (edge.roadType() == RoadType.HIGHWAY)
                 {
-                    color = zoomedIn ? Road.HIGHWAY : Road.HIGHWAY_ZOOMED_OUT;
+                    color = zoomedIn ? MapColors.HIGHWAY : MapColors.HIGHWAY_ZOOMED_OUT;
                 }
                 else
                 {
-                    color = zoomedIn ? Road.FIRST_CLASS : Road.FIRST_CLASS_ZOOMED_OUT;
+                    color = zoomedIn ? MapColors.FIRST_CLASS : MapColors.FIRST_CLASS_ZOOMED_OUT;
                 }
                 break;
 
             case SECOND_CLASS:
-                color = Road.SECOND_CLASS;
+                color = MapColors.SECOND_CLASS;
                 break;
 
             case THIRD_CLASS:
-                color = Road.THIRD_CLASS;
+                color = MapColors.THIRD_CLASS;
                 break;
 
             case FOURTH_CLASS:
-                color = Road.FOURTH_CLASS;
+                color = MapColors.FOURTH_CLASS;
                 break;
 
             case UNKNOWN:
@@ -141,7 +144,7 @@ public class EdgeRenderer extends Renderer
     /**
      * Draws edges of the given selection type
      */
-    public void draw(final Type type)
+    public void draw(final Selection.Type type)
     {
         // Go through the visible edges of the given selection type
         for (final var edge : model().visibleEdges().edges(type))
@@ -150,7 +153,7 @@ public class EdgeRenderer extends Renderer
             if (model().selection().is(edge, type))
             {
                 // draw the 'from' and 'to' vertexes if it's selected,
-                if (type == Type.SELECTED)
+                if (type == Selection.Type.SELECTED)
                 {
                     new VertexRenderer(canvas(), model()).draw(edge);
                 }
@@ -161,10 +164,10 @@ public class EdgeRenderer extends Renderer
         }
     }
 
-    private static Line line(final MapCanvas canvas, final Type type, final Edge edge)
+    private static Line line(final MapCanvas canvas, final Selection.Type type, final Edge edge)
     {
         final var line = fattenedAndFilled(canvas, type, edge);
-        if (canvas.scale().isZoomedOut(Scale.REGION))
+        if (canvas.scale().isZoomedOut(MapScale.REGION))
         {
             return line.withWidth(Width.pixels(type == Type.HIGHLIGHTED ? 4f : 2f))
                     .withOutlineStyle(Styles.TRANSPARENT)
@@ -173,7 +176,7 @@ public class EdgeRenderer extends Renderer
         return line;
     }
 
-    private void draw(final Edge edge, final Type type)
+    private void draw(final Edge edge, final Selection.Type type)
     {
         // Draw the edge polyline
         final var line = line(canvas(), type, edge);
@@ -184,9 +187,9 @@ public class EdgeRenderer extends Renderer
 
         // and draw the edge's shape points
         final var selectedShapePoint = model().selection().selectedShapePoint();
-        if (model().selection().isSelected(edge) || (type == Type.SELECTED && selectedShapePoint != null))
+        if (model().selection().isSelected(edge) || (type == Selection.Type.SELECTED && selectedShapePoint != null))
         {
-            if (canvas().scale().isZoomedIn(Scale.CITY))
+            if (canvas().scale().isZoomedIn(MapScale.CITY))
             {
                 shapePointRenderer.draw(edge);
             }

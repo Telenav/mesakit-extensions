@@ -52,7 +52,7 @@ public class TagPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        indexer.addListener(message -> graphPanel.say(message.formatted(MessageFormatter.Format.WITH_EXCEPTION)));
+        indexer.addListener(message -> graphPanel.status(message.formatted(MessageFormatter.Format.WITH_EXCEPTION)));
 
         Borders.insideMarginsOf(Margins.of(10)).apply(this);
 

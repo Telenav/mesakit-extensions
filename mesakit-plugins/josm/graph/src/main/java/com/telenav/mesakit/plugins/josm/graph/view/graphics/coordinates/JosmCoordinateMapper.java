@@ -4,6 +4,7 @@ import com.telenav.kivakit.kernel.language.primitives.Doubles;
 import com.telenav.mesakit.map.geography.Latitude;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.Longitude;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapProjection;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.MapView;
 
@@ -12,7 +13,7 @@ import java.awt.geom.Point2D;
 /**
  * @author jonathanl (shibo)
  */
-public class JosmCoordinateMapper implements CoordinateMapper
+public class JosmCoordinateMapper implements MapProjection
 {
     private final MapView view;
 

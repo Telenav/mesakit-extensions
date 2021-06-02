@@ -18,13 +18,14 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
-
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Polyline.ZOOMED_IN;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Polyline.ZOOMED_OUT;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
+import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapPolyline;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.PolylineTheme;
 
 /**
  * Draws any selected polyline
@@ -37,20 +38,34 @@ public class PolylineRenderer
 
     private final ViewModel model;
 
+    private final PolylineTheme theme = new PolylineTheme();
+
     public PolylineRenderer(final MapCanvas canvas, final ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw()
+    public void draw(final Polyline polyline)
     {
-        for (final var polyline : model.selection().selectedPolylines())
+        draw(polyline, theme.styleUnselected());
+    }
+
+    public void draw(final Polyline polyline, final Style style)
+    {
+        MapPolyline.polyline(style)
+                .withPolyline(polyline)
+                .draw(canvas);
+    }
+
+    public void drawSelectedPolylines()
+    {
+        final var style = canvas.scale().isZoomedIn(MapScale.CITY) ? theme.styleZoomedIn() : theme.styleZoomedOut();
+        for (final var selectedPolyline : model.selection().selectedPolylines())
         {
-            if (model.selection().is(Type.SELECTED, polyline))
+            if (model.selection().is(Selection.Type.SELECTED, selectedPolyline))
             {
-                final var line = canvas.scale().isZoomedIn(Scale.CITY) ? ZOOMED_IN : ZOOMED_OUT;
-                line.draw(canvas, polyline);
+                draw(selectedPolyline, style);
             }
         }
     }

@@ -33,6 +33,7 @@ import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
 import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
 import java.util.HashMap;
@@ -71,7 +72,7 @@ public class EdgeLabelRenderer extends Renderer
         super(canvas, model);
     }
 
-    public void draw(final Type type)
+    public void draw(final Selection.Type type)
     {
         // Get the set of edges of the given time,
         final var edges = model().visibleEdges().edges(type);

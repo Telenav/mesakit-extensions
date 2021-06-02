@@ -18,23 +18,25 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
 import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.scalars.counts.Estimate;
-import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.kernel.language.values.count.Estimate;
+import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Route;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.collections.RelationSet;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Line;
+import com.telenav.mesakit.map.geography.shape.rectangle.Width;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.theme.shapes.Relations;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.RelationTheme;
 
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.*;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Relation;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.HIGHLIGHTED;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.SELECTED;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.UNSELECTED;
 
 /**
  * Draws relations and restrictions
@@ -53,13 +55,15 @@ public class RelationRenderer
 
     private EdgeSet edges;
 
+    private final RelationTheme theme = new RelationTheme();
+
     public RelationRenderer(final MapCanvas canvas, final ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Type type)
+    public void draw(final Selection.Type type)
     {
         switch (type)
         {
@@ -81,11 +85,11 @@ public class RelationRenderer
                     final var viaNodeLocation = selected.viaNodeLocation();
                     if (viaNodeLocation != null)
                     {
-                        Relation.VIA_NODE_SELECTED.withWidth(viaNodeDotSize()).draw(canvas, viaNodeLocation);
+                        Relations.VIA_NODE_SELECTED.withWidth(viaNodeDotSize()).draw(canvas, viaNodeLocation);
                     }
                     for (final var route : selected.asRoutes())
                     {
-                        Relation.SELECTED_LINE.draw(canvas, route.polyline());
+                        Relations.SELECTED_LINE.draw(canvas, route.polyline());
                     }
                 }
                 break;
@@ -106,7 +110,7 @@ public class RelationRenderer
 
     private void drawNonRestrictions()
     {
-        if (canvas.scale().isZoomedIn(Scale.NEIGHBORHOOD))
+        if (canvas.scale().isZoomedIn(MapScale.NEIGHBORHOOD))
         {
             final var relations = relations((relation) -> isVisible(relation) && !relation.isRestriction());
             if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_NON_RESTRICTIONS))
@@ -161,7 +165,7 @@ public class RelationRenderer
         }
     }
 
-    private void drawRestrictions(final Type type)
+    private void drawRestrictions(final Selection.Type type)
     {
         final var relations = relations((relation) -> isVisible(relation) && relation.isRestriction());
         if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_RESTRICTIONS))

@@ -26,6 +26,8 @@ import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingRectangle;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
@@ -47,7 +49,7 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import com.telenav.mesakit.map.measurements.geographic.Angle;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
-import com.telenav.mesakit.map.ui.desktop.theme.shapes.Bounds;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
 import com.telenav.mesakit.navigation.routing.RoutingDebugger;
 import com.telenav.mesakit.navigation.routing.RoutingRequest;
 import com.telenav.mesakit.navigation.routing.bidijkstra.BiDijkstraRouter;
@@ -61,17 +63,23 @@ import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 import com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates.JosmCoordinateMapper;
 import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmLayer;
+import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.MapView;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.telenav.kivakit.kernel.language.strings.conversion.StringFormat.HTML;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.FIRST_CLASS;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.MAIN;
+
 /**
- * Handles painting by rendering the graph's {@link ViewModel} on the {@link Canvas} using a {@link GraphLayerRenderer}
- * to do the actual work. Besides the loaded graph, two other decimated graphs are maintained for display when zoomed
- * out. This makes the redraw more efficient.
+ * Handles painting by rendering the graph's {@link ViewModel} on the {@link MapCanvas} using a {@link
+ * GraphLayerRenderer} to do the actual work. Besides the loaded graph, two other decimated graphs are maintained for
+ * display when zoomed out. This makes the redraw more efficient.
  *
  * @author jonathanl (shibo)
  */
@@ -180,7 +188,8 @@ public class GraphLayer extends BaseJosmLayer
 
         if (graph() != null)
         {
-            canvas = new MapCanvas(graphics, bounds(), Scale.of(view.getScale()), new JosmCoordinateMapper(view));
+            final var paintArea = DrawingRectangle.pixels(0, 0, view.getWidth(), view.getHeight());
+            canvas = MapCanvas.canvas("graph-layer", graphics, MapScale.of(view.getScale()), paintArea, new JosmCoordinateMapper(view));
 
             model().bounds(bounds().expanded(Percent.of(5)));
             model().graph(graph);
@@ -205,7 +214,7 @@ public class GraphLayer extends BaseJosmLayer
                     break;
             }
 
-            model().visibleEdges(new VisibleEdges(canvas, model(), Mode.EDGES));
+            model().visibleEdges(new VisibleEdges(canvas, model(), VisibleEdges.Mode.EDGES));
 
             new GraphLayerRenderer(model).paint(canvas);
         }
@@ -213,7 +222,7 @@ public class GraphLayer extends BaseJosmLayer
 
     public void onReady()
     {
-        panel().say("Ready");
+        panel().status("Ready");
     }
 
     @Override
@@ -246,7 +255,7 @@ public class GraphLayer extends BaseJosmLayer
         }
         else
         {
-            panel().say("A start and end vertex must be chosen before routing");
+            panel().status("A start and end vertex must be chosen before routing");
         }
         return false;
     }
@@ -352,7 +361,7 @@ public class GraphLayer extends BaseJosmLayer
     {
         if (bounds != null)
         {
-            var expanded = bounds.expanded(new Percent(10));
+            var expanded = bounds.expanded(Percent.of(10));
             if (expanded.widthAtBase().isLessThan(Distance._100_METERS))
             {
                 expanded = expanded.expandedLeft(Distance.meters(50));
@@ -415,7 +424,7 @@ public class GraphLayer extends BaseJosmLayer
                     if (layer instanceof GraphLayer)
                     {
                         final var graphLayer = (GraphLayer) layer;
-                        final var location = canvas.location(event.getPoint());
+                        final var location = canvas.toMap(event.getPoint());
                         if (graphLayer.graph().bounds().contains(location))
                         {
                             MainApplication.getLayerManager().setActiveLayer(layer);
@@ -446,13 +455,13 @@ public class GraphLayer extends BaseJosmLayer
 
     private boolean clickEdge(final MouseEvent event, final boolean snap)
     {
-        final var edges = selection().edgesForPoint(canvas, model().graph(), event.getPoint(), snap);
+        final var edges = selection().edgesForPoint(canvas, model().graph(), DrawingPoint.point(event.getPoint()), snap);
         var selected = false;
         if (!edges.isEmpty())
         {
             if (!selection().sameEdgeStack(edges))
             {
-                if (canvas != null && canvas.viewWidth().isLessThan(Distance.miles(50)) && !edges.isEmpty())
+                if (canvas != null && canvas.mapWidth().isLessThan(Distance.miles(50)) && !edges.isEmpty())
                 {
                     final var edge = edges.get(0);
                     select(edge);
@@ -490,7 +499,7 @@ public class GraphLayer extends BaseJosmLayer
             {
                 if (!selection().sameRelationStack(relations))
                 {
-                    if (canvas != null && canvas.viewWidth().isLessThan(Distance.miles(50))
+                    if (canvas != null && canvas.mapWidth().isLessThan(Distance.miles(50))
                             && !relations.isEmpty())
                     {
                         select(relations.get(0));
@@ -519,7 +528,7 @@ public class GraphLayer extends BaseJosmLayer
     private boolean clickPlace(final MouseEvent event)
     {
         final var place = selection().placeForPoint(event.getPoint());
-        final var exactlyOnEdge = !selection().edgesForPoint(canvas, graph, event.getPoint(), false).isEmpty();
+        final var exactlyOnEdge = !selection().edgesForPoint(canvas, graph, DrawingPoint.point(event.getPoint()), false).isEmpty();
         if (place != null && !exactlyOnEdge)
         {
             select(place);
@@ -549,7 +558,7 @@ public class GraphLayer extends BaseJosmLayer
         {
             if (!selection().sameVertexStack(vertexes))
             {
-                if (canvas != null && canvas.viewWidth().isLessThan(Distance.miles(50))
+                if (canvas != null && canvas.mapWidth().isLessThan(Distance.miles(50))
                         && !vertexes.isEmpty())
                 {
                     select(vertexes.get(0));
@@ -578,7 +587,7 @@ public class GraphLayer extends BaseJosmLayer
     {
         final var relations = new StringList();
         edge.relations().forEach(relation -> relations.add(relation.asString(HTML)));
-        panel().say("Selected edge $", edge.identifier());
+        panel().status("Selected edge $", edge.identifier());
         html(edge.asString(HTML)
                 + "\n"
                 + edge.from().asString(HTML)

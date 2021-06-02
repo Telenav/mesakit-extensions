@@ -32,16 +32,16 @@ public class ValuesColumn extends JPanel
             final var key = tagPanel.keysList.selected();
             if (key != null && value != null)
             {
-                tagPanel.graphPanel.say("Searching for $='$'", key, value);
+                tagPanel.graphPanel.status("Searching for $='$'", key, value);
                 final var edges = tagPanel.index.edges(key, value);
                 if (edges == null)
                 {
-                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.say("Too many matches to show"));
+                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.status("Too many matches to show"));
                     tagPanel.layer.show(new EdgeSet(), HIGHLIGHT_ONLY);
                 }
                 else
                 {
-                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.say("Highlighting $ $", edges.size(), Plural.pluralize(edges.size(), "match")));
+                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.status("Highlighting $ $", edges.size(), Plural.pluralize(edges.size(), "match")));
                     tagPanel.layer.show(edges, tagPanel.searchViewAreaOnly.isSelected() ? HIGHLIGHT_ONLY : HIGHLIGHT_AND_ZOOM_TO);
                 }
             }

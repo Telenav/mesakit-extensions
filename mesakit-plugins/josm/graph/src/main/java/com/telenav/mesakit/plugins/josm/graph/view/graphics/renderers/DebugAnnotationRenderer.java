@@ -22,12 +22,12 @@ import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.mesakit.graph.Vertex;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.AnnotationTheme;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.telenav.kivakit.kernel.language.strings.conversion.StringFormat.USER_LABEL;
-import static com.telenav.mesakit.map.ui.desktop.theme.shapes.Locations.LOCATION;
 
 /**
  * Draws edges in the appropriate color for zoom level
@@ -37,6 +37,8 @@ import static com.telenav.mesakit.map.ui.desktop.theme.shapes.Locations.LOCATION
 public class DebugAnnotationRenderer extends Renderer
 {
     private final Set<Vertex> drawn = new HashSet<>();
+
+    private final AnnotationTheme theme = new AnnotationTheme();
 
     public DebugAnnotationRenderer(final MapCanvas canvas, final ViewModel model)
     {
@@ -56,7 +58,7 @@ public class DebugAnnotationRenderer extends Renderer
                         edge.toVertexIdentifier(),
                         edge.identifierAsLong());
 
-                callout(edge.roadShape().midpoint(), LOCATION, EDGE_CALLOUT, text);
+                callout(edge.roadShape().midpoint(), theme.dotAnnotationLocation(), theme.styleEdgeAnnotationCallout(), text);
 
                 drawVertexAnnotation(edge.from());
                 drawVertexAnnotation(edge.to());
@@ -74,7 +76,7 @@ public class DebugAnnotationRenderer extends Renderer
                     vertex.outEdges().asString(USER_LABEL),
                     vertex.nodeIdentifier());
 
-            callout(vertex.location(), LOCATION, VERTEX_CALLOUT, text);
+            callout(vertex.location(), theme.dotAnnotationLocation(), theme.styleVertexAnnotationCallout(), text);
 
             drawn.add(vertex);
         }

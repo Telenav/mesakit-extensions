@@ -52,7 +52,7 @@ public class SearchPanel extends JPanel
             }
             else
             {
-                graphPanel.say("No graph layer is selected. To load a graph use File/Open...");
+                graphPanel.status("No graph layer is selected. To load a graph use File/Open...");
             }
         };
 
@@ -110,7 +110,7 @@ public class SearchPanel extends JPanel
             }
             if (feedback.status() != null)
             {
-                graphPanel.say(feedback.status());
+                graphPanel.status(feedback.status());
             }
         }
     }

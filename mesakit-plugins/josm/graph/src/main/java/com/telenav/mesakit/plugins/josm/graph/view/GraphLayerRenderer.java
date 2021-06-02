@@ -18,18 +18,25 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view;
 
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.*;
-import com.telenav.mesakit.map.measurements.Heading;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.GraphTheme;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.DebugAnnotationRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.EdgeLabelRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.EdgeRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.PlaceRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.PolylineRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.RelationRenderer;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VertexRenderer;
 
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.HIGHLIGHTED;
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.INACTIVE;
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.RESTRICTED;
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.SELECTED;
-import static com.telenav.kivakit.josm.plugins.graph.model.Selection.Type.UNSELECTED;
-import static com.telenav.kivakit.map.ui.swing.map.theme.Labels.*;
+import static com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint.pixels;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.CITY;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.REGION;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.HIGHLIGHTED;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.INACTIVE;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.RESTRICTED;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.SELECTED;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.UNSELECTED;
 
 /**
  * Paints the {@link ViewModel} for the loaded graph on a {@link MapCanvas}.
@@ -39,6 +46,8 @@ import static com.telenav.kivakit.map.ui.swing.map.theme.Labels.*;
 class GraphLayerRenderer
 {
     private final ViewModel model;
+
+    private final GraphTheme theme = new GraphTheme();
 
     GraphLayerRenderer(final ViewModel model)
     {
@@ -62,12 +71,11 @@ class GraphLayerRenderer
         // Draw box around graph
         if (!model.isWorldGraph())
         {
-            final var style = model.isActiveLayer() ? STYLE_BORDERED : STYLE_GRAYED;
-            canvas.drawLabeledRectangle(style, Width.pixels(3f), model.graph().bounds(), model.graph().name());
+            theme.boxGraphBounds(model.graph(), model.isActiveLayer()).draw(canvas);
         }
 
         // If we're zoomed in enough to draw anything,
-        if (canvas.scale().atOrCloserThan(Scale.REGION))
+        if (canvas.scale().atOrCloserThan(REGION))
         {
             // and we're inactive,
             if (!model.isActiveLayer())
@@ -78,7 +86,7 @@ class GraphLayerRenderer
             else
             {
                 // otherwise, if we're zoomed in
-                if (canvas.scale().isZoomedIn(Scale.CITY))
+                if (canvas.scale().isZoomedIn(CITY))
                 {
                     // draw unselected objects from back to front
                     relationRenderer.draw(UNSELECTED);
@@ -108,7 +116,7 @@ class GraphLayerRenderer
                     debugRenderer.drawAnnotations();
                 }
 
-                if (canvas.scale().isZoomedIn(Scale.CITY))
+                if (canvas.scale().isZoomedIn(CITY))
                 {
                     edgeLabelRenderer.draw(UNSELECTED);
                 }
@@ -120,13 +128,11 @@ class GraphLayerRenderer
         }
 
         // and finally, draw any user-specified lines
-        lineRenderer.draw();
+        lineRenderer.drawSelectedPolylines();
 
-        final var south = canvas.distance(50);
-        final var east = canvas.distance(10);
-        canvas.drawLabel(Styles.OCEAN_AND_WHITE, canvas.bounds().topLeft()
-                        .moved(Heading.SOUTH, south)
-                        .moved(Heading.EAST, east),
-                Width.pixels(2f), canvas.scale().name());
+        // and the scale label in the upper left
+        theme.labelMap(canvas.scale().name())
+                .at(pixels(50, 10))
+                .draw(canvas);
     }
 }

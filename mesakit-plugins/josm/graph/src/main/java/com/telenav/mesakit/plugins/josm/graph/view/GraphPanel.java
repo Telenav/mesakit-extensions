@@ -78,7 +78,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
         createLayout(container(), false, Collections.emptyList());
 
-        say(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
+        status(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
 
         SwingUtilities.invokeLater(() ->
                 Components.children(this, component -> component.setFont(Fonts.component(12))));
@@ -119,18 +119,6 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         return routingPanel;
     }
 
-    @Override
-    public void say(final Duration stayFor, final String message, final Object... arguments)
-    {
-        statusPanel.say(stayFor, message, arguments);
-    }
-
-    @Override
-    public void say(final String message, final Object... arguments)
-    {
-        statusPanel.say(Duration.seconds(10), message, arguments);
-    }
-
     public SearchPanel searchPanel()
     {
         if (searchPanel == null)
@@ -145,13 +133,24 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         return layer().model().selection().selectedVertex();
     }
 
-    @NotNull
+    @Override
+    public void status(final Duration stayFor, final String message, final Object... arguments)
+    {
+        statusPanel.status(stayFor, message, arguments);
+    }
+
+    @Override
+    public void status(final String message, final Object... arguments)
+    {
+        statusPanel.status(Duration.seconds(10), message, arguments);
+    }
+
     public JTabbedPane tabbedPane()
     {
         if (tabbedPane == null)
         {
             tabbedPane = new JTabbedPane();
-            tabbedPane.setForeground(KivaKitColors.DARK_GRAY.asAwtColor());
+            tabbedPane.setForeground(KivaKitColors.DARK_CHARCOAL.asAwtColor());
             tabbedPane.addTab("home", searchPanel());
             tabbedPane.addTab("query", queryPanel());
             tabbedPane.addTab("view", viewPanel());
@@ -221,7 +220,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         final var container = new JPanel();
         container.setLayout(new BorderLayout());
         container.add(tabbedPane(), BorderLayout.CENTER);
-        statusPanel = new StatusPanel(NO_HEALTH_PANEL);
+        statusPanel = new StatusPanel(StatusPanel.Display.NO_HEALTH_PANEL);
         statusPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         container.add(statusPanel, BorderLayout.SOUTH);
         return container;

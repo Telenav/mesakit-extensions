@@ -95,7 +95,7 @@ public class QueryPanel extends JPanel
         {
             if (feedback.status() != null)
             {
-                graphPanel.say(feedback.status());
+                graphPanel.status(feedback.status());
             }
         }
     }
@@ -169,7 +169,7 @@ public class QueryPanel extends JPanel
             }
             else
             {
-                graphPanel.say("No graph layer is selected. To load a graph use File/Open...");
+                graphPanel.status("No graph layer is selected. To load a graph use File/Open...");
             }
         };
     }

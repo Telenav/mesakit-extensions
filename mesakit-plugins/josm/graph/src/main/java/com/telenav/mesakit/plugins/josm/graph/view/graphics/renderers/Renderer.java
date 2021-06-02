@@ -18,16 +18,16 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Dot;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingRectangle;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
-import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.AnnotationTheme;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -66,42 +66,43 @@ public abstract class Renderer
 
     private final ViewModel model;
 
+    private final AnnotationTheme theme = new AnnotationTheme();
+
     protected Renderer(final MapCanvas canvas, final ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    protected void callout(final Location at, final Dot dot, final Style style, final String text)
+    protected void callout(final Location at, final MapDot dot, final Style style, final String text)
     {
         for (int dx = 30; dx < 100; dx += 10)
         {
             for (int dy = -30; dy > -100; dy -= 10)
             {
-                final var screenLocation = canvas().toDrawing(at).plus(dx, dy);
-
-                final var drawAt = canvas().toMap(screenLocation);
+                final var drawAt = canvas().toDrawing(at).plus(dx, dy);
 
                 final var margin = 5.0;
-                final var bounds = canvas().labelBounds(style, drawAt, text);
-                final var planned = new Rectangle2D.Double(bounds.getX() - margin,
-                        bounds.getY() - margin,
-                        bounds.getWidth() + 2 * margin,
-                        bounds.getHeight() + 2 * margin);
+                final var bounds = DrawingRectangle.rectangle(drawAt, canvas().textSize(style, text));
+                final var planned = new Rectangle2D.Double(bounds.x() - margin,
+                        bounds.y() - margin,
+                        bounds.width() + 2 * margin,
+                        bounds.height() + 2 * margin);
 
                 if (!model().intersectsDrawnRectangle(planned))
                 {
-                    dot.draw(canvas(), at);
+                    dot.withLocation(at).draw(canvas());
 
-                    final var connectPoint = new Point2D.Double(bounds.getX(), bounds.getY() + bounds.getHeight() / 2);
-                    final var color = Styles.BASE.withFillColor(style.draw()).withDrawColor(style.draw());
-                    canvas().drawPolyline(color, Width.pixels(2f), color,
-                            Width.pixels(1f), Polyline.fromLocations(at, canvas().location(connectPoint)));
+                    final var connectPoint = new Point2D.Double(bounds.x(), bounds.y() + bounds.height() / 2);
+                    theme.lineCallout()
+                            .withFrom(at)
+                            .withTo(canvas().toMap(connectPoint))
+                            .draw(canvas());
 
-                    final var drawn = canvas().drawLabel(style, drawAt,
-                            Width.pixels(2f), text);
-
-                    model().drawn(drawn);
+                    final var shape = theme.labelAnnotation(text)
+                            .at(drawAt)
+                            .draw(canvas());
+                    model().drawn(shape.getBounds());
                     return;
                 }
             }

@@ -71,7 +71,7 @@ public class RoutingPanel extends JPanel
             if (!graphPanel.layer().route(this.from, this.to,
                     debug.isSelected()))
             {
-                graphPanel.say("Couldn't find route");
+                graphPanel.status("Couldn't find route");
             }
         }).start());
     }

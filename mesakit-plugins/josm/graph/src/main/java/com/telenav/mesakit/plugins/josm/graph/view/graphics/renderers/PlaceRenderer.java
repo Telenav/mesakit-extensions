@@ -19,16 +19,12 @@
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
 import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.values.level.Percent;
-import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Dot;
 import com.telenav.mesakit.graph.Place;
-import com.telenav.mesakit.map.geography.shape.rectangle.Width;
-import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
-import com.telenav.mesakit.map.ui.desktop.theme.shapes.Labels;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.PlaceTheme;
 
 /**
  * Draws dots where places are located
@@ -37,15 +33,11 @@ import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
  */
 public class PlaceRenderer
 {
-    private enum RenderPass
-    {
-        DOT,
-        LABEL
-    }
-
     private final MapCanvas canvas;
 
     private final ViewModel model;
+
+    private final PlaceTheme theme = new PlaceTheme();
 
     public PlaceRenderer(final MapCanvas canvas, final ViewModel model)
     {
@@ -57,52 +49,31 @@ public class PlaceRenderer
     {
         if (model.graphPanel().viewPanel().viewPlaces())
         {
-            for (final var pass : RenderPass.values())
+            for (final var place : model.graph().placesInside(model.bounds()))
             {
-                for (final var place : model.graph().placesInside(model.bounds()))
+                if (isVisible(place) && model.selection().is(type, place))
                 {
-                    if (isVisible(place) && model.selection().is(type, place))
-                    {
-                        draw(pass, place);
-                    }
+                    draw(place);
                 }
             }
         }
     }
 
-    private void draw(final RenderPass pass, final Place place)
+    private void draw(final Place place)
     {
-        // If we're zoomed in or the place is important
+        // If we're zoomed in or the place is important enough
         if (canvas.scale().closerThan(MapScale.STATE) || place.isCity() || place.population().isGreaterThan(Count.count(10_000)))
         {
-            // True if the place is selected
-            final var isSelected = model.selection().isSelected(place);
+            final var dot = model.selection().isSelected(place)
+                    ? theme.dotPlaceSelected(place.population())
+                    : theme.dotPlace(place.population());
 
-            // Draw dot
-            if (pass == RenderPass.DOT)
-            {
-                // Compute dot diameter
-                final var base = Distance.meters(8);
-                final var width = Width.of(base
-                        .add(base.times(Math.abs(Math.log10(place.population().asInt())))));
+            final var shape = dot
+                    .withLabelText(place.name())
+                    .withLocation(place.location())
+                    .draw(canvas);
 
-                final var normal = new Dot(width, PLACE, width.scaledBy(Percent.of(10)), PLACE);
-                final var selected = TRANSLUCENT_YELLOW.withWidth(width);
-
-                final var dot = isSelected ? selected : normal;
-                final var shape = dot.draw(canvas, place.location());
-                model.selection().shape(place, shape);
-            }
-
-            // Draw label
-            if (pass == RenderPass.LABEL)
-            {
-                if (isSelected || place.population().isGreaterThan(Count._100_000))
-                {
-                    final var label = isSelected ? Labels.SELECTED : Labels.NORMAL;
-                    label.draw(canvas, place.location(), place.name());
-                }
-            }
+            model.selection().shape(place, shape);
         }
     }
 
@@ -112,7 +83,6 @@ public class PlaceRenderer
         {
             return false;
         }
-        final var panel = model.graphPanel();
-        return panel.viewPanel().viewPlaces() && panel.viewPanel().viewPlaceTypes().contains(place.type());
+        return model.graphPanel().viewPanel().viewPlaces() && model.graphPanel().viewPanel().viewPlaceTypes().contains(place.type());
     }
 }
