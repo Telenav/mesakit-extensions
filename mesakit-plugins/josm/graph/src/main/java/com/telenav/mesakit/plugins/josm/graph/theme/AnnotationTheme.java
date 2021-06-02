@@ -1,7 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.theme;
 
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
-import com.telenav.kivakit.ui.desktop.theme.darcula.KivaKitDarculaTheme;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapLabel;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapLine;
@@ -11,7 +10,7 @@ import static com.telenav.kivakit.ui.desktop.theme.KivaKitColors.BLUE_RIDGE_MOUN
 import static com.telenav.kivakit.ui.desktop.theme.KivaKitColors.LIGHT_GRAY;
 import static com.telenav.mesakit.map.measurements.geographic.Distance.meters;
 
-public class AnnotationTheme extends KivaKitDarculaTheme
+public class AnnotationTheme extends GraphTheme
 {
     public MapDot dotAnnotationLocation()
     {

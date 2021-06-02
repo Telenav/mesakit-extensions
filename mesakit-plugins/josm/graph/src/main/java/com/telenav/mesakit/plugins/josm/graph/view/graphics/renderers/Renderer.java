@@ -100,7 +100,7 @@ public abstract class Renderer
                             .draw(canvas());
 
                     final var shape = theme.labelAnnotation(text)
-                            .at(drawAt)
+                            .withLocation(drawAt)
                             .draw(canvas());
                     model().drawn(shape.getBounds());
                     return;

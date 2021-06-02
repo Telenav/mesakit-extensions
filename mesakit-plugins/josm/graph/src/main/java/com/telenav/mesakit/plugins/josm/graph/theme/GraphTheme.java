@@ -10,6 +10,7 @@ import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapLabel;
 import static com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.measurements.DrawingWidth.pixels;
 import static com.telenav.kivakit.ui.desktop.theme.KivaKitColors.BLUE_RIDGE_MOUNTAINS;
 import static com.telenav.kivakit.ui.desktop.theme.KivaKitColors.LIGHT_GRAY;
+import static com.telenav.kivakit.ui.desktop.theme.KivaKitStyles.VALENCIA;
 
 public class GraphTheme extends KivaKitDarculaTheme
 {
@@ -45,5 +46,10 @@ public class GraphTheme extends KivaKitDarculaTheme
     public Style styleLabelMap()
     {
         return KivaKitStyles.OCEAN_SURF;
+    }
+
+    public Style styleSelected()
+    {
+        return VALENCIA;
     }
 }

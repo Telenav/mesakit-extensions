@@ -23,17 +23,17 @@ import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.count.Estimate;
 import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.mesakit.graph.EdgeRelation;
-import com.telenav.mesakit.graph.Route;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.collections.RelationSet;
-import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
-import com.telenav.mesakit.map.ui.desktop.theme.shapes.Relations;
+import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 import com.telenav.mesakit.plugins.josm.graph.theme.RelationTheme;
 
+import static com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.measurements.DrawingLength.pixels;
+import static com.telenav.mesakit.map.measurements.geographic.Distance.meters;
 import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.HIGHLIGHTED;
 import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.SELECTED;
 import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.UNSELECTED;
@@ -85,11 +85,14 @@ public class RelationRenderer
                     final var viaNodeLocation = selected.viaNodeLocation();
                     if (viaNodeLocation != null)
                     {
-                        Relations.VIA_NODE_SELECTED.withWidth(viaNodeDotSize()).draw(canvas, viaNodeLocation);
+                        viaNodeDotSize(theme.dotViaNodeSelected())
+                                .withLocation(viaNodeLocation).draw(canvas);
                     }
                     for (final var route : selected.asRoutes())
                     {
-                        Relations.SELECTED_LINE.draw(canvas, route.polyline());
+                        theme.polylineRouteSelected()
+                                .withPolyline(route.polyline())
+                                .draw(canvas);
                     }
                 }
                 break;
@@ -103,7 +106,7 @@ public class RelationRenderer
     {
         for (final var route : relation.asRoutes())
         {
-            final var shape = line(Relation.ROUTE, route).draw(canvas, route.polyline());
+            final var shape = theme.polylineRoute(theme.polylineRoute(), route).draw(canvas);
             model.selection().shape(relation, shape);
         }
     }
@@ -132,25 +135,27 @@ public class RelationRenderer
         final var viaNodeLocation = relation.viaNodeLocation();
         if (viaNodeLocation != null)
         {
-            final var dot = relation.is(EdgeRelation.Type.BAD_TURN_RESTRICTION) ? Relation.VIA_NODE_BAD : Relation.VIA_NODE;
-            dot.withWidth(viaNodeDotSize()).draw(canvas, viaNodeLocation);
+            final var dot = relation.is(EdgeRelation.Type.BAD_TURN_RESTRICTION) ? theme.dotViaNodeBad() : theme.dotViaNodeUnselected();
+            viaNodeDotSize(dot)
+                    .withLocation(viaNodeLocation)
+                    .draw(canvas);
         }
 
         // Draw route
-        if (canvas.scale().atOrCloserThan(Scale.NEIGHBORHOOD))
+        if (canvas.scale().atOrCloserThan(MapScale.NEIGHBORHOOD))
         {
             if (relation.isTurnRestriction())
             {
                 final var restriction = relation.turnRestriction();
                 for (final var route : restriction.routes())
                 {
-                    final var shape = line(Relation.RESTRICTION, route).draw(canvas, route.polyline());
+                    final var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
                 final var location = relation.viaNodeLocation();
                 if (location != null)
                 {
-                    final var shape = Relation.ROUTE_NONE.draw(canvas, location);
+                    final var shape = theme.dotNoRoute().withLocation(location).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
             }
@@ -158,7 +163,7 @@ public class RelationRenderer
             {
                 for (final var route : relation.asRoutes())
                 {
-                    final var shape = line(Relation.RESTRICTION, route).draw(canvas, route.polyline());
+                    final var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
             }
@@ -190,11 +195,6 @@ public class RelationRenderer
         return panel.viewPanel().viewRelations() && panel.viewPanel().viewRelationTypes().contains(relation.type());
     }
 
-    private Line line(final Line line, final Route route)
-    {
-        return EdgeRenderer.fattened(line, route.asEdgeSet().mostImportant());
-    }
-
     private RelationSet relations(final Matcher<EdgeRelation> matcher)
     {
         if (edges == null)
@@ -222,19 +222,19 @@ public class RelationRenderer
         return relations;
     }
 
-    private Width viaNodeDotSize()
+    private MapDot viaNodeDotSize(final MapDot dot)
     {
         switch (canvas.scale())
         {
             case STATE:
             case REGION:
             case CITY:
-                return Width.pixels(3f);
+                return dot.withRadius(pixels(3));
 
             case NEIGHBORHOOD:
             case STREET:
             default:
-                return Width.meters(7);
+                return dot.withRadius(meters(7));
         }
     }
 }

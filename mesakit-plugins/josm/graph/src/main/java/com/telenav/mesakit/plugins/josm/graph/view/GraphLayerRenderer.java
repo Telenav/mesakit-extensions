@@ -132,7 +132,7 @@ class GraphLayerRenderer
 
         // and the scale label in the upper left
         theme.labelMap(canvas.scale().name())
-                .at(pixels(50, 10))
+                .withLocation(pixels(50, 10))
                 .draw(canvas);
     }
 }
