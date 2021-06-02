@@ -18,6 +18,8 @@
 
 package com.telenav.mesakit.plugins.josm.library;
 
+import org.openstreetmap.josm.gui.MainApplication;
+
 public class JosmMainWrapper
 {
     public static void main(final String[] args)

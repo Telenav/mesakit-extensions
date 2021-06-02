@@ -19,7 +19,18 @@
 package com.telenav.mesakit.plugins.josm.library;
 
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
-import com.telenav.mesakit.map.ui.desktop.theme.shapes.Bounds;
+import org.openstreetmap.josm.data.Bounds;
+import org.openstreetmap.josm.gui.MainApplication;
+import org.openstreetmap.josm.gui.MapFrame;
+import org.openstreetmap.josm.gui.MapView;
+import org.openstreetmap.josm.gui.layer.Layer;
+import org.openstreetmap.josm.gui.layer.LayerManager;
+import org.openstreetmap.josm.io.auth.CredentialsManager;
+import org.openstreetmap.josm.plugins.Plugin;
+import org.openstreetmap.josm.plugins.PluginInformation;
+import org.openstreetmap.josm.tools.Shortcut;
+
+import static com.telenav.kivakit.kernel.data.validation.ensure.Ensure.ensureNotNull;
 
 public abstract class BaseJosmPlugin extends Plugin
 {
@@ -34,22 +45,22 @@ public abstract class BaseJosmPlugin extends Plugin
         super(info);
         this.layerClass = ensureNotNull(layerClass);
         MainApplication.getLayerManager().addActiveLayerChangeListener(event -> activeLayerChanged(event.getPreviousActiveLayer()));
-        MainApplication.getLayerManager().addLayerChangeListener(new LayerChangeListener()
+        MainApplication.getLayerManager().addLayerChangeListener(new LayerManager.LayerChangeListener()
         {
             @Override
-            public void layerAdded(final LayerAddEvent event)
+            public void layerAdded(final LayerManager.LayerAddEvent event)
             {
                 addedLayer(event.getAddedLayer());
             }
 
             @Override
-            public void layerOrderChanged(final LayerOrderChangeEvent event)
+            public void layerOrderChanged(final LayerManager.LayerOrderChangeEvent event)
             {
                 reorderedLayers();
             }
 
             @Override
-            public void layerRemoving(final LayerRemoveEvent event)
+            public void layerRemoving(final LayerManager.LayerRemoveEvent event)
             {
                 removingLayer(event.getRemovedLayer());
             }

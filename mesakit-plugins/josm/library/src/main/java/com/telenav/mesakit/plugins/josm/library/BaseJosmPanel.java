@@ -18,6 +18,10 @@
 
 package com.telenav.mesakit.plugins.josm.library;
 
+import org.openstreetmap.josm.gui.MainApplication;
+import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
+import org.openstreetmap.josm.gui.layer.Layer;
+
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
