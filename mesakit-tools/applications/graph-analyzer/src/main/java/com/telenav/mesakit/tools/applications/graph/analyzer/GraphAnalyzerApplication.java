@@ -18,17 +18,20 @@
 
 package com.telenav.mesakit.tools.applications.graph.analyzer;
 
-import com.telenav.kivakit.application.KivaKitApplication;
-import com.telenav.kivakit.data.formats.pbf.osm.OsmHighwayTag;
+import com.telenav.kivakit.application.Application;
+import com.telenav.kivakit.commandline.ArgumentParser;
+import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.kernel.commandline.*;
 import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
-import com.telenav.kivakit.kernel.language.matching.All;
-import com.telenav.kivakit.kernel.language.string.*;
+import com.telenav.kivakit.kernel.language.collections.list.StringList;
+import com.telenav.kivakit.kernel.language.primitives.Doubles;
+import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.language.strings.Align;
+import com.telenav.kivakit.kernel.language.time.Time;
+import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.scalars.counts.*;
-import com.telenav.kivakit.kernel.time.Time;
+import com.telenav.kivakit.kernel.messaging.filters.operators.All;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
@@ -47,13 +50,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
+import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
+
 /**
  * Analyze a Graph, printing out interesting statistics.
  *
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class GraphAnalyzerApplication extends KivaKitApplication
+public class GraphAnalyzerApplication extends Application
 {
     public static void main(final String[] arguments)
     {
@@ -80,28 +86,28 @@ public class GraphAnalyzerApplication extends KivaKitApplication
 
         private String label(final String value)
         {
-            return Strings.alignRight(value, 32, ' ') + ": ";
+            return Align.right(value, 32, ' ') + ": ";
         }
     }
 
     private final ArgumentParser<SmartGraphLoader> GRAPH_RESOURCE =
-            SmartGraphLoader.argumentParser("The graph(s) to analyze")
+            graphArgumentParser("The graph(s) to analyze")
                     .oneOrMore()
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            Folder.OUTPUT
+            Folder.outputFolderSwitchParser()
                     .optional()
                     .build();
 
     private final SwitchParser<Boolean> PRINT =
-            SwitchParser.booleanSwitch("print", "Print output to the console")
+            booleanSwitchParser("print", "Print output to the console")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> BY_HIGHWAY_TYPE =
-            SwitchParser.booleanSwitch("byHighwayType", "Show lengths by highway type")
+            booleanSwitchParser("byHighwayType", "Show lengths by highway type")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -161,56 +167,20 @@ public class GraphAnalyzerApplication extends KivaKitApplication
 
     private void analyze(final boolean print, final Folder output, final Graph graph)
     {
-        if (graph.supports(EdgeAttributes.get().TAGS))
+        final var matcherResult = analyze(graph, new All<>());
+        if (print)
         {
-            final var matcher0Result = analyze(graph, matcher0());
-            final var matcher1Result = analyze(graph, matcher1());
-            final var matcher2Result = analyze(graph, matcher2());
-            final var matcher3Result = analyze(graph, matcher3());
-            final var matcher4Result = analyze(graph, matcher4());
-            final var matcher5Result = analyze(graph, matcher5());
-            if (print)
-            {
-                final var writer = new PrintWriter(System.out);
-                matcher0Result.write(writer);
-                matcher1Result.write(writer);
-                matcher2Result.write(writer);
-                matcher3Result.write(writer);
-                matcher4Result.write(writer);
-                matcher5Result.write(writer);
-                writer.flush();
-            }
-            if (output != null)
-            {
-                output.mkdirs();
-                final var file = output.file(graph.name() + ".analysis.txt");
-                final var writer = file.printWriter();
-                matcher0Result.write(writer);
-                matcher1Result.write(writer);
-                matcher2Result.write(writer);
-                matcher3Result.write(writer);
-                matcher4Result.write(writer);
-                matcher5Result.write(writer);
-                writer.close();
-            }
+            final var writer = new PrintWriter(System.out);
+            matcherResult.write(writer);
+            writer.flush();
         }
-        else
+        if (output != null)
         {
-            final var matcherResult = analyze(graph, new All<>());
-            if (print)
-            {
-                final var writer = new PrintWriter(System.out);
-                matcherResult.write(writer);
-                writer.flush();
-            }
-            if (output != null)
-            {
-                output.mkdirs();
-                final var file = output.file(graph.name() + ".analysis.txt");
-                final var writer = file.printWriter();
-                matcherResult.write(writer);
-                writer.close();
-            }
+            output.mkdirs();
+            final var file = output.file(graph.name() + ".analysis.txt");
+            final var writer = file.printWriter();
+            matcherResult.write(writer);
+            writer.close();
         }
     }
 
@@ -468,53 +438,9 @@ public class GraphAnalyzerApplication extends KivaKitApplication
         }
     }
 
-    private HereEdgeMatcher matcher0()
-    {
-        return new HereEdgeMatcher(OsmHighwayTag.MOTORWAY, OsmHighwayTag.MOTORWAY_LINK, OsmHighwayTag.TRUNK,
-                OsmHighwayTag.TRUNK_LINK, OsmHighwayTag.PRIMARY, OsmHighwayTag.PRIMARY_LINK);
-    }
-
-    private HereEdgeMatcher matcher1()
-    {
-        return new HereEdgeMatcher(OsmHighwayTag.MOTORWAY, OsmHighwayTag.MOTORWAY_LINK, OsmHighwayTag.TRUNK,
-                OsmHighwayTag.TRUNK_LINK, OsmHighwayTag.PRIMARY, OsmHighwayTag.PRIMARY_LINK, OsmHighwayTag.SECONDARY,
-                OsmHighwayTag.SECONDARY_LINK, OsmHighwayTag.TERTIARY, OsmHighwayTag.TERTIARY_LINK,
-                OsmHighwayTag.RESIDENTIAL, OsmHighwayTag.RESIDENTIAL_LINK);
-    }
-
-    private HereEdgeMatcher matcher2()
-    {
-        return new HereEdgeMatcher(OsmHighwayTag.MOTORWAY, OsmHighwayTag.MOTORWAY_LINK, OsmHighwayTag.TRUNK,
-                OsmHighwayTag.TRUNK_LINK, OsmHighwayTag.PRIMARY, OsmHighwayTag.PRIMARY_LINK, OsmHighwayTag.SECONDARY,
-                OsmHighwayTag.SECONDARY_LINK, OsmHighwayTag.TERTIARY, OsmHighwayTag.TERTIARY_LINK,
-                OsmHighwayTag.RESIDENTIAL, OsmHighwayTag.RESIDENTIAL_LINK, OsmHighwayTag.PRIVATE, OsmHighwayTag.DRIVEWAY,
-                OsmHighwayTag.UNCLASSIFIED, OsmHighwayTag.SERVICE);
-    }
-
-    private HereEdgeMatcher matcher3()
-    {
-        return new HereEdgeMatcher(OsmHighwayTag.MOTORWAY, OsmHighwayTag.MOTORWAY_LINK, OsmHighwayTag.TRUNK,
-                OsmHighwayTag.TRUNK_LINK, OsmHighwayTag.PRIMARY, OsmHighwayTag.PRIMARY_LINK, OsmHighwayTag.SECONDARY,
-                OsmHighwayTag.SECONDARY_LINK, OsmHighwayTag.TERTIARY, OsmHighwayTag.TERTIARY_LINK,
-                OsmHighwayTag.RESIDENTIAL, OsmHighwayTag.RESIDENTIAL_LINK, OsmHighwayTag.PRIVATE, OsmHighwayTag.DRIVEWAY,
-                OsmHighwayTag.UNCLASSIFIED, OsmHighwayTag.SERVICE, OsmHighwayTag.REST_AREA, OsmHighwayTag.ROAD,
-                OsmHighwayTag.TRACK, OsmHighwayTag.UNDEFINED, OsmHighwayTag.UNKNOWN, OsmHighwayTag.LIVING_STREET);
-    }
-
     private Matcher<Edge> matcher4()
     {
         return new All<>();
-    }
-
-    private Matcher<Edge> matcher5()
-    {
-        return new HereEdgeMatcher(OsmHighwayTag.MOTORWAY, OsmHighwayTag.MOTORWAY_LINK, OsmHighwayTag.TRUNK,
-                OsmHighwayTag.TRUNK_LINK, OsmHighwayTag.PRIMARY, OsmHighwayTag.PRIMARY_LINK, OsmHighwayTag.SECONDARY,
-                OsmHighwayTag.SECONDARY_LINK, OsmHighwayTag.TERTIARY, OsmHighwayTag.TERTIARY_LINK,
-                OsmHighwayTag.RESIDENTIAL, OsmHighwayTag.RESIDENTIAL_LINK, OsmHighwayTag.UNCLASSIFIED,
-                OsmHighwayTag.SERVICE, OsmHighwayTag.TRACK, OsmHighwayTag.FOOTWAY, OsmHighwayTag.PEDESTRIAN,
-                OsmHighwayTag.STEPS, OsmHighwayTag.BRIDLEWAY, OsmHighwayTag.CONSTRUCTION, OsmHighwayTag.CYCLEWAY,
-                OsmHighwayTag.PATH, OsmHighwayTag.BUS_GUIDEWAY);
     }
 
     private String miles(final double miles)
@@ -524,6 +450,6 @@ public class GraphAnalyzerApplication extends KivaKitApplication
 
     private String miles(final double miles, final double total)
     {
-        return miles(miles) + " (" + Strings.format(miles / total * 100.0, 1) + "%)";
+        return miles(miles) + " (" + Doubles.format(miles / total * 100.0, 1) + "%)";
     }
 }

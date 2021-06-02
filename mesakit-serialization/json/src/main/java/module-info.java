@@ -1,7 +1,7 @@
 open module mesakit.graph.json
 {
+    requires transitive kivakit.serialization.json;
     requires transitive mesakit.graph.core;
-    requires transitive tdk.utilities.json;
 
-    exports com.telenav.kivakit.graph.json;
+    exports com.telenav.mesakit.graph.json.serializers;
 }

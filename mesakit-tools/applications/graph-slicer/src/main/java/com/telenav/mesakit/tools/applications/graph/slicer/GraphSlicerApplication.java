@@ -18,17 +18,23 @@
 
 package com.telenav.mesakit.tools.applications.graph.slicer;
 
+import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
+import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.project.GraphCore;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
-import java.security.cert.Extension;
 import java.util.Set;
+
+import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
+import static com.telenav.mesakit.map.geography.shape.rectangle.Rectangle.rectangleSwitchParser;
 
 /**
  * Slice a graph to a given rectangle
@@ -44,17 +50,17 @@ public class GraphSlicerApplication extends Application
     }
 
     private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE =
-            SmartGraphLoader.switchParser("graph", "The input graph to slice")
+            graphSwitchParser("graph", "The input graph to slice")
                     .required()
                     .build();
 
     private final SwitchParser<File> OUTPUT =
-            File.switchParser("output", "The output file")
+            fileSwitchParser("output", "The output file")
                     .required()
                     .build();
 
     private final SwitchParser<Rectangle> BOUNDS =
-            Rectangle.switchParser("bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
+            rectangleSwitchParser("bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
                     .required()
                     .build();
 

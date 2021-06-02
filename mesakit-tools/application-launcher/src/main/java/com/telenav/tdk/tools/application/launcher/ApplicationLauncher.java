@@ -18,25 +18,23 @@
 
 package com.telenav.tdk.tools.application.launcher;
 
+import com.telenav.kivakit.kernel.language.time.Duration;
 import com.telenav.kivakit.kernel.logging.loggers.LogServiceLoader;
-import com.telenav.kivakit.kernel.time.Duration;
 import com.telenav.kivakit.logs.server.ServerLog;
-import com.telenav.kivakit.tools.applications.codec.CodecGeneratorApplication;
-import com.telenav.kivakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
-import com.telenav.kivakit.tools.applications.graph.dumper.GraphDumperApplication;
-import com.telenav.kivakit.tools.applications.graph.slicer.GraphSlicerApplication;
-import com.telenav.kivakit.tools.applications.graph.verifier.GraphVerifierApplication;
-import com.telenav.kivakit.tools.applications.graph.ways.extractor.DoubleDigitizedWaysExtractorApplication;
-import com.telenav.kivakit.tools.applications.log.viewer.LogViewerApplication;
-import com.telenav.kivakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication;
-import com.telenav.kivakit.tools.applications.pbf.converter.PbfToGraphConverterApplication;
-import com.telenav.kivakit.tools.applications.pbf.dumper.PbfDumperApplication;
-import com.telenav.kivakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
-import com.telenav.kivakit.tools.applications.pbf.metadata.PbfMetadataApplication;
-import com.telenav.kivakit.tools.applications.pbf.region.extractor.PbfRegionExtractorApplication;
-import com.telenav.kivakit.tools.applications.region.information.RegionInformationApplication;
-import com.telenav.kivakit.tools.applications.service.registry.ServiceRegistryViewerApplication;
+import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
+import com.telenav.mesakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
+import com.telenav.mesakit.tools.applications.graph.dumper.GraphDumperApplication;
+import com.telenav.mesakit.tools.applications.graph.slicer.GraphSlicerApplication;
+import com.telenav.mesakit.tools.applications.graph.verifier.GraphVerifierApplication;
+import com.telenav.mesakit.tools.applications.graph.ways.extractor.DoubleDigitizedWaysExtractorApplication;
+import com.telenav.mesakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication;
+import com.telenav.mesakit.tools.applications.pbf.converter.PbfToGraphConverterApplication;
+import com.telenav.mesakit.tools.applications.pbf.dumper.PbfDumperApplication;
+import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
+import com.telenav.mesakit.tools.applications.pbf.metadata.PbfMetadataApplication;
+import com.telenav.mesakit.tools.applications.pbf.region.extractor.PbfRegionExtractorApplication;
+import com.telenav.mesakit.tools.applications.region.information.RegionInformationApplication;
 
 import java.util.Arrays;
 
@@ -161,20 +159,12 @@ public class ApplicationLauncher
 
                 // Other Tools
 
-                case "service-registry-viewer":
-                    ServiceRegistryViewerApplication.main(arguments);
-                    break;
-
                 case "codec-generator":
                     CodecGeneratorApplication.main(arguments);
                     break;
 
                 case "region-information":
                     RegionInformationApplication.main(arguments);
-                    break;
-
-                case "log-viewer":
-                    LogViewerApplication.main(arguments);
                     break;
 
                 default:

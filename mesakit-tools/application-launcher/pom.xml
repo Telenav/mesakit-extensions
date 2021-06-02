@@ -15,7 +15,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-tools-application-launcher</artifactId>
     <packaging>jar</packaging>
     <name>MesaKit - Tools - Application Launcher</name>

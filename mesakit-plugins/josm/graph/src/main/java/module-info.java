@@ -1,10 +1,10 @@
-open module mesakit.josm.plugins.graph
+open module mesakit.plugins.josm.graph
 {
     requires java.desktop;
 
-    requires tdk.graph.query;
-    requires tdk.josm.plugins.library;
-    requires tdk.navigation.routing;
+    requires mesakit.graph.query;
+    requires mesakit.josm.plugins.library;
+    requires mesakit.navigation.routing;
 
-    exports com.telenav.kivakit.josm.plugins.graph;
+    exports com.telenav.mesakit.plugins.josm.graph;
 }

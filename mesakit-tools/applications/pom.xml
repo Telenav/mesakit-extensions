@@ -45,14 +45,6 @@
 
         <module>codec-generator</module>
 
-        <!-- Logging -->
-
-        <module>log-viewer</module>
-
-        <!-- Services -->
-
-        <module>service-registry</module>
-
         <!-- Region -->
 
         <module>region-information</module>

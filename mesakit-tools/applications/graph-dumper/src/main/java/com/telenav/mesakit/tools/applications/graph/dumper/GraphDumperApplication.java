@@ -41,6 +41,16 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import java.util.List;
 import java.util.Set;
 
+import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParser.countSwitchParser;
+import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
+import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
+import static com.telenav.mesakit.graph.identifiers.RelationIdentifier.relationIdentifierSwitchParser;
+import static com.telenav.mesakit.graph.identifiers.VertexIdentifier.vertexIdentifierSwitchParser;
+import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
+import static com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier.pbfWayIdentifierSwitchParser;
+
 /**
  * Dumps graph resources. A specific edge, vertex, relation, way or place can be shown. The spatial index can also be
  * dumped.
@@ -50,53 +60,53 @@ import java.util.Set;
 public class GraphDumperApplication extends Application
 {
     private static final ArgumentParser<SmartGraphLoader> INPUT =
-            SmartGraphLoader.argumentParser("The graph to dump")
+            graphArgumentParser("The graph to dump")
                     .required()
                     .build();
 
     private static final SwitchParser<EdgeIdentifier> EDGE =
-            EdgeIdentifier.switchParser("edge", "A specific edge identifier to dump")
+            edgeIdentifierSwitchParser("edge", "A specific edge identifier to dump")
                     .optional()
                     .build();
 
     private static final SwitchParser<VertexIdentifier> VERTEX =
-            VertexIdentifier.switchParser("vertex", "A specific vertex identifier to dump")
+            vertexIdentifierSwitchParser("vertex", "A specific vertex identifier to dump")
                     .optional()
                     .build();
 
     private static final SwitchParser<RelationIdentifier> RELATION =
-            RelationIdentifier.switchParser("relation", "A specific relation identifier to dump")
+            relationIdentifierSwitchParser("relation", "A specific relation identifier to dump")
                     .optional()
                     .build();
 
     private static final SwitchParser<PbfWayIdentifier> WAY =
-            PbfWayIdentifier.switchParser("way", "A specific way identifier to dump")
+            pbfWayIdentifierSwitchParser("way", "A specific way identifier to dump")
                     .optional()
                     .build();
 
     private static final SwitchParser<PlaceIdentifier> PLACE =
-            PlaceIdentifier.switchParser("place", "A specific place identifier to dump")
+            placeIdentifierSwitchParser("place", "A specific place identifier to dump")
                     .optional()
                     .build();
 
     private static final SwitchParser<Boolean> SPATIAL_INDEX =
-            SwitchParser.booleanSwitch("spatial-index", "Dump the spatial index")
+            booleanSwitchParser("spatial-index", "Dump the spatial index")
                     .optional()
                     .build();
 
     private static final SwitchParser<Boolean> DUMP_EDGE_IDENTIFIERS =
-            SwitchParser.booleanSwitch("all-edge-identifiers", "Dump all edge identifiers to the console")
+            booleanSwitchParser("all-edge-identifiers", "Dump all edge identifiers to the console")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private static final SwitchParser<File> DUMP_HEAP =
-            File.fileSwitch("dump-heap-to", "Force load all data and dump graph heap to the given file")
+            fileSwitchParser("dump-heap-to", "Force load all data and dump graph heap to the given file")
                     .optional()
                     .build();
 
     private static final SwitchParser<Count> LIMIT =
-            SwitchParser.countSwitch("entity-limit", "The maximum number of edges, vertexes and relations to dump")
+            countSwitchParser("entity-limit", "The maximum number of edges, vertexes and relations to dump")
                     .optional()
                     .defaultValue(Count.MAXIMUM)
                     .build();

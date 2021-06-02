@@ -18,7 +18,11 @@
 
 package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.utilities.json.gson.GsonSerializer;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.telenav.kivakit.serialization.json.GsonSerializer;
 import com.telenav.mesakit.map.geography.Latitude;
 
 import java.lang.reflect.Type;

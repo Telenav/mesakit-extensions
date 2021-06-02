@@ -1,8 +1,8 @@
 open module mesakit.tools.applications.pbf.region.extractor
 {
-    requires transitive mesakit.application;
-    requires transitive tdk.data.formats.pbf;
-    requires transitive tdk.map.cutter;
+    requires transitive kivakit.application;
+    requires transitive mesakit.data.formats.pbf;
+    requires transitive mesakit.map.cutter;
 
-    exports com.telenav.kivakit.tools.applications.pbf.region.extractor;
+    exports com.telenav.mesakit.tools.applications.pbf.region.extractor;
 }

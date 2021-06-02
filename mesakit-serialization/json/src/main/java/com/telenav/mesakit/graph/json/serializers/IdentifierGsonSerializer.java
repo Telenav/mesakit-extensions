@@ -18,8 +18,8 @@
 
 package com.telenav.mesakit.graph.json.serializers;
 
-import com.telenav.kivakit.kernel.scalars.identifiers.Identifier;
-import com.telenav.kivakit.utilities.json.gson.PrimitiveGsonSerializer;
+import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
+import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
 
 public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier, Long>
 {

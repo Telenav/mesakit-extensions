@@ -1,7 +1,7 @@
 open module mesakit.tools.applications.pbf.comparator
 {
-    requires transitive mesakit.application;
+    requires transitive kivakit.application;
     requires transitive mesakit.graph.core;
 
-    exports com.telenav.kivakit.tools.applications.pbf.comparator;
+    exports com.telenav.mesakit.tools.applications.pbf.comparator;
 }

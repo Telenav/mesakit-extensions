@@ -1,7 +1,7 @@
 open module mesakit.tools.applications.graph.ways.extractor
 {
-    requires transitive mesakit.application;
+    requires transitive kivakit.application;
     requires transitive mesakit.graph.core;
 
-    exports com.telenav.kivakit.tools.applications.graph.ways.extractor;
+    exports com.telenav.mesakit.tools.applications.graph.ways.extractor;
 }

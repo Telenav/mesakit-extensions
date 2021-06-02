@@ -38,7 +38,7 @@
 
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-core-utilities</artifactId>
+            <artifactId>mesakit-map-utilities</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>

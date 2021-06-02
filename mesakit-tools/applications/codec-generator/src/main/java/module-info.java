@@ -1,7 +1,7 @@
 open module mesakit.tools.applications.codec
 {
-    requires transitive mesakit.application;
+    requires transitive kivakit.application;
     requires transitive mesakit.graph.core;
 
-    exports com.telenav.kivakit.tools.applications.codec;
+    exports com.telenav.mesakit.tools.applications.codec;
 }

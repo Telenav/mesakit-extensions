@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
-import com.telenav.kivakit.kernel.scalars.levels.Percent;
+import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.mesakit.map.road.model.RoadName;
 
 public interface RoadNameMatcher

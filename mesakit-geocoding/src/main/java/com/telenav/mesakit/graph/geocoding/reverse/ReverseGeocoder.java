@@ -18,17 +18,19 @@
 
 package com.telenav.mesakit.graph.geocoding.reverse;
 
-import com.telenav.kivakit.kernel.scalars.levels.Percent;
-import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.polyline.*;
-import com.telenav.mesakit.map.measurements.*;
-import com.telenav.mesakit.map.road.model.RoadName;
-import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
+import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;
 import com.telenav.mesakit.graph.geocoding.reverse.matching.RoadNameMatcher;
-import com.telenav.mesakit.graph.specifications.osm.graph.edge.model.attributes.OsmEdgeAttributes;
-import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCode;
-import com.telenav.mesakit.graph.traffic.roadsection.RoadSectionCodingSystem;
+import com.telenav.mesakit.map.geography.Location;
+import com.telenav.mesakit.map.geography.shape.polyline.PolylineSnap;
+import com.telenav.mesakit.map.geography.shape.polyline.PolylineSnapper;
+import com.telenav.mesakit.map.measurements.geographic.Angle;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
+import com.telenav.mesakit.map.measurements.geographic.Heading;
+import com.telenav.mesakit.map.road.model.RoadName;
+import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
 
 import java.util.Set;
 
@@ -47,8 +49,6 @@ public class ReverseGeocoder
         private RoadNameStandardizer roadNameStandardizer;
 
         private Percent roadNameCloseness;
-
-        private RoadSectionCodingSystem roadSectionCodingSystem = RoadSectionCodingSystem.TMC;
 
         private RoadNameMatcher roadNameMatcher = new FuzzyRoadNameMatcher();
 
@@ -86,7 +86,7 @@ public class ReverseGeocoder
          * @param roadNameCloseness The minimum percentage of characters that must be the same between one road name and
          * another for them to be considered equivalent.
          * <p>
-         * This is computed using the Levenschtein distance divided by the string length. For example, the Levenschtein
+         * This is computed using the Levenshtein distance divided by the string length. For example, the Levenshtein
          * distance between "Latona Ave NE" and "Latona Ave" is 3 (because 3 characters must be added to "Latona Ave" to
          * get "Latona Ave NE"), which if we're looking for "Latona Ave" is a distance of 3 / 10 or 30%. A 30% distance
          * is a closeness of 70%.
@@ -117,16 +117,6 @@ public class ReverseGeocoder
         public void roadNameStandardizer(final RoadNameStandardizer standardizer)
         {
             roadNameStandardizer = standardizer;
-        }
-
-        public RoadSectionCodingSystem roadSectionCodingSystem()
-        {
-            return roadSectionCodingSystem;
-        }
-
-        public void roadSectionCodingSystem(final RoadSectionCodingSystem roadSectionCodingSystem)
-        {
-            this.roadSectionCodingSystem = roadSectionCodingSystem;
         }
 
         public Distance within()
@@ -183,23 +173,19 @@ public class ReverseGeocoder
     {
         private final Edge edge;
 
-        private final RoadSectionCode roadSectionCode;
-
         private final PolylineSnap snap;
 
         private Percent percentage = Percent._0;
 
-        Response(final Edge edge, final RoadSectionCode roadSectionCode, final PolylineSnap snap)
+        Response(final Edge edge, final PolylineSnap snap)
         {
             this.edge = edge;
-            this.roadSectionCode = roadSectionCode;
             this.snap = snap;
         }
 
-        Response(final Edge edge, final RoadSectionCode roadSectionCode, final PolylineSnap snap,
-                 final Percent percentage)
+        Response(final Edge edge, final PolylineSnap snap, final Percent percentage)
         {
-            this(edge, roadSectionCode, snap);
+            this(edge, snap);
             this.percentage = percentage;
         }
 
@@ -211,11 +197,6 @@ public class ReverseGeocoder
         public Percent percentage()
         {
             return percentage;
-        }
-
-        public RoadSectionCode roadSectionCode()
-        {
-            return roadSectionCode;
         }
 
         public PolylineSnap snap()
@@ -276,7 +257,7 @@ public class ReverseGeocoder
                     {
                         // create a new response
                         closestDistance = snap.distanceToSource();
-                        response = new Response(edge, roadSectionCode(edge, snap), snap, roadNameCloseness);
+                        response = new Response(edge, snap, roadNameCloseness);
                     }
                 }
             }
@@ -284,8 +265,10 @@ public class ReverseGeocoder
         return response;
     }
 
-    private Percent matches(final Set<RoadName> roadNames, final RoadName desired,
-                            final RoadNameStandardizer standardizer, final Heading edgeHeading)
+    private Percent matches(final Set<RoadName> roadNames,
+                            final RoadName desired,
+                            final RoadNameStandardizer standardizer,
+                            final Heading edgeHeading)
     {
         var highestScore = Percent._0;
         for (var roadName : roadNames)
@@ -295,7 +278,7 @@ public class ReverseGeocoder
             {
                 if (desired.extractDirection() != null && roadName.extractDirection() == null)
                 {
-                    roadName = RoadName.forName(roadName.name() + " " + edgeHeading.asDirection());
+                    roadName = RoadName.forName(roadName.name() + " " + edgeHeading.asApproximateDirection());
                 }
                 // and the standardized road name matches the desired road name,
                 final var score = configuration.roadNameMatcher().matches(
@@ -307,35 +290,5 @@ public class ReverseGeocoder
             }
         }
         return highestScore;
-    }
-
-    private RoadSectionCode roadSectionCode(final Edge edge, final PolylineSnap snap)
-    {
-        RoadSectionCode code = null;
-
-        if (configuration.roadSectionCodingSystem().equals(RoadSectionCodingSystem.TMC)
-                && edge.supports(OsmEdgeAttributes.get().FORWARD_TMC_IDENTIFIERS))
-        {
-            var closest = Distance.MAXIMUM;
-            for (final var identifier : edge.tmcIdentifiers())
-            {
-                final var section = identifier.roadSection();
-                final var proximity = snap.distanceTo(section.start()).add(snap.distanceTo(section.end()));
-                if (proximity.isLessThan(closest))
-                {
-                    closest = proximity;
-                    code = identifier.asCode();
-                }
-            }
-        }
-        else if (configuration.roadSectionCodingSystem().equals(RoadSectionCodingSystem.TELENAV_TRAFFIC_LOCATION)
-                && edge.supports(OsmEdgeAttributes.get().FORWARD_TELENAV_TRAFFIC_LOCATION_IDENTIFIER))
-        {
-            if (edge.osmTelenavTrafficLocationIdentifier() != null)
-            {
-                code = edge.osmTelenavTrafficLocationIdentifier().asCode();
-            }
-        }
-        return code;
     }
 }
