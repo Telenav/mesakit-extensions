@@ -16,14 +16,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.mesakit.plugins.josm.geojson;
 
-import com.telenav.kivakit.josm.plugins.library.BaseJosmPanel;
-import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
+import com.telenav.kivakit.kernel.language.strings.Strings;
+import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
+import com.telenav.mesakit.plugins.josm.library.BaseJosmPanel;
 import org.openstreetmap.josm.actions.JosmAction;
-import org.openstreetmap.josm.gui.*;
+import org.openstreetmap.josm.gui.MainApplication;
+import org.openstreetmap.josm.gui.MainMenu;
 import org.openstreetmap.josm.gui.layer.Layer;
 import org.openstreetmap.josm.tools.Shortcut;
 

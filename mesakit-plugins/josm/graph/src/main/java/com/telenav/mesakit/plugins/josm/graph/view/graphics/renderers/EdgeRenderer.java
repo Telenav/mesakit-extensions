@@ -18,18 +18,17 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.kernel.scalars.levels.Percent;
-import com.telenav.kivakit.utilities.ui.swing.graphics.color.*;
+import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Line;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
 import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.Road;
+import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.road.model.RoadType;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.*;
-import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Line;
-import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Edge.*;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Road;
+import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.INACTIVE;
 
 /**
  * Draws edges in the appropriate color for zoom level
@@ -68,7 +67,7 @@ public class EdgeRenderer extends Renderer
         }
     }
 
-    public static Line fattenedAndFilled(final MapCanvas canvas, final Type type, final Edge edge)
+    public static Line fattenedAndFilled(final MapCanvas canvas, final Selection.Type type, final Edge edge)
     {
         switch (type)
         {

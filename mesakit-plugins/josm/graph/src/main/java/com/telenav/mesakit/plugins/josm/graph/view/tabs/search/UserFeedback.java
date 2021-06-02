@@ -1,6 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.language.strings.StringTo;
 import com.telenav.kivakit.kernel.messaging.Message;
 
 /**
@@ -72,7 +72,7 @@ public class UserFeedback
     public UserFeedback withText(final String message, final Object... arguments)
     {
         final var copy = new UserFeedback(this);
-        copy.text = Strings.toHtml(Message.format(message, arguments));
+        copy.text = StringTo.html(Message.format(message, arguments));
         return copy;
     }
 }

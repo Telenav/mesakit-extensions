@@ -36,17 +36,6 @@
             <artifactId>mesakit-graph-world</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-logs-server</artifactId>
-            <version>${mesakit.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
     </dependencies>
 

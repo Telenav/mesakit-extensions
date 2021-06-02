@@ -18,15 +18,15 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.ShapePoint;
 import com.telenav.mesakit.graph.specifications.common.shapepoint.HeavyWeightShapePoint;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.ShapePoint.NORMAL;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.ShapePoint.SELECTED;
+import static com.telenav.mesakit.map.ui.desktop.theme.shapes.ShapePoints.NORMAL;
+import static com.telenav.mesakit.map.ui.desktop.theme.shapes.ShapePoints.SELECTED;
 
 /**
  * Draws the shape points of an edge. Shape points are selectable objects with details when a graph supports full node
@@ -85,7 +85,7 @@ public class ShapePointRenderer
     {
         final var selected = model.selection().isSelected(point);
         final var dot = selected ? SELECTED : NORMAL;
-        final var shape = dot.draw(canvas, point.location());
+        final var shape = dot.withLocation(point.location()).draw(canvas);
         if (model.graph().supportsFullPbfNodeInformation())
         {
             model.selection().shape(point, shape);

@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-ui-swing</artifactId>
+            <artifactId>mesakit-map-ui-desktop</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
 

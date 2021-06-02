@@ -18,14 +18,14 @@
 
 package com.telenav.mesakit.plugins.josm.graph.model;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges;
 import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.collections.EdgeSequence;
 import com.telenav.mesakit.graph.world.WorldGraph;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges;
 
 import java.awt.geom.Rectangle2D;
 import java.util.HashSet;

@@ -25,7 +25,7 @@ import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.mesakit.graph.Metadata;
-import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.project.GraphCoreProject;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
@@ -101,7 +101,7 @@ public class PbfMetadataApplication extends Application
 
     private PbfMetadataApplication()
     {
-        super(GraphCore.get());
+        super(GraphCoreProject.get());
     }
 
     @Override

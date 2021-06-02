@@ -16,34 +16,33 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.mesakit.plugins.josm.geojson;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.josm.plugins.library.BaseJosmLayer;
 import com.telenav.kivakit.kernel.interfaces.naming.NamedObject;
 import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.scalars.levels.Percent;
-import com.telenav.kivakit.utilities.ui.swing.graphics.color.ColorConverter;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSettings;
 import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSpatialIndex;
-import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonGeometry;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonPoint;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonPolyline;
+import com.telenav.mesakit.plugins.josm.library.BaseJosmLayer;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.data.osm.visitor.BoundingXYVisitor;
 import org.openstreetmap.josm.gui.MapView;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Path2D;
@@ -64,7 +63,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
 
     private final Map<Shape, GeoJsonFeature> featureForShape = new HashMap<>();
 
-    private final ColorConverter colorConverter = new ColorConverter(LOGGER);
+    private final Color.ColorConverter colorConverter = new Color.ColorConverter(LOGGER);
 
     private RTreeSpatialIndex<GeoJsonFeature> spatialIndex;
 
@@ -80,37 +79,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return document;
     }
 
-    public void setDocument(final GeoJsonDocument document)
-    {
-        spatialIndex = new RTreeSpatialIndex<>(objectName() + ".spatialIndex", new RTreeSettings());
-        final List<GeoJsonFeature> features = new ArrayList<>();
-        for (final var feature : document.features())
-        {
-            if (feature.bounds() != null)
-            {
-                features.add(feature);
-            }
-            else
-            {
-                LOGGER.warning("Not indexing GeoJson feature with missing bounds: $", feature);
-            }
-        }
-        spatialIndex.bulkLoad(features);
-        this.document = document;
-        if (panel() != null)
-        {
-            panel().refresh();
-        }
-    }
-
     public File getFile()
     {
         return file;
-    }
-
-    public void setFile(final File file)
-    {
-        this.file = file;
     }
 
     @Override
@@ -169,6 +140,34 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return (GeoJsonPlugin) super.plugin();
     }
 
+    public void setDocument(final GeoJsonDocument document)
+    {
+        spatialIndex = new RTreeSpatialIndex<>(objectName() + ".spatialIndex", new RTreeSettings());
+        final List<GeoJsonFeature> features = new ArrayList<>();
+        for (final var feature : document.features())
+        {
+            if (feature.bounds() != null)
+            {
+                features.add(feature);
+            }
+            else
+            {
+                LOGGER.warning("Not indexing GeoJson feature with missing bounds: $", feature);
+            }
+        }
+        spatialIndex.bulkLoad(features);
+        this.document = document;
+        if (panel() != null)
+        {
+            panel().refresh();
+        }
+    }
+
+    public void setFile(final File file)
+    {
+        this.file = file;
+    }
+
     @Override
     public void visitBoundingBox(final BoundingXYVisitor v)
     {
@@ -190,7 +189,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             final var bounds = feature.bounds();
             if (bounds != null)
             {
-                plugin().zoomTo(bounds.expanded(new Percent(50)));
+                plugin().zoomTo(bounds.expanded(Percent.of(50)));
             }
             selectedFeature = feature;
         }
@@ -280,7 +279,8 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return -1;
     }
 
-    private Color colorForGeometry(final GeoJsonFeature feature, final GeoJsonGeometry geometry,
+    private Color colorForGeometry(final GeoJsonFeature feature,
+                                   final GeoJsonGeometry geometry,
                                    final boolean highlight)
     {
         if (isInactiveLayer())
@@ -293,7 +293,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             final var color = colorConverter.convert(colorProperty.toString());
             if (color != null)
             {
-                return highlight ? color.invert().asAwtColor() : color.asAwtColor();
+                return highlight ? color.invert() : color;
             }
             else
             {
@@ -348,7 +348,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         final var width = (int) strokeWidth();
         if (feature.title() != null && drawTitle)
         {
-            graphics.setColor(color);
+            graphics.setColor(color.asAwtColor());
             final var area = awtRectangleForRectangle(feature.bounds());
             graphics.drawRect((int) area.getX(), (int) area.getY(), (int) area.getWidth(), (int) area.getHeight());
             final var textBounds = graphics.getFontMetrics().getStringBounds(feature.title(), graphics);
@@ -359,18 +359,18 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         {
             final var location = ((GeoJsonPoint) geometry).location();
             final var point = pointForLocation(location);
-            graphics.setColor(color);
+            graphics.setColor(color.asAwtColor());
             final var x = (int) point.getX();
             final var y = (int) point.getY();
             graphics.fillOval(x, y, width, width);
-            graphics.setColor(color.darker());
+            graphics.setColor(color.darker().asAwtColor());
             final var outlineWidth = Math.max(2, (width / 8) * 2 / 2);
             graphics.setStroke(new BasicStroke(outlineWidth + 2));
             graphics.drawOval(x, y, width, width);
         }
         if (geometry instanceof GeoJsonPolyline)
         {
-            graphics.setColor(color);
+            graphics.setColor(color.asAwtColor());
             final var line = ((GeoJsonPolyline) geometry).polyline();
             var first = true;
             final Path2D path = new Path2D.Float();
@@ -403,9 +403,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                     final var centerY = (int) point.getY();
                     final var x = centerX - width / 2;
                     final var y = centerY - width / 2;
-                    graphics.setColor(annotationText);
+                    graphics.setColor(annotationText.asAwtColor());
                     graphics.fillOval(x - 1, y - 1, width + 2, width + 2);
-                    graphics.setColor(annotationBackground);
+                    graphics.setColor(annotationBackground.asAwtColor());
                     //noinspection SuspiciousNameCombination
                     graphics.fillOval(x, y, width, width);
                     if (font != null)
@@ -413,7 +413,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                         final var string = "" + index;
                         final var metrics = graphics.getFontMetrics();
                         final var bounds = metrics.getStringBounds(string, graphics);
-                        graphics.setColor(annotationText);
+                        graphics.setColor(annotationText.asAwtColor());
                         graphics.drawString(string, centerX - (int) bounds.getWidth() / 2,
                                 centerY + metrics.getAscent() / 2);
                     }
@@ -425,7 +425,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
 
     private void drawHeatMap(final Graphics2D graphics)
     {
-        final var size = viewWidth().scaledBy(0.02);
+        final var size = viewWidth().times(0.02);
         var maximum = Count._0;
         final Map<Rectangle, Count> counts = new HashMap<>();
         for (final var cell : bounds().cells(size))
@@ -437,8 +437,8 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         for (final var cell : bounds().cells(size))
         {
             final var count = counts.get(cell);
-            graphics.setColor(new Color(255, 0, 0,
-                    Math.min(255, (int) (255 * ((double) count.asInt() / (double) maximum.asInt())))));
+            graphics.setColor(Color.rgba(255, 0, 0,
+                    Math.min(255, (int) (255 * ((double) count.asInt() / (double) maximum.asInt())))).asAwtColor());
             final var topLeft = pointForLocation(cell.topLeft());
             final var bottomRight = pointForLocation(cell.bottomRight());
             final var x = (int) topLeft.getX();

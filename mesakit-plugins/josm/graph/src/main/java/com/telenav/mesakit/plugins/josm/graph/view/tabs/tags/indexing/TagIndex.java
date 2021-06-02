@@ -1,8 +1,8 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.collections.map.multi.MultiMap;
+import com.telenav.kivakit.collections.map.MultiMap;
 import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
-import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.language.collections.list.StringList;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
@@ -48,7 +48,7 @@ public class TagIndex
 
     public synchronized StringList keys()
     {
-        return StringList.fromObjects(keyToValues.keySet()).sorted();
+        return StringList.stringList(keyToValues.keySet()).sorted();
     }
 
     public Count valueCount()

@@ -1,23 +1,27 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.query;
 
-import com.telenav.kivakit.josm.plugins.graph.view.*;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.UserFeedback;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.scalars.counts.*;
-import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
-import com.telenav.kivakit.utilities.ui.swing.component.icon.search.MagnifyingGlass;
-import com.telenav.kivakit.utilities.ui.swing.component.progress.ProgressPanel;
-import com.telenav.kivakit.utilities.ui.swing.component.stack.CardPanel;
-import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
-import com.telenav.kivakit.utilities.ui.swing.layout.*;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.language.strings.Strings;
+import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.kernel.language.values.count.Maximum;
+import com.telenav.kivakit.kernel.language.values.mutable.MutableValue;
+import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
+import com.telenav.kivakit.ui.desktop.component.panel.stack.CardPanel;
+import com.telenav.kivakit.ui.desktop.component.progress.ProgressPanel;
+import com.telenav.kivakit.ui.desktop.layout.Borders;
+import com.telenav.kivakit.ui.desktop.layout.HorizontalBox;
+import com.telenav.kivakit.ui.desktop.layout.Size;
+import com.telenav.kivakit.ui.desktop.layout.Spacing;
+import com.telenav.kivakit.ui.desktop.layout.VerticalBoxLayout;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.query.GraphQuery;
-import com.telenav.mesakit.map.geography.rectangle.Rectangle;
-import org.jetbrains.annotations.NotNull;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.search.UserFeedback;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -52,7 +56,7 @@ public class QueryPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        Components.border(this, 8);
+        Borders.applyMargin(this, 8);
 
         // Add the cards panel and the matches panel in a vertical box
         new VerticalBoxLayout(this)
@@ -80,7 +84,7 @@ public class QueryPanel extends JPanel
             cardPanel = new CardPanel();
             cardPanel.addCard(queryTools(), "query-tools");
             cardPanel.addCard(progressPanel(), "progress-bar");
-            Components.maximumHeight(cardPanel, 32);
+            Size.heightOf(32).maximum(cardPanel);
         }
         return cardPanel;
     }
@@ -111,7 +115,6 @@ public class QueryPanel extends JPanel
         });
     }
 
-    @NotNull
     private ProgressPanel progressPanel()
     {
         // Create progress panel that tracks search progress
@@ -133,18 +136,17 @@ public class QueryPanel extends JPanel
         // Search when the query button is pushed or return is hit in the search field
         final ActionListener search = searchAction(graphPanel);
         final var searchButton = theme.newButton("query");
-        searchButton.setFont(theme.componentFont());
+        searchButton.setFont(theme.fontNormal());
         searchButton.addActionListener(search);
         searchField().addActionListener(search);
 
         // Add the search field and button to a query tools box
-        return new HorizontalBox(SpacingStyle.MANUAL_SPACING, 24)
+        return new HorizontalBox(Spacing.MANUAL_SPACING, 24)
                 .add(new MagnifyingGlass())
                 .add(searchField())
                 .add(searchButton);
     }
 
-    @NotNull
     private ActionListener searchAction(final GraphPanel graphPanel)
     {
         return event ->
@@ -177,9 +179,9 @@ public class QueryPanel extends JPanel
         if (searchField == null)
         {
             searchField = KivaKitTheme.get().newTextField();
-            Components.border(searchField, 8);
-            Components.preferredWidth(searchField, 1_000);
-            UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_GRAY.asAwtColor());
+            Borders.applyMargin(searchField, 8);
+            Size.widthOf(1_000).preferred(cardPanel);
+            UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_CHARCOAL.asAwtColor());
         }
         return searchField;
     }

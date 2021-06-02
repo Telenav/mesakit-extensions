@@ -18,22 +18,23 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view;
 
-import com.telenav.kivakit.josm.plugins.graph.GraphPlugin;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.query.QueryPanel;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.routing.RoutingPanel;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.search.SearchPanel;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.TagPanel;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.view.ViewPanel;
-import com.telenav.kivakit.josm.plugins.library.BaseJosmPanel;
-import com.telenav.kivakit.kernel.project.KivaKit;
-import com.telenav.kivakit.kernel.time.Duration;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
-import com.telenav.kivakit.utilities.ui.swing.component.status.*;
-import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
-import com.telenav.kivakit.utilities.ui.swing.graphics.font.Fonts;
-import com.telenav.kivakit.utilities.ui.swing.theme.*;
+import com.telenav.kivakit.kernel.language.time.Duration;
+import com.telenav.kivakit.ui.desktop.component.Components;
+import com.telenav.kivakit.ui.desktop.component.status.StatusDisplay;
+import com.telenav.kivakit.ui.desktop.component.status.StatusPanel;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Fonts;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
+import com.telenav.kivakit.ui.desktop.theme.vanhelsing.KivaKitVanHelsingTheme;
+import com.telenav.mesakit.core.MesaKit;
 import com.telenav.mesakit.graph.Vertex;
-import org.jetbrains.annotations.NotNull;
+import com.telenav.mesakit.plugins.josm.graph.GraphPlugin;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.query.QueryPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.routing.RoutingPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.search.SearchPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.TagPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.view.ViewPanel;
+import com.telenav.mesakit.plugins.josm.library.BaseJosmPanel;
 import org.openstreetmap.josm.gui.layer.Layer;
 
 import javax.swing.BorderFactory;
@@ -41,10 +42,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.util.Collections;
-
-import static com.telenav.kivakit.utilities.ui.swing.component.status.StatusPanel.Display.NO_HEALTH_PANEL;
 
 /**
  * The JOSM panel showing graph information and providing search functionality.
@@ -80,10 +78,10 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
         createLayout(container(), false, Collections.emptyList());
 
-        say(KivaKit.version() + " - " + KivaKit.build());
+        say(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
 
         SwingUtilities.invokeLater(() ->
-                Components.children(this, component -> component.setFont(Fonts.component(Font.PLAIN, 12))));
+                Components.children(this, component -> component.setFont(Fonts.component(12))));
     }
 
     public void html(final String message, final Object... arguments)

@@ -18,21 +18,21 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.Selection;
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
-import com.telenav.kivakit.kernel.scalars.counts.Maximum;
+import com.telenav.kivakit.kernel.language.values.count.Maximum;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.collections.EdgeSet;
-import com.telenav.mesakit.map.measurements.Distance;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.road.model.RoadType;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
-import java.awt.geom.Point2D;
 import java.util.List;
 
-import static com.telenav.kivakit.josm.plugins.graph.view.graphics.renderers.VisibleEdges.Mode.RELATIONS;
-import static com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale.CITY;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.CITY;
+import static com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges.Mode.RELATIONS;
 
 /**
  * @author jonathanl (shibo)
@@ -64,10 +64,9 @@ public class VisibleEdges
         this.mode = mode;
 
         // We don't want to draw any tiny edges. An edge should be at least a few pixels wide.
-        smallest = canvas.location(new Point2D.Float(0, 0))
-                .distanceTo(canvas.location(new Point2D.Float(4, 0)));
+        smallest = canvas.toMap(DrawingPoint.pixels(0, 0)).distanceTo(canvas.toMap(DrawingPoint.pixels(4, 0)));
 
-        if (canvas.scale().atOrFurtherThan(Scale.REGION))
+        if (canvas.scale().atOrFurtherThan(MapScale.REGION))
         {
             edges = model.forwardEdges(edge -> edge.roadType() == RoadType.FREEWAY
                     || edge.roadType() == RoadType.URBAN_HIGHWAY).asList();

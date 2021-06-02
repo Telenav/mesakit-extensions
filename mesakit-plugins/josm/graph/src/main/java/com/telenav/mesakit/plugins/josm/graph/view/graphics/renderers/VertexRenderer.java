@@ -18,13 +18,13 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.Selection.Type;
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.mesakit.graph.Edge;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.Selection;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Vertex.NORMAL;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Vertex.SELECTED;
+import static com.telenav.mesakit.map.ui.desktop.theme.shapes.Vertexes.NORMAL;
+import static com.telenav.mesakit.map.ui.desktop.theme.shapes.Vertexes.SELECTED;
 
 /**
  * Draws the vertexes of edges when they are selected.
@@ -48,23 +48,23 @@ public class VertexRenderer
         if (selected != null)
         {
             // Draw from vertex
-            final var from = NORMAL.draw(canvas, selected.fromLocation());
+            final var from = NORMAL.withLocation(selected.fromLocation()).draw(canvas);
             model.selection().shape(selected.from(), from);
 
             // Draw to vertex
-            final var to = NORMAL.draw(canvas, selected.toLocation());
+            final var to = NORMAL.withLocation(selected.toLocation()).draw(canvas);
             model.selection().shape(selected.to(), to);
         }
     }
 
-    public void draw(final Type type)
+    public void draw(final Selection.Type type)
     {
-        if (type == Type.SELECTED)
+        if (type == Selection.Type.SELECTED)
         {
             final var vertex = model.selection().selectedVertex();
             if (vertex != null)
             {
-                SELECTED.draw(canvas, vertex.location());
+                SELECTED.withLocation(vertex.location()).draw(canvas);
             }
         }
     }

@@ -24,7 +24,7 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.values.count.Minimum;
-import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.project.GraphCoreProject;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.tools.applications.codec.polyline.HuffmanCodecGenerator;
@@ -120,7 +120,7 @@ public class CodecGeneratorApplication extends Application
 
     protected CodecGeneratorApplication()
     {
-        super(GraphCore.get());
+        super(GraphCoreProject.get());
     }
 
     @Override

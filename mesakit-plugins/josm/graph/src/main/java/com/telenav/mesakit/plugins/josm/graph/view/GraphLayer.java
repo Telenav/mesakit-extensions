@@ -23,6 +23,7 @@ import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.time.PreciseDuration;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.mesakit.graph.Edge;
@@ -38,6 +39,7 @@ import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
+import com.telenav.mesakit.map.data.formats.library.map.identifiers.MapNodeIdentifier;
 import com.telenav.mesakit.map.data.formats.library.map.identifiers.MapRelationIdentifier;
 import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
@@ -59,6 +61,8 @@ import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 import com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates.JosmCoordinateMapper;
 import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmLayer;
+import org.openstreetmap.josm.gui.MainApplication;
+import org.openstreetmap.josm.gui.MapView;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -297,7 +301,7 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    public void show(final NodeIdentifier identifier)
+    public void show(final MapNodeIdentifier identifier)
     {
         if (graph().contains(identifier))
         {

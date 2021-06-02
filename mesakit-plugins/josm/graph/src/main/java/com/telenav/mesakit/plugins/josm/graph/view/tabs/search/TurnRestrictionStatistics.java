@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.kernel.language.string.StringList;
+import com.telenav.kivakit.kernel.language.collections.list.StringList;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.mesakit.graph.EdgeRelation;
 

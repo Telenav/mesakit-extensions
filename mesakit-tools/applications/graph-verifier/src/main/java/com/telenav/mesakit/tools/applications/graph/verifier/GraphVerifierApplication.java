@@ -29,7 +29,7 @@ import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.project.GraphCoreProject;
 import com.telenav.mesakit.map.data.formats.library.map.identifiers.MapNodeIdentifier;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -77,7 +77,7 @@ public class GraphVerifierApplication extends Application
 
     private GraphVerifierApplication()
     {
-        super(GraphCore.get());
+        super(GraphCoreProject.get());
     }
 
     @Override

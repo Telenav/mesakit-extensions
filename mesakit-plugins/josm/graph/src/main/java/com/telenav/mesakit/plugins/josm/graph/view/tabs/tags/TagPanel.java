@@ -1,14 +1,23 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.josm.plugins.graph.view.*;
-import com.telenav.kivakit.josm.plugins.graph.view.tabs.tags.indexing.*;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
-import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
-import com.telenav.kivakit.utilities.ui.swing.layout.*;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.kernel.messaging.messages.MessageFormatter;
+import com.telenav.kivakit.ui.desktop.component.Components;
+import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
+import com.telenav.kivakit.ui.desktop.layout.Borders;
+import com.telenav.kivakit.ui.desktop.layout.HorizontalBoxLayout;
+import com.telenav.kivakit.ui.desktop.layout.Layouts;
+import com.telenav.kivakit.ui.desktop.layout.Margins;
+import com.telenav.kivakit.ui.desktop.layout.Spacing;
+import com.telenav.kivakit.ui.desktop.layout.VerticalBoxLayout;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
 import com.telenav.mesakit.graph.Graph;
-import com.telenav.mesakit.map.geography.rectangle.Rectangle;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing.TagIndex;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing.TagIndexRequest;
+import com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing.TagIndexer;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -43,9 +52,9 @@ public class TagPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        indexer.addListener(message -> graphPanel.say(message.formatted()));
+        indexer.addListener(message -> graphPanel.say(message.formatted(MessageFormatter.Format.WITH_EXCEPTION)));
 
-        Components.border(this, 10);
+        Borders.insideMarginsOf(Margins.of(10)).apply(this);
 
         searchViewAreaOnly = KivaKitTheme.get().newCheckBox("Index tags in view area only");
         searchViewAreaOnly.setAlignmentX(JCheckBox.LEFT_ALIGNMENT);
@@ -54,7 +63,7 @@ public class TagPanel extends JPanel
 
         final var columns = new JPanel();
 
-        new HorizontalBoxLayout(columns)
+        new HorizontalBoxLayout(columns, Spacing.AUTOMATIC_SPACING)
                 .add(new KeysColumn(this))
                 .add(new ValuesColumn(this));
 

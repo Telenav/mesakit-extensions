@@ -18,16 +18,16 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.mesakit.graph.Vertex;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.telenav.kivakit.kernel.language.string.conversion.StringFormat.USER_LABEL;
-import static com.telenav.kivakit.map.ui.swing.map.theme.MapStyles.Debug.*;
+import static com.telenav.kivakit.kernel.language.strings.conversion.StringFormat.USER_LABEL;
+import static com.telenav.mesakit.map.ui.desktop.theme.shapes.Locations.LOCATION;
 
 /**
  * Draws edges in the appropriate color for zoom level

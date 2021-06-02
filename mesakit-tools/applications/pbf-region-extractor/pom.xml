@@ -48,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-map-ui</artifactId>
+            <artifactId>mesakit-map-ui-desktop</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
@@ -58,7 +58,7 @@
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-data-formats-pbf</artifactId>
+            <artifactId>mesakit-map-data-formats-pbf</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>

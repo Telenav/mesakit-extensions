@@ -27,7 +27,7 @@ import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
-import com.telenav.mesakit.graph.project.GraphCore;
+import com.telenav.mesakit.graph.project.GraphCoreProject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class GraphToPbfConverterApplication extends Application
 
     public GraphToPbfConverterApplication()
     {
-        super(GraphCore.get());
+        super(GraphCoreProject.get());
     }
 
     @Override

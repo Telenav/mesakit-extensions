@@ -18,25 +18,31 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.josm.plugins.graph.model.ViewModel;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Dot;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
+import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.road.model.RoadFunctionalClass;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Scale;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Style;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.Width;
-import com.telenav.mesakit.map.ui.swing.map.graphics.drawables.Dot;
-import com.telenav.mesakit.map.ui.swing.map.theme.Styles;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.telenav.kivakit.map.road.model.RoadFunctionalClass.*;
-import static com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale.*;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.FIRST_CLASS;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.FOURTH_CLASS;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.MAIN;
+import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.SECOND_CLASS;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.CITY;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.NEIGHBORHOOD;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.REGION;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.STATE;
+import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.STREET;
 
 /**
  * Base class for renderers which holds the canvas to draw on and the model to draw.
@@ -45,7 +51,7 @@ import static com.telenav.kivakit.map.ui.swing.map.graphics.canvas.Scale.*;
  */
 public abstract class Renderer
 {
-    private static final Map<Scale, RoadFunctionalClass> scale = new HashMap<>();
+    private static final Map<MapScale, RoadFunctionalClass> scale = new HashMap<>();
 
     static
     {
@@ -72,10 +78,9 @@ public abstract class Renderer
         {
             for (int dy = -30; dy > -100; dy -= 10)
             {
-                final var screenLocation = canvas().awtPoint(at);
-                screenLocation.setLocation(screenLocation.getX() + dx, screenLocation.getY() + dy);
+                final var screenLocation = canvas().toDrawing(at).plus(dx, dy);
 
-                final var drawAt = canvas().location(screenLocation);
+                final var drawAt = canvas().toMap(screenLocation);
 
                 final var margin = 5.0;
                 final var bounds = canvas().labelBounds(style, drawAt, text);

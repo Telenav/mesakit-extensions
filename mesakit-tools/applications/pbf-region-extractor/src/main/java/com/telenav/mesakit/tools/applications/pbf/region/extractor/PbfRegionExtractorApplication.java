@@ -35,6 +35,7 @@ import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.threadCountSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
+import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
 import static com.telenav.mesakit.map.region.Region.regionListSwitchParser;
 
@@ -58,7 +59,7 @@ public class PbfRegionExtractorApplication extends Application
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            Folder.outputFolderSwitchParser
+            outputFolderSwitchParser()
                     .optional()
                     .build();
 

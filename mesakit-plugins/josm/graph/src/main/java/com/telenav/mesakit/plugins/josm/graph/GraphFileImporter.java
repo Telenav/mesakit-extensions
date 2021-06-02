@@ -19,19 +19,19 @@
 package com.telenav.mesakit.plugins.josm.graph;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.josm.plugins.graph.view.GraphLayer;
-import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.language.progress.ProgressListener;
+import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
+import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
+import com.telenav.kivakit.kernel.language.strings.AsciiArt;
+import com.telenav.kivakit.kernel.language.values.count.Maximum;
+import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.kivakit.kernel.language.values.mutable.MutableValue;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.messages.MessageList;
-import com.telenav.kivakit.kernel.operation.progress.*;
-import com.telenav.kivakit.kernel.operation.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.scalars.counts.Maximum;
-import com.telenav.kivakit.kernel.scalars.levels.Percent;
-import com.telenav.kivakit.kernel.scalars.mutable.MutableValue;
+import com.telenav.kivakit.kernel.messaging.listeners.MessageList;
 import com.telenav.kivakit.resource.compression.archive.ZipArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import org.jetbrains.annotations.NotNull;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
 import org.openstreetmap.josm.gui.progress.ProgressMonitor;
@@ -63,10 +63,10 @@ public class GraphFileImporter extends FileImporter
     {
         try
         {
-            final var input = new File(file);
+            final var input = File.of(file);
             if (ZipArchive.is(input))
             {
-                final var messages = new MessageList<>(Maximum._100, message -> message.isWorseThan(COMPLETED));
+                final var messages = new MessageList(Maximum._100, message -> message.isWorseThan(COMPLETED));
                 final var reporter = Progress.create();
                 progressMonitor.beginTask("Loading TDK graph '" + input.baseName() + "'", 100);
                 final var previous = new MutableValue<>(0);
@@ -82,13 +82,13 @@ public class GraphFileImporter extends FileImporter
                     layer.add();
 
                     plugin.panel().showPanel();
-                    plugin.zoomTo(graph.bounds().expanded(new Percent(10)));
+                    plugin.zoomTo(graph.bounds().expanded(Percent.of(10)));
                     layer.forceRepaint();
                     plugin.panel().layer(layer);
                 }
                 else
                 {
-                    LOGGER.warning(Strings.textBox("Unable to Load Graph", "$\n$", input, messages.formatted().bulleted()));
+                    LOGGER.warning(AsciiArt.textBox("Unable to Load Graph", "$\n$", input, messages.formatted().bulleted()));
                 }
             }
             else
@@ -109,7 +109,6 @@ public class GraphFileImporter extends FileImporter
         return false;
     }
 
-    @NotNull
     private ProgressListener workListener(final ProgressMonitor progressMonitor, final MutableValue<Integer> previous)
     {
         return at ->

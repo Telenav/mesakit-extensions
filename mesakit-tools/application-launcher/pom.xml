@@ -99,22 +99,12 @@
 
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-tools-applications-service-registry</artifactId>
-            <version>${mesakit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-tools-applications-codec-generator</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-tools-applications-region-information</artifactId>
-            <version>${mesakit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.telenav.mesakit</groupId>
-            <artifactId>mesakit-tools-applications-log-viewer</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
 

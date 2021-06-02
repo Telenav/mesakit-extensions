@@ -16,9 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.mesakit.plugins.josm.geojson;
 
-import com.telenav.kivakit.data.formats.library.map.identifiers.MapIdentifier;
+import com.telenav.mesakit.map.data.formats.library.map.identifiers.MapIdentifier;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
 
 import javax.swing.JMenuItem;

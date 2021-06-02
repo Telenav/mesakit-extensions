@@ -1,10 +1,9 @@
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates;
 
-import com.telenav.kivakit.kernel.language.primitive.Doubles;
+import com.telenav.kivakit.kernel.language.primitives.Doubles;
 import com.telenav.mesakit.map.geography.Latitude;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.Longitude;
-import com.telenav.mesakit.map.ui.swing.map.coordinates.mappers.CoordinateMapper;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.MapView;
 

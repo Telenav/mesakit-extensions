@@ -1,8 +1,8 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.kernel.language.string.StringList;
-import com.telenav.kivakit.kernel.language.thread.KivaKitThread;
-import com.telenav.kivakit.kernel.language.thread.latches.CompletionLatch;
+import com.telenav.kivakit.kernel.language.collections.list.StringList;
+import com.telenav.kivakit.kernel.language.threading.KivaKitThread;
+import com.telenav.kivakit.kernel.language.threading.latches.CompletionLatch;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;

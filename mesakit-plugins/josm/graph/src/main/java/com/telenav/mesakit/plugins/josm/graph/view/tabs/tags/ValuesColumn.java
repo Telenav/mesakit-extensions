@@ -1,21 +1,21 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.kernel.conversion.language.IdentityConverter;
-import com.telenav.kivakit.kernel.language.string.Strings;
+import com.telenav.kivakit.kernel.data.conversion.string.language.IdentityConverter;
+import com.telenav.kivakit.kernel.language.strings.Plural;
 import com.telenav.kivakit.kernel.messaging.Listener;
-import com.telenav.kivakit.utilities.ui.swing.component.searchlist.SearchList;
-import com.telenav.kivakit.utilities.ui.swing.layout.*;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
+import com.telenav.kivakit.ui.desktop.layout.Layouts;
+import com.telenav.kivakit.ui.desktop.layout.VerticalBoxLayout;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.awt.Component;
 
-import static com.telenav.kivakit.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
-import static com.telenav.kivakit.josm.plugins.graph.view.GraphLayer.Show.HIGHLIGHT_ONLY;
+import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
+import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLIGHT_ONLY;
 
 /**
  * @author jonathanl (shibo)
@@ -26,7 +26,7 @@ public class ValuesColumn extends JPanel
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.NULL));
+        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.none()));
         tagPanel.valuesList.addSelectionListener((value) ->
         {
             final var key = tagPanel.keysList.selected();
@@ -41,13 +41,13 @@ public class ValuesColumn extends JPanel
                 }
                 else
                 {
-                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.say("Highlighting $ $", edges.size(), Strings.pluralize(edges.size(), "match")));
+                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.say("Highlighting $ $", edges.size(), Plural.pluralize(edges.size(), "match")));
                     tagPanel.layer.show(edges, tagPanel.searchViewAreaOnly.isSelected() ? HIGHLIGHT_ONLY : HIGHLIGHT_AND_ZOOM_TO);
                 }
             }
         });
 
-        tagPanel.valuesLabel = KivaKitTheme.get().configure(new JLabel(""));
+        tagPanel.valuesLabel = KivaKitTheme.get().newComponentLabel("");
         tagPanel.valuesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         new VerticalBoxLayout(this)

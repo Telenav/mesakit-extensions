@@ -18,7 +18,9 @@
 
 package com.telenav.mesakit.plugins.josm.graph.model;
 
-import com.telenav.kivakit.kernel.scalars.counts.Estimate;
+import com.telenav.kivakit.kernel.language.objects.Objects;
+import com.telenav.kivakit.kernel.language.values.count.Estimate;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
@@ -30,11 +32,10 @@ import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.matching.snapping.GraphSnapper;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.shape.polyline.Polyline;
-import com.telenav.mesakit.map.measurements.Distance;
-import com.telenav.mesakit.map.ui.swing.map.graphics.canvas.MapCanvas;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
+import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import org.openstreetmap.josm.gui.layer.Layer;
 
-import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -42,7 +43,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -134,14 +134,16 @@ public class Selection
         placeForShape.clear();
     }
 
-    public List<Edge> edgesForPoint(final MapCanvas canvas, final Graph graph, final Point point,
+    public List<Edge> edgesForPoint(final MapCanvas canvas,
+                                    final Graph graph,
+                                    final DrawingPoint point,
                                     final boolean snapToNearby)
     {
         final List<Edge> edges = new ArrayList<>();
         for (final var entry : edgeForShape.entrySet())
         {
             final var key = entry.getKey();
-            if (key != null && key.contains(point))
+            if (key != null && key.contains(point.asAwt()))
             {
                 final var value = entry.getValue();
                 if (value != null)
@@ -157,7 +159,7 @@ public class Selection
         if (snapToNearby)
         {
             final var snap = new GraphSnapper(graph, Distance.meters(200), null, Edge.TransportMode.ANY)
-                    .snap(canvas.location(point), null);
+                    .snap(canvas.toMap(point), null);
             if (snap != null)
             {
                 edges.add(snap.closestEdge());
@@ -182,12 +184,16 @@ public class Selection
         {
             case HIGHLIGHTED:
                 return isHighlighted(edge);
+
             case SELECTED:
                 return isSelected(edge);
+
             case UNSELECTED:
                 return !isSelected(edge);
+
             case INACTIVE:
                 return true;
+
             default:
                 return false;
         }
@@ -199,9 +205,12 @@ public class Selection
         {
             case SELECTED:
                 return isSelected(relation);
+
             case UNSELECTED:
                 return !isSelected(relation);
+
             case HIGHLIGHTED:
+
             default:
                 return false;
         }

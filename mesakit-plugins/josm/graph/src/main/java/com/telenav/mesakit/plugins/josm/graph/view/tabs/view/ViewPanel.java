@@ -1,11 +1,13 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.view;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
-import com.telenav.kivakit.utilities.ui.swing.layout.HorizontalBoxLayout;
+import com.telenav.kivakit.ui.desktop.layout.Borders;
+import com.telenav.kivakit.ui.desktop.layout.HorizontalBoxLayout;
+import com.telenav.kivakit.ui.desktop.layout.Margins;
+import com.telenav.kivakit.ui.desktop.layout.Spacing;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Place;
 import com.telenav.mesakit.map.road.model.RoadType;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -139,9 +141,9 @@ public class ViewPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        Components.border(this, 8);
+        Borders.insideMarginsOf(Margins.of(8)).apply(this);
 
-        new HorizontalBoxLayout(this)
+        new HorizontalBoxLayout(this, Spacing.AUTOMATIC_SPACING)
                 .add(new EdgesColumn())
                 .add(new RelationsColumn())
                 .add(new PlacesColumn());

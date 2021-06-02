@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.view;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import javax.swing.JCheckBox;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ public class ViewCheckBox extends JCheckBox
     public ViewCheckBox(final GraphPanel graphPanel, final String label)
     {
         super(label);
-        KivaKitTheme.get().configure(this);
+        KivaKitTheme.get().applyTo(this);
         setSelected(true);
         setPreferredSize(new Dimension(150, 20));
         addItemListener(e ->

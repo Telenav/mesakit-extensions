@@ -1,8 +1,8 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.query;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
 import com.telenav.mesakit.graph.Route;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -23,7 +23,7 @@ public class MatchesPanel extends JPanel
 
     public MatchesPanel(final GraphPanel graphPanel)
     {
-        matches = KivaKitTheme.get().configure(new JList<>());
+        matches = KivaKitTheme.get().applyTo(new JList<>());
         matches.setModel(new DefaultListModel<>());
 
         final var scrollPane = new JScrollPane(matches, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);

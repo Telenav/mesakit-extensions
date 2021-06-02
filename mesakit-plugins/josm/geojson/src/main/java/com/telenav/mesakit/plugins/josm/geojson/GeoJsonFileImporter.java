@@ -16,15 +16,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.josm.plugins.geojson;
+package com.telenav.mesakit.plugins.josm.geojson;
 
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
 import org.openstreetmap.josm.gui.io.importexport.FileImporter;
+import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
 import javax.swing.JOptionPane;
-import javax.swing.ProgressMonitor;
 
 public class GeoJsonFileImporter extends FileImporter
 {
@@ -41,7 +41,7 @@ public class GeoJsonFileImporter extends FileImporter
     {
         try
         {
-            final var input = new File(file);
+            final var input = File.of(file);
             final var document = GeoJsonDocument.forJson(input.reader().string());
             if (document != null)
             {
@@ -57,7 +57,7 @@ public class GeoJsonFileImporter extends FileImporter
         catch (final Throwable e)
         {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(plugin.mapView(), "Unable to open " + file + ":\n\n" + e.toString());
+            JOptionPane.showMessageDialog(plugin.mapView(), "Unable to open " + file + ":\n\n" + e);
         }
     }
 

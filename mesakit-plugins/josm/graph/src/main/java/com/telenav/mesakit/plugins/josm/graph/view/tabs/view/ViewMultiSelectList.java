@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.view;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import javax.swing.JList;
 
@@ -13,7 +13,7 @@ public class ViewMultiSelectList<T> extends JList<T>
     public ViewMultiSelectList(final GraphPanel graphPanel, final T[] values)
     {
         super(values);
-        KivaKitTheme.get().configure(this);
+        KivaKitTheme.get().applyTo(this);
         getSelectionModel().addListSelectionListener((event) ->
         {
             final var layer = graphPanel.layer();

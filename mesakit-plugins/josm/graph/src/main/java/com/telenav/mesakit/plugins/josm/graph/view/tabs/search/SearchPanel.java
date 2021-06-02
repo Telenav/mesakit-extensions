@@ -1,13 +1,15 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.josm.plugins.graph.view.GraphPanel;
-import com.telenav.kivakit.kernel.language.string.Strings;
-import com.telenav.kivakit.utilities.ui.swing.component.Components;
-import com.telenav.kivakit.utilities.ui.swing.component.console.OutputPanel;
-import com.telenav.kivakit.utilities.ui.swing.component.icon.search.MagnifyingGlass;
-import com.telenav.kivakit.utilities.ui.swing.graphics.color.KivaKitColors;
-import com.telenav.kivakit.utilities.ui.swing.layout.*;
-import com.telenav.kivakit.utilities.ui.swing.theme.KivaKitTheme;
+import com.telenav.kivakit.kernel.language.strings.Strings;
+import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
+import com.telenav.kivakit.ui.desktop.component.panel.output.OutputPanel;
+import com.telenav.kivakit.ui.desktop.layout.Borders;
+import com.telenav.kivakit.ui.desktop.layout.HorizontalBox;
+import com.telenav.kivakit.ui.desktop.layout.Size;
+import com.telenav.kivakit.ui.desktop.layout.VerticalBoxLayout;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitTheme;
+import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 
-import static com.telenav.kivakit.utilities.ui.swing.component.console.OutputPanel.Type;
+import static com.telenav.kivakit.ui.desktop.layout.Spacing.MANUAL_SPACING;
 
 /**
  * @author jonathanl (shibo)
@@ -32,7 +34,7 @@ public class SearchPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        Components.border(this, 8);
+        Borders.applyMargin(this, 8);
 
         graphPanel.overrideMenuAcceleratorKeys(searchField);
 
@@ -55,19 +57,19 @@ public class SearchPanel extends JPanel
         };
 
         final var searchButton = new JButton("search");
-        searchButton.setFont(KivaKitTheme.get().componentFont());
+        searchButton.setFont(KivaKitTheme.get().fontNormal());
         searchButton.addActionListener(searchAction);
 
         searchField.addActionListener(searchAction);
-        Components.border(searchField, 8);
-        Components.preferredWidth(searchField, 1_000);
+        Borders.applyMargin(searchField, 8);
+        Size.widthOf(1_000).preferred(searchField);
 
-        final var searchTools = new HorizontalBox(SpacingStyle.MANUAL_SPACING, 24)
+        final var searchTools = new HorizontalBox(MANUAL_SPACING, 24)
                 .add(new MagnifyingGlass())
                 .add(searchField)
                 .add(searchButton);
 
-        UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_GRAY.asAwtColor());
+        UIManager.getDefaults().put("TextPane.background", KivaKitColors.DARK_CHARCOAL.asAwtColor());
 
         new VerticalBoxLayout(this)
                 .add(searchTools)
@@ -78,7 +80,7 @@ public class SearchPanel extends JPanel
     {
         if (console == null)
         {
-            console = new OutputPanel(Type.VARIABLE_WIDTH);
+            console = new OutputPanel(OutputPanel.Type.VARIABLE_WIDTH);
             console.html(Searcher.help().html());
         }
         return console;

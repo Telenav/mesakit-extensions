@@ -1,9 +1,9 @@
 open module mesakit.josm.plugins.geojson
 {
-    requires transitive tdk.josm.plugins.library;
-    requires transitive tdk.map.utilities.geojson;
-    requires transitive tdk.ui.swing;
-    requires transitive tdk.data.formats.library;
+    requires transitive mesakit.plugins.josm.library;
+    requires transitive mesakit.map.utilities.geojson;
+    requires transitive mesakit.map.ui.desktop;
+    requires transitive mesakit.map.data.library;
 
-    exports com.telenav.kivakit.josm.plugins.geojson;
+    exports com.telenav.mesakit.plugins.josm.geojson;
 }
