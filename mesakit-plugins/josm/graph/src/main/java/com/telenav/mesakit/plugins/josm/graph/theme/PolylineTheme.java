@@ -6,7 +6,7 @@ import com.telenav.mesakit.map.ui.desktop.theme.MapStyles;
 
 import static com.telenav.mesakit.map.measurements.geographic.Distance.meters;
 
-public class PolylineTheme extends GraphTheme
+public class PolylineTheme extends BaseTheme
 {
     public Style styleUnselected()
     {

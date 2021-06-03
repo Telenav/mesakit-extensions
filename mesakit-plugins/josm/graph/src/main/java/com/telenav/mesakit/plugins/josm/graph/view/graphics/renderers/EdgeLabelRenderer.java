@@ -35,6 +35,7 @@ import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.AnnotationTheme;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -66,6 +67,8 @@ public class EdgeLabelRenderer extends Renderer
         roadFunctionalClassToColor.put(RoadFunctionalClass.THIRD_CLASS, KivaKitColors.WHITE_SMOKE);
         roadFunctionalClassToColor.put(RoadFunctionalClass.FOURTH_CLASS, KivaKitColors.WHITE_SMOKE);
     }
+
+    private final AnnotationTheme annotationTheme = new AnnotationTheme();
 
     public EdgeLabelRenderer(final MapCanvas canvas, final ViewModel model)
     {
@@ -113,11 +116,11 @@ public class EdgeLabelRenderer extends Renderer
                                     {
                                         last = current;
                                     }
-                                    final var distance = canvas().awtDistance(current.distanceTo(last));
-                                    if (distance > 300f)
+                                    final var distance = canvas().toDrawing(current.distanceTo(last));
+                                    if (distance.units() > 300)
                                     {
                                         // and if the edge is long enough,
-                                        if (canvas().awtDistance(at.length()) > 75)
+                                        if (canvas().toDrawing(at.length()).units() > 75)
                                         {
                                             // label it.
                                             if (!labeled.contains(at.forward()))
@@ -177,7 +180,7 @@ public class EdgeLabelRenderer extends Renderer
                     style = MINOR_STREET_LABEL;
                     break;
             }
-            callout(at, ROAD_NAME_CALLOUT_LOCATION, style.withTextColor(textColor), text);
+            callout(at, annotationTheme.dotAnnotationLocation(), style.withTextColor(textColor), text);
         }
     }
 

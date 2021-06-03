@@ -7,7 +7,7 @@ import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 
-public class PlaceTheme extends GraphTheme
+public class PlaceTheme extends BaseTheme
 {
     public MapDot dotPlace(final Count population)
     {

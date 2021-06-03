@@ -18,13 +18,14 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Line;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.measurements.DrawingWidth;
 import com.telenav.mesakit.graph.Edge;
-import com.telenav.mesakit.map.geography.shape.rectangle.Width;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapPolyline;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.theme.EdgeTheme;
 
 /**
  * Draws edges in the appropriate color for zoom level
@@ -34,6 +35,8 @@ import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 public class EdgeRenderer extends Renderer
 {
     private final ShapePointRenderer shapePointRenderer;
+
+    private final EdgeTheme theme = new EdgeTheme();
 
     public EdgeRenderer(final MapCanvas canvas, final ViewModel model)
     {
@@ -65,23 +68,11 @@ public class EdgeRenderer extends Renderer
         }
     }
 
-    private static Line line(final MapCanvas canvas, final Selection.Type type, final Edge edge)
-    {
-        final var line = fattenedAndFilled(canvas, type, edge);
-        if (canvas.scale().isZoomedOut(MapScale.REGION))
-        {
-            return line.withWidth(Width.pixels(type == Type.HIGHLIGHTED ? 4f : 2f))
-                    .withOutlineStyle(Styles.TRANSPARENT)
-                    .withOutlineWidth(Width.pixels(0f));
-        }
-        return line;
-    }
-
     private void draw(final Edge edge, final Selection.Type type)
     {
         // Draw the edge polyline
-        final var line = line(canvas(), type, edge);
-        final var shape = line.draw(canvas(), edge.roadShape());
+        final var line = polyline(canvas(), type, edge);
+        final var shape = line.draw(canvas());
 
         // store the shape of the edge in the selection model
         model().selection().shape(edge, shape);
@@ -95,5 +86,15 @@ public class EdgeRenderer extends Renderer
                 shapePointRenderer.draw(edge);
             }
         }
+    }
+
+    private MapPolyline polyline(final MapCanvas canvas, final Selection.Type type, final Edge edge)
+    {
+        final var polyline = theme.polylineEdge(canvas, type, edge);
+        if (canvas.scale().isZoomedOut(MapScale.REGION))
+        {
+            return polyline.withDrawStrokeWidth(DrawingWidth.pixels(type == Selection.Type.HIGHLIGHTED ? 4 : 2));
+        }
+        return polyline;
     }
 }

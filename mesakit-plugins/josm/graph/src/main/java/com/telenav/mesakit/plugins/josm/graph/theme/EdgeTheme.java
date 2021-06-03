@@ -1,33 +1,105 @@
 package com.telenav.mesakit.plugins.josm.graph.theme;
 
 import com.telenav.kivakit.kernel.language.values.level.Percent;
-import com.telenav.kivakit.ui.desktop.graphics.drawing.drawables.Line;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Fonts;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
+import com.telenav.kivakit.ui.desktop.theme.KivaKitStyles;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
+import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapPolyline;
+import com.telenav.mesakit.map.ui.desktop.graphics.style.MapStroke;
 import com.telenav.mesakit.map.ui.desktop.theme.MapColors;
+import com.telenav.mesakit.map.ui.desktop.theme.MapStyles;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 
-import static com.telenav.mesakit.plugins.josm.graph.model.Selection.Type.INACTIVE;
+import java.awt.Font;
 
-public class EdgeTheme extends GraphTheme
+import static com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color.TRANSPARENT;
+import static com.telenav.kivakit.ui.desktop.theme.KivaKitStyles.MOJITO;
+import static com.telenav.mesakit.map.measurements.geographic.Distance.meters;
+
+public class EdgeTheme extends BaseTheme
 {
-    public static Line fattenedAndFilled(final MapCanvas canvas, final Selection.Type type, final Edge edge)
+    public MapPolyline edgeHighlighted()
+    {
+        return edgeUnselected()
+                .withStyle(KivaKitStyles.NIGHT_SHIFT
+                        .withFillStroke(MapStroke.stroke(meters(10)))
+                        .withDrawStroke(MapStroke.stroke(meters(1))));
+    }
+
+    public MapPolyline edgeInactive()
+    {
+        return edgeUnselected()
+                .withStyle(MapStyles.INACTIVE);
+    }
+
+    public MapPolyline edgeSelected()
+    {
+        return edgeUnselected()
+                .withStyle(styleSelected())
+                .withToArrowHead(MapDot.dot()
+                        .withRadius(meters(2))
+                        .withStyle(MapStyles.ARROWHEAD
+                                .withFillColor(TRANSPARENT)
+                                .withDrawStroke(MapStroke.stroke(meters(0.1)))));
+    }
+
+    public MapPolyline edgeUnselected()
+    {
+        return MapPolyline.polyline()
+                .withStyle(MOJITO
+                        .withFillStroke(MapStroke.stroke(meters(3)))
+                        .withDrawStroke(MapStroke.stroke(meters(0.5))));
+    }
+
+    public MapPolyline fattenPolyline(final MapPolyline line, final Edge edge)
+    {
+        switch (edge.roadFunctionalClass())
+        {
+            case MAIN:
+                return line.fattened(Percent.of(200));
+
+            case FIRST_CLASS:
+                if (edge.roadType() == RoadType.HIGHWAY)
+                {
+                    return line.fattened(Percent.of(100));
+                }
+                else
+                {
+                    return line.fattened(Percent.of(50));
+                }
+
+            case SECOND_CLASS:
+                return line.fattened(Percent.of(30));
+
+            case THIRD_CLASS:
+                return line.fattened(Percent.of(5));
+
+            case UNKNOWN:
+            case FOURTH_CLASS:
+            default:
+                return line;
+        }
+    }
+
+    public MapPolyline polylineEdge(final MapCanvas canvas, final Selection.Type type, final Edge edge)
     {
         switch (type)
         {
             case INACTIVE:
-                return fattenPolyline(INACTIVE, edge);
+                return fattenPolyline(edgeInactive(), edge);
 
             case HIGHLIGHTED:
-                return fattenPolyline(HIGHLIGHTED, edge);
+                return fattenPolyline(edgeHighlighted(), edge);
 
             case SELECTED:
-                return fattenPolyline(SELECTED, edge);
+                return fattenPolyline(edgeSelected(), edge);
 
             case UNSELECTED:
                 break;
@@ -36,7 +108,7 @@ public class EdgeTheme extends GraphTheme
                 throw new IllegalArgumentException();
         }
 
-        final var line = fattenPolyline(NORMAL, edge);
+        final var line = fattenPolyline(edgeUnselected(), edge);
 
         final Color color;
 
@@ -75,36 +147,15 @@ public class EdgeTheme extends GraphTheme
                 color = KivaKitColors.UNSPECIFIED;
                 break;
         }
-        return line.withFill(color);
+        return line.withFillColor(color);
     }
 
-    public MapPolyline fattenPolyline(final MapPolyline line, final Edge edge)
+    public Style styleEdgeCallout()
     {
-        switch (edge.roadFunctionalClass())
-        {
-            case MAIN:
-                return line.fattened(Percent.of(200));
-
-            case FIRST_CLASS:
-                if (edge.roadType() == RoadType.HIGHWAY)
-                {
-                    return line.fattened(Percent.of(100));
-                }
-                else
-                {
-                    return line.fattened(Percent.of(50));
-                }
-
-            case SECOND_CLASS:
-                return line.fattened(Percent.of(30));
-
-            case THIRD_CLASS:
-                return line.fattened(Percent.of(5));
-
-            case UNKNOWN:
-            case FOURTH_CLASS:
-            default:
-                return line;
-        }
+        return Style.create()
+                .withTextFont(Fonts.fixedWidth(Font.BOLD, 12))
+                .withFillColor(KivaKitColors.IRON.withAlpha(192))
+                .withDrawColor(KivaKitColors.LIME)
+                .withTextColor(KivaKitColors.LIME);
     }
 }
