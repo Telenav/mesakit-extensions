@@ -1,14 +1,14 @@
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates;
 
 import com.telenav.kivakit.kernel.language.primitives.Doubles;
-import com.telenav.mesakit.map.geography.Latitude;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingSize;
 import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.Longitude;
+import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
+import com.telenav.mesakit.map.geography.shape.rectangle.Size;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapProjection;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.MapView;
-
-import java.awt.geom.Point2D;
 
 /**
  * @author jonathanl (shibo)
@@ -23,16 +23,40 @@ public class JosmCoordinateMapper implements MapProjection
     }
 
     @Override
-    public Location locationForPoint(final Point2D point)
+    public DrawingSize drawingSize()
     {
-        final var latitudeLongitude = view.getLatLon(point.getX(), point.getY());
-        return new Location(Latitude.degrees(Doubles.inRange(latitudeLongitude.getY(), -90, 90)),
-                Longitude.degrees(Doubles.inRange(latitudeLongitude.getX(), -180, 180)));
+        final var bounds = view.getBounds();
+        return DrawingSize.pixels(bounds.getWidth(), bounds.getHeight());
     }
 
     @Override
-    public Point2D pointForLocation(final Location location)
+    public Rectangle mapArea()
     {
-        return view.getPoint(new LatLon(location.latitude().asDegrees(), location.longitude().asDegrees()));
+        final var bounds = view.getBounds();
+        final var location = bounds.getLocation();
+        final var width = bounds.getWidth();
+        final var height = bounds.getHeight();
+        return Rectangle.fromLocations(
+                Location.degrees(location.getY(), location.getX()),
+                Location.degrees(location.getY() + height, location.getX() + width));
+    }
+
+    @Override
+    public DrawingSize toDrawing(final Size size)
+    {
+        return null;
+    }
+
+    @Override
+    public DrawingPoint toDrawing(final Location location)
+    {
+        return DrawingPoint.point(view.getPoint(new LatLon(location.latitude().asDegrees(), location.longitude().asDegrees())));
+    }
+
+    @Override
+    public Location toMap(final DrawingPoint point)
+    {
+        final var latlon = view.getLatLon(point.x(), point.y());
+        return Location.degrees(Doubles.inRange(latlon.getY(), -85, 85), Doubles.inRange(latlon.getX(), -180, 180));
     }
 }

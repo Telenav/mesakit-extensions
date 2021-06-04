@@ -27,7 +27,7 @@ import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.library.osm.change.PbfSaver;
+import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 import com.telenav.mesakit.graph.project.GraphCoreProject;
 
 import java.util.Set;

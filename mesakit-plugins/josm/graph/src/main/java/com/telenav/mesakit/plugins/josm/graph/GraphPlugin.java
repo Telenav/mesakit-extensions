@@ -24,8 +24,12 @@ import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmPanel;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmPlugin;
+import org.openstreetmap.josm.gui.layer.Layer;
+import org.openstreetmap.josm.plugins.PluginInformation;
 
 import java.awt.event.KeyEvent;
+
+import static org.openstreetmap.josm.actions.ExtensionFileFilter.addImporter;
 
 /**
  * The main plugin class. Adds the file importer, initializes the Graph API and creates new layers and panels.
@@ -39,10 +43,10 @@ public class GraphPlugin extends BaseJosmPlugin
 
         super(info, GraphLayer.class);
 
-        ExtensionFileFilter.addImporter(new GraphFileImporter(this));
+        addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        GraphCoreProject.get().install();
+        GraphCoreProject.get().initialize();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();

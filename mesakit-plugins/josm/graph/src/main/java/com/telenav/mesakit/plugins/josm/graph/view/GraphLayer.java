@@ -164,7 +164,7 @@ public class GraphLayer extends BaseJosmLayer
     }
 
     @Override
-    public synchronized void onPaint(final Graphics2D graphics, final MapView view, final Bounds bounds)
+    public synchronized void onPaint(final Graphics2D graphics, final MapView mapView, final Bounds bounds)
     {
         if (!bounds.equals(lastPaintBounds))
         {
@@ -188,8 +188,8 @@ public class GraphLayer extends BaseJosmLayer
 
         if (graph() != null)
         {
-            final var paintArea = DrawingRectangle.pixels(0, 0, view.getWidth(), view.getHeight());
-            canvas = MapCanvas.canvas("graph-layer", graphics, MapScale.of(view.getScale()), paintArea, new JosmCoordinateMapper(view));
+            final var paintArea = DrawingRectangle.pixels(0, 0, mapView.getWidth(), mapView.getHeight());
+            canvas = MapCanvas.canvas("graph-layer", graphics, MapScale.of(mapView.getScale()), paintArea, new JosmCoordinateMapper(mapView));
 
             model().bounds(bounds().expanded(Percent.of(5)));
             model().graph(graph);

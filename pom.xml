@@ -72,9 +72,9 @@
 
     <scm>
 
-        <connection>scm:git:https://Telenav/mesakit.git</connection>
-        <developerConnection>scm:git:https://Telenav/mesakit.git</developerConnection>
-        <url>https://Telenav/mesakit.git</url>
+        <connection>scm:git:https://Telenav/mesakit-extensions.git</connection>
+        <developerConnection>scm:git:https://Telenav/mesakit-extensions.git</developerConnection>
+        <url>https://Telenav/mesakit-extensions.git</url>
 
     </scm>
 

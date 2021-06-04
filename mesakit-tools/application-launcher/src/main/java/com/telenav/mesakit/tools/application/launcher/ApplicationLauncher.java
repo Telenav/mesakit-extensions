@@ -16,11 +16,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.tdk.tools.application.launcher;
+package com.telenav.mesakit.tools.application.launcher;
 
 import com.telenav.kivakit.kernel.language.time.Duration;
-import com.telenav.kivakit.kernel.logging.loggers.LogServiceLoader;
-import com.telenav.kivakit.logs.server.ServerLog;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
 import com.telenav.mesakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
@@ -91,11 +89,6 @@ public class ApplicationLauncher
 
     public static void main(String[] arguments)
     {
-        // We add the server log manually here because when the application launcher is converted into an über-jar,
-        // it breaks modularity and the log service provider implementations like ServerLog can no longer be found.
-        // The Jigsaw team is aware of this issue, but has not set a schedule for fixing it yet. -- Shibo
-        LogServiceLoader.logs().add(ServerLog.get());
-
         if (arguments.length >= 1)
         {
             final var application = arguments[0];

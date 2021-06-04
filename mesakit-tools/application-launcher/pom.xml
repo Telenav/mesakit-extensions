@@ -174,7 +174,7 @@
                                 <configuration>
                                     <target name = "Install tools.jar">
                                         <!--suppress UnresolvedMavenProperty -->
-                                        <copy file = "target/mesakit-tools-${mesakit.version}.jar" tofile = "${env.MesaKit_HOME}/tools/applications/mesakit-tools-${mesakit.version}.jar"/>
+                                        <copy file = "target/mesakit-tools-${mesakit.version}.jar" tofile = "${env.MESAKIT_ASSETS_HOME}/docs/${mesakit.version}/applications/mesakit-tools-${mesakit.version}.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>

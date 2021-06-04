@@ -128,7 +128,7 @@ public class PbfMetadataApplication extends Application
                 final var metadataFromDescriptor = Metadata.parseDescriptor(get(DATA_DESCRIPTOR));
                 if (metadataFromDescriptor == null)
                 {
-                    exit("$ is not a valid metadataFromDescriptor", get(DATA_DESCRIPTOR));
+                    exit("$ is not a valid metadata descriptor", get(DATA_DESCRIPTOR));
                 }
                 else
                 {

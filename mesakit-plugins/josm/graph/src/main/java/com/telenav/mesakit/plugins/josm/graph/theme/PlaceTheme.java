@@ -25,14 +25,7 @@ public class PlaceTheme extends BaseTheme
                 .scaledBy(Percent.of(10));
     }
 
-    private Style styleSelected()
-    {
-        return styleLabel()
-                .withFillColor(KivaKitColors.LIGHT_GRAY)
-                .withTextColor(KivaKitColors.BLUE_RIDGE_MOUNTAINS);
-    }
-
-    private Style styleUnselected()
+    public Style styleUnselected()
     {
         return styleLabel()
                 .withFillColor(KivaKitColors.LIGHT_GRAY)
