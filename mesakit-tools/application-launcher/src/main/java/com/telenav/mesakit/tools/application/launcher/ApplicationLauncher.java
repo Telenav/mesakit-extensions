@@ -42,7 +42,7 @@ public class ApplicationLauncher
     protected static void help(final String tool)
     {
         System.out.println();
-        System.out.println("tdk-tool <tool-name>");
+        System.out.println("mesakit-tools <tool-name>");
         System.out.println();
         System.out.flush();
         Duration.seconds(0.25).sleep();
@@ -57,7 +57,7 @@ public class ApplicationLauncher
         System.err.flush();
         Duration.seconds(0.25).sleep();
         System.out.println();
-        System.out.println("    // Conversions");
+        System.out.println("    // Map Data Conversions");
         System.out.println();
         System.out.println("    pbf-to-graph-converter - converts pbf files to graph format");
         System.out.println("    pbf-world-graph-extractor - converts an pbf file into a world graph");
@@ -80,10 +80,8 @@ public class ApplicationLauncher
         System.out.println();
         System.out.println("    // Other Tools");
         System.out.println();
-        System.out.println("    service-registry-viewer - shows registered TDK services on the local machine or another host");
         System.out.println("    codec-generator - creates codecs for use in graph specification implementations");
         System.out.println("    region-information - shows information about country, state, county and metro regions");
-        System.out.println("    log-viewer - shows server logs on a local or remote machine ");
         System.out.println();
     }
 

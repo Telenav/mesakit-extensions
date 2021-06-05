@@ -152,7 +152,7 @@ public class Conversion extends BaseRepeater
                 return output;
             }
 
-            problem("$ does not contain TDK metadata. Use the PbfFileMetadataAnnotator application to add it.", input);
+            problem("$ does not contain metadata. Use the PbfFileMetadataAnnotator application to add it.", input);
             return null;
         }
         finally

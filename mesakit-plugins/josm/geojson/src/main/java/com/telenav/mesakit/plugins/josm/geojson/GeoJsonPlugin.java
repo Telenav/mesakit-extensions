@@ -60,7 +60,7 @@ public class GeoJsonPlugin extends BaseJosmPlugin
     @Override
     public String name()
     {
-        return "TDK GeoJson";
+        return "MesaKit GeoJson";
     }
 
     @Override

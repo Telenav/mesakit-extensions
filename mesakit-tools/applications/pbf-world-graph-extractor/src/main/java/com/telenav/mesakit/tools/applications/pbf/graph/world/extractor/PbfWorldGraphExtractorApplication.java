@@ -326,13 +326,26 @@ public class PbfWorldGraphExtractorApplication extends Application
     protected Set<SwitchParser<?>> switchParsers()
     {
         // The deployments can now be created since the graph core is initialized, which means that
-        // environment variable expansions are now possible, like ${tdk.graph.folder} in particular
+        // environment variable expansions are now possible, like ${mesakit.graph.folder} in particular
         DEPLOYMENT = new WorldGraphDeployments(this).switchParser("deployment");
 
-        return Set.of(WARN, MODE, PARALLEL, THREADS, DEPLOYMENT, WORLD_GRAPH_REPOSITORY,
-                SPEED_PATTERN_FILE, VERIFY, PROFILE_FORCE_LOAD, EXCLUDED_HIGHWAY_TYPES_FILE,
-                INCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE, REGION_INFORMATION, RELATION_FILTER,
-                WAY_FILTER, OVERWRITE, QUIET);
+        return Set.of(WARN,
+                MODE,
+                PARALLEL,
+                THREADS,
+                DEPLOYMENT,
+                WORLD_GRAPH_REPOSITORY,
+                SPEED_PATTERN_FILE,
+                VERIFY,
+                PROFILE_FORCE_LOAD,
+                EXCLUDED_HIGHWAY_TYPES_FILE,
+                INCLUDED_HIGHWAY_TYPES_FILE,
+                FREE_FLOW_SIDE_FILE,
+                REGION_INFORMATION,
+                RELATION_FILTER,
+                WAY_FILTER,
+                OVERWRITE,
+                QUIET);
     }
 
     private WorldGraphConfiguration configuration()

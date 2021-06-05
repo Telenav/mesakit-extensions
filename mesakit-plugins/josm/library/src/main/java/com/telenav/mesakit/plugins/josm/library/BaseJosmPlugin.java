@@ -34,7 +34,7 @@ import static com.telenav.kivakit.kernel.data.validation.ensure.Ensure.ensureNot
 
 public abstract class BaseJosmPlugin extends Plugin
 {
-    // The TDK Graph panel
+    // The MesaKit Graph panel
     private BaseJosmPanel panel;
 
     // The type of layer class

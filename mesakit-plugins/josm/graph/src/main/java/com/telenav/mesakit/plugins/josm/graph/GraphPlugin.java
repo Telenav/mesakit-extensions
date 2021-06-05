@@ -61,7 +61,7 @@ public class GraphPlugin extends BaseJosmPlugin
     @Override
     public String name()
     {
-        return "TDK Graph";
+        return "MesaKit Graph";
     }
 
     @Override

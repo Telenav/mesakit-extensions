@@ -68,7 +68,7 @@ public class GraphFileImporter extends FileImporter
             {
                 final var messages = new MessageList(Maximum._100, message -> message.isWorseThan(COMPLETED));
                 final var reporter = Progress.create();
-                progressMonitor.beginTask("Loading TDK graph '" + input.baseName() + "'", 100);
+                progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
                 final var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));
                 final var graph = new SmartGraphLoader(input).load(messages, reporter);

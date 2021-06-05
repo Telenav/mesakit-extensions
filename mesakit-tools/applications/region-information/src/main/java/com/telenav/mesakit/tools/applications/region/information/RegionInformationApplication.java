@@ -57,7 +57,7 @@ public class RegionInformationApplication extends Application
     }
 
     private final ArgumentParser<String> REGION =
-            stringArgumentParser("A pattern matching the TDK code of the region to give information on")
+            stringArgumentParser("A pattern matching the MesaKit code of the region to give information on")
                     .required()
                     .build();
 
