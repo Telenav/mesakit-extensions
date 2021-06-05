@@ -163,26 +163,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>copy</id>
-                                <phase>package</phase>
-                                <configuration>
-                                    <target name = "Install tools.jar">
-                                        <!--suppress UnresolvedMavenProperty -->
-                                        <copy file = "target/mesakit-tools-${mesakit.version}.jar" tofile = "${env.MESAKIT_ASSETS_HOME}/docs/${mesakit.version}/applications/mesakit-tools-${mesakit.version}.jar"/>
-                                    </target>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
