@@ -91,7 +91,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
                 final var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
 
                 // Save graph file
-                try (final var archive = new GraphArchive(base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
+                try (final var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
                 {
                     filtered.save(archive);
                 }
