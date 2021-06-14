@@ -222,10 +222,10 @@ public class Analyzer
 
         report.add(AsciiArt.line());
 
-        report.add("file size = " + input.bytes());
-        report.add("nodes / byte = " + (double) nodes / input.bytes().asBytes());
-        report.add("ways / byte = " + (double) ways / input.bytes().asBytes());
-        report.add("relations / byte = " + (double) relations / input.bytes().asBytes());
+        report.add("file size = " + input.sizeInBytes());
+        report.add("nodes / byte = " + (double) nodes / input.sizeInBytes().asBytes());
+        report.add("ways / byte = " + (double) ways / input.sizeInBytes().asBytes());
+        report.add("relations / byte = " + (double) relations / input.sizeInBytes().asBytes());
 
         report.add(AsciiArt.line());
         report.add("places = " + Count.count(places));

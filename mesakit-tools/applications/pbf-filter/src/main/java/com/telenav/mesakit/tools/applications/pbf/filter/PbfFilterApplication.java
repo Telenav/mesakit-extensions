@@ -223,7 +223,7 @@ public class PbfFilterApplication extends Application
 
         writer.close();
 
-        information("Filtered ($) ($) to $ ($) in $ ", input, input.bytes(), output, output.bytes(), start.elapsedSince());
+        information("Filtered ($) ($) to $ ($) in $ ", input, input.sizeInBytes(), output, output.sizeInBytes(), start.elapsedSince());
 
         statistics.log();
 
