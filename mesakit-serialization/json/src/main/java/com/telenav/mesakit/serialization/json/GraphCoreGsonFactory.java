@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.mesakit.graph.json;
+package com.telenav.mesakit.serialization.json;
 
 import com.google.gson.GsonBuilder;
 import com.telenav.kivakit.kernel.language.strings.formatting.Separators;
@@ -29,11 +29,6 @@ import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.serialization.json.GsonFactory;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
-import com.telenav.mesakit.graph.json.serializers.CountGsonSerializer;
-import com.telenav.mesakit.graph.json.serializers.IdentifierGsonSerializer;
-import com.telenav.mesakit.graph.json.serializers.LatitudeGsonSerializer;
-import com.telenav.mesakit.graph.json.serializers.LongitudeGsonSerializer;
-import com.telenav.mesakit.graph.json.serializers.SpeedCategoryGsonSerializer;
 import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
 import com.telenav.mesakit.graph.metadata.DataBuild;
 import com.telenav.mesakit.map.geography.Latitude;
@@ -50,6 +45,11 @@ import com.telenav.mesakit.map.region.regions.State;
 import com.telenav.mesakit.map.road.model.RoadName;
 import com.telenav.mesakit.map.road.model.SpeedCategory;
 import com.telenav.mesakit.map.road.model.converters.RoadNameConverter;
+import com.telenav.mesakit.serialization.json.serializers.CountGsonSerializer;
+import com.telenav.mesakit.serialization.json.serializers.IdentifierGsonSerializer;
+import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer;
+import com.telenav.mesakit.serialization.json.serializers.LongitudeGsonSerializer;
+import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSerializer;
 
 public class GraphCoreGsonFactory extends GsonFactory
 {

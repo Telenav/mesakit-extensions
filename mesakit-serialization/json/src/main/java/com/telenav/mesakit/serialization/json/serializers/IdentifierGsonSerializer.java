@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.mesakit.graph.json.serializers;
+package com.telenav.mesakit.serialization.json.serializers;
 
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
 import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;

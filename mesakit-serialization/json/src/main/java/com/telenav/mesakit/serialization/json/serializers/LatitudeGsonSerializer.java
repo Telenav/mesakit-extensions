@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.mesakit.graph.json.serializers;
+package com.telenav.mesakit.serialization.json.serializers;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
