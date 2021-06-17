@@ -83,7 +83,6 @@
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-query</artifactId>
             <version>${mesakit.version}</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
