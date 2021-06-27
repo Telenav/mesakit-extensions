@@ -22,7 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.configuration.Deployment;
+import com.telenav.kivakit.configuration.deployment.Deployment;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
