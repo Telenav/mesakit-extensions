@@ -18,25 +18,32 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
+import com.telenav.lexakai.annotations.LexakaiJavadoc;
+import com.telenav.mesakit.map.measurements.geographic.Distance;
 
-public class CountGsonSerializer extends PrimitiveGsonSerializer<Count, Integer>
+/**
+ * Serializes {@link Distance} objects to and from JSON
+ *
+ * @author jonathanl (shibo)
+ */
+@LexakaiJavadoc(complete = true)
+public class DistanceGsonSerializer extends PrimitiveGsonSerializer<Distance, String>
 {
-    public CountGsonSerializer()
+    public DistanceGsonSerializer()
     {
-        super(Integer.class);
+        super(String.class);
     }
 
     @Override
-    protected Count toObject(final Integer scalar)
+    protected Distance toObject(final String text)
     {
-        return Count.count(scalar);
+        return Distance.parse(text);
     }
 
     @Override
-    protected Integer toPrimitive(final Count object)
+    protected String toPrimitive(final Distance distance)
     {
-        return object.asInt();
+        return distance.toString();
     }
 }

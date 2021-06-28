@@ -18,20 +18,19 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 /**
- * Serializes {@link Time} objects to and from JSON as a number of milliseconds since the start of the UNIX epoch.
+ * Serializes {@link Rectangle} objects to and from JSON
  *
  * @author jonathanl (shibo)
  */
 @LexakaiJavadoc(complete = true)
-public class RectangleSerializer extends PrimitiveGsonSerializer<Rectangle, String>
+public class RectangleGsonSerializer extends PrimitiveGsonSerializer<Rectangle, String>
 {
-    public RectangleSerializer()
+    public RectangleGsonSerializer()
     {
         super(String.class);
     }
