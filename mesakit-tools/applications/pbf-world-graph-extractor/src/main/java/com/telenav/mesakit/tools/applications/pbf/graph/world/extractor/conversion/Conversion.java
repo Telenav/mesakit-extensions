@@ -21,7 +21,7 @@ package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.convers
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.kernel.data.validation.reporters.ValidationFailure;
+import com.telenav.kivakit.kernel.data.validation.ensure.reporters.ValidationFailure;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
