@@ -22,7 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.configuration.deployment.Deployment;
+import com.telenav.kivakit.configuration.settings.deployment.Deployment;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
@@ -350,7 +350,7 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     private WorldGraphConfiguration configuration()
     {
-        return requireConfiguration(WorldGraphConfiguration.class);
+        return require(WorldGraphConfiguration.class);
     }
 
     /**
