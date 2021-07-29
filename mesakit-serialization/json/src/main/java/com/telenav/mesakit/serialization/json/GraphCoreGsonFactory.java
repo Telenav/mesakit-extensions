@@ -21,6 +21,7 @@ package com.telenav.mesakit.serialization.json;
 import com.google.gson.GsonBuilder;
 import com.telenav.kivakit.kernel.language.strings.formatting.Separators;
 import com.telenav.kivakit.kernel.language.time.LocalTime;
+import com.telenav.kivakit.kernel.language.time.conversion.converters.UtcDateTimeConverter;
 import com.telenav.kivakit.kernel.language.values.count.Bytes;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
@@ -59,7 +60,7 @@ public class GraphCoreGsonFactory extends GsonFactory
     protected GsonBuilder addSerializers(final GsonBuilder builder)
     {
         addSerializer(builder, Identifier.class, new IdentifierGsonSerializer());
-        addSerializer(builder, LocalTime.class, serializer(LocalTime.ISO_UTC_TIMESTAMP_CONVERTER));
+        addSerializer(builder, LocalTime.class, serializer(new UtcDateTimeConverter(LOGGER)));
         addSerializer(builder, Count.class, new CountGsonSerializer());
         addSerializer(builder, Bytes.class, serializer(new Bytes.Converter(LOGGER)));
         addSerializer(builder, Continent.class, serializer(new Continent.Converter<Continent>(LOGGER)));
