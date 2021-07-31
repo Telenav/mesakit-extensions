@@ -54,14 +54,6 @@
             <version>2.2.4</version>
         </dependency>
 
-        <!-- XML -->
-
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb.version}</version>
-        </dependency>
-
     </dependencies>
 
     <profiles>
