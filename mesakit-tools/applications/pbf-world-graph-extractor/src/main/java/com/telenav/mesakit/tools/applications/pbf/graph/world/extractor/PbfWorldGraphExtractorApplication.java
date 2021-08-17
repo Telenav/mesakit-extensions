@@ -327,7 +327,9 @@ public class PbfWorldGraphExtractorApplication extends Application
     {
         // The deployments can now be created since the graph core is initialized, which means that
         // environment variable expansions are now possible, like ${mesakit.graph.folder} in particular
-        DEPLOYMENT = new WorldGraphDeployments(this).switchParser("deployment");
+        DEPLOYMENT = new WorldGraphDeployments(this).switchParser("deployment")
+                .required()
+                .build();
 
         return Set.of(WARN,
                 MODE,
