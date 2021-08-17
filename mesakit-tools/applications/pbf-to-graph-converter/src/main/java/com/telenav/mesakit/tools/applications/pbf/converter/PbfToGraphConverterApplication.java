@@ -183,7 +183,7 @@ public class PbfToGraphConverterApplication extends Application
         final var start = Time.now();
 
         // show application arguments
-        announce();
+        showCommandLine();
 
         // check the input files,
         final var inputFiles = argument(INPUT_FILES);
