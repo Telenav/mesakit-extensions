@@ -23,6 +23,7 @@ import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.data.comparison.Differences;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.count.MutableCount;
 import com.telenav.kivakit.resource.path.Extension;
@@ -118,9 +119,9 @@ public class GraphVerifierApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(SUB_GRAPH, QUIET);
+        return ObjectSet.of(SUB_GRAPH, QUIET);
     }
 
     private Edge matchingEdge(final Graph graph, final Edge edge)

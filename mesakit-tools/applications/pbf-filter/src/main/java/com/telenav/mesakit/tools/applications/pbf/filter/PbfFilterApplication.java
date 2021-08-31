@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.pbf.filter;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.language.values.count.Estimate;
 import com.telenav.kivakit.kernel.language.values.count.MutableCount;
@@ -38,7 +39,6 @@ import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
 import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.model.tags.PbfTagPatternFilter.tagFilterSwitchParser;
@@ -237,9 +237,9 @@ public class PbfFilterApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
+        return ObjectSet.of(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
     }
 
     private static LongSet referencedNodes(final WayFilter filter, final File graphFile)

@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.ways.extractor;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
@@ -29,8 +30,6 @@ import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 import com.telenav.mesakit.graph.project.GraphCoreProject;
-
-import java.util.Set;
 
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parse;
@@ -111,8 +110,8 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(GRAPH, OUTPUT_FOLDER, QUIET);
+        return ObjectSet.of(GRAPH, OUTPUT_FOLDER, QUIET);
     }
 }

@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.verifier;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.level.Percent;
@@ -375,9 +376,9 @@ public class EdgeAttributeChecker extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(GRAPH_RESOURCE, OUTPUT_FOLDER);
+        return ObjectSet.of(GRAPH_RESOURCE, OUTPUT_FOLDER);
     }
 
     private boolean check(final Edge edge, final Attribute<Edge> attribute)

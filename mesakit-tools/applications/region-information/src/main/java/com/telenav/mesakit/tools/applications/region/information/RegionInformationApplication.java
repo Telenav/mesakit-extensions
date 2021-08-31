@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.patterns.Pattern;
 import com.telenav.kivakit.kernel.language.patterns.SimplifiedPattern;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
@@ -34,7 +35,6 @@ import com.telenav.mesakit.map.region.project.MapRegionProject;
 import com.telenav.mesakit.map.region.regions.Continent;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.ArgumentParser.stringArgumentParser;
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
@@ -141,9 +141,9 @@ public class RegionInformationApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
+        return ObjectSet.of(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
     private Region region(final CommandLine commandLine, final String name)

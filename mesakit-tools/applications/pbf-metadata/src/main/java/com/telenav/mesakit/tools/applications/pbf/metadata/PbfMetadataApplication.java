@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.mesakit.graph.Metadata;
@@ -34,7 +35,6 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.osm.OsmRelati
 import com.telenav.mesakit.map.geography.Precision;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
@@ -195,8 +195,8 @@ public class PbfMetadataApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
+        return ObjectSet.of(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
     }
 }

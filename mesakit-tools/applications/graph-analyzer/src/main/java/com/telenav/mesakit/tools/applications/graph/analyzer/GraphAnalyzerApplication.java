@@ -24,6 +24,7 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
 import com.telenav.kivakit.kernel.language.collections.list.StringList;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.primitives.Doubles;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.strings.Align;
@@ -160,9 +161,9 @@ public class GraphAnalyzerApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
+        return ObjectSet.of(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
     private void analyze(final boolean print, final Folder output, final Graph graph)

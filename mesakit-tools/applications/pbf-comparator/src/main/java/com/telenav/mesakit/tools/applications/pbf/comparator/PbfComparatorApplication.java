@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.collections.set.SetDifferencer;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
@@ -254,8 +255,8 @@ public class PbfComparatorApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
+        return ObjectSet.of(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
     }
 }

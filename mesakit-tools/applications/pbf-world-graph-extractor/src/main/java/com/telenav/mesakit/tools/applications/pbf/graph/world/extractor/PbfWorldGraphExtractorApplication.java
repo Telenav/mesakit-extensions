@@ -24,6 +24,7 @@ import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.configuration.settings.deployment.Deployment;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.time.Time;
@@ -44,7 +45,6 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.osm.OsmNaviga
 import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion.WorldConversion;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
@@ -323,7 +323,7 @@ public class PbfWorldGraphExtractorApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
         // The deployments can now be created since the graph core is initialized, which means that
         // environment variable expansions are now possible, like ${mesakit.graph.folder} in particular
@@ -331,7 +331,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 .required()
                 .build();
 
-        return Set.of(WARN,
+        return ObjectSet.of(WARN,
                 MODE,
                 PARALLEL,
                 THREADS,

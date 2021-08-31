@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.values.count.Minimum;
 import com.telenav.mesakit.graph.project.GraphCoreProject;
@@ -32,7 +33,6 @@ import com.telenav.mesakit.tools.applications.codec.roadname.RoadNameCodecGenera
 import com.telenav.mesakit.tools.applications.codec.tag.TagCodecGenerator;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParser.integerSwitchParser;
@@ -156,9 +156,9 @@ public class CodecGeneratorApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of
+        return ObjectSet.of
                 (
                         TYPE,
                         WAY_FILTER,

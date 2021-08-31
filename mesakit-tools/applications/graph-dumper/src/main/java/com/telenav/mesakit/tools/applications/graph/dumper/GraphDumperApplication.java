@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.iteration.Streams;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.language.values.count.Count;
@@ -39,7 +40,6 @@ import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifi
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParser.countSwitchParser;
@@ -192,21 +192,20 @@ public class GraphDumperApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of
-                (
-                        WAY,
-                        EDGE,
-                        VERTEX,
-                        RELATION,
-                        PLACE,
-                        LIMIT,
-                        SPATIAL_INDEX,
-                        DUMP_EDGE_IDENTIFIERS,
-                        DUMP_HEAP,
-                        QUIET
-                );
+        return ObjectSet.of(
+                WAY,
+                EDGE,
+                VERTEX,
+                RELATION,
+                PLACE,
+                LIMIT,
+                SPATIAL_INDEX,
+                DUMP_EDGE_IDENTIFIERS,
+                DUMP_HEAP,
+                QUIET
+        );
     }
 
     private void dump(final GraphElement element)

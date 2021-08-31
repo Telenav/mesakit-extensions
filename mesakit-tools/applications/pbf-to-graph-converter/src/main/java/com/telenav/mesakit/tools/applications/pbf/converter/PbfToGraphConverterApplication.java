@@ -26,6 +26,7 @@ import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.FileList;
 import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.kernel.language.collections.list.ObjectList;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.language.values.count.Count;
@@ -39,7 +40,6 @@ import com.telenav.mesakit.map.region.locale.MapLocale;
 import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParser.countSwitchParser;
@@ -250,9 +250,9 @@ public class PbfToGraphConverterApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
+        return ObjectSet.of(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
                 INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
                 PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
                 TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);
