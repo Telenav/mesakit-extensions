@@ -24,6 +24,7 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanCharacterCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -34,7 +35,6 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfRead
 import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
@@ -141,9 +141,9 @@ public class PbfAnalyzerApplication extends Application
     }
 
     @Override
-    protected Set<SwitchParser<?>> switchParsers()
+    protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return Set.of
+        return ObjectSet.of
                 (
                         WAY_FILTER,
                         RELATION_FILTER,
