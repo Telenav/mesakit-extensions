@@ -65,7 +65,6 @@ echo "Installing shape file reader"
 mvn install:install-file -Dfile="$ROOT/mesakit/mesakit-map/geography/libraries/shapefilereader-1.0.jar" -DgroupId=org.nocrala -DartifactId=shapefilereader -Dversion=1.0 -Dpackaging=jar
 $BUILD
 
-
 #
 # Build mesakit-extensions
 #
