@@ -61,7 +61,10 @@ $SUPERPOM_BUILD
 
 echo "Building mesakit"
 cd "$ROOT"/mesakit
+echo "Installing shape file reader"
+mvn install:install-file -Dfile="$ROOT/mesakit/mesakit-map/geography/libraries/shapefilereader-1.0.jar" -DgroupId=org.nocrala -DartifactId=shapefilereader -Dversion=1.0 -Dpackaging=jar
 $BUILD
+
 
 #
 # Build mesakit-extensions
@@ -70,8 +73,6 @@ $BUILD
 echo "Cloning mesakit-extensions"
 cd "$ROOT"
 $CLONE https://github.com/Telenav/mesakit-extensions.git
-
-mvn install:install-file -Dfile="$ROOT/mesakit/mesakit-map/geography/libraries/shapefilereader-1.0.jar" -DgroupId=org.nocrala -DartifactId=shapefilereader -Dversion=1.0 -Dpackaging=jar
 
 echo "Building mesakit-extensions"
 cd "$ROOT"/mesakit-extensions
