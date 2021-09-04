@@ -15,7 +15,7 @@ ROOT="$(pwd)"
 BRANCH="${GITHUB_REF//refs\/heads\//}"
 SUPERPOM_BUILD="mvn --batch-mode --no-transfer-progress clean install"
 BUILD="mvn -Dmaven.javadoc.skip=true -DKIVAKIT_DEBUG="!Debug" -P shade -P tools --no-transfer-progress --batch-mode clean install"
-CLONE="git clone --branch "$BRANCH" --quiet"
+CLONE="git clone --branch $BRANCH --quiet"
 
 export MESAKIT_HOME="$ROOT/mesakit"
 
@@ -70,6 +70,8 @@ $BUILD
 echo "Cloning mesakit-extensions"
 cd "$ROOT"
 $CLONE https://github.com/Telenav/mesakit-extensions.git
+
+mvn install:install-file -Dfile="$ROOT/mesakit/mesakit-map/geography/libraries/shapefilereader-1.0.jar" -DgroupId=org.nocrala -DartifactId=shapefilereader -Dversion=1.0 -Dpackaging=jar
 
 echo "Building mesakit-extensions"
 cd "$ROOT"/mesakit-extensions
