@@ -13,7 +13,7 @@
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>superpom</artifactId>
         <version>1.0.0</version>
-        <relativePath>../mesakit/superpom</relativePath>
+        <relativePath>../mesakit/superpom/pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
