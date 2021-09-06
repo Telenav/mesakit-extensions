@@ -26,7 +26,6 @@
         <dependency>
             <groupId>com.telenav.kivakit</groupId>
             <artifactId>kivakit-application</artifactId>
-            <version>${kivakit.version}</version>
         </dependency>
 
         <!-- MesaKit -->
@@ -34,7 +33,6 @@
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-core</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
 
     </dependencies>

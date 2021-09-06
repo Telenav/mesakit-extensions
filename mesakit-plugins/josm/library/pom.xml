@@ -26,17 +26,14 @@
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-navigation-routing</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-map-utilities-geojson</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-map-ui-desktop</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
 
         <!-- JOSM -->
@@ -44,7 +41,6 @@
         <dependency>
             <groupId>org.openstreetmap.josm</groupId>
             <artifactId>josm</artifactId>
-            <version>${josm.version}</version>
         </dependency>
 
     </dependencies>
