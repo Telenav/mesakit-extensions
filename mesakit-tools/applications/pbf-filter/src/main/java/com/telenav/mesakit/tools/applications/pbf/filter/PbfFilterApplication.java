@@ -35,7 +35,7 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilte
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
 import com.telenav.mesakit.map.data.formats.pbf.processing.writers.PbfWriter;
-import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
 import java.util.ArrayList;
@@ -143,7 +143,7 @@ public class PbfFilterApplication extends Application
 
     private PbfFilterApplication()
     {
-        super(DataFormatsPbfProject.get());
+        super(PbfProject.get());
     }
 
     @Override

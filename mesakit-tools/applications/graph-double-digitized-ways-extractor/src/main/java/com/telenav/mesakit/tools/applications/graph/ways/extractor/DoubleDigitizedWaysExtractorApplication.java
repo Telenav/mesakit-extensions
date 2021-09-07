@@ -29,7 +29,7 @@ import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
-import com.telenav.mesakit.graph.project.GraphCoreProject;
+import com.telenav.mesakit.graph.GraphProject;
 
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parse;
@@ -61,7 +61,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
 
     private DoubleDigitizedWaysExtractorApplication()
     {
-        super(GraphCoreProject.get());
+        super(GraphProject.get());
     }
 
     @Override

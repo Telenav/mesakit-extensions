@@ -26,7 +26,7 @@ import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class PbfDumperApplication extends Application
 
     private PbfDumperApplication()
     {
-        super(DataFormatsPbfProject.get());
+        super(PbfProject.get());
     }
 
     @Override

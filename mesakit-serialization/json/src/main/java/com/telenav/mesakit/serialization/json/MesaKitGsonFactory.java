@@ -27,7 +27,6 @@ import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.serialization.json.GsonFactory;
 import com.telenav.kivakit.serialization.json.serializers.CountGsonSerializer;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
@@ -52,7 +51,7 @@ import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer
 import com.telenav.mesakit.serialization.json.serializers.LongitudeGsonSerializer;
 import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSerializer;
 
-public class GraphCoreGsonFactory extends GsonFactory
+public class MesaKitGsonFactory extends com.telenav.kivakit.serialization.json.GsonFactory
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 

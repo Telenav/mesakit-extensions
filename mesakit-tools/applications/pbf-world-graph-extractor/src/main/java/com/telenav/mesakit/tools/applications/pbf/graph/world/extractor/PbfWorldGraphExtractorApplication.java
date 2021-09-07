@@ -36,7 +36,7 @@ import com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory
 import com.telenav.mesakit.graph.world.WorldGraph;
 import com.telenav.mesakit.graph.world.WorldGraphConfiguration;
 import com.telenav.mesakit.graph.world.WorldGraphDeployments;
-import com.telenav.mesakit.graph.world.project.GraphWorldProject;
+import com.telenav.mesakit.graph.world.WorldGraphProject;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepository;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepositoryFolder;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
@@ -172,7 +172,7 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     private PbfWorldGraphExtractorApplication()
     {
-        super(GraphWorldProject.get());
+        super(WorldGraphProject.get());
     }
 
     @Override

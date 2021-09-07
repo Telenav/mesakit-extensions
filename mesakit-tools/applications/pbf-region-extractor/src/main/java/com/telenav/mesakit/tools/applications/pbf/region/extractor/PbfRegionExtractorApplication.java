@@ -29,7 +29,7 @@ import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
 import com.telenav.mesakit.map.region.RegionSet;
-import com.telenav.mesakit.map.region.project.MapRegionProject;
+import com.telenav.mesakit.map.region.RegionProject;
 
 import java.util.List;
 
@@ -80,7 +80,7 @@ public class PbfRegionExtractorApplication extends Application
 
     protected PbfRegionExtractorApplication()
     {
-        super(MapRegionProject.get());
+        super(RegionProject.get());
     }
 
     @Override
