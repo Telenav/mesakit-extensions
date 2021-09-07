@@ -35,7 +35,7 @@ import com.telenav.mesakit.graph.identifiers.PlaceIdentifier;
 import com.telenav.mesakit.graph.identifiers.RelationIdentifier;
 import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.project.GraphCoreProject;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
@@ -118,7 +118,7 @@ public class GraphDumperApplication extends Application
 
     protected GraphDumperApplication()
     {
-        super(GraphCoreProject.get());
+        super(GraphProject.get());
     }
 
     @Override

@@ -27,7 +27,7 @@ import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.project.GraphCoreProject;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
@@ -65,7 +65,7 @@ public class GraphSlicerApplication extends Application
 
     protected GraphSlicerApplication()
     {
-        super(GraphCoreProject.get());
+        super(GraphProject.get());
     }
 
     @Override

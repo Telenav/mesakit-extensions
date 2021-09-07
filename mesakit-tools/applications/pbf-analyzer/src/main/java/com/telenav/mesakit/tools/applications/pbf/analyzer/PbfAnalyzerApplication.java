@@ -32,7 +32,7 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.List;
 
@@ -86,7 +86,7 @@ public class PbfAnalyzerApplication extends Application
 
     public PbfAnalyzerApplication()
     {
-        super(DataFormatsPbfProject.get());
+        super(PbfProject.get());
     }
 
     @Override

@@ -31,7 +31,7 @@ import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.osm.Osm;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.project.DataFormatsPbfProject;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -95,7 +95,7 @@ public class PbfComparatorApplication extends Application
 
     protected PbfComparatorApplication()
     {
-        super(DataFormatsPbfProject.get());
+        super(PbfProject.get());
     }
 
     public void compare(final File before, final File after)

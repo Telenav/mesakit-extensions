@@ -31,7 +31,7 @@ import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.RegionSet;
-import com.telenav.mesakit.map.region.project.MapRegionProject;
+import com.telenav.mesakit.map.region.RegionProject;
 import com.telenav.mesakit.map.region.regions.Continent;
 
 import java.util.List;
@@ -99,7 +99,7 @@ public class RegionInformationApplication extends Application
 
     public RegionInformationApplication()
     {
-        super(MapRegionProject.get());
+        super(RegionProject.get());
     }
 
     @Override

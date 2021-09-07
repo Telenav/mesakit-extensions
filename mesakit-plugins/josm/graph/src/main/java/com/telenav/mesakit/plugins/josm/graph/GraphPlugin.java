@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph;
 
-import com.telenav.mesakit.graph.project.GraphCoreProject;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
@@ -46,7 +46,7 @@ public class GraphPlugin extends BaseJosmPlugin
         addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        GraphCoreProject.get().initialize();
+        GraphProject.get().initialize();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();
