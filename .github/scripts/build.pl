@@ -34,7 +34,7 @@ clone("$github/kivakit-extensions", "dependency");
 clone("$github/mesakit", "dependency");
 clone("$github/mesakit-extensions", "build");
 
-build_kivakit("package");
-build_kivakit_extensions("package");
-build_mesakit("package");
+build_kivakit($build_type);
+build_kivakit_extensions($build_type);
+build_mesakit($build_type);
 build_mesakit_extensions($build_type);
