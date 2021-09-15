@@ -27,6 +27,7 @@ require "./cactus-build/.github/scripts/build-include.pl";
 #
 
 my ($build_type) = @ARGV;
+check_build_type($build_type);
 my $github = "https://github.com/Telenav";
 
 clone("$github/kivakit", "dependency");

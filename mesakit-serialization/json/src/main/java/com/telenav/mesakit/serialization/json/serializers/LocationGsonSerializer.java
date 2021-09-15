@@ -25,15 +25,17 @@ public class LocationGsonSerializer implements GsonSerializer<Location>
             throws JsonParseException
     {
         final var location = json.getAsJsonObject();
-        return Location.degrees(location.get("lat").getAsDouble(), location.get("lon").getAsDouble());
+        return Location.degrees(
+                location.get("latitude").getAsDouble(),
+                location.get("longitude").getAsDouble());
     }
 
     @Override
     public JsonElement serialize(final Location src, final Type typeOfSrc, final JsonSerializationContext context)
     {
         final var location = new JsonObject();
-        location.add("lat", new JsonPrimitive(src.latitudeInDegrees()));
-        location.add("lon", new JsonPrimitive(src.longitudeInDegrees()));
+        location.add("latitude", new JsonPrimitive(src.latitudeInDegrees()));
+        location.add("longitude", new JsonPrimitive(src.longitudeInDegrees()));
         return location;
     }
 }
