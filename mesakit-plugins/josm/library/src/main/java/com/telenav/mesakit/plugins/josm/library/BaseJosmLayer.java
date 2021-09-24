@@ -246,7 +246,7 @@ public abstract class BaseJosmLayer extends Layer
     {
     }
 
-    protected void onInitialize()
+    public void onInitialize()
     {
     }
 

@@ -152,7 +152,7 @@ public abstract class BaseJosmPanel extends ToggleDialog
     {
     }
 
-    protected void onInitialize()
+    public void onInitialize()
     {
         MainApplication.getMap().addToggleDialog(this);
         hidePanel();

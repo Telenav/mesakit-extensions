@@ -205,7 +205,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @Override
-    protected void onInitialize()
+    public void onInitialize()
     {
         if (panel() != null)
         {
