@@ -23,7 +23,6 @@ import com.telenav.kivakit.kernel.language.progress.ProgressListener;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.kivakit.kernel.language.values.mutable.MutableValue;
 import com.telenav.kivakit.kernel.logging.Logger;
@@ -66,7 +65,7 @@ public class GraphFileImporter extends FileImporter
             final var input = File.of(file);
             if (ZipArchive.is(input))
             {
-                final var messages = new MessageList(Maximum._100, message -> message.isWorseThan(COMPLETED));
+                final var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
                 final var reporter = Progress.create();
                 progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
                 final var previous = new MutableValue<>(0);
