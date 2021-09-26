@@ -27,7 +27,6 @@ import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.serialization.json.GsonFactory;
 import com.telenav.kivakit.serialization.json.serializers.CountGsonSerializer;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
@@ -52,15 +51,13 @@ import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer
 import com.telenav.mesakit.serialization.json.serializers.LongitudeGsonSerializer;
 import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSerializer;
 
-public class MesaKitGsonFactory extends GsonFactory
+public class MesaKitGsonFactory extends com.telenav.kivakit.serialization.json.GsonFactory
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
     @Override
     protected void onAddSerializers(final GsonBuilder builder)
     {
-        super.onAddSerializers(builder);
-
         addSerializer(builder, Identifier.class, new IdentifierGsonSerializer());
         addSerializer(builder, LocalTime.class, serializer(new UtcDateTimeConverter(LOGGER)));
         addSerializer(builder, Count.class, new CountGsonSerializer());
@@ -81,5 +78,10 @@ public class MesaKitGsonFactory extends GsonFactory
         addSerializer(builder, Distance.class, serializer(new Distance.Converter(LOGGER)));
         addSerializer(builder, WayIdentifierList.class, serializer(new WayIdentifierList.Converter(LOGGER, Separators.DEFAULT)));
         addSerializer(builder, NodeIdentifierList.class, serializer(new NodeIdentifierList.Converter(LOGGER, Separators.DEFAULT)));
+    }
+
+    @Override
+    protected void onInitialize(final GsonBuilder builder)
+    {
     }
 }
