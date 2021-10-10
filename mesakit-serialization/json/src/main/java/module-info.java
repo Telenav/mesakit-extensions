@@ -4,6 +4,8 @@ open module mesakit.serialization.json
     requires transitive mesakit.graph.core;
     requires transitive kivakit.component;
 
+    requires gson;
+
     exports com.telenav.mesakit.serialization.json;
     exports com.telenav.mesakit.serialization.json.serializers;
 }

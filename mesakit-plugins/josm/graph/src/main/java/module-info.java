@@ -6,6 +6,8 @@ open module mesakit.plugins.josm.graph
     requires mesakit.plugins.josm.library;
     requires mesakit.navigation.routing;
 
+    requires josm;
+
     exports com.telenav.mesakit.plugins.josm.graph;
     exports com.telenav.mesakit.plugins.josm.graph.model;
     exports com.telenav.mesakit.plugins.josm.graph.view;
