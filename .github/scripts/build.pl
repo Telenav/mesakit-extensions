@@ -36,7 +36,9 @@ clone("$github/mesakit-extensions", "build");
 
 build_kivakit($build_type);
 
+print("Installing GRPC merged");
 system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-grpc-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-grpc-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
+print("Installing Protostuff merged");
 system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-protostuff-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-protostuff-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
 
 build_kivakit_extensions($build_type);
