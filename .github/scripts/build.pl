@@ -36,6 +36,10 @@ clone("$github/mesakit", "dependency");
 clone("$github/mesakit-extensions", "build");
 
 build_kivakit($build_type);
+
+system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-grpc-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-grpc-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
+system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-protostuff-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-protostuff-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
+
 build_kivakit_extensions($build_type);
 build_mesakit($build_type);
 build_mesakit_extensions($build_type);
