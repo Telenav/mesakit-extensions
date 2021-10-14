@@ -34,6 +34,8 @@ clone("$github/kivakit-extensions", "dependency");
 clone("$github/mesakit", "dependency");
 clone("$github/mesakit-extensions", "build");
 
+system("cd $KIVAKIT_HOME/superpom && mvn clean install");
+
 build_kivakit($build_type);
 
 print("Installing GRPC merged");
