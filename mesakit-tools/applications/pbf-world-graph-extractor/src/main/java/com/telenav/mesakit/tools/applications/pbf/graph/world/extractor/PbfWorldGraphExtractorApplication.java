@@ -233,7 +233,7 @@ public class PbfWorldGraphExtractorApplication extends Application
             }
 
             // get the input file to extract
-            if (arguments().size() != 1)
+            if (argumentList().size() != 1)
             {
                 exit("Input PBF file is required to extract");
             }

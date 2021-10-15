@@ -36,8 +36,8 @@ import com.telenav.kivakit.kernel.messaging.filters.operators.All;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
-import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.GraphProject;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.specifications.common.edge.EdgeAttributes;
 import com.telenav.mesakit.graph.specifications.common.relation.RelationAttributes;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
@@ -134,7 +134,7 @@ public class GraphAnalyzerApplication extends Application
         final boolean print = get(PRINT);
         final boolean byHighwayType = get(BY_HIGHWAY_TYPE);
         final var output = get(OUTPUT_FOLDER);
-        for (final var argument : arguments())
+        for (final var argument : argumentList())
         {
             final var graph = argument.get(GRAPH_RESOURCE).load();
             final var start = Time.now();

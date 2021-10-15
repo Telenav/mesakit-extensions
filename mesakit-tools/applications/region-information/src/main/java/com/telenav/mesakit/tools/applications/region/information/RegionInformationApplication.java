@@ -30,8 +30,8 @@ import com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBui
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.mesakit.map.region.Region;
-import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.RegionProject;
+import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.regions.Continent;
 
 import java.util.List;
@@ -111,7 +111,7 @@ public class RegionInformationApplication extends Application
     @Override
     protected void onRun()
     {
-        var region = region(commandLine(), arguments().first().get(REGION));
+        var region = region(commandLine(), argumentList().first().get(REGION));
         if (get(PARENT))
         {
             region = region.parent();
