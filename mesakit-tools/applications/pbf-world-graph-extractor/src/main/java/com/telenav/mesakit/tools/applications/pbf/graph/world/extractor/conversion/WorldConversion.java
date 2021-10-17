@@ -241,7 +241,7 @@ public class WorldConversion
         report.add(AsciiArt.line());
         report.add("Total Size: $", Bytes.bytes(totalSize.asLong()));
         report.add("Conversion: $", start.elapsedSince());
-        report.titledBox(LOGGER, "Conversion Completed");
+        LOGGER.information(report.titledBox("Conversion Completed"));
 
         // Return the number of successful conversions
         final var statistics = new Statistics();

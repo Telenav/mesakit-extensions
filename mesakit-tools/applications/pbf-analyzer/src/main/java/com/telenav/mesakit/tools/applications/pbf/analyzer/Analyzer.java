@@ -80,7 +80,7 @@ public class Analyzer
         feedback.add("way filter = $", commandLine.get(WAY_FILTER));
         feedback.add("show warnings = $", showWarnings);
         feedback.add("compute lengths = $", computeLengths);
-        feedback.titledBox(LOGGER, "Analyzing " + input.fileName());
+        LOGGER.information(feedback.titledBox("Analyzing " + input.fileName()));
 
         locationForNode = new SplitLongToLongMap("locationForNode");
         locationForNode.initialSize(Estimate._65536);
@@ -263,6 +263,6 @@ public class Analyzer
             }
         }
 
-        report.titledBox(LOGGER, "Statistics");
+        LOGGER.information(report.titledBox("Statistics"));
     }
 }
