@@ -42,6 +42,8 @@ print("Installing GRPC merged");
 system("cd ./kivakit-extensions/kivakit-grpc-merged && mvn --batch-mode --no-transfer-progress clean install");
 print("Installing Protostuff merged");
 system("cd ./kivakit-extensions/kivakit-protostuff-merged && mvn --batch-mode --no-transfer-progress clean install");
+print("Installing Prometheus merged");
+system("cd ./kivakit-extensions/kivakit-prometheus-merged && mvn --batch-mode --no-transfer-progress clean install");
 
 build_kivakit_extensions($build_type);
 build_mesakit($build_type);
