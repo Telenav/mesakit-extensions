@@ -34,14 +34,11 @@ clone("$github/kivakit-extensions", "dependency");
 clone("$github/mesakit", "dependency");
 clone("$github/mesakit-extensions", "build");
 
-system("cd ./kivakit/superpom && mvn clean install");
-
 build_kivakit($build_type);
 
-print("Installing GRPC merged");
-system("cd ./kivakit-extensions/kivakit-grpc-merged && mvn --batch-mode --no-transfer-progress clean install");
-print("Installing Protostuff merged");
-system("cd ./kivakit-extensions/kivakit-protostuff-merged && mvn --batch-mode --no-transfer-progress clean install");
+system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-grpc-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-grpc-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
+system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-protostuff-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-protostuff-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
+system("mvn -DgroupId=com.telenav.kivakit -DartifactId=kivakit-prometheus-merged -Dfile=./kivakit-extensions/kivakit-merged-jars/lib/kivakit-prometheus-merged-1.1.0.jar -Dversion=1.1.0 -Dpackaging=jar install:install-file");
 
 build_kivakit_extensions($build_type);
 build_mesakit($build_type);
