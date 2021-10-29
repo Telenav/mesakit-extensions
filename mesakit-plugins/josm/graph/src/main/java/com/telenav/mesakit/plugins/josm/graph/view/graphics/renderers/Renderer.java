@@ -82,7 +82,7 @@ public abstract class Renderer
             {
                 var drawAt = canvas().toDrawing(at).plus(dx, dy);
 
-                final var margin = 5.0;
+                var margin = 5.0;
                 var bounds = DrawingRectangle.rectangle(drawAt, canvas().textSize(style, text));
                 var planned = new Rectangle2D.Double(bounds.x() - margin,
                         bounds.y() - margin,
