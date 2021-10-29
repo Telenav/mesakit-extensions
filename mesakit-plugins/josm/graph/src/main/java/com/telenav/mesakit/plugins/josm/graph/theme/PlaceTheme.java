@@ -9,16 +9,16 @@ import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 
 public class PlaceTheme extends BaseTheme
 {
-    public MapDot dotPlace(final Count population)
+    public MapDot dotPlace(Count population)
     {
-        final var base = Distance.meters(8);
-        final var radius = base.add(base.times(Math.abs(Math.log10(population.asInt()))));
+        var base = Distance.meters(8);
+        var radius = base.add(base.times(Math.abs(Math.log10(population.asInt()))));
         return MapDot.dot()
                 .withStyle(styleUnselected())
                 .withRadius(radius);
     }
 
-    public MapDot dotPlaceSelected(final Count population)
+    public MapDot dotPlaceSelected(Count population)
     {
         return dotPlace(population)
                 .withStyle(styleSelected())

@@ -32,7 +32,7 @@ import java.lang.reflect.Type;
 public class RectangleInDegreesGsonSerializer implements GsonSerializer<Rectangle>
 {
     @Override
-    public Rectangle deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public Rectangle deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
         var object = json.getAsJsonObject();
@@ -42,8 +42,8 @@ public class RectangleInDegreesGsonSerializer implements GsonSerializer<Rectangl
     }
 
     @Override
-    public JsonElement serialize(final Rectangle rectangle, final Type typeOfSrc,
-                                 final JsonSerializationContext context)
+    public JsonElement serialize(Rectangle rectangle, Type typeOfSrc,
+                                 JsonSerializationContext context)
     {
         var bottomLeft = context.serialize(rectangle.bottomLeft());
         var topRight = context.serialize(rectangle.topRight());

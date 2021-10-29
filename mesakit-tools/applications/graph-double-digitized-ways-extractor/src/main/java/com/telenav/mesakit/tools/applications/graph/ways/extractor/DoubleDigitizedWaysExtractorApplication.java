@@ -25,11 +25,11 @@ import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
-import com.telenav.mesakit.graph.GraphProject;
 
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parse;
@@ -54,7 +54,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
                     .optional()
                     .build();
 
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new DoubleDigitizedWaysExtractorApplication().run(arguments);
     }
@@ -67,15 +67,15 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
     @Override
     protected void onRun()
     {
-        final var graph = get(GRAPH).load(this);
+        var graph = get(GRAPH).load(this);
         var outputFolder = get(OUTPUT_FOLDER);
 
         // Extract double digitized edges
-        final var filtered = graph.createConstrained(GraphConstraints.ALL.withEdgeMatcher(Edge::osmIsDoubleDigitized));
+        var filtered = graph.createConstrained(GraphConstraints.ALL.withEdgeMatcher(Edge::osmIsDoubleDigitized));
         if (filtered != null)
         {
             // Get graph resource path
-            final var path = graph.resource().path();
+            var path = graph.resource().path();
 
             // If no output folder was specified
             if (outputFolder == null)
@@ -87,10 +87,10 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
             if (outputFolder != null)
             {
                 // Base file
-                final var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
+                var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
 
                 // Save graph file
-                try (final var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
+                try (var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
                 {
                     filtered.save(archive);
                 }

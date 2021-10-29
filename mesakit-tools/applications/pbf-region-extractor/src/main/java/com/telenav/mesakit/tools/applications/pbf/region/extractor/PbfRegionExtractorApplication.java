@@ -28,8 +28,8 @@ import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.RegionProject;
+import com.telenav.mesakit.map.region.RegionSet;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class PbfRegionExtractorApplication extends Application
 {
     private static final SwitchParser<Count> THREADS = threadCountSwitchParser(Count._16);
 
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfRegionExtractorApplication().run(arguments);
     }
@@ -93,17 +93,17 @@ public class PbfRegionExtractorApplication extends Application
     protected void onRun()
     {
         // Get input file
-        final var input = argument(0, INPUT);
+        var input = argument(0, INPUT);
         if (!input.exists())
         {
             exit("Input file or folder does not exist: " + input);
         }
 
         // Get arguments
-        final var outputFolder = get(OUTPUT_FOLDER, input.parent());
-        final var wayFilter = get(WAY_FILTER);
-        final var extract = get(EXTRACT);
-        final var extractUnder = get(EXTRACT_UNDER);
+        var outputFolder = get(OUTPUT_FOLDER, input.parent());
+        var wayFilter = get(WAY_FILTER);
+        var extract = get(EXTRACT);
+        var extractUnder = get(EXTRACT_UNDER);
 
         // Validate consistency
         if (has(EXTRACT) && has(EXTRACT_UNDER))
@@ -112,8 +112,8 @@ public class PbfRegionExtractorApplication extends Application
         }
 
         // Extract the regions
-        final var reader = listenTo(new SerialPbfReader(input));
-        final var extractor = new PbfRegionCutter(() -> reader, outputFolder, wayFilter);
+        var reader = listenTo(new SerialPbfReader(input));
+        var extractor = new PbfRegionCutter(() -> reader, outputFolder, wayFilter);
         if (extract != null)
         {
             extractor.regionsToExtract(extract);

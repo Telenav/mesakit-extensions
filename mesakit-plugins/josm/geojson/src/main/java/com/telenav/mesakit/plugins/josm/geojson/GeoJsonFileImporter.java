@@ -30,22 +30,22 @@ public class GeoJsonFileImporter extends FileImporter
 {
     private final GeoJsonPlugin plugin;
 
-    public GeoJsonFileImporter(final GeoJsonPlugin plugin)
+    public GeoJsonFileImporter(GeoJsonPlugin plugin)
     {
         super(new ExtensionFileFilter("geojson", "geojson", "GeoJson Files (*.geojson)"));
         this.plugin = plugin;
     }
 
     @Override
-    public void importData(final java.io.File file, final ProgressMonitor progressMonitor)
+    public void importData(java.io.File file, ProgressMonitor progressMonitor)
     {
         try
         {
-            final var input = File.of(file);
-            final var document = GeoJsonDocument.forJson(input.reader().string());
+            var input = File.of(file);
+            var document = GeoJsonDocument.forJson(input.reader().string());
             if (document != null)
             {
-                final var layer = (GeoJsonLayer) plugin
+                var layer = (GeoJsonLayer) plugin
                         .createLayer(plugin.name() + " (" + file.getName() + ")");
                 layer.setDocument(document);
                 layer.setFile(input);
@@ -54,7 +54,7 @@ public class GeoJsonFileImporter extends FileImporter
                 plugin.zoomTo(document.bounds());
             }
         }
-        catch (final Throwable e)
+        catch (Throwable e)
         {
             e.printStackTrace();
             JOptionPane.showMessageDialog(plugin.mapView(), "Unable to open " + file + ":\n\n" + e);

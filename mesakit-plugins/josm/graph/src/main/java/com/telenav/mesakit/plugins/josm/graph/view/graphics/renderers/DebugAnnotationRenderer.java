@@ -40,7 +40,7 @@ public class DebugAnnotationRenderer extends Renderer
 
     private final AnnotationTheme theme = new AnnotationTheme();
 
-    public DebugAnnotationRenderer(final MapCanvas canvas, final ViewModel model)
+    public DebugAnnotationRenderer(MapCanvas canvas, ViewModel model)
     {
         super(canvas, model);
     }
@@ -48,11 +48,11 @@ public class DebugAnnotationRenderer extends Renderer
     public void drawAnnotations()
     {
         // Go through all visible edges
-        for (final var edge : model().visibleEdges().edges())
+        for (var edge : model().visibleEdges().edges())
         {
             if (edge.isForward())
             {
-                final var text = Message.format("e${long} [v${long} \u2192 v${long}] id${long}",
+                var text = Message.format("e${long} [v${long} \u2192 v${long}] id${long}",
                         edge.index(),
                         edge.fromVertexIdentifier(),
                         edge.toVertexIdentifier(),
@@ -66,11 +66,11 @@ public class DebugAnnotationRenderer extends Renderer
         }
     }
 
-    private void drawVertexAnnotation(final Vertex vertex)
+    private void drawVertexAnnotation(Vertex vertex)
     {
         if (!drawn.contains(vertex))
         {
-            final var text = Message.format("v${long} in[$] out[$] n${long}",
+            var text = Message.format("v${long} in[$] out[$] n${long}",
                     vertex.index(),
                     vertex.inEdges().asString(USER_LABEL),
                     vertex.outEdges().asString(USER_LABEL),

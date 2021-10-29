@@ -33,18 +33,18 @@ public class VectorTileRequest extends AbstractTileRequest
     {
     }
 
-    private VectorTileRequest(final VectorTileRequest that)
+    private VectorTileRequest(VectorTileRequest that)
     {
         mapData = that.mapData;
         tile = that.tile;
     }
 
     @Override
-    public boolean equals(final Object object)
+    public boolean equals(Object object)
     {
         if (object instanceof VectorTileRequest)
         {
-            final var that = (VectorTileRequest) object;
+            var that = (VectorTileRequest) object;
             return mapData.equals(that.mapData) && tile.equals(that.tile);
         }
         return false;
@@ -66,23 +66,23 @@ public class VectorTileRequest extends AbstractTileRequest
         return tile;
     }
 
-    public VectorTileRequest withForceUpdate(final boolean forceUpdate)
+    public VectorTileRequest withForceUpdate(boolean forceUpdate)
     {
-        final var request = new VectorTileRequest(this);
+        var request = new VectorTileRequest(this);
         request.forceUpdate(forceUpdate);
         return request;
     }
 
-    public VectorTileRequest withMapData(final MapData mapData)
+    public VectorTileRequest withMapData(MapData mapData)
     {
-        final var request = new VectorTileRequest(this);
+        var request = new VectorTileRequest(this);
         request.mapData = mapData;
         return request;
     }
 
-    public VectorTileRequest withTile(final SlippyTile tile)
+    public VectorTileRequest withTile(SlippyTile tile)
     {
-        final var request = new VectorTileRequest(this);
+        var request = new VectorTileRequest(this);
         request.tile = tile;
         return request;
     }

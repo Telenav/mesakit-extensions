@@ -72,7 +72,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
     private StatusPanel statusPanel;
 
-    public GraphPanel(final GraphPlugin plugin)
+    public GraphPanel(GraphPlugin plugin)
     {
         super(plugin);
 
@@ -84,7 +84,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
                 Components.children(this, component -> component.setFont(Fonts.component(12))));
     }
 
-    public void html(final String message, final Object... arguments)
+    public void html(String message, Object... arguments)
     {
         searchPanel().html(message, arguments);
     }
@@ -95,7 +95,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         return layer;
     }
 
-    public void layer(final GraphLayer layer)
+    public void layer(GraphLayer layer)
     {
         this.layer = layer;
         tagPanel().layer(layer);
@@ -134,13 +134,13 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
     }
 
     @Override
-    public void status(final Duration stayFor, final String message, final Object... arguments)
+    public void status(Duration stayFor, String message, Object... arguments)
     {
         statusPanel.status(stayFor, message, arguments);
     }
 
     @Override
-    public void status(final String message, final Object... arguments)
+    public void status(String message, Object... arguments)
     {
         statusPanel.status(Duration.seconds(10), message, arguments);
     }
@@ -169,7 +169,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
         return tagPanel;
     }
 
-    public void text(final String message, final Object... arguments)
+    public void text(String message, Object... arguments)
     {
         searchPanel().text(message, arguments);
     }
@@ -190,7 +190,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
     }
 
     @Override
-    protected void onLayerRemoving(final Layer layer)
+    protected void onLayerRemoving(Layer layer)
     {
         if (layer() == null)
         {
@@ -217,7 +217,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
     private JPanel container()
     {
-        final var container = new JPanel();
+        var container = new JPanel();
         container.setLayout(new BorderLayout());
         container.add(tabbedPane(), BorderLayout.CENTER);
         statusPanel = new StatusPanel(StatusPanel.Display.NO_HEALTH_PANEL);

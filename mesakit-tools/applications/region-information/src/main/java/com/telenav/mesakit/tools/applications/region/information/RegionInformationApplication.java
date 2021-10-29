@@ -51,7 +51,7 @@ public class RegionInformationApplication extends Application
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new RegionInformationApplication().run(arguments);
     }
@@ -116,25 +116,25 @@ public class RegionInformationApplication extends Application
         {
             region = region.parent();
         }
-        final boolean showAll = get(ALL);
-        final boolean showCode = get(CODE);
+        boolean showAll = get(ALL);
+        boolean showCode = get(CODE);
         if (showCode || showAll)
         {
             System.out.println(region.identity().mesakit().code());
         }
-        final boolean showFolder = get(FOLDER);
+        boolean showFolder = get(FOLDER);
         if (showFolder || showAll)
         {
             System.out.println(region.folder());
         }
-        final boolean showUri = get(URI);
+        boolean showUri = get(URI);
         if (showUri || showAll)
         {
             System.out.println(region.geofabrikUri());
         }
         if (!showCode && !showFolder && !showUri && !showAll)
         {
-            final var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
+            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
             regionCodes(region, builder, get(RECURSE));
             System.out.println(builder);
         }
@@ -146,17 +146,17 @@ public class RegionInformationApplication extends Application
         return ObjectSet.of(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
-    private Region region(final CommandLine commandLine, final String name)
+    private Region region(CommandLine commandLine, String name)
     {
-        final Pattern pattern = new SimplifiedPattern(name.toLowerCase());
-        final var matches = new RegionSet();
-        for (final var continent : Continent.all())
+        Pattern pattern = new SimplifiedPattern(name.toLowerCase());
+        var matches = new RegionSet();
+        for (var continent : Continent.all())
         {
             if (pattern.matches(continent.identity().mesakit().code().toLowerCase()))
             {
                 matches.add(continent);
             }
-            for (final Region nested : continent.nestedChildren())
+            for (Region nested : continent.nestedChildren())
             {
                 if (pattern.matches(nested.identity().mesakit().code().toLowerCase()))
                 {
@@ -176,12 +176,12 @@ public class RegionInformationApplication extends Application
         return matches.first();
     }
 
-    private void regionCodes(final Region region, final IndentingStringBuilder builder, final boolean recurse)
+    private void regionCodes(Region region, IndentingStringBuilder builder, boolean recurse)
     {
         builder.appendLine(region.identity().mesakit().code() + " (" + region.type() + ")");
         if (recurse)
         {
-            for (final Region<?> child : region.children())
+            for (Region<?> child : region.children())
             {
                 builder.indent();
                 regionCodes(child, builder, recurse);

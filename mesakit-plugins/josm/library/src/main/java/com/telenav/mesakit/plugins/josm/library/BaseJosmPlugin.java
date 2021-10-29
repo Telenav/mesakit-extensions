@@ -40,7 +40,7 @@ public abstract class BaseJosmPlugin extends Plugin
     // The type of layer class
     private final Class<? extends BaseJosmLayer> layerClass;
 
-    protected BaseJosmPlugin(final PluginInformation info, final Class<? extends BaseJosmLayer> layerClass)
+    protected BaseJosmPlugin(PluginInformation info, Class<? extends BaseJosmLayer> layerClass)
     {
         super(info);
         this.layerClass = ensureNotNull(layerClass);
@@ -48,19 +48,19 @@ public abstract class BaseJosmPlugin extends Plugin
         MainApplication.getLayerManager().addLayerChangeListener(new LayerManager.LayerChangeListener()
         {
             @Override
-            public void layerAdded(final LayerManager.LayerAddEvent event)
+            public void layerAdded(LayerManager.LayerAddEvent event)
             {
                 addedLayer(event.getAddedLayer());
             }
 
             @Override
-            public void layerOrderChanged(final LayerManager.LayerOrderChangeEvent event)
+            public void layerOrderChanged(LayerManager.LayerOrderChangeEvent event)
             {
                 reorderedLayers();
             }
 
             @Override
-            public void layerRemoving(final LayerManager.LayerRemoveEvent event)
+            public void layerRemoving(LayerManager.LayerRemoveEvent event)
             {
                 removingLayer(event.getRemovedLayer());
             }
@@ -73,7 +73,7 @@ public abstract class BaseJosmPlugin extends Plugin
         return createLayer(name());
     }
 
-    public BaseJosmLayer createLayer(final String name)
+    public BaseJosmLayer createLayer(String name)
     {
         if (isMultiLayer() || selectedLayer() == null)
         {
@@ -93,13 +93,13 @@ public abstract class BaseJosmPlugin extends Plugin
     @SuppressWarnings("SameReturnValue")
     public abstract String iconName();
 
-    public boolean isLayerOfPlugin(final Layer layer)
+    public boolean isLayerOfPlugin(Layer layer)
     {
         return layer != null && layerClass.isAssignableFrom(layer.getClass());
     }
 
     @Override
-    public void mapFrameInitialized(final MapFrame oldFrame, final MapFrame newFrame)
+    public void mapFrameInitialized(MapFrame oldFrame, MapFrame newFrame)
     {
         if (newFrame != null && oldFrame == null)
         {
@@ -137,7 +137,7 @@ public abstract class BaseJosmPlugin extends Plugin
 
     public BaseJosmLayer selectedLayer()
     {
-        final var layer = MainApplication.getLayerManager().getActiveLayer();
+        var layer = MainApplication.getLayerManager().getActiveLayer();
         if (layer != null && layerClass.isAssignableFrom(layer.getClass()))
         {
             return (BaseJosmLayer) layer;
@@ -162,7 +162,7 @@ public abstract class BaseJosmPlugin extends Plugin
         return CredentialsManager.getInstance().getUsername();
     }
 
-    public void zoomTo(final Rectangle bounds)
+    public void zoomTo(Rectangle bounds)
     {
         if (mapView() != null && bounds != null)
         {
@@ -192,7 +192,7 @@ public abstract class BaseJosmPlugin extends Plugin
     }
 
     @SuppressWarnings("EmptyMethod")
-    protected void onLayerRemoving(final Layer layer)
+    protected void onLayerRemoving(Layer layer)
     {
     }
 
@@ -204,7 +204,7 @@ public abstract class BaseJosmPlugin extends Plugin
 
     protected abstract int shortCutKey();
 
-    private void activeLayerChanged(final Layer layer)
+    private void activeLayerChanged(Layer layer)
     {
         if (isLayerOfPlugin(layer))
         {
@@ -216,7 +216,7 @@ public abstract class BaseJosmPlugin extends Plugin
         }
     }
 
-    private void addedLayer(final Layer layer)
+    private void addedLayer(Layer layer)
     {
         if (isLayerOfPlugin(layer))
         {
@@ -228,7 +228,7 @@ public abstract class BaseJosmPlugin extends Plugin
         }
     }
 
-    private void removingLayer(final Layer layer)
+    private void removingLayer(Layer layer)
     {
         if (isLayerOfPlugin(layer))
         {

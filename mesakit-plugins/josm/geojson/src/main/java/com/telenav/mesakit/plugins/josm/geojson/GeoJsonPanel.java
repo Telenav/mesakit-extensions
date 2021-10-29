@@ -62,14 +62,14 @@ public class GeoJsonPanel extends BaseJosmPanel
 
     private final JTextField search = new JTextField();
 
-    public GeoJsonPanel(final GeoJsonPlugin plugin)
+    public GeoJsonPanel(GeoJsonPlugin plugin)
     {
         super(plugin);
 
-        final var panel = new JPanel();
+        var panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
-        final var constraints = new GridBagConstraints();
+        var constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);
 
         constraints.anchor = GridBagConstraints.NORTH;
@@ -92,7 +92,7 @@ public class GeoJsonPanel extends BaseJosmPanel
         constraints.weighty = 1;
         constraints.fill = GridBagConstraints.BOTH;
 
-        final var scrollPane = new JScrollPane();
+        var scrollPane = new JScrollPane();
         scrollPane.setViewportView(list);
         panel.add(scrollPane, constraints);
 
@@ -104,7 +104,7 @@ public class GeoJsonPanel extends BaseJosmPanel
         {
 
             @Override
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked(MouseEvent e)
             {
                 if (SwingUtilities.isLeftMouseButton(e))
                 {
@@ -113,7 +113,7 @@ public class GeoJsonPanel extends BaseJosmPanel
             }
 
             @Override
-            public void mousePressed(final MouseEvent e)
+            public void mousePressed(MouseEvent e)
             {
                 if (e.isPopupTrigger())
                 {
@@ -122,7 +122,7 @@ public class GeoJsonPanel extends BaseJosmPanel
             }
 
             @Override
-            public void mouseReleased(final MouseEvent e)
+            public void mouseReleased(MouseEvent e)
             {
                 if (e.isPopupTrigger())
                 {
@@ -134,7 +134,7 @@ public class GeoJsonPanel extends BaseJosmPanel
         {
 
             @Override
-            public void keyReleased(final KeyEvent e)
+            public void keyReleased(KeyEvent e)
             {
                 if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN)
                 {
@@ -146,19 +146,19 @@ public class GeoJsonPanel extends BaseJosmPanel
         {
 
             @Override
-            public void changedUpdate(final DocumentEvent e)
+            public void changedUpdate(DocumentEvent e)
             {
                 refresh();
             }
 
             @Override
-            public void insertUpdate(final DocumentEvent e)
+            public void insertUpdate(DocumentEvent e)
             {
                 refresh();
             }
 
             @Override
-            public void removeUpdate(final DocumentEvent e)
+            public void removeUpdate(DocumentEvent e)
             {
                 refresh();
             }
@@ -166,13 +166,13 @@ public class GeoJsonPanel extends BaseJosmPanel
 
         overrideMenuAcceleratorKeys(search);
 
-        final var font = new Font("Helvetica", Font.PLAIN, 12);
+        var font = new Font("Helvetica", Font.PLAIN, 12);
         Components.children(panel, component -> component.setFont(font));
 
         createLayout(panel, false, Collections.emptyList());
     }
 
-    public boolean isVisible(final GeoJsonFeature feature)
+    public boolean isVisible(GeoJsonFeature feature)
     {
         for (var i = 0; i < listModel.size(); i++)
         {
@@ -187,7 +187,7 @@ public class GeoJsonPanel extends BaseJosmPanel
     @Override
     public GeoJsonLayer layer()
     {
-        final var layer = super.layer();
+        var layer = super.layer();
         if (layer instanceof GeoJsonLayer)
         {
             return (GeoJsonLayer) layer;
@@ -195,7 +195,7 @@ public class GeoJsonPanel extends BaseJosmPanel
         return null;
     }
 
-    public void selectFeature(final GeoJsonFeature feature)
+    public void selectFeature(GeoJsonFeature feature)
     {
         list.setSelectedValue(feature, true);
         list.repaint();
@@ -221,7 +221,7 @@ public class GeoJsonPanel extends BaseJosmPanel
     }
 
     @Override
-    protected void onLayerRemoving(final Layer layer)
+    protected void onLayerRemoving(Layer layer)
     {
         if (layer() == null)
         {
@@ -247,13 +247,13 @@ public class GeoJsonPanel extends BaseJosmPanel
         {
 
             // Get the GeoJson document we're showing
-            final var document = layer().getDocument();
+            var document = layer().getDocument();
 
             // Get features that match the search text
-            final List<GeoJsonFeature> matches = new ArrayList<>();
+            List<GeoJsonFeature> matches = new ArrayList<>();
             if (document != null)
             {
-                for (final var feature : document)
+                for (var feature : document)
                 {
                     if (Strings.isEmpty(search.getText())
                             || feature.title().toUpperCase().contains(search.getText().toUpperCase()))
@@ -269,7 +269,7 @@ public class GeoJsonPanel extends BaseJosmPanel
 
                 // then update the list
                 listModel.removeAllElements();
-                for (final var match : matches)
+                for (var match : matches)
                 {
                     listModel.addElement(match);
                 }
@@ -295,33 +295,33 @@ public class GeoJsonPanel extends BaseJosmPanel
         refresh();
     }
 
-    protected void popup(final MouseEvent e)
+    protected void popup(MouseEvent e)
     {
         list.setSelectedIndex(list.locationToIndex(e.getPoint()));
-        final var selectedValue = list.getSelectedValue();
-        final var layer = layer();
+        var selectedValue = list.getSelectedValue();
+        var layer = layer();
         if (layer != null)
         {
             layer.zoomToFeature(selectedValue);
         }
-        final var menu = new GeoJsonFeaturePopUpMenu(selectedValue);
+        var menu = new GeoJsonFeaturePopUpMenu(selectedValue);
         menu.show(e.getComponent(), e.getX(), e.getY());
     }
 
     private void addNextShortCut()
     {
         final var shortcutName = "Next GeoJson Feature";
-        final var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
+        var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
                 Shortcut.ALT_CTRL_SHIFT);
-        final var next = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
+        var next = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
         {
 
             private static final long serialVersionUID = 9209000550528190850L;
 
             @Override
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed(ActionEvent e)
             {
-                final var index = list.getSelectedIndex();
+                var index = list.getSelectedIndex();
                 if (index + 1 < list.getModel().getSize())
                 {
                     list.setSelectedIndex(index + 1);
@@ -329,24 +329,24 @@ public class GeoJsonPanel extends BaseJosmPanel
                 zoomToSelected();
             }
         };
-        final var menu = MainApplication.getMenu().toolsMenu;
+        var menu = MainApplication.getMenu().toolsMenu;
         MainMenu.add(menu, next, MainMenu.WINDOW_MENU_GROUP.VOLATILE);
     }
 
     private void addPreviousShortCut()
     {
         final var shortcutName = "Previous GeoJson Feature";
-        final var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
+        var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
                 Shortcut.ALT_CTRL_SHIFT);
-        final var previous = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
+        var previous = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
         {
 
             private static final long serialVersionUID = 9209000550528190850L;
 
             @Override
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed(ActionEvent e)
             {
-                final var index = list.getSelectedIndex();
+                var index = list.getSelectedIndex();
                 if (index - 1 >= 0)
                 {
                     list.setSelectedIndex(index - 1);
@@ -354,11 +354,11 @@ public class GeoJsonPanel extends BaseJosmPanel
                 zoomToSelected();
             }
         };
-        final var menu = MainApplication.getMenu().toolsMenu;
+        var menu = MainApplication.getMenu().toolsMenu;
         MainMenu.add(menu, previous, MainMenu.WINDOW_MENU_GROUP.VOLATILE);
     }
 
-    private boolean isNewModel(final List<GeoJsonFeature> features)
+    private boolean isNewModel(List<GeoJsonFeature> features)
     {
         if (listModel.size() == features.size())
         {
@@ -374,14 +374,14 @@ public class GeoJsonPanel extends BaseJosmPanel
         return true;
     }
 
-    private void say(final String message)
+    private void say(String message)
     {
         status.setText(message);
     }
 
     private void zoomToSelected()
     {
-        final var layer = layer();
+        var layer = layer();
         if (layer != null)
         {
             layer.zoomToFeature(list.getSelectedValue());

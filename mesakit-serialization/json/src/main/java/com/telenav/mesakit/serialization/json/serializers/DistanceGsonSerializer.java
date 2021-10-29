@@ -36,13 +36,13 @@ public class DistanceGsonSerializer extends PrimitiveGsonSerializer<Distance, St
     }
 
     @Override
-    protected Distance toObject(final String text)
+    protected Distance toObject(String text)
     {
         return Distance.parse(text);
     }
 
     @Override
-    protected String toPrimitive(final Distance distance)
+    protected String toPrimitive(Distance distance)
     {
         return distance.toString();
     }

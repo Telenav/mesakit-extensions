@@ -30,14 +30,14 @@ import java.lang.reflect.Type;
 public class LatitudeGsonSerializer implements GsonSerializer<Latitude>
 {
     @Override
-    public Latitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public Latitude deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
         return Latitude.degrees(context.deserialize(json, Double.class));
     }
 
     @Override
-    public JsonElement serialize(final Latitude latitude, final Type typeOfSrc, final JsonSerializationContext context)
+    public JsonElement serialize(Latitude latitude, Type typeOfSrc, JsonSerializationContext context)
     {
         return context.serialize(latitude.asDegrees());
     }

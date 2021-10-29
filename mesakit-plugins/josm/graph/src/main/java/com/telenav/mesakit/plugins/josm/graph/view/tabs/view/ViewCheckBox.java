@@ -11,7 +11,7 @@ import java.awt.Dimension;
  */
 public class ViewCheckBox extends JCheckBox
 {
-    public ViewCheckBox(final GraphPanel graphPanel, final String label)
+    public ViewCheckBox(GraphPanel graphPanel, String label)
     {
         super(label);
         KivaKitTheme.get().applyTo(this);
@@ -19,7 +19,7 @@ public class ViewCheckBox extends JCheckBox
         setPreferredSize(new Dimension(150, 20));
         addItemListener(e ->
         {
-            final var layer = graphPanel.layer();
+            var layer = graphPanel.layer();
             if (layer != null)
             {
                 layer.forceRepaint();

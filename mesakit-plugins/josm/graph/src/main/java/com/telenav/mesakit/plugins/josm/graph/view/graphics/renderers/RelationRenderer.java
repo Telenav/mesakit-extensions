@@ -57,13 +57,13 @@ public class RelationRenderer
 
     private final RelationTheme theme = new RelationTheme();
 
-    public RelationRenderer(final MapCanvas canvas, final ViewModel model)
+    public RelationRenderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Selection.Type type)
+    public void draw(Selection.Type type)
     {
         switch (type)
         {
@@ -79,16 +79,16 @@ public class RelationRenderer
                 break;
 
             case SELECTED:
-                final var selected = model.selection().selectedRelation();
+                var selected = model.selection().selectedRelation();
                 if (selected != null)
                 {
-                    final var viaNodeLocation = selected.viaNodeLocation();
+                    var viaNodeLocation = selected.viaNodeLocation();
                     if (viaNodeLocation != null)
                     {
                         viaNodeDotSize(theme.dotViaNodeSelected())
                                 .withLocation(viaNodeLocation).draw(canvas);
                     }
-                    for (final var route : selected.asRoutes())
+                    for (var route : selected.asRoutes())
                     {
                         theme.polylineRouteSelected()
                                 .withPolyline(route.polyline())
@@ -102,11 +102,11 @@ public class RelationRenderer
         }
     }
 
-    private void drawNonRestriction(final EdgeRelation relation)
+    private void drawNonRestriction(EdgeRelation relation)
     {
-        for (final var route : relation.asRoutes())
+        for (var route : relation.asRoutes())
         {
-            final var shape = theme.polylineRoute(theme.polylineRoute(), route).draw(canvas);
+            var shape = theme.polylineRoute(theme.polylineRoute(), route).draw(canvas);
             model.selection().shape(relation, shape);
         }
     }
@@ -115,10 +115,10 @@ public class RelationRenderer
     {
         if (canvas.scale().isZoomedIn(MapScale.NEIGHBORHOOD))
         {
-            final var relations = relations((relation) -> isVisible(relation) && !relation.isRestriction());
+            var relations = relations((relation) -> isVisible(relation) && !relation.isRestriction());
             if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_NON_RESTRICTIONS))
             {
-                for (final var relation : relations)
+                for (var relation : relations)
                 {
                     if (!model.selection().isSelected(relation))
                     {
@@ -129,13 +129,13 @@ public class RelationRenderer
         }
     }
 
-    private void drawRestriction(final EdgeRelation relation)
+    private void drawRestriction(EdgeRelation relation)
     {
         // Draw via node
-        final var viaNodeLocation = relation.viaNodeLocation();
+        var viaNodeLocation = relation.viaNodeLocation();
         if (viaNodeLocation != null)
         {
-            final var dot = relation.is(EdgeRelation.Type.BAD_TURN_RESTRICTION) ? theme.dotViaNodeBad() : theme.dotViaNodeUnselected();
+            var dot = relation.is(EdgeRelation.Type.BAD_TURN_RESTRICTION) ? theme.dotViaNodeBad() : theme.dotViaNodeUnselected();
             viaNodeDotSize(dot)
                     .withLocation(viaNodeLocation)
                     .draw(canvas);
@@ -146,36 +146,36 @@ public class RelationRenderer
         {
             if (relation.isTurnRestriction())
             {
-                final var restriction = relation.turnRestriction();
-                for (final var route : restriction.routes())
+                var restriction = relation.turnRestriction();
+                for (var route : restriction.routes())
                 {
-                    final var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
+                    var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
-                final var location = relation.viaNodeLocation();
+                var location = relation.viaNodeLocation();
                 if (location != null)
                 {
-                    final var shape = theme.dotNoRoute().withLocation(location).draw(canvas);
+                    var shape = theme.dotNoRoute().withLocation(location).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
             }
             else
             {
-                for (final var route : relation.asRoutes())
+                for (var route : relation.asRoutes())
                 {
-                    final var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
+                    var shape = theme.polylineRoute(theme.polylineRestriction(), route).draw(canvas);
                     model.selection().shape(relation, shape);
                 }
             }
         }
     }
 
-    private void drawRestrictions(final Selection.Type type)
+    private void drawRestrictions(Selection.Type type)
     {
-        final var relations = relations((relation) -> isVisible(relation) && relation.isRestriction());
+        var relations = relations((relation) -> isVisible(relation) && relation.isRestriction());
         if (Count.count(relations).isLessThan(MAXIMUM_RENDERED_RESTRICTIONS))
         {
-            for (final var relation : relations)
+            for (var relation : relations)
             {
                 if (model.selection().is(type, relation))
                 {
@@ -185,17 +185,17 @@ public class RelationRenderer
         }
     }
 
-    private boolean isVisible(final EdgeRelation relation)
+    private boolean isVisible(EdgeRelation relation)
     {
         if (relation.type() == null)
         {
             return false;
         }
-        final var panel = model.graphPanel();
+        var panel = model.graphPanel();
         return panel.viewPanel().viewRelations() && panel.viewPanel().viewRelationTypes().contains(relation.type());
     }
 
-    private RelationSet relations(final Matcher<EdgeRelation> matcher)
+    private RelationSet relations(Matcher<EdgeRelation> matcher)
     {
         if (edges == null)
         {
@@ -208,10 +208,10 @@ public class RelationRenderer
                 edges = new VisibleEdges(canvas, model, VisibleEdges.Mode.RELATIONS).edges();
             }
         }
-        final var relations = new RelationSet(Estimate._2048);
-        for (final var edge : edges)
+        var relations = new RelationSet(Estimate._2048);
+        for (var edge : edges)
         {
-            for (final var relation : edge.relations())
+            for (var relation : edge.relations())
             {
                 if (matcher.matches(relation))
                 {
@@ -222,7 +222,7 @@ public class RelationRenderer
         return relations;
     }
 
-    private MapDot viaNodeDotSize(final MapDot dot)
+    private MapDot viaNodeDotSize(MapDot dot)
     {
         switch (canvas.scale())
         {

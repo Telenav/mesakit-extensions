@@ -134,18 +134,18 @@ public class Selection
         placeForShape.clear();
     }
 
-    public List<Edge> edgesForPoint(final MapCanvas canvas,
-                                    final Graph graph,
-                                    final DrawingPoint point,
-                                    final boolean snapToNearby)
+    public List<Edge> edgesForPoint(MapCanvas canvas,
+                                    Graph graph,
+                                    DrawingPoint point,
+                                    boolean snapToNearby)
     {
-        final List<Edge> edges = new ArrayList<>();
-        for (final var entry : edgeForShape.entrySet())
+        List<Edge> edges = new ArrayList<>();
+        for (var entry : edgeForShape.entrySet())
         {
-            final var key = entry.getKey();
+            var key = entry.getKey();
             if (key != null && key.contains(point.asAwt()))
             {
-                final var value = entry.getValue();
+                var value = entry.getValue();
                 if (value != null)
                 {
                     edges.add(value);
@@ -158,7 +158,7 @@ public class Selection
         }
         if (snapToNearby)
         {
-            final var snap = new GraphSnapper(graph, Distance.meters(200), null, Edge.TransportMode.ANY)
+            var snap = new GraphSnapper(graph, Distance.meters(200), null, Edge.TransportMode.ANY)
                     .snap(canvas.toMap(point), null);
             if (snap != null)
             {
@@ -168,7 +168,7 @@ public class Selection
         return edges;
     }
 
-    public void highlight(final EdgeSet edges)
+    public void highlight(EdgeSet edges)
     {
         highlightedEdges = edges;
     }
@@ -178,7 +178,7 @@ public class Selection
         return highlightedEdges;
     }
 
-    public boolean is(final Edge edge, final Type type)
+    public boolean is(Edge edge, Type type)
     {
         switch (type)
         {
@@ -199,7 +199,7 @@ public class Selection
         }
     }
 
-    public boolean is(final Type type, final EdgeRelation relation)
+    public boolean is(Type type, EdgeRelation relation)
     {
         switch (type)
         {
@@ -216,52 +216,52 @@ public class Selection
         }
     }
 
-    public boolean is(final Type type, final Place place)
+    public boolean is(Type type, Place place)
     {
         return (type == Type.SELECTED) == isSelected(place);
     }
 
-    public boolean is(final Type type, final Polyline line)
+    public boolean is(Type type, Polyline line)
     {
         return (type == Type.SELECTED) == isSelected(line);
     }
 
-    public boolean isHighlighted(final Edge edge)
+    public boolean isHighlighted(Edge edge)
     {
         return highlightedEdges.contains(edge);
     }
 
-    public boolean isSelected(final Edge edge)
+    public boolean isSelected(Edge edge)
     {
         return Objects.equal(edge, selectedEdge);
     }
 
-    public boolean isSelected(final EdgeRelation relation)
+    public boolean isSelected(EdgeRelation relation)
     {
         return Objects.equal(relation, selectedRelation);
     }
 
-    public boolean isSelected(final Layer layer)
+    public boolean isSelected(Layer layer)
     {
         return Objects.equal(layer, selectedLayer);
     }
 
-    public boolean isSelected(final Place place)
+    public boolean isSelected(Place place)
     {
         return Objects.equal(place, selectedPlace);
     }
 
-    public boolean isSelected(final Polyline polyline)
+    public boolean isSelected(Polyline polyline)
     {
         return selectedPolylines.contains(polyline);
     }
 
-    public boolean isSelected(final ShapePoint shapePoint)
+    public boolean isSelected(ShapePoint shapePoint)
     {
         return Objects.equal(shapePoint, selectedShapePoint);
     }
 
-    public boolean isSelected(final Vertex vertex)
+    public boolean isSelected(Vertex vertex)
     {
         return Objects.equal(vertex, selectedVertex);
     }
@@ -270,7 +270,7 @@ public class Selection
     {
         if (selectedVertexStack.size() > 1)
         {
-            final var index = selectedVertexStack.indexOf(selectedVertex);
+            var index = selectedVertexStack.indexOf(selectedVertex);
             if (index != -1)
             {
                 return select(selectedVertexStack.get((index + 1) % selectedVertexStack.size()));
@@ -278,7 +278,7 @@ public class Selection
         }
         if (selectedEdgeStack.size() > 1)
         {
-            final var index = selectedEdgeStack.indexOf(selectedEdge);
+            var index = selectedEdgeStack.indexOf(selectedEdge);
             if (index != -1)
             {
                 return select(selectedEdgeStack.get((index + 1) % selectedEdgeStack.size()));
@@ -286,7 +286,7 @@ public class Selection
         }
         if (selectedRelationStack.size() > 1)
         {
-            final var index = selectedRelationStack.indexOf(selectedRelation);
+            var index = selectedRelationStack.indexOf(selectedRelation);
             if (index != -1)
             {
                 return select(selectedRelationStack.get((index + 1) % selectedRelationStack.size()));
@@ -295,9 +295,9 @@ public class Selection
         return null;
     }
 
-    public Place placeForPoint(final Point2D point)
+    public Place placeForPoint(Point2D point)
     {
-        for (final var entry : placeForShape.entrySet())
+        for (var entry : placeForShape.entrySet())
         {
             if (entry.getKey().contains(point))
             {
@@ -311,7 +311,7 @@ public class Selection
     {
         if (selectedVertexStack.size() > 1)
         {
-            final var index = selectedVertexStack.indexOf(selectedVertex);
+            var index = selectedVertexStack.indexOf(selectedVertex);
             if (index != -1)
             {
                 return select(selectedVertexStack.get(Math.abs(index - 1) % selectedVertexStack.size()));
@@ -319,7 +319,7 @@ public class Selection
         }
         if (selectedEdgeStack.size() > 1)
         {
-            final var index = selectedEdgeStack.indexOf(selectedEdge);
+            var index = selectedEdgeStack.indexOf(selectedEdge);
             if (index != -1)
             {
                 return select(selectedEdgeStack.get(Math.abs(index - 1) % selectedEdgeStack.size()));
@@ -327,7 +327,7 @@ public class Selection
         }
         if (selectedRelationStack.size() > 1)
         {
-            final var index = selectedRelationStack.indexOf(selectedRelation);
+            var index = selectedRelationStack.indexOf(selectedRelation);
             if (index != -1)
             {
                 return select(selectedRelationStack.get((index - 1) % selectedRelationStack.size()));
@@ -336,10 +336,10 @@ public class Selection
         return null;
     }
 
-    public List<EdgeRelation> relationsForPoint(final Point2D point)
+    public List<EdgeRelation> relationsForPoint(Point2D point)
     {
-        final List<EdgeRelation> relations = new ArrayList<>();
-        for (final var entry : relationForShape.entrySet())
+        List<EdgeRelation> relations = new ArrayList<>();
+        for (var entry : relationForShape.entrySet())
         {
             if (entry.getKey().contains(point))
             {
@@ -349,65 +349,65 @@ public class Selection
         return relations;
     }
 
-    public boolean sameEdgeStack(final List<Edge> edges)
+    public boolean sameEdgeStack(List<Edge> edges)
     {
         return new HashSet<>(selectedEdgeStack).equals(new HashSet<>(edges));
     }
 
-    public boolean sameRelationStack(final List<EdgeRelation> relations)
+    public boolean sameRelationStack(List<EdgeRelation> relations)
     {
         return new HashSet<>(selectedRelationStack).equals(new HashSet<>(relations));
     }
 
-    public boolean sameVertexStack(final List<Vertex> vertexes)
+    public boolean sameVertexStack(List<Vertex> vertexes)
     {
         return new HashSet<>(selectedVertexStack).equals(new HashSet<>(vertexes));
     }
 
-    public Edge select(final Edge edge)
+    public Edge select(Edge edge)
     {
         clear();
         selectedEdge = edge;
         return edge;
     }
 
-    public EdgeRelation select(final EdgeRelation selectedEdgeRelation)
+    public EdgeRelation select(EdgeRelation selectedEdgeRelation)
     {
         clear();
         selectedRelation = selectedEdgeRelation;
         return selectedEdgeRelation;
     }
 
-    public void select(final Layer selectedLayer)
+    public void select(Layer selectedLayer)
     {
         clear();
         this.selectedLayer = selectedLayer;
     }
 
-    public void select(final Place selectedPlace)
+    public void select(Place selectedPlace)
     {
         clear();
         this.selectedPlace = selectedPlace;
     }
 
-    public void select(final Polyline line)
+    public void select(Polyline line)
     {
         selectedPolylines.add(line);
     }
 
-    public void select(final Set<Polyline> polylines)
+    public void select(Set<Polyline> polylines)
     {
         clear();
         selectedPolylines = polylines;
     }
 
-    public void select(final ShapePoint selectedShapePoint)
+    public void select(ShapePoint selectedShapePoint)
     {
         clear();
         this.selectedShapePoint = selectedShapePoint;
     }
 
-    public Vertex select(final Vertex selectedVertex)
+    public Vertex select(Vertex selectedVertex)
     {
         clear();
         this.selectedVertex = selectedVertex;
@@ -419,7 +419,7 @@ public class Selection
         return selectedEdge;
     }
 
-    public void selectedEdgeStack(final List<Edge> edges)
+    public void selectedEdgeStack(List<Edge> edges)
     {
         selectedEdgeStack = edges;
     }
@@ -434,7 +434,7 @@ public class Selection
         return selectedRelation;
     }
 
-    public void selectedRelationStack(final List<EdgeRelation> relations)
+    public void selectedRelationStack(List<EdgeRelation> relations)
     {
         selectedRelationStack = relations;
     }
@@ -449,46 +449,46 @@ public class Selection
         return selectedVertex;
     }
 
-    public void selectedVertexStack(final List<Vertex> vertexes)
+    public void selectedVertexStack(List<Vertex> vertexes)
     {
         selectedVertexStack = vertexes;
     }
 
-    public Shape shape(final Edge edge)
+    public Shape shape(Edge edge)
     {
         return shapeForEdge.get(edge);
     }
 
-    public void shape(final Edge edge, final Shape shape)
+    public void shape(Edge edge, Shape shape)
     {
         edgeForShape.put(shape, edge);
         shapeForEdge.put(edge, shape);
     }
 
-    public void shape(final EdgeRelation relation, final Shape shape)
+    public void shape(EdgeRelation relation, Shape shape)
     {
         relationForShape.put(shape, relation);
     }
 
-    public void shape(final Place place, final Shape shape)
+    public void shape(Place place, Shape shape)
     {
         placeForShape.put(shape, place);
     }
 
-    public void shape(final ShapePoint point, final Shape shape)
+    public void shape(ShapePoint point, Shape shape)
     {
         shapePointLocationForShape.put(shape, point.location());
         shapeToShapePoint.put(shape, point);
     }
 
-    public void shape(final Vertex vertex, final Shape shape)
+    public void shape(Vertex vertex, Shape shape)
     {
         vertexForShape.put(shape, vertex);
     }
 
-    public ShapePoint shapePointForPoint(final Graph graph, final Point2D point)
+    public ShapePoint shapePointForPoint(Graph graph, Point2D point)
     {
-        for (final var entry : shapePointLocationForShape.entrySet())
+        for (var entry : shapePointLocationForShape.entrySet())
         {
             if (entry.getKey().contains(point))
             {
@@ -498,10 +498,10 @@ public class Selection
         return null;
     }
 
-    public List<Vertex> vertexesForPoint(final Point2D point)
+    public List<Vertex> vertexesForPoint(Point2D point)
     {
-        final List<Vertex> vertexes = new ArrayList<>();
-        for (final var entry : vertexForShape.entrySet())
+        List<Vertex> vertexes = new ArrayList<>();
+        for (var entry : vertexForShape.entrySet())
         {
             if (entry.getKey().contains(point))
             {

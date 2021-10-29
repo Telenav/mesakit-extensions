@@ -21,19 +21,19 @@ public class MatchesPanel extends JPanel
 {
     private final JList<Route> matches;
 
-    public MatchesPanel(final GraphPanel graphPanel)
+    public MatchesPanel(GraphPanel graphPanel)
     {
         matches = KivaKitTheme.get().applyTo(new JList<>());
         matches.setModel(new DefaultListModel<>());
 
-        final var scrollPane = new JScrollPane(matches, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        var scrollPane = new JScrollPane(matches, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
 
         matches.addListSelectionListener((event) ->
         {
-            final var selected = matches.getSelectedValue();
+            var selected = matches.getSelectedValue();
             if (selected != null)
             {
                 graphPanel.layer().show(selected);
@@ -42,7 +42,7 @@ public class MatchesPanel extends JPanel
         });
     }
 
-    public void addAll(final Set<Route> result)
+    public void addAll(Set<Route> result)
     {
         model().addAll(result);
     }

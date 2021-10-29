@@ -42,19 +42,19 @@ public class ShapePointRenderer
 
     private final ViewModel model;
 
-    public ShapePointRenderer(final MapCanvas canvas, final ViewModel model)
+    public ShapePointRenderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Edge edge)
+    public void draw(Edge edge)
     {
         if (edge.graph().supportsFullPbfNodeInformation())
         {
             var at = 0;
-            final var shapePoints = edge.shapePointsWithoutVertexes();
-            for (final var point : shapePoints)
+            var shapePoints = edge.shapePointsWithoutVertexes();
+            for (var point : shapePoints)
             {
                 if (at != 0 && at != shapePoints.size() - 1)
                 {
@@ -66,12 +66,12 @@ public class ShapePointRenderer
         else
         {
             var at = 0;
-            final var shape = edge.roadShape();
-            for (final var location : shape.locationSequence())
+            var shape = edge.roadShape();
+            for (var location : shape.locationSequence())
             {
                 if (at != 0 && at != shape.size() - 1)
                 {
-                    final var point = new HeavyWeightShapePoint(model.graph(), 1L);
+                    var point = new HeavyWeightShapePoint(model.graph(), 1L);
                     point.index(1);
                     point.location(location);
                     drawShapePoint(point);
@@ -81,11 +81,11 @@ public class ShapePointRenderer
         }
     }
 
-    private void drawShapePoint(final ShapePoint point)
+    private void drawShapePoint(ShapePoint point)
     {
-        final var selected = model.selection().isSelected(point);
-        final var dot = selected ? SELECTED : NORMAL;
-        final var shape = dot.withLocation(point.location()).draw(canvas);
+        var selected = model.selection().isSelected(point);
+        var dot = selected ? SELECTED : NORMAL;
+        var shape = dot.withLocation(point.location()).draw(canvas);
         if (model.graph().supportsFullPbfNodeInformation())
         {
             model.selection().shape(point, shape);

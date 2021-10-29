@@ -25,17 +25,17 @@ public class VectorTile extends AbstractTile
 {
     private final SlippyTile tile;
 
-    VectorTile(final SlippyTile tile)
+    VectorTile(SlippyTile tile)
     {
         this.tile = tile;
     }
 
     @Override
-    public boolean equals(final Object object)
+    public boolean equals(Object object)
     {
         if (object instanceof VectorTile)
         {
-            final var that = (VectorTile) object;
+            var that = (VectorTile) object;
             return tile.equals(that.tile);
         }
         return false;

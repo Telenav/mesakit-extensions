@@ -68,23 +68,23 @@ public abstract class Renderer
 
     private final AnnotationTheme theme = new AnnotationTheme();
 
-    protected Renderer(final MapCanvas canvas, final ViewModel model)
+    protected Renderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    protected void callout(final Location at, final MapDot dot, final Style style, final String text)
+    protected void callout(Location at, MapDot dot, Style style, String text)
     {
         for (int dx = 30; dx < 100; dx += 10)
         {
             for (int dy = -30; dy > -100; dy -= 10)
             {
-                final var drawAt = canvas().toDrawing(at).plus(dx, dy);
+                var drawAt = canvas().toDrawing(at).plus(dx, dy);
 
                 final var margin = 5.0;
-                final var bounds = DrawingRectangle.rectangle(drawAt, canvas().textSize(style, text));
-                final var planned = new Rectangle2D.Double(bounds.x() - margin,
+                var bounds = DrawingRectangle.rectangle(drawAt, canvas().textSize(style, text));
+                var planned = new Rectangle2D.Double(bounds.x() - margin,
                         bounds.y() - margin,
                         bounds.width() + 2 * margin,
                         bounds.height() + 2 * margin);
@@ -93,13 +93,13 @@ public abstract class Renderer
                 {
                     dot.withLocation(at).draw(canvas());
 
-                    final var connectPoint = new Point2D.Double(bounds.x(), bounds.y() + bounds.height() / 2);
+                    var connectPoint = new Point2D.Double(bounds.x(), bounds.y() + bounds.height() / 2);
                     theme.lineCallout()
                             .withFrom(at)
                             .withTo(canvas().toMap(connectPoint))
                             .draw(canvas());
 
-                    final var shape = theme.labelAnnotation(text)
+                    var shape = theme.labelAnnotation(text)
                             .withLocation(drawAt)
                             .draw(canvas());
                     model().drawn(shape.getBounds());
@@ -114,7 +114,7 @@ public abstract class Renderer
         return canvas;
     }
 
-    protected boolean isVisible(final Edge edge)
+    protected boolean isVisible(Edge edge)
     {
         if (model.graphPanel().viewPanel().viewEdges() && model.graphPanel().viewPanel().viewRoadTypes().contains(edge.roadType()))
         {

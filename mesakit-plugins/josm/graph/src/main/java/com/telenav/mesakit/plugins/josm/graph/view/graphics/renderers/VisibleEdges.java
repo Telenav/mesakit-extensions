@@ -57,7 +57,7 @@ public class VisibleEdges
 
     private final Distance smallest;
 
-    public VisibleEdges(final MapCanvas canvas, final ViewModel model, final Mode mode)
+    public VisibleEdges(MapCanvas canvas, ViewModel model, Mode mode)
     {
         this.canvas = canvas;
         this.model = model;
@@ -81,7 +81,7 @@ public class VisibleEdges
             while (edges.size() > MAXIMUM_RENDERED_EDGES && type != null)
             {
                 // remove the least important ones
-                final var remove = type;
+                var remove = type;
                 edges.removeIf(edge -> edge.roadType().isEqualOrLessImportantThan(remove));
                 type = type.nextMostImportant();
             }
@@ -93,15 +93,15 @@ public class VisibleEdges
         return EdgeSet.forCollection(Maximum.MAXIMUM, edges);
     }
 
-    public EdgeSet edges(final Selection.Type type)
+    public EdgeSet edges(Selection.Type type)
     {
-        final var selected = model.selection().selectedEdge();
+        var selected = model.selection().selectedEdge();
         switch (type)
         {
             case UNSELECTED:
             case INACTIVE:
             {
-                final var edges = edges();
+                var edges = edges();
                 if (selected != null && selected.isTwoWay())
                 {
                     edges.add(selected.reversed());
@@ -122,7 +122,7 @@ public class VisibleEdges
                 }
                 else
                 {
-                    final var edges = EdgeSet.of(selected);
+                    var edges = EdgeSet.of(selected);
                     if (selected.isTwoWay())
                     {
                         edges.add(selected.reversed());
@@ -139,7 +139,7 @@ public class VisibleEdges
     /**
      * @return True if the edge could be visible
      */
-    private boolean couldBeVisible(final Edge edge)
+    private boolean couldBeVisible(Edge edge)
     {
         // If edges are enabled and the specific kind of edge is enable,
         if (mode == RELATIONS || model.graphPanel().viewPanel().viewEdges() && model.graphPanel().viewPanel().viewRoadTypes().contains(edge.roadType()))
@@ -161,7 +161,7 @@ public class VisibleEdges
         return false;
     }
 
-    private boolean isLongEnough(final Edge edge)
+    private boolean isLongEnough(Edge edge)
     {
         return edge != null && edge.length().isGreaterThan(smallest);
     }

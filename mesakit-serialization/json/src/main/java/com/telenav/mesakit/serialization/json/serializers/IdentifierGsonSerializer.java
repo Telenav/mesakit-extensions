@@ -29,13 +29,13 @@ public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier
     }
 
     @Override
-    protected Identifier toObject(final Long scalar)
+    protected Identifier toObject(Long scalar)
     {
         return new Identifier(scalar);
     }
 
     @Override
-    protected Long toPrimitive(final Identifier object)
+    protected Long toPrimitive(Identifier object)
     {
         return object.asLong();
     }

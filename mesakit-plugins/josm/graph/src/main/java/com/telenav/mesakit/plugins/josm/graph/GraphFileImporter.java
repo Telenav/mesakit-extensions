@@ -50,7 +50,7 @@ public class GraphFileImporter extends FileImporter
 
     private final GraphPlugin plugin;
 
-    public GraphFileImporter(final GraphPlugin plugin)
+    public GraphFileImporter(GraphPlugin plugin)
     {
         super(new ExtensionFileFilter("graph,txd,txd.gz", "graph", "Graph Files (*.graph, *.txd, *.txd.gz)"));
 
@@ -58,24 +58,24 @@ public class GraphFileImporter extends FileImporter
     }
 
     @Override
-    public void importData(final java.io.File file, final ProgressMonitor progressMonitor) throws IOException
+    public void importData(java.io.File file, ProgressMonitor progressMonitor) throws IOException
     {
         try
         {
-            final var input = File.of(file);
+            var input = File.of(file);
             if (ZipArchive.is(LOGGER, input))
             {
-                final var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
-                final var reporter = Progress.create();
+                var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
+                var reporter = Progress.create();
                 progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
-                final var previous = new MutableValue<>(0);
+                var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));
-                final var graph = new SmartGraphLoader(input).load(messages, reporter);
+                var graph = new SmartGraphLoader(input).load(messages, reporter);
                 if (graph != null)
                 {
                     progressMonitor.worked(100 - previous.get());
-                    final var metadata = graph.metadata();
-                    final var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
+                    var metadata = graph.metadata();
+                    var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
                     layer.graph(graph, ProgressReporter.NULL);
                     LOGGER.information("Loaded graph '$':\n$", graph.name(), metadata);
                     layer.add();
@@ -95,7 +95,7 @@ public class GraphFileImporter extends FileImporter
                 throw new IOException("Not a graph archive: " + file);
             }
         }
-        catch (final Throwable e)
+        catch (Throwable e)
         {
             e.printStackTrace();
             throw new IOException("Unable to open " + file, e);
@@ -108,12 +108,12 @@ public class GraphFileImporter extends FileImporter
         return false;
     }
 
-    private ProgressListener workListener(final ProgressMonitor progressMonitor, final MutableValue<Integer> previous)
+    private ProgressListener workListener(ProgressMonitor progressMonitor, MutableValue<Integer> previous)
     {
         return at ->
         {
-            final var current = at.asInt();
-            final var worked = current - previous.get();
+            var current = at.asInt();
+            var worked = current - previous.get();
             previous.set(current);
             progressMonitor.worked(worked);
         };

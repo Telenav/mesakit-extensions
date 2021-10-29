@@ -25,6 +25,7 @@ import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanChar
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -32,7 +33,6 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.List;
 
@@ -79,7 +79,7 @@ public class PbfAnalyzerApplication extends Application
                     .defaultValue(false)
                     .build();
 
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfAnalyzerApplication().run(arguments);
     }
@@ -98,24 +98,24 @@ public class PbfAnalyzerApplication extends Application
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var wayFilter = get(WAY_FILTER);
-        final var relationFilter = get(RELATION_FILTER);
+        var input = argument(INPUT);
+        var wayFilter = get(WAY_FILTER);
+        var relationFilter = get(RELATION_FILTER);
 
-        final Analyzer analyzer = new Analyzer(commandLine());
+        Analyzer analyzer = new Analyzer(commandLine());
 
-        final var reader = listenTo(new SerialPbfReader(input));
+        var reader = listenTo(new SerialPbfReader(input));
         reader.process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 analyzer.addNode(node);
                 return ACCEPTED;
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (relationFilter.accepts(relation))
                 {
@@ -126,7 +126,7 @@ public class PbfAnalyzerApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (wayFilter.accepts(way))
                 {

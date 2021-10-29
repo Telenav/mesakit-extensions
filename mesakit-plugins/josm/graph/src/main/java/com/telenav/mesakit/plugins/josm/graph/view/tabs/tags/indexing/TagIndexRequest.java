@@ -11,13 +11,13 @@ import java.util.function.Consumer;
  */
 public class TagIndexRequest
 {
-    Graph graph;
+    final Graph graph;
 
-    Rectangle bounds;
+    final Rectangle bounds;
 
-    Consumer<TagIndex> consumer;
+    final Consumer<TagIndex> consumer;
 
-    public TagIndexRequest(final Graph graph, final Rectangle bounds, final Consumer<TagIndex> consumer)
+    public TagIndexRequest(Graph graph, Rectangle bounds, Consumer<TagIndex> consumer)
     {
         this.graph = graph;
         this.bounds = bounds;
@@ -25,11 +25,11 @@ public class TagIndexRequest
     }
 
     @Override
-    public boolean equals(final Object object)
+    public boolean equals(Object object)
     {
         if (object instanceof TagIndexRequest)
         {
-            final TagIndexRequest that = (TagIndexRequest) object;
+            TagIndexRequest that = (TagIndexRequest) object;
             return graph.equals(that.graph) && bounds.equals(that.bounds);
         }
         return false;

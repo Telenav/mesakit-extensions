@@ -23,5 +23,5 @@ import com.telenav.mesakit.map.road.model.RoadName;
 
 public interface RoadNameMatcher
 {
-    Percent matches(final RoadName candidate, final RoadName desired);
+    Percent matches(RoadName candidate, RoadName desired);
 }

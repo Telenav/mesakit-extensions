@@ -25,8 +25,8 @@ import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
 import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.GraphProject;
+import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
@@ -51,7 +51,7 @@ import static com.telenav.mesakit.map.geography.Precision.precisionSwitchParser;
  */
 public class PbfMetadataApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfMetadataApplication().run(arguments);
     }
@@ -114,8 +114,8 @@ public class PbfMetadataApplication extends Application
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var existingMetadata = Metadata.from(input);
+        var input = argument(INPUT);
+        var existingMetadata = Metadata.from(input);
         if (get(VIEW))
         {
             information(commandLineDescription("PBF Metadata Annotator"));
@@ -125,7 +125,7 @@ public class PbfMetadataApplication extends Application
         {
             if (has(DATA_PRECISION) && has(DATA_DESCRIPTOR))
             {
-                final var metadataFromDescriptor = Metadata.parseDescriptor(get(DATA_DESCRIPTOR));
+                var metadataFromDescriptor = Metadata.parseDescriptor(get(DATA_DESCRIPTOR));
                 if (metadataFromDescriptor == null)
                 {
                     exit("$ is not a valid metadata descriptor", get(DATA_DESCRIPTOR));
@@ -165,13 +165,13 @@ public class PbfMetadataApplication extends Application
                     commandLine().addSwitch("way-filter", wayFilter.name());
                     information(commandLineDescription("PBF Metadata Annotator"));
 
-                    final var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
+                    var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
 
-                    final var metadata = annotator.read()
+                    var metadata = annotator.read()
                             .withDataPrecision(get(DATA_PRECISION))
                             .withMetadata(metadataFromDescriptor);
 
-                    final boolean replace = existingMetadata != null;
+                    boolean replace = existingMetadata != null;
                     if (annotator.write(metadata))
                     {
                         Message.println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")

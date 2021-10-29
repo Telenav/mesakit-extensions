@@ -84,7 +84,7 @@ public class EdgeAttributeChecker extends Application
         scope_output.add(EdgeAttributes.get().ROAD_SHAPE);
     }
 
-    public static void main(final String[] args)
+    public static void main(String[] args)
     {
         new EdgeAttributeChecker().run(args);
     }
@@ -101,14 +101,14 @@ public class EdgeAttributeChecker extends Application
 
         private final Map<Attribute<Edge>, Writer> attributeTypeWriters = new HashMap<>();
 
-        public CheckResult(final Folder outputFolder, final Graph graph)
+        public CheckResult(Folder outputFolder, Graph graph)
         {
             this.outputFolder = outputFolder;
             this.graph = graph;
             outputFolder.ensureExists();
         }
 
-        public void addFailed(final Edge edge, final Attribute<Edge> attribute) throws IOException
+        public void addFailed(Edge edge, Attribute<Edge> attribute) throws IOException
         {
             var count = attributeTypeCount.get(attribute);
             if (count == null)
@@ -121,14 +121,14 @@ public class EdgeAttributeChecker extends Application
 
             if (scope_output.contains(attribute))
             {
-                final var writer = writerForType(attribute);
+                var writer = writerForType(attribute);
                 writer.write(edge.identifierAsLong() + "\n");
             }
         }
 
         public void close() throws IOException
         {
-            for (final var writer : attributeTypeWriters.values())
+            for (var writer : attributeTypeWriters.values())
             {
                 writer.close();
             }
@@ -138,21 +138,21 @@ public class EdgeAttributeChecker extends Application
 
         public void save() throws IOException
         {
-            final Writer writer = outputFolder.file("failed-statistics.txt").printWriter();
+            Writer writer = outputFolder.file("failed-statistics.txt").printWriter();
 
             writer.write("total " + failed + " of " + graph.edgeCount() + " ("
                     + Count.count(failed).percentOf(graph.edgeCount()) + ") failed \n");
 
-            for (final var entry : attributeTypeCount.entrySet())
+            for (var entry : attributeTypeCount.entrySet())
             {
-                final var attribute = entry.getKey();
-                final var count = entry.getValue();
+                var attribute = entry.getKey();
+                var count = entry.getValue();
                 writer.write(attribute + "\t" + count + "\t" + count.percentOf(graph.edgeCount()) + "\n");
             }
 
             writer.write("\nChecked Attributes:\n");
 
-            for (final var attribute : graph.dataSpecification().attributes(graph.edgeStore().getClass()))
+            for (var attribute : graph.dataSpecification().attributes(graph.edgeStore().getClass()))
             {
                 if (scope_all.contains(attribute))
                 {
@@ -165,7 +165,7 @@ public class EdgeAttributeChecker extends Application
             close();
         }
 
-        public Writer writerForType(final Attribute<Edge> attribute)
+        public Writer writerForType(Attribute<Edge> attribute)
         {
             var writer = attributeTypeWriters.get(attribute);
             if (writer == null)
@@ -179,14 +179,14 @@ public class EdgeAttributeChecker extends Application
         }
     }
 
-    public boolean checkCountry(final Edge edge)
+    public boolean checkCountry(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.country() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -194,14 +194,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkFreeFlowSpeed(final Edge edge)
+    public boolean checkFreeFlowSpeed(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.freeFlowSpeed() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -209,14 +209,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkLaneCount(final Edge edge)
+    public boolean checkLaneCount(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.laneCount() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -224,14 +224,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkLength(final Edge edge)
+    public boolean checkLength(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.length() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -239,14 +239,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkOneWayFlag(final Edge edge)
+    public boolean checkOneWayFlag(Edge edge)
     {
         var isValid = true;
         try
         {
             edge.isOneWay();
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -254,14 +254,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkOsmFromNodeIdentifier(final Edge edge)
+    public boolean checkOsmFromNodeIdentifier(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.fromNodeIdentifier() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -269,14 +269,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkOsmToNodeIdentifier(final Edge edge)
+    public boolean checkOsmToNodeIdentifier(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.toNodeIdentifier() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -284,14 +284,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkRoadShape(final Edge edge)
+    public boolean checkRoadShape(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.roadShape() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -299,14 +299,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkRoadType(final Edge edge)
+    public boolean checkRoadType(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.roadType() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -314,14 +314,14 @@ public class EdgeAttributeChecker extends Application
         return isValid;
     }
 
-    public boolean checkSpeedLimit(final Edge edge)
+    public boolean checkSpeedLimit(Edge edge)
     {
         var isValid = true;
         try
         {
             isValid = (edge.speedLimit() != null);
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             isValid = false;
         }
@@ -332,20 +332,20 @@ public class EdgeAttributeChecker extends Application
     @Override
     protected void onRun()
     {
-        final var graph = get(GRAPH_RESOURCE).load();
-        final var outputFolder = get(OUTPUT_FOLDER);
+        var graph = get(GRAPH_RESOURCE).load();
+        var outputFolder = get(OUTPUT_FOLDER);
 
-        final var time = Time.now();
-        final var result = new CheckResult(outputFolder, graph);
-        final var total = graph.edgeCount();
+        var time = Time.now();
+        var result = new CheckResult(outputFolder, graph);
+        var total = graph.edgeCount();
         try
         {
             var i = 0;
-            for (final var edge : graph.edges())
+            for (var edge : graph.edges())
             {
                 i++;
                 var failed = false;
-                for (final var attribute : scope_all)
+                for (var attribute : scope_all)
                 {
                     if (!check(edge, attribute))
                     {
@@ -367,7 +367,7 @@ public class EdgeAttributeChecker extends Application
 
             result.save();
         }
-        catch (final Exception ex)
+        catch (Exception ex)
         {
             ex.printStackTrace();
         }
@@ -381,7 +381,7 @@ public class EdgeAttributeChecker extends Application
         return ObjectSet.of(GRAPH_RESOURCE, OUTPUT_FOLDER);
     }
 
-    private boolean check(final Edge edge, final Attribute<Edge> attribute)
+    private boolean check(Edge edge, Attribute<Edge> attribute)
     {
         var isValid = true;
         if (attribute.equals(EdgeAttributes.get().COUNTRY))

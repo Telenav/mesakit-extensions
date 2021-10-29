@@ -21,12 +21,12 @@ package com.telenav.mesakit.tools.applications.pbf.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcess
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class PbfDumperApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfDumperApplication().run(arguments);
     }
@@ -87,13 +87,13 @@ public class PbfDumperApplication extends Application
     @Override
     protected void onRun()
     {
-        final var file = argument(0, INPUT);
-        final var identifier = argument(1, IDENTIFIER);
+        var file = argument(0, INPUT);
+        var identifier = argument(1, IDENTIFIER);
 
         listenTo(new SerialPbfReader(file)).process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (node.identifierAsLong() == identifier)
                 {
@@ -104,7 +104,7 @@ public class PbfDumperApplication extends Application
 
             @SuppressWarnings("UseOfSystemOutOrSystemErr")
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 var found = false;
                 if (relation.identifierAsLong() == identifier || identifier == -1L)
@@ -113,7 +113,7 @@ public class PbfDumperApplication extends Application
                 }
                 else
                 {
-                    for (final var member : relation.members())
+                    for (var member : relation.members())
                     {
                         if (member.getMemberId() == identifier)
                         {
@@ -123,11 +123,11 @@ public class PbfDumperApplication extends Application
                 }
                 if (found)
                 {
-                    for (final var tag : relation)
+                    for (var tag : relation)
                     {
                         if (tag.getKey() != null && "restriction".equalsIgnoreCase(tag.getKey()))
                         {
-                            final var value = tag.getValue().toLowerCase();
+                            var value = tag.getValue().toLowerCase();
                             if (value.startsWith("no_"))
                             {
                                 if ("no_left_turn".equalsIgnoreCase(value))
@@ -195,12 +195,12 @@ public class PbfDumperApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (way.identifierAsLong() == identifier)
                 {
                     System.out.println(way + " = " + way);
-                    for (final var node : way.nodes())
+                    for (var node : way.nodes())
                     {
                         System.out.println(" - node " + node.getNodeId() + " (" + node.getLatitude() + ", "
                                 + node.getLongitude() + ")");

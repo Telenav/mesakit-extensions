@@ -29,13 +29,13 @@ public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCa
     }
 
     @Override
-    protected SpeedCategory toObject(final Integer scalar)
+    protected SpeedCategory toObject(Integer scalar)
     {
         return SpeedCategory.forIdentifier(scalar);
     }
 
     @Override
-    protected Integer toPrimitive(final SpeedCategory object)
+    protected Integer toPrimitive(SpeedCategory object)
     {
         return object.identifier();
     }

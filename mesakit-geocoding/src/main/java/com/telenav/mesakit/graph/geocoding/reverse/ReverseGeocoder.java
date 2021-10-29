@@ -62,7 +62,7 @@ public class ReverseGeocoder
             return compareDirection;
         }
 
-        public void compareDirection(final boolean compare)
+        public void compareDirection(boolean compare)
         {
             compareDirection = compare;
         }
@@ -72,7 +72,7 @@ public class ReverseGeocoder
             return headingTolerance;
         }
 
-        public void headingTolerance(final Angle headingTolerance)
+        public void headingTolerance(Angle headingTolerance)
         {
             this.headingTolerance = headingTolerance;
         }
@@ -94,7 +94,7 @@ public class ReverseGeocoder
          * Given this, if your roadNameCloseness in this configuration was 70%, the two names would be considered
          * equivalent.
          */
-        public void roadNameCloseness(final Percent roadNameCloseness)
+        public void roadNameCloseness(Percent roadNameCloseness)
         {
             this.roadNameCloseness = roadNameCloseness;
         }
@@ -104,7 +104,7 @@ public class ReverseGeocoder
             return roadNameMatcher;
         }
 
-        public void roadNameMatcher(final RoadNameMatcher roadNameMatcher)
+        public void roadNameMatcher(RoadNameMatcher roadNameMatcher)
         {
             this.roadNameMatcher = roadNameMatcher;
         }
@@ -114,7 +114,7 @@ public class ReverseGeocoder
             return roadNameStandardizer;
         }
 
-        public void roadNameStandardizer(final RoadNameStandardizer standardizer)
+        public void roadNameStandardizer(RoadNameStandardizer standardizer)
         {
             roadNameStandardizer = standardizer;
         }
@@ -124,7 +124,7 @@ public class ReverseGeocoder
             return within;
         }
 
-        public void within(final Distance within)
+        public void within(Distance within)
         {
             this.within = within;
         }
@@ -143,7 +143,7 @@ public class ReverseGeocoder
             return heading;
         }
 
-        public void heading(final Heading heading)
+        public void heading(Heading heading)
         {
             this.heading = heading;
         }
@@ -153,7 +153,7 @@ public class ReverseGeocoder
             return location;
         }
 
-        public void location(final Location location)
+        public void location(Location location)
         {
             this.location = location;
         }
@@ -163,7 +163,7 @@ public class ReverseGeocoder
             return roadName;
         }
 
-        public void roadName(final RoadName roadName)
+        public void roadName(RoadName roadName)
         {
             this.roadName = roadName;
         }
@@ -177,13 +177,13 @@ public class ReverseGeocoder
 
         private Percent percentage = Percent._0;
 
-        Response(final Edge edge, final PolylineSnap snap)
+        Response(Edge edge, PolylineSnap snap)
         {
             this.edge = edge;
             this.snap = snap;
         }
 
-        Response(final Edge edge, final PolylineSnap snap, final Percent percentage)
+        Response(Edge edge, PolylineSnap snap, Percent percentage)
         {
             this(edge, snap);
             this.percentage = percentage;
@@ -209,18 +209,18 @@ public class ReverseGeocoder
 
     private final Configuration configuration;
 
-    public ReverseGeocoder(final Graph graph, final Configuration configuration)
+    public ReverseGeocoder(Graph graph, Configuration configuration)
     {
         this.graph = graph;
         this.configuration = configuration;
     }
 
-    public Response locate(final Request request)
+    public Response locate(Request request)
     {
-        final var snapper = new PolylineSnapper();
-        final var standardizer = configuration.roadNameStandardizer();
-        final var location = request.location();
-        final var heading = request.heading();
+        var snapper = new PolylineSnapper();
+        var standardizer = configuration.roadNameStandardizer();
+        var location = request.location();
+        var heading = request.heading();
 
         var desired = request.roadName();
         if (standardizer != null)
@@ -234,7 +234,7 @@ public class ReverseGeocoder
         var highestRoadNameCloseness = Percent._0;
 
         // Go through each edge within the given distance of the requested location
-        for (final var edge : graph.edgesIntersecting(location.within(configuration.within())))
+        for (var edge : graph.edgesIntersecting(location.within(configuration.within())))
         {
             // and if no heading was specified or the edge's heading is close to what we're
             // looking for,
@@ -250,7 +250,7 @@ public class ReverseGeocoder
                 {
                     highestRoadNameCloseness = roadNameCloseness;
                     // then snap the location to the edge
-                    final var snap = snapper.snap(edge, location);
+                    var snap = snapper.snap(edge, location);
 
                     // and if the snap is the closest we've seen so far,
                     if (snap.distanceToSource().isLessThan(closestDistance))
@@ -265,10 +265,10 @@ public class ReverseGeocoder
         return response;
     }
 
-    private Percent matches(final Set<RoadName> roadNames,
-                            final RoadName desired,
-                            final RoadNameStandardizer standardizer,
-                            final Heading edgeHeading)
+    private Percent matches(Set<RoadName> roadNames,
+                            RoadName desired,
+                            RoadNameStandardizer standardizer,
+                            Heading edgeHeading)
     {
         var highestScore = Percent._0;
         for (var roadName : roadNames)
@@ -281,7 +281,7 @@ public class ReverseGeocoder
                     roadName = RoadName.forName(roadName.name() + " " + edgeHeading.asApproximateDirection());
                 }
                 // and the standardized road name matches the desired road name,
-                final var score = configuration.roadNameMatcher().matches(
+                var score = configuration.roadNameMatcher().matches(
                         standardizer != null ? standardizer.standardize(roadName).asRoadName() : roadName, desired);
                 if (score.isGreaterThan(highestScore))
                 {

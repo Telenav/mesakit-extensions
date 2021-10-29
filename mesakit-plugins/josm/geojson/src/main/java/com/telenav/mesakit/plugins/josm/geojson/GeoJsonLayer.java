@@ -69,7 +69,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
 
     private File file;
 
-    public GeoJsonLayer(final GeoJsonPlugin plugin, final String name)
+    public GeoJsonLayer(GeoJsonPlugin plugin, String name)
     {
         super(plugin, name);
     }
@@ -85,7 +85,16 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @Override
-    public void onPaint(final Graphics2D graphics, final MapView view, final Bounds bounds)
+    public void onInitialize()
+    {
+        if (panel() != null)
+        {
+            panel().refresh();
+        }
+    }
+
+    @Override
+    public void onPaint(Graphics2D graphics, MapView view, Bounds bounds)
     {
         if (document != null)
         {
@@ -97,7 +106,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             {
 
                 // we can draw each feature in the document
-                final var panel = panel();
+                var panel = panel();
                 if (panel != null)
                 {
 
@@ -109,9 +118,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                 }
                 if (selectedFeature != null)
                 {
-                    final var arrowIndex = arrowGeometryIndex(selectedFeature);
+                    var arrowIndex = arrowGeometryIndex(selectedFeature);
                     var index = 0;
-                    for (final var geometry : selectedFeature)
+                    for (var geometry : selectedFeature)
                     {
                         if (index++ != arrowIndex)
                         {
@@ -140,11 +149,11 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return (GeoJsonPlugin) super.plugin();
     }
 
-    public void setDocument(final GeoJsonDocument document)
+    public void setDocument(GeoJsonDocument document)
     {
         spatialIndex = new RTreeSpatialIndex<>(objectName() + ".spatialIndex", new RTreeSettings());
-        final List<GeoJsonFeature> features = new ArrayList<>();
-        for (final var feature : document.features())
+        List<GeoJsonFeature> features = new ArrayList<>();
+        for (var feature : document.features())
         {
             if (feature.bounds() != null)
             {
@@ -163,17 +172,17 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         }
     }
 
-    public void setFile(final File file)
+    public void setFile(File file)
     {
         this.file = file;
     }
 
     @Override
-    public void visitBoundingBox(final BoundingXYVisitor v)
+    public void visitBoundingBox(BoundingXYVisitor v)
     {
         if (document != null)
         {
-            final var bounds = document.bounds();
+            var bounds = document.bounds();
             if (bounds != null)
             {
                 v.visit(new Bounds(bounds.bottom().asDegrees(), bounds.left().asDegrees(), bounds.top().asDegrees(),
@@ -182,11 +191,11 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         }
     }
 
-    public void zoomToFeature(final GeoJsonFeature feature)
+    public void zoomToFeature(GeoJsonFeature feature)
     {
         if (feature != null)
         {
-            final var bounds = feature.bounds();
+            var bounds = feature.bounds();
             if (bounds != null)
             {
                 plugin().zoomTo(bounds.expanded(Percent.of(50)));
@@ -205,20 +214,11 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @Override
-    public void onInitialize()
-    {
-        if (panel() != null)
-        {
-            panel().refresh();
-        }
-    }
-
-    @Override
     protected void onNextSelection()
     {
         if (selectedFeatures != null && selectedFeatures.size() > 1)
         {
-            final var index = selectedFeatures.indexOf(selectedFeature);
+            var index = selectedFeatures.indexOf(selectedFeature);
             if (index != -1)
             {
                 selectFeature(selectedFeatures.get((index + 1) % selectedFeatures.size()));
@@ -227,9 +227,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @Override
-    protected void onPopup(final Component parent, final int x, final int y)
+    protected void onPopup(Component parent, int x, int y)
     {
-        final var menu = new GeoJsonFeaturePopUpMenu(selectedFeature);
+        var menu = new GeoJsonFeaturePopUpMenu(selectedFeature);
         menu.show(parent, x, y);
     }
 
@@ -238,7 +238,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     {
         if (selectedFeatures != null && selectedFeatures.size() > 1)
         {
-            final var index = selectedFeatures.indexOf(selectedFeature);
+            var index = selectedFeatures.indexOf(selectedFeature);
             if (index != -1)
             {
                 selectFeature(selectedFeatures.get(Math.abs(index - 1) % selectedFeatures.size()));
@@ -247,9 +247,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @Override
-    protected boolean onSelect(final MouseEvent event)
+    protected boolean onSelect(MouseEvent event)
     {
-        final var features = featuresForPoint(event.getPoint());
+        var features = featuresForPoint(event.getPoint());
         if (!features.isEmpty())
         {
             selectFeature(features.get(0));
@@ -259,11 +259,11 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return false;
     }
 
-    private int arrowGeometryIndex(final GeoJsonFeature feature)
+    private int arrowGeometryIndex(GeoJsonFeature feature)
     {
         try
         {
-            final var value = feature.properties().get("arrowGeometryIndex");
+            var value = feature.properties().get("arrowGeometryIndex");
             if (value != null)
             {
                 if (value instanceof Double)
@@ -273,24 +273,24 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                 return Integer.parseInt(value.toString());
             }
         }
-        catch (final Exception ignored)
+        catch (Exception ignored)
         {
         }
         return -1;
     }
 
-    private Color colorForGeometry(final GeoJsonFeature feature,
-                                   final GeoJsonGeometry geometry,
-                                   final boolean highlight)
+    private Color colorForGeometry(GeoJsonFeature feature,
+                                   GeoJsonGeometry geometry,
+                                   boolean highlight)
     {
         if (isInactiveLayer())
         {
             return Color.GRAY;
         }
-        final var colorProperty = feature.properties().get("color");
+        var colorProperty = feature.properties().get("color");
         if (colorProperty != null)
         {
-            final var color = colorConverter.convert(colorProperty.toString());
+            var color = colorConverter.convert(colorProperty.toString());
             if (color != null)
             {
                 return highlight ? color.invert() : color;
@@ -314,17 +314,17 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return null;
     }
 
-    private void drawFeatures(final Graphics2D graphics, final Bounds bounds, final GeoJsonPanel panel,
-                              final boolean drawPoints)
+    private void drawFeatures(Graphics2D graphics, Bounds bounds, GeoJsonPanel panel,
+                              boolean drawPoints)
     {
-        for (final var feature : spatialIndex.intersecting(rectangle(bounds)))
+        for (var feature : spatialIndex.intersecting(rectangle(bounds)))
         {
-            final var arrowIndex = arrowGeometryIndex(feature);
+            var arrowIndex = arrowGeometryIndex(feature);
             if ((isInactiveLayer() || panel.isVisible(feature))
                     && (selectedFeature == null || feature != selectedFeature))
             {
                 var index = 0;
-                for (final var geometry : feature)
+                for (var geometry : feature)
                 {
                     if (index++ != arrowIndex)
                     {
@@ -340,43 +340,43 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
     }
 
     @SuppressWarnings({ "SuspiciousNameCombination" })
-    private void drawGeometry(final Graphics2D graphics, final GeoJsonFeature feature,
-                              final GeoJsonGeometry geometry, final Color color, final Color annotationBackground,
-                              final Color annotationText,
-                              final boolean drawTitle)
+    private void drawGeometry(Graphics2D graphics, GeoJsonFeature feature,
+                              GeoJsonGeometry geometry, Color color, Color annotationBackground,
+                              Color annotationText,
+                              boolean drawTitle)
     {
-        final var width = (int) strokeWidth();
+        var width = (int) strokeWidth();
         if (feature.title() != null && drawTitle)
         {
             graphics.setColor(color.asAwtColor());
-            final var area = awtRectangleForRectangle(feature.bounds());
+            var area = awtRectangleForRectangle(feature.bounds());
             graphics.drawRect((int) area.getX(), (int) area.getY(), (int) area.getWidth(), (int) area.getHeight());
-            final var textBounds = graphics.getFontMetrics().getStringBounds(feature.title(), graphics);
+            var textBounds = graphics.getFontMetrics().getStringBounds(feature.title(), graphics);
             graphics.drawString(feature.title(), (int) area.getX(),
                     (int) area.getY() - (int) textBounds.getHeight());
         }
         if (geometry instanceof GeoJsonPoint)
         {
-            final var location = ((GeoJsonPoint) geometry).location();
-            final var point = pointForLocation(location);
+            var location = ((GeoJsonPoint) geometry).location();
+            var point = pointForLocation(location);
             graphics.setColor(color.asAwtColor());
-            final var x = (int) point.getX();
-            final var y = (int) point.getY();
+            var x = (int) point.getX();
+            var y = (int) point.getY();
             graphics.fillOval(x, y, width, width);
             graphics.setColor(color.darker().asAwtColor());
-            final var outlineWidth = Math.max(2, (width / 8) * 2 / 2);
+            var outlineWidth = Math.max(2, (width / 8) * 2 / 2);
             graphics.setStroke(new BasicStroke(outlineWidth + 2));
             graphics.drawOval(x, y, width, width);
         }
         if (geometry instanceof GeoJsonPolyline)
         {
             graphics.setColor(color.asAwtColor());
-            final var line = ((GeoJsonPolyline) geometry).polyline();
+            var line = ((GeoJsonPolyline) geometry).polyline();
             var first = true;
-            final Path2D path = new Path2D.Float();
-            for (final var to : line.locationSequence())
+            Path2D path = new Path2D.Float();
+            for (var to : line.locationSequence())
             {
-                final var point = pointForLocation(to);
+                var point = pointForLocation(to);
                 if (first)
                 {
                     path.moveTo(point.getX(), point.getY());
@@ -387,22 +387,22 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                     path.lineTo(point.getX(), point.getY());
                 }
             }
-            final var stroke = stroke();
-            final var shape = stroke.createStrokedShape(path);
+            var stroke = stroke();
+            var shape = stroke.createStrokedShape(path);
             graphics.fill(shape);
             featureForShape.put(shape, feature);
             if (annotationBackground != null)
             {
                 var index = 1;
-                final var font = font(graphics, "99", width);
+                var font = font(graphics, "99", width);
                 graphics.setFont(font);
-                for (final var location : line.locationSequence())
+                for (var location : line.locationSequence())
                 {
-                    final var point = pointForLocation(location);
-                    final var centerX = (int) point.getX();
-                    final var centerY = (int) point.getY();
-                    final var x = centerX - width / 2;
-                    final var y = centerY - width / 2;
+                    var point = pointForLocation(location);
+                    var centerX = (int) point.getX();
+                    var centerY = (int) point.getY();
+                    var x = centerX - width / 2;
+                    var y = centerY - width / 2;
                     graphics.setColor(annotationText.asAwtColor());
                     graphics.fillOval(x - 1, y - 1, width + 2, width + 2);
                     graphics.setColor(annotationBackground.asAwtColor());
@@ -410,9 +410,9 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                     graphics.fillOval(x, y, width, width);
                     if (font != null)
                     {
-                        final var string = "" + index;
-                        final var metrics = graphics.getFontMetrics();
-                        final var bounds = metrics.getStringBounds(string, graphics);
+                        var string = "" + index;
+                        var metrics = graphics.getFontMetrics();
+                        var bounds = metrics.getStringBounds(string, graphics);
                         graphics.setColor(annotationText.asAwtColor());
                         graphics.drawString(string, centerX - (int) bounds.getWidth() / 2,
                                 centerY + metrics.getAscent() / 2);
@@ -423,36 +423,36 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         }
     }
 
-    private void drawHeatMap(final Graphics2D graphics)
+    private void drawHeatMap(Graphics2D graphics)
     {
-        final var size = viewWidth().times(0.02);
+        var size = viewWidth().times(0.02);
         var maximum = Count._0;
-        final Map<Rectangle, Count> counts = new HashMap<>();
-        for (final var cell : bounds().cells(size))
+        Map<Rectangle, Count> counts = new HashMap<>();
+        for (var cell : bounds().cells(size))
         {
-            final var count = Count.count(spatialIndex.intersecting(cell));
+            var count = Count.count(spatialIndex.intersecting(cell));
             maximum = maximum.maximum(count);
             counts.put(cell, count);
         }
-        for (final var cell : bounds().cells(size))
+        for (var cell : bounds().cells(size))
         {
-            final var count = counts.get(cell);
+            var count = counts.get(cell);
             graphics.setColor(Color.rgba(255, 0, 0,
                     Math.min(255, (int) (255 * ((double) count.asInt() / (double) maximum.asInt())))).asAwtColor());
-            final var topLeft = pointForLocation(cell.topLeft());
-            final var bottomRight = pointForLocation(cell.bottomRight());
-            final var x = (int) topLeft.getX();
-            final var y = (int) topLeft.getY();
-            final var width = (int) (bottomRight.getX() - x);
-            final var height = (int) (bottomRight.getY() - y);
+            var topLeft = pointForLocation(cell.topLeft());
+            var bottomRight = pointForLocation(cell.bottomRight());
+            var x = (int) topLeft.getX();
+            var y = (int) topLeft.getY();
+            var width = (int) (bottomRight.getX() - x);
+            var height = (int) (bottomRight.getY() - y);
             graphics.fillRect(x, y, width, height);
         }
     }
 
-    private List<GeoJsonFeature> featuresForPoint(final Point point)
+    private List<GeoJsonFeature> featuresForPoint(Point point)
     {
-        final List<GeoJsonFeature> features = new ArrayList<>();
-        for (final var entry : featureForShape.entrySet())
+        List<GeoJsonFeature> features = new ArrayList<>();
+        for (var entry : featureForShape.entrySet())
         {
             if (entry.getKey().contains(point))
             {
@@ -467,7 +467,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         return activeLayer() != this;
     }
 
-    private void selectFeature(final GeoJsonFeature feature)
+    private void selectFeature(GeoJsonFeature feature)
     {
         selectedFeature = feature;
         if (panel() != null)

@@ -39,17 +39,17 @@ public class PlaceRenderer
 
     private final PlaceTheme theme = new PlaceTheme();
 
-    public PlaceRenderer(final MapCanvas canvas, final ViewModel model)
+    public PlaceRenderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Selection.Type type)
+    public void draw(Selection.Type type)
     {
         if (model.graphPanel().viewPanel().viewPlaces())
         {
-            for (final var place : model.graph().placesInside(model.bounds()))
+            for (var place : model.graph().placesInside(model.bounds()))
             {
                 if (isVisible(place) && model.selection().is(type, place))
                 {
@@ -59,16 +59,16 @@ public class PlaceRenderer
         }
     }
 
-    private void draw(final Place place)
+    private void draw(Place place)
     {
         // If we're zoomed in or the place is important enough
         if (canvas.scale().closerThan(MapScale.STATE) || place.isCity() || place.population().isGreaterThan(Count.count(10_000)))
         {
-            final var dot = model.selection().isSelected(place)
+            var dot = model.selection().isSelected(place)
                     ? theme.dotPlaceSelected(place.population())
                     : theme.dotPlace(place.population());
 
-            final var shape = dot
+            var shape = dot
                     .withLabelText(place.name())
                     .withLocation(place.location())
                     .draw(canvas);
@@ -77,7 +77,7 @@ public class PlaceRenderer
         }
     }
 
-    private boolean isVisible(final Place place)
+    private boolean isVisible(Place place)
     {
         if (place.type() == null)
         {

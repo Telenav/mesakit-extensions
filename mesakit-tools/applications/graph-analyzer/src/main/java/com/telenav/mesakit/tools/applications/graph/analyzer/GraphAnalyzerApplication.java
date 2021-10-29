@@ -62,7 +62,7 @@ import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentPa
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class GraphAnalyzerApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new GraphAnalyzerApplication().run(arguments);
     }
@@ -71,21 +71,21 @@ public class GraphAnalyzerApplication extends Application
     {
         private final Map<String, Object> properties = new LinkedHashMap<>();
 
-        public void add(final String key, final Object value)
+        public void add(String key, Object value)
         {
             properties.put(key, value);
         }
 
-        public void write(final PrintWriter writer)
+        public void write(PrintWriter writer)
         {
-            for (final var property : properties.entrySet())
+            for (var property : properties.entrySet())
             {
                 writer.write(label(property.getKey()) + property.getValue() + "\n");
             }
             writer.write("\n");
         }
 
-        private String label(final String value)
+        private String label(String value)
         {
             return Align.right(value, 32, ' ') + ": ";
         }
@@ -131,13 +131,13 @@ public class GraphAnalyzerApplication extends Application
     @Override
     protected void onRun()
     {
-        final boolean print = get(PRINT);
-        final boolean byHighwayType = get(BY_HIGHWAY_TYPE);
-        final var output = get(OUTPUT_FOLDER);
-        for (final var argument : argumentList())
+        boolean print = get(PRINT);
+        boolean byHighwayType = get(BY_HIGHWAY_TYPE);
+        var output = get(OUTPUT_FOLDER);
+        for (var argument : argumentList())
         {
-            final var graph = argument.get(GRAPH_RESOURCE).load();
-            final var start = Time.now();
+            var graph = argument.get(GRAPH_RESOURCE).load();
+            var start = Time.now();
             graph.loadAll();
             information("Force-loaded in $", start.elapsedSince());
             information("Rough graph size is $", JavaVirtualMachine.local().sizeOfObjectGraph(graph));
@@ -166,26 +166,26 @@ public class GraphAnalyzerApplication extends Application
         return ObjectSet.of(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
-    private void analyze(final boolean print, final Folder output, final Graph graph)
+    private void analyze(boolean print, Folder output, Graph graph)
     {
-        final var matcherResult = analyze(graph, new All<>());
+        var matcherResult = analyze(graph, new All<>());
         if (print)
         {
-            final var writer = new PrintWriter(System.out);
+            var writer = new PrintWriter(System.out);
             matcherResult.write(writer);
             writer.flush();
         }
         if (output != null)
         {
             output.mkdirs();
-            final var file = output.file(graph.name() + ".analysis.txt");
-            final var writer = file.printWriter();
+            var file = output.file(graph.name() + ".analysis.txt");
+            var writer = file.printWriter();
             matcherResult.write(writer);
             writer.close();
         }
     }
 
-    private Result analyze(final Graph graph, final Matcher<Edge> matcher)
+    private Result analyze(Graph graph, Matcher<Edge> matcher)
     {
         var total = 0D;
         var serviceWays = 0D;
@@ -208,13 +208,13 @@ public class GraphAnalyzerApplication extends Application
         var otherTurnRestriction = 0;
         var turnRestrictionsByEdgeTurnRestrictions = 0;
         var turnRestrictionsByEdgeGetRelations = 0;
-        final var progress = Progress.create(this);
-        final var ofType = new double[7];
+        var progress = Progress.create(this);
+        var ofType = new double[7];
         var other = 0D;
         var ferry = 0D;
-        final Set<EdgeRelation> visited = new HashSet<>();
+        Set<EdgeRelation> visited = new HashSet<>();
         var turnRestrictions = 0;
-        for (final var relation : graph.relations())
+        for (var relation : graph.relations())
         {
             if (relation.isTurnRestriction())
             {
@@ -222,24 +222,24 @@ public class GraphAnalyzerApplication extends Application
             }
         }
         var counter = 0;
-        for (final var edge : graph.edges().matching(matcher))
+        for (var edge : graph.edges().matching(matcher))
         {
             if (edge.osmIsServiceWay())
             {
                 if (edge.isForward())
                 {
                     counter++;
-                    final var miles = edge.length().asMiles();
+                    var miles = edge.length().asMiles();
                     total += miles;
                     serviceWays += miles;
                 }
             }
             else
             {
-                final var relations = edge.turnRestrictionsBeginningAt();
+                var relations = edge.turnRestrictionsBeginningAt();
                 turnRestrictionsByEdgeTurnRestrictions += relations.size();
                 restrictions.addAll(relations);
-                for (final var relation : edge.relations())
+                for (var relation : edge.relations())
                 {
                     if (!visited.contains(relation))
                     {
@@ -253,7 +253,7 @@ public class GraphAnalyzerApplication extends Application
                         {
                             if ("restriction".equalsIgnoreCase(relation.tagValue("type")))
                             {
-                                final var type = relation.tagValue("restriction");
+                                var type = relation.tagValue("restriction");
                                 if (type != null)
                                 {
                                     if ("no_left_turn".equalsIgnoreCase(type))
@@ -296,10 +296,10 @@ public class GraphAnalyzerApplication extends Application
                 if (edge.isForward())
                 {
                     counter++;
-                    final var miles = edge.length().asMiles();
+                    var miles = edge.length().asMiles();
                     total += miles;
-                    final var roadTypeIdentifier = edge.roadType().identifier();
-                    final var isNavigable = roadTypeIdentifier < RoadType.PRIVATE_ROAD.identifier();
+                    var roadTypeIdentifier = edge.roadType().identifier();
+                    var isNavigable = roadTypeIdentifier < RoadType.PRIVATE_ROAD.identifier();
                     if (edge.roadName() != null)
                     {
                         withNonEmptyName += miles;
@@ -355,7 +355,7 @@ public class GraphAnalyzerApplication extends Application
             }
             progress.next();
         }
-        final var result = new Result();
+        var result = new Result();
         result.add("GRAPH", graph.name());
         result.add("INCLUDING", matcher);
         result.add("TOTAL", miles(total));
@@ -401,7 +401,7 @@ public class GraphAnalyzerApplication extends Application
 
         all.removeAll(restrictions);
         var i = 0;
-        for (final var relation : all)
+        for (var relation : all)
         {
             warning(i + ". missing restriction = " + relation);
             i++;
@@ -411,15 +411,15 @@ public class GraphAnalyzerApplication extends Application
         return result;
     }
 
-    private void analyzeByHighwayType(final Graph graph)
+    private void analyzeByHighwayType(Graph graph)
     {
-        final Map<String, Distance> lengthForType = new HashMap<>();
-        for (final var edge : graph.forwardEdges())
+        Map<String, Distance> lengthForType = new HashMap<>();
+        for (var edge : graph.forwardEdges())
         {
-            final var highwayTag = edge.tagList().get("highway");
+            var highwayTag = edge.tagList().get("highway");
             if (highwayTag != null)
             {
-                final var type = highwayTag.getValue();
+                var type = highwayTag.getValue();
                 if (type != null)
                 {
                     var length = lengthForType.get(type);
@@ -431,9 +431,9 @@ public class GraphAnalyzerApplication extends Application
                 }
             }
         }
-        final var keys = new StringList(Maximum.MAXIMUM, lengthForType.keySet());
+        var keys = new StringList(Maximum.MAXIMUM, lengthForType.keySet());
         keys.sort(String::compareTo);
-        for (final var type : keys)
+        for (var type : keys)
         {
             information("highway['" + type + "'] = " + lengthForType.get(type));
         }
@@ -444,12 +444,12 @@ public class GraphAnalyzerApplication extends Application
         return new All<>();
     }
 
-    private String miles(final double miles)
+    private String miles(double miles)
     {
         return Count.count((int) Math.round(miles)).toCommaSeparatedString() + " miles";
     }
 
-    private String miles(final double miles, final double total)
+    private String miles(double miles, double total)
     {
         return miles(miles) + " (" + Doubles.format(miles / total * 100.0, 1) + "%)";
     }

@@ -29,8 +29,8 @@ import com.telenav.kivakit.kernel.language.values.count.MutableCount;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
-import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.GraphProject;
+import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.data.formats.library.map.identifiers.MapNodeIdentifier;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -59,7 +59,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcess
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class GraphVerifierApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new GraphVerifierApplication().run(arguments);
     }
@@ -90,20 +90,20 @@ public class GraphVerifierApplication extends Application
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var graph = new SmartGraphLoader(input).load(this);
+        var input = argument(INPUT);
+        var graph = new SmartGraphLoader(input).load(this);
         if (graph != null)
         {
             if (input.fileName().endsWith(Extension.OSM_PBF))
             {
-                final var reader = new SerialPbfReader(input);
+                var reader = new SerialPbfReader(input);
                 verify(graph, reader);
             }
             else
             {
                 if (has(SUB_GRAPH))
                 {
-                    final var subgraph = new SmartGraphLoader(get(SUB_GRAPH)).load(this);
+                    var subgraph = new SmartGraphLoader(get(SUB_GRAPH)).load(this);
                     verify(subgraph, graph);
                 }
                 else
@@ -124,17 +124,17 @@ public class GraphVerifierApplication extends Application
         return ObjectSet.of(SUB_GRAPH, QUIET);
     }
 
-    private Edge matchingEdge(final Graph graph, final Edge edge)
+    private Edge matchingEdge(Graph graph, Edge edge)
     {
-        final var from = graph.vertexForNodeIdentifier(edge.fromNodeIdentifier());
-        final var to = graph.vertexForNodeIdentifier(edge.toNodeIdentifier());
+        var from = graph.vertexForNodeIdentifier(edge.fromNodeIdentifier());
+        var to = graph.vertexForNodeIdentifier(edge.toNodeIdentifier());
         if (from != null && to != null)
         {
             Edge match = null;
             var minimumDifferences = Integer.MAX_VALUE;
-            for (final var candidate : from.edgesBetween(to))
+            for (var candidate : from.edgesBetween(to))
             {
-                final var differences = edge.differencesFrom(candidate);
+                var differences = edge.differencesFrom(candidate);
                 if (differences.isIdentical())
                 {
                     return candidate;
@@ -150,19 +150,19 @@ public class GraphVerifierApplication extends Application
         return null;
     }
 
-    private void verify(final Graph subgraph, final Graph graph)
+    private void verify(Graph subgraph, Graph graph)
     {
-        for (final var edge : subgraph.edges())
+        for (var edge : subgraph.edges())
         {
-            final var worldEdge = matchingEdge(graph, edge);
+            var worldEdge = matchingEdge(graph, edge);
             if (worldEdge != null)
             {
-                final var differences = edge.differencesFrom(worldEdge);
+                var differences = edge.differencesFrom(worldEdge);
                 if (differences.isDifferent())
                 {
                     warning("$ edge $ is different from $ edge $: $", edge.graph().name(), edge,
                             worldEdge.graph().name(), worldEdge, differences);
-                    final var feature = new GeoJsonFeature();
+                    var feature = new GeoJsonFeature();
                     feature.title(
                             "Edge " + edge.identifierAsLong() + " != " + worldEdge.identifierAsLong() + ": " + differences);
                     feature.add(new GeoJsonPolyline(edge.roadShape()));
@@ -175,7 +175,7 @@ public class GraphVerifierApplication extends Application
                 warning("$ edge $ not found in $", subgraph.name(), edge, graph.name());
             }
         }
-        final var output = parse("differences.geojson");
+        var output = parse("differences.geojson");
         if (document.size() != 0)
         {
             document.save(output);
@@ -186,16 +186,16 @@ public class GraphVerifierApplication extends Application
         }
     }
 
-    private void verify(final Graph graph, final SerialPbfReader reader)
+    private void verify(Graph graph, SerialPbfReader reader)
     {
-        final var nodes = new MutableCount();
-        final Set<PbfWayIdentifier> ways = new HashSet<>();
-        final var nodeTagDifferences = new MutableCount();
-        final var wayTagDifferences = new MutableCount();
-        final Set<MapNodeIdentifier> nodeIdentifiers = new HashSet<>();
-        for (final var vertex : graph.vertexes())
+        var nodes = new MutableCount();
+        Set<PbfWayIdentifier> ways = new HashSet<>();
+        var nodeTagDifferences = new MutableCount();
+        var wayTagDifferences = new MutableCount();
+        Set<MapNodeIdentifier> nodeIdentifiers = new HashSet<>();
+        for (var vertex : graph.vertexes())
         {
-            final var identifier = vertex.mapIdentifier();
+            var identifier = vertex.mapIdentifier();
             if (identifier != null)
             {
                 nodeIdentifiers.add(identifier);
@@ -205,15 +205,15 @@ public class GraphVerifierApplication extends Application
         reader.process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
-                final var identifier = node.identifier();
+                var identifier = node.identifier();
                 if (nodeIdentifiers.contains(identifier))
                 {
-                    final var vertex = graph.vertexForNodeIdentifier(identifier);
+                    var vertex = graph.vertexForNodeIdentifier(identifier);
                     if (vertex != null)
                     {
-                        final var differences = new Differences();
+                        var differences = new Differences();
                         if (!differences.compare("tags", vertex.tagList(), node.tagList()))
                         {
                             System.out.println("node " + node.identifier() + " (index = " + vertex.index()
@@ -227,15 +227,15 @@ public class GraphVerifierApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
-                final var wayIdentifier = way.identifier();
+                var wayIdentifier = way.identifier();
                 if (!ways.contains(wayIdentifier))
                 {
                     ways.add(wayIdentifier);
-                    for (final var edge : graph.routeForWayIdentifier(wayIdentifier))
+                    for (var edge : graph.routeForWayIdentifier(wayIdentifier))
                     {
-                        final var differences = new Differences();
+                        var differences = new Differences();
                         if (!differences.compare("tags", edge.tagList(), way.tagList()))
                         {
                             System.out.println("way " + way.identifier() + ": " + differences);

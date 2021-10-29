@@ -22,18 +22,18 @@ import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLI
  */
 public class ValuesColumn extends JPanel
 {
-    ValuesColumn(final TagPanel tagPanel)
+    ValuesColumn(TagPanel tagPanel)
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
         tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.none()));
         tagPanel.valuesList.addSelectionListener((value) ->
         {
-            final var key = tagPanel.keysList.selected();
+            var key = tagPanel.keysList.selected();
             if (key != null && value != null)
             {
                 tagPanel.graphPanel.status("Searching for $='$'", key, value);
-                final var edges = tagPanel.index.edges(key, value);
+                var edges = tagPanel.index.edges(key, value);
                 if (edges == null)
                 {
                     SwingUtilities.invokeLater(() -> tagPanel.graphPanel.status("Too many matches to show"));

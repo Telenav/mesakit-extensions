@@ -65,7 +65,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfWorldGraphExtractorApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfWorldGraphExtractorApplication().run(arguments);
     }
@@ -179,7 +179,7 @@ public class PbfWorldGraphExtractorApplication extends Application
     public void onRun()
     {
         // Start time
-        final var start = Time.now();
+        var start = Time.now();
 
         // Install deployment
         get(DEPLOYMENT).install();
@@ -188,8 +188,8 @@ public class PbfWorldGraphExtractorApplication extends Application
         get(WAY_FILTER);
 
         // Get input resource
-        final var input = argument(INPUT);
-        final var metadata = Metadata.from(input);
+        var input = argument(INPUT);
+        var metadata = Metadata.from(input);
         if (metadata == null)
         {
             exit("Unable get metadata for $", input);
@@ -197,23 +197,23 @@ public class PbfWorldGraphExtractorApplication extends Application
         }
 
         // Get number of threads to use
-        final var threads = get(THREADS);
+        var threads = get(THREADS);
 
         // Get mode (extract-and-convert or convert only)
-        final var mode = get(MODE);
+        var mode = get(MODE);
 
         // Get the repository install folder
-        final var repositoryInstallFolder = repositoryInstallFolder(commandLine(), metadata, mode);
+        var repositoryInstallFolder = repositoryInstallFolder(commandLine(), metadata, mode);
 
         // Get the local repository
-        final var localRepository = configuration().localRepository();
+        var localRepository = configuration().localRepository();
 
         // Get temporary and local install folders
-        final var localRepositoryInstallFolder = localRepository.folder(metadata);
+        var localRepositoryInstallFolder = localRepository.folder(metadata);
 
         // Create world graph to populate
-        final var worldGraph = WorldGraph.create(localRepositoryInstallFolder, metadata);
-        final var worldGrid = worldGraph.worldGrid();
+        var worldGraph = WorldGraph.create(localRepositoryInstallFolder, metadata);
+        var worldGrid = worldGraph.worldGrid();
 
         // If we're extracting
         if (mode == Mode.EXTRACT)
@@ -237,28 +237,28 @@ public class PbfWorldGraphExtractorApplication extends Application
             {
                 exit("Input PBF file is required to extract");
             }
-            final var speedPattern = get(SPEED_PATTERN_FILE);
+            var speedPattern = get(SPEED_PATTERN_FILE);
             if (speedPattern != null && !speedPattern.exists())
             {
                 exit("Speed pattern file doesn't exist! File path: " + speedPattern);
             }
 
             // and a temporary folder in the local repository
-            final var localRepositoryTemporaryFolder = localRepository.temporaryFolder();
+            var localRepositoryTemporaryFolder = localRepository.temporaryFolder();
             if (localRepositoryTemporaryFolder != null)
             {
                 // and extract PBF cells into the local repository temporary folder
-                final var factory = listenTo(new PbfDataSourceFactory(input,
+                var factory = listenTo(new PbfDataSourceFactory(input,
                         get(THREADS), get(PARALLEL) ? PARALLEL_READER : SERIAL_READER));
-                final var extracted = worldGrid.extract(localRepositoryTemporaryFolder,
+                var extracted = worldGrid.extract(localRepositoryTemporaryFolder,
                         () -> factory.newInstance(metadata));
 
                 // and if anything was extracted,
                 if (extracted.isNonZero())
                 {
                     // convert the extracted PBF files
-                    final var conversion = new WorldConversion();
-                    final var statistics = conversion.convert(this, worldGrid, commandLine(), metadata, localRepositoryTemporaryFolder, threads);
+                    var conversion = new WorldConversion();
+                    var statistics = conversion.convert(this, worldGrid, commandLine(), metadata, localRepositoryTemporaryFolder, threads);
 
                     // and if we succeeded
                     if (statistics.succeeded().isNonZero())
@@ -284,7 +284,7 @@ public class PbfWorldGraphExtractorApplication extends Application
         else if (mode == Mode.CONVERT)
         {
             // We're only converting PBF to graph files in-place
-            final var statistics = new WorldConversion().convert(this, worldGrid, commandLine(), metadata, localRepositoryInstallFolder, threads);
+            var statistics = new WorldConversion().convert(this, worldGrid, commandLine(), metadata, localRepositoryInstallFolder, threads);
 
             // If some PBFs were converted
             if (statistics.succeeded().isNonZero())
@@ -306,8 +306,8 @@ public class PbfWorldGraphExtractorApplication extends Application
 
         if (get(PROFILE_FORCE_LOAD))
         {
-            final var startLoad = Time.now();
-            final var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
+            var startLoad = Time.now();
+            var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
             forceLoad.loadAll();
             information("Force-loaded $ world graph in $", forceLoad.estimatedMemorySize(), startLoad.elapsedSince());
         }
@@ -358,17 +358,17 @@ public class PbfWorldGraphExtractorApplication extends Application
     /**
      * @return The repository install folder specified on the command line
      */
-    private WorldGraphRepositoryFolder repositoryInstallFolder(final CommandLine commandLine, final Metadata metadata,
-                                                               final Mode mode)
+    private WorldGraphRepositoryFolder repositoryInstallFolder(CommandLine commandLine, Metadata metadata,
+                                                               Mode mode)
     {
         // Get any repository that was specified
-        final var repository = commandLine.get(WORLD_GRAPH_REPOSITORY);
+        var repository = commandLine.get(WORLD_GRAPH_REPOSITORY);
 
         // If a repository was specified
         if (repository != null)
         {
             // then get the install folder for the specified data date
-            final var installFolder = repository.folder(metadata);
+            var installFolder = repository.folder(metadata);
             installFolder.mkdirs();
 
             // If we're extracting from scratch and the install folder exists and its not empty,

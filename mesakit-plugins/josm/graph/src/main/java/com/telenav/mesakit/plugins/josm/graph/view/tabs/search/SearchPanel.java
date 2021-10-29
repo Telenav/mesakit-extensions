@@ -30,7 +30,7 @@ public class SearchPanel extends JPanel
 
     private final GraphPanel graphPanel;
 
-    public SearchPanel(final GraphPanel graphPanel)
+    public SearchPanel(GraphPanel graphPanel)
     {
         this.graphPanel = graphPanel;
 
@@ -38,11 +38,11 @@ public class SearchPanel extends JPanel
 
         graphPanel.overrideMenuAcceleratorKeys(searchField);
 
-        final ActionListener searchAction = event ->
+        ActionListener searchAction = event ->
         {
             if (graphPanel.layer() != null)
             {
-                final var searchString = searchField.getText();
+                var searchString = searchField.getText();
                 if (!Strings.isEmpty(searchString))
                 {
                     searchField.setSelectionStart(0);
@@ -56,7 +56,7 @@ public class SearchPanel extends JPanel
             }
         };
 
-        final var searchButton = new JButton("search");
+        var searchButton = new JButton("search");
         searchButton.setFont(KivaKitTheme.get().fontNormal());
         searchButton.addActionListener(searchAction);
 
@@ -64,7 +64,7 @@ public class SearchPanel extends JPanel
         Borders.applyMargin(searchField, 8);
         Size.widthOf(1_000).preferred(searchField);
 
-        final var searchTools = new HorizontalBox(MANUAL_SPACING, 24)
+        var searchTools = new HorizontalBox(MANUAL_SPACING, 24)
                 .add(new MagnifyingGlass())
                 .add(searchField)
                 .add(searchButton);
@@ -86,17 +86,17 @@ public class SearchPanel extends JPanel
         return console;
     }
 
-    public void html(final String message, final Object... arguments)
+    public void html(String message, Object... arguments)
     {
         console().html(message, arguments);
     }
 
-    public void text(final String message, final Object... arguments)
+    public void text(String message, Object... arguments)
     {
         console().text(message, arguments);
     }
 
-    private void show(final UserFeedback feedback)
+    private void show(UserFeedback feedback)
     {
         if (feedback != null)
         {

@@ -64,8 +64,8 @@ public class Conversion extends BaseRepeater
 
     private final Folder outputFolder;
 
-    public Conversion(final PbfToGraphConverterApplication application, final CommandLine commandLine,
-                      final Folder outputFolder)
+    public Conversion(PbfToGraphConverterApplication application, CommandLine commandLine,
+                      Folder outputFolder)
     {
         this.application = application;
         this.commandLine = commandLine;
@@ -84,7 +84,7 @@ public class Conversion extends BaseRepeater
         try
         {
             // retrieve its metadata,
-            final var metadata = Metadata.from(input);
+            var metadata = Metadata.from(input);
             if (metadata != null)
             {
                 // and if the data specification is UniDb and we are not including tags,
@@ -98,24 +98,24 @@ public class Conversion extends BaseRepeater
                 if (metadata.dataSpecification().supports(EdgeAttributes.get().COUNTRY))
                 {
                     // then get going on loading the border data for countries.
-                    final var thread = new Thread(() -> Region.type(Country.class).loadBorders());
+                    var thread = new Thread(() -> Region.type(Country.class).loadBorders());
                     thread.setPriority(3);
                     thread.start();
                 }
 
                 // Next, determine the output file,
-                final var output = output(outputFolder, input);
+                var output = output(outputFolder, input);
 
                 // create a configuration for the converter,
-                final var configuration = configuration(commandLine, metadata);
+                var configuration = configuration(commandLine, metadata);
 
                 // create the converter
-                final var converter = converter(metadata);
+                var converter = converter(metadata);
                 converter.configure(configuration);
 
                 // convert the input file,
                 information("Converting $ $ to $", metadata.descriptor(), input, output);
-                final var graph = converter.convert(input);
+                var graph = converter.convert(input);
                 if (graph == null)
                 {
                     problem("Graph conversion failed for $", input);
@@ -123,9 +123,9 @@ public class Conversion extends BaseRepeater
                 else
                 {
                     // save the graph to disk,
-                    try (final var archive = new GraphArchive(this, output, WRITE, ProgressReporter.NULL))
+                    try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.NULL))
                     {
-                        final var start = Time.now();
+                        var start = Time.now();
                         information(AsciiArt.topLine(20, "Saving $", archive));
                         graph.save(archive);
                         information(AsciiArt.bottomLine(20, "Saved $ in $", archive, start.elapsedSince()));
@@ -134,13 +134,13 @@ public class Conversion extends BaseRepeater
                     // and verify it if we're were asked to.
                     if (configuration.verify())
                     {
-                        try (final var archive = new GraphArchive(this, output, READ, ProgressReporter.NULL))
+                        try (var archive = new GraphArchive(this, output, READ, ProgressReporter.NULL))
                         {
-                            final var start = Time.now();
+                            var start = Time.now();
                             information(AsciiArt.topLine("Verifying graph"));
-                            final var loaded = archive.load(LOGGER);
+                            var loaded = archive.load(LOGGER);
                             loaded.loadAll();
-                            final var comparison = graph.differencesFrom(loaded, Rectangle.MAXIMUM, Maximum._100);
+                            var comparison = graph.differencesFrom(loaded, Rectangle.MAXIMUM, Maximum._100);
                             if (comparison.isDifferent())
                             {
                                 LOGGER.problem("Graph verification failed:\n$", comparison);
@@ -165,16 +165,16 @@ public class Conversion extends BaseRepeater
     /**
      * @return PbfToGraphConverter configuration for command line
      */
-    private PbfToGraphConverter.Configuration configuration(final CommandLine commandLine, final Metadata metadata)
+    private PbfToGraphConverter.Configuration configuration(CommandLine commandLine, Metadata metadata)
     {
-        final var loaderConfiguration = PbfGraphLoader.newConfiguration(metadata);
+        var loaderConfiguration = PbfGraphLoader.newConfiguration(metadata);
 
         loaderConfiguration.cleanCutTo(commandLine.get(application.CLEAN_CUT_TO));
         loaderConfiguration.regionInformation(commandLine.get(application.REGION_INFORMATION));
         loaderConfiguration.wayFilter(wayFilter(commandLine));
         loaderConfiguration.relationFilter(relationFilter(commandLine));
 
-        final var configuration = PbfToGraphConverter.newConfiguration(metadata);
+        var configuration = PbfToGraphConverter.newConfiguration(metadata);
 
         configuration.loaderConfiguration(loaderConfiguration);
         configuration.freeFlowSideFile(commandLine.get(application.FREE_FLOW_SIDE_FILE));
@@ -183,7 +183,7 @@ public class Conversion extends BaseRepeater
         configuration.parallel(this.commandLine.get(application.PARALLEL_READER));
         configuration.threads(this.commandLine.get(application.THREADS));
 
-        final var speedPatternFile = commandLine.get(application.SPEED_PATTERN_FILE);
+        var speedPatternFile = commandLine.get(application.SPEED_PATTERN_FILE);
         if (speedPatternFile != null && !speedPatternFile.exists())
         {
             commandLine.exit("Speed pattern file doesn't exist! File path: " + speedPatternFile);
@@ -203,7 +203,7 @@ public class Conversion extends BaseRepeater
      * @return A configured {@link PbfToGraphConverter} configured by the given command line for the data specification
      * supplied by the metadata.
      */
-    private PbfToGraphConverter converter(final Metadata metadata)
+    private PbfToGraphConverter converter(Metadata metadata)
     {
         return listenTo((PbfToGraphConverter) metadata.dataSpecification().newGraphConverter(metadata));
     }
@@ -211,9 +211,9 @@ public class Conversion extends BaseRepeater
     /**
      * @return The output file to write to
      */
-    private File output(final Folder outputFolder, final File input)
+    private File output(Folder outputFolder, File input)
     {
-        final File outputFile;
+        File outputFile;
         if (outputFolder == null)
         {
             outputFile = input.withoutKnownExtensions().withExtension(Extension.GRAPH);
@@ -231,7 +231,7 @@ public class Conversion extends BaseRepeater
     /**
      * @return A relation filter for the given command line
      */
-    private RelationFilter relationFilter(final CommandLine commandLine)
+    private RelationFilter relationFilter(CommandLine commandLine)
     {
         RelationFilter relationFilter = null;
         if (commandLine.has(application.RELATION_FILTER))
@@ -244,17 +244,17 @@ public class Conversion extends BaseRepeater
     /**
      * @return A way filter for the given command lines
      */
-    private WayFilter wayFilter(final CommandLine commandLine)
+    private WayFilter wayFilter(CommandLine commandLine)
     {
         WayFilter wayFilter = new OsmNavigableWayFilter();
         if (commandLine.has(application.EXCLUDED_HIGHWAY_TYPES_FILE))
         {
-            final var file = commandLine.get(application.EXCLUDED_HIGHWAY_TYPES_FILE);
+            var file = commandLine.get(application.EXCLUDED_HIGHWAY_TYPES_FILE);
             wayFilter = WayFilter.exclude(file.fileName().name(), file);
         }
         if (commandLine.has(application.INCLUDED_HIGHWAY_TYPES_FILE))
         {
-            final var file = commandLine.get(application.INCLUDED_HIGHWAY_TYPES_FILE);
+            var file = commandLine.get(application.INCLUDED_HIGHWAY_TYPES_FILE);
             wayFilter = WayFilter.include(file.fileName().name(), file);
         }
         if (commandLine.has(application.WAY_FILTER))

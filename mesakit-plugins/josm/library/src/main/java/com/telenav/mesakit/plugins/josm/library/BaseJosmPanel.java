@@ -36,7 +36,7 @@ public abstract class BaseJosmPanel extends ToggleDialog
 
     private boolean destroyed;
 
-    protected BaseJosmPanel(final BaseJosmPlugin plugin)
+    protected BaseJosmPanel(BaseJosmPlugin plugin)
     {
         super(plugin.name(), plugin.iconName(), plugin.tooltip(), plugin.shortcut(), plugin.preferredPanelHeight());
         this.plugin = plugin;
@@ -76,7 +76,13 @@ public abstract class BaseJosmPanel extends ToggleDialog
         return plugin().selectedLayer();
     }
 
-    public void overrideMenuAcceleratorKeys(final JTextField field)
+    public void onInitialize()
+    {
+        MainApplication.getMap().addToggleDialog(this);
+        hidePanel();
+    }
+
+    public void overrideMenuAcceleratorKeys(JTextField field)
     {
         for (var key = KeyEvent.VK_COMMA; key < KeyEvent.VK_CLOSE_BRACKET; key++)
         {
@@ -89,13 +95,13 @@ public abstract class BaseJosmPanel extends ToggleDialog
                 private static final long serialVersionUID = 6898833815633986680L;
 
                 @Override
-                public void actionPerformed(final ActionEvent e)
+                public void actionPerformed(ActionEvent e)
                 {
                 }
             });
 
             // Add normal keystroke handler
-            final var keyChar = (char) key;
+            var keyChar = (char) key;
             field.getInputMap().put(KeyStroke.getKeyStroke(keyChar), key + "pressed");
             field.getActionMap().put(key + "pressed", new AbstractAction()
             {
@@ -103,7 +109,7 @@ public abstract class BaseJosmPanel extends ToggleDialog
                 private static final long serialVersionUID = 6898833815633986680L;
 
                 @Override
-                public void actionPerformed(final ActionEvent e)
+                public void actionPerformed(ActionEvent e)
                 {
                     field.replaceSelection(Character.toString(keyChar));
                 }
@@ -152,17 +158,11 @@ public abstract class BaseJosmPanel extends ToggleDialog
     {
     }
 
-    public void onInitialize()
-    {
-        MainApplication.getMap().addToggleDialog(this);
-        hidePanel();
-    }
-
     protected void onLayerAdded()
     {
     }
 
-    protected void onLayerRemoving(final Layer layer)
+    protected void onLayerRemoving(Layer layer)
     {
     }
 

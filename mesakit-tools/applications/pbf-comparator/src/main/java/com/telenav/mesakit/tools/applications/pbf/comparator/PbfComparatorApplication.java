@@ -25,13 +25,13 @@ import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
 import com.telenav.kivakit.kernel.language.time.Time;
+import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.osm.Osm;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -48,7 +48,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcess
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class PbfComparatorApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfComparatorApplication().run(arguments);
     }
@@ -98,22 +98,22 @@ public class PbfComparatorApplication extends Application
         super(PbfProject.get());
     }
 
-    public void compare(final File before, final File after)
+    public void compare(File before, File after)
     {
-        final var start = Time.now();
+        var start = Time.now();
 
-        final Set<Long> beforeNodes = new HashSet<>();
-        final Set<Long> beforeWays = new HashSet<>();
-        final Set<Long> beforeRelations = new HashSet<>();
+        Set<Long> beforeNodes = new HashSet<>();
+        Set<Long> beforeWays = new HashSet<>();
+        Set<Long> beforeRelations = new HashSet<>();
 
-        final var beforeNodeProgress = Progress.create(this);
-        final var beforeWayProgress = Progress.create(this);
-        final var beforeRelationsProgress = Progress.create(this);
+        var beforeNodeProgress = Progress.create(this);
+        var beforeWayProgress = Progress.create(this);
+        var beforeRelationsProgress = Progress.create(this);
 
         new SerialPbfReader(before).process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (get(COMPARE_NODES))
                 {
@@ -124,7 +124,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (get(COMPARE_RELATIONS))
                 {
@@ -135,7 +135,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (get(COMPARE_WAYS))
                 {
@@ -149,17 +149,17 @@ public class PbfComparatorApplication extends Application
             }
         });
 
-        final Set<Long> afterNodes = new HashSet<>();
-        final Set<Long> afterWays = new HashSet<>();
-        final Set<Long> afterRelations = new HashSet<>();
-        final var afterNodeProgress = Progress.create(this);
-        final var afterWayProgress = Progress.create(this);
-        final var afterRelationsProgress = Progress.create(this);
+        Set<Long> afterNodes = new HashSet<>();
+        Set<Long> afterWays = new HashSet<>();
+        Set<Long> afterRelations = new HashSet<>();
+        var afterNodeProgress = Progress.create(this);
+        var afterWayProgress = Progress.create(this);
+        var afterRelationsProgress = Progress.create(this);
 
         new SerialPbfReader(after).process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (get(COMPARE_NODES))
                 {
@@ -170,7 +170,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (get(COMPARE_RELATIONS))
                 {
@@ -181,7 +181,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (get(COMPARE_WAYS))
                 {
@@ -195,10 +195,10 @@ public class PbfComparatorApplication extends Application
             }
         });
 
-        final SetDifferencer<Long> differencer = new SetDifferencer<>(null)
+        SetDifferencer<Long> differencer = new SetDifferencer<>(null)
         {
             @Override
-            protected void onAdded(final Long id)
+            protected void onAdded(Long id)
             {
                 if (get(SHOW_ADDED))
                 {
@@ -207,7 +207,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            protected void onRemoved(final Long id)
+            protected void onRemoved(Long id)
             {
                 if (get(SHOW_REMOVED))
                 {
@@ -216,7 +216,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            protected void onUpdated(final Long id)
+            protected void onUpdated(Long id)
             {
             }
         };
@@ -241,12 +241,12 @@ public class PbfComparatorApplication extends Application
     @Override
     protected void onRun()
     {
-        final var before = get(BEFORE);
+        var before = get(BEFORE);
         if (!before.exists())
         {
             exit("Before file does not exist: " + before);
         }
-        final var after = get(AFTER);
+        var after = get(AFTER);
         if (!after.exists())
         {
             exit("After file does not exist: " + after);

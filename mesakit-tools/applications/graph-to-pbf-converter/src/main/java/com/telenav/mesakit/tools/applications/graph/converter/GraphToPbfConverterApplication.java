@@ -26,9 +26,9 @@ import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
-import com.telenav.mesakit.graph.GraphProject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
  */
 public class GraphToPbfConverterApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new GraphToPbfConverterApplication().run(arguments);
     }
@@ -77,8 +77,8 @@ public class GraphToPbfConverterApplication extends Application
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var outputFolder = get(OUTPUT_FOLDER);
+        var input = argument(INPUT);
+        var outputFolder = get(OUTPUT_FOLDER);
 
         // If an output folder was specified,
         if (outputFolder != null)
@@ -88,7 +88,7 @@ public class GraphToPbfConverterApplication extends Application
         }
 
         // If we're converting just one file
-        final var start = Time.now();
+        var start = Time.now();
         if (input.isFile())
         {
             convertOne(outputFolder, input.parent(), input);
@@ -96,23 +96,23 @@ public class GraphToPbfConverterApplication extends Application
         else
         {
             // otherwise we're converting a whole folder
-            final var folder = input.asFolder();
+            var folder = input.asFolder();
 
             // so go through each input file in the folder,
-            for (final var file : folder.nestedFiles(Extension.GRAPH.fileMatcher()))
+            for (var file : folder.nestedFiles(Extension.GRAPH.fileMatcher()))
             {
                 convertOne(outputFolder, folder, file);
             }
         }
 
         // Dematerialize converted files
-        for (final var file : materialized)
+        for (var file : materialized)
         {
             file.dematerialize();
         }
 
         information("Built ${debug} PBF file(s) in ${debug}:", converted.size(), start.elapsedSince());
-        for (final var file : converted)
+        for (var file : converted)
         {
             information(" - $", file.path().absolute());
         }
@@ -124,25 +124,25 @@ public class GraphToPbfConverterApplication extends Application
         return ObjectSet.of(OUTPUT_FOLDER, QUIET);
     }
 
-    private void convertOne(final Folder outputFolder, final Folder folder, final File input)
+    private void convertOne(Folder outputFolder, Folder folder, File input)
     {
         // Materialize the input file
         materialized.add(input);
 
         // Determine the output file
-        final var output = output(folder, input, outputFolder);
+        var output = output(folder, input, outputFolder);
 
         // Load the graph
-        final var graph = new SmartGraphLoader(input).load(this);
+        var graph = new SmartGraphLoader(input).load(this);
 
         // Convert from Graph to PBF
         new PbfGraphSaver().save(graph, output);
         converted.add(output);
     }
 
-    private File output(final Folder folder, final File input, final Folder outputFolder)
+    private File output(Folder folder, File input, Folder outputFolder)
     {
-        final File outputFile;
+        File outputFile;
         if (outputFolder == null)
         {
             outputFile = input.withoutCompoundExtension().withExtension(Extension.OSM_PBF);

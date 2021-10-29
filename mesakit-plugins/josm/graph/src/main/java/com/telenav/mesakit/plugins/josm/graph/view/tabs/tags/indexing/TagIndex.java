@@ -18,20 +18,20 @@ public class TagIndex
 
     final TagIndexRequest request;
 
-    public TagIndex(final TagIndexRequest request)
+    public TagIndex(TagIndexRequest request)
     {
         this.request = request;
     }
 
-    public EdgeSet edges(final String key, final String value)
+    public EdgeSet edges(String key, String value)
     {
-        final var identifiers = this.identifiers.get(key + "=" + value);
+        var identifiers = this.identifiers.get(key + "=" + value);
         if (identifiers != null)
         {
             if (identifiers.size() <= 1_000)
             {
-                final var edges = new EdgeSet();
-                for (final var identifier : identifiers)
+                var edges = new EdgeSet();
+                for (var identifier : identifiers)
                 {
                     edges.add(request.graph.edgeForIdentifier(identifier));
                 }
@@ -56,7 +56,7 @@ public class TagIndex
         return Count.count(keyToValues.totalValues());
     }
 
-    public synchronized ObjectList<String> values(final String key)
+    public synchronized ObjectList<String> values(String key)
     {
         return keyToValues.get(key);
     }

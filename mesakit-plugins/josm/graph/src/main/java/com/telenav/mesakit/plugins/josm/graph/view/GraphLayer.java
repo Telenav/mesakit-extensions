@@ -107,7 +107,7 @@ public class GraphLayer extends BaseJosmLayer
 
     private Timer indexingTimer = new Timer();
 
-    public GraphLayer(final GraphPlugin plugin, final String name)
+    public GraphLayer(GraphPlugin plugin, String name)
     {
         super(plugin, name);
         model = new ViewModel(panel());
@@ -116,7 +116,7 @@ public class GraphLayer extends BaseJosmLayer
     @Override
     public GraphLayer activeLayer()
     {
-        final var layer = super.activeLayer();
+        var layer = super.activeLayer();
         if (layer instanceof GraphLayer)
         {
             return (GraphLayer) layer;
@@ -124,7 +124,7 @@ public class GraphLayer extends BaseJosmLayer
         return null;
     }
 
-    public void graph(final Graph graph, final ProgressReporter reporter)
+    public void graph(Graph graph, ProgressReporter reporter)
     {
         this.graph = graph;
         if (!graph.isComposite() && graph.edgeCount().isGreaterThan(Count._0))
@@ -164,14 +164,14 @@ public class GraphLayer extends BaseJosmLayer
     }
 
     @Override
-    public synchronized void onPaint(final Graphics2D graphics, final MapView mapView, final Bounds bounds)
+    public synchronized void onPaint(Graphics2D graphics, MapView mapView, Bounds bounds)
     {
         if (!bounds.equals(lastPaintBounds))
         {
             indexingTimer.cancel();
             indexingTimer.purge();
             indexingTimer = new Timer();
-            final TimerTask indexingTask = new TimerTask()
+            TimerTask indexingTask = new TimerTask()
             {
                 @Override
                 public void run()
@@ -188,7 +188,7 @@ public class GraphLayer extends BaseJosmLayer
 
         if (graph() != null)
         {
-            final var paintArea = DrawingRectangle.pixels(0, 0, mapView.getWidth(), mapView.getHeight());
+            var paintArea = DrawingRectangle.pixels(0, 0, mapView.getWidth(), mapView.getHeight());
             canvas = MapCanvas.canvas("graph-layer", graphics, MapScale.of(mapView.getScale()), paintArea, new JosmCoordinateMapper(mapView));
 
             model().bounds(bounds().expanded(Percent.of(5)));
@@ -231,21 +231,21 @@ public class GraphLayer extends BaseJosmLayer
         return (GraphPanel) super.panel();
     }
 
-    public boolean route(final Vertex start, final Vertex end, final boolean visualDebug)
+    public boolean route(Vertex start, Vertex end, boolean visualDebug)
     {
         if (start != null && end != null)
         {
-            final var router = new BiDijkstraRouter(new SpeedCostFunction());
-            final RoutingRequest request = new BiDijkstraRoutingRequest(start, end)
+            var router = new BiDijkstraRouter(new SpeedCostFunction());
+            RoutingRequest request = new BiDijkstraRoutingRequest(start, end)
                     .withLimiter(new CpuTimeRoutingLimiter(PreciseDuration.seconds(5)))
                     .withDebugger(visualDebug ? new SwingRoutingDebugger("routing") : RoutingDebugger.NULL);
-            final var result = router.findRoute(request);
+            var result = router.findRoute(request);
             if (result != null)
             {
-                final var route = result.route();
+                var route = result.route();
                 if (route != null)
                 {
-                    final var polyline = route.polyline();
+                    var polyline = route.polyline();
                     selection().select(polyline);
                     html("Found $ $-edge route in $:\n\n    $\n\n    $", route.length(), route.size(),
                             result.elapsed(), route.toString("\n    "), route);
@@ -260,11 +260,11 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    public void show(final PbfWayIdentifier identifier)
+    public void show(PbfWayIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
-            final var route = graph().routeForWayIdentifier(identifier);
+            var route = graph().routeForWayIdentifier(identifier);
             if (route != null)
             {
                 show(route);
@@ -272,24 +272,24 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    public void show(final Polyline polyline)
+    public void show(Polyline polyline)
     {
         select(polyline);
         zoomTo(polyline.bounds());
     }
 
-    public void show(final Route route)
+    public void show(Route route)
     {
         selection().clear();
         selection().highlight(route.asEdgeSet());
         zoomTo(route.bounds());
     }
 
-    public void show(final EdgeIdentifier identifier)
+    public void show(EdgeIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
-            final var edge = graph().edgeForIdentifier(identifier);
+            var edge = graph().edgeForIdentifier(identifier);
             if (edge != null)
             {
                 select(edge);
@@ -298,9 +298,9 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    public boolean show(final MapEdgeIdentifier identifier)
+    public boolean show(MapEdgeIdentifier identifier)
     {
-        final var edge = graph().edgeForIdentifier(identifier);
+        var edge = graph().edgeForIdentifier(identifier);
         if (edge != null)
         {
             select(edge);
@@ -310,11 +310,11 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    public void show(final MapNodeIdentifier identifier)
+    public void show(MapNodeIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
-            final var vertex = graph().vertexForNodeIdentifier(identifier);
+            var vertex = graph().vertexForNodeIdentifier(identifier);
             if (vertex != null)
             {
                 show(vertex.identifier());
@@ -322,11 +322,11 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    public void show(final MapRelationIdentifier identifier)
+    public void show(MapRelationIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
-            final var relation = graph().relationForMapRelationIdentifier(identifier);
+            var relation = graph().relationForMapRelationIdentifier(identifier);
             if (relation != null)
             {
                 show(relation);
@@ -334,11 +334,11 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    public void show(final VertexIdentifier identifier)
+    public void show(VertexIdentifier identifier)
     {
         if (graph().contains(identifier))
         {
-            final var vertex = graph().vertexForIdentifier(identifier);
+            var vertex = graph().vertexForIdentifier(identifier);
             if (vertex != null)
             {
                 select(vertex);
@@ -347,7 +347,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    public void show(final EdgeSet edges, final Show show)
+    public void show(EdgeSet edges, Show show)
     {
         selection().highlight(edges);
         if (show == Show.HIGHLIGHT_AND_ZOOM_TO)
@@ -357,7 +357,7 @@ public class GraphLayer extends BaseJosmLayer
         forceRepaint();
     }
 
-    public void zoomTo(final Rectangle bounds)
+    public void zoomTo(Rectangle bounds)
     {
         if (bounds != null)
         {
@@ -389,7 +389,7 @@ public class GraphLayer extends BaseJosmLayer
     }
 
     @Override
-    protected boolean onSelect(final MouseEvent event)
+    protected boolean onSelect(MouseEvent event)
     {
         if (activeLayer() == this)
         {
@@ -419,12 +419,12 @@ public class GraphLayer extends BaseJosmLayer
         {
             if (event.getClickCount() == 2)
             {
-                for (final var layer : MainApplication.getLayerManager().getLayers())
+                for (var layer : MainApplication.getLayerManager().getLayers())
                 {
                     if (layer instanceof GraphLayer)
                     {
-                        final var graphLayer = (GraphLayer) layer;
-                        final var location = canvas.toMap(event.getPoint());
+                        var graphLayer = (GraphLayer) layer;
+                        var location = canvas.toMap(event.getPoint());
                         if (graphLayer.graph().bounds().contains(location))
                         {
                             MainApplication.getLayerManager().setActiveLayer(layer);
@@ -438,7 +438,7 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    void show(final EdgeRelation relation)
+    void show(EdgeRelation relation)
     {
         if (relation != null && relation.bounds() != null)
         {
@@ -453,9 +453,9 @@ public class GraphLayer extends BaseJosmLayer
         html("");
     }
 
-    private boolean clickEdge(final MouseEvent event, final boolean snap)
+    private boolean clickEdge(MouseEvent event, boolean snap)
     {
-        final var edges = selection().edgesForPoint(canvas, model().graph(), DrawingPoint.point(event.getPoint()), snap);
+        var edges = selection().edgesForPoint(canvas, model().graph(), DrawingPoint.point(event.getPoint()), snap);
         var selected = false;
         if (!edges.isEmpty())
         {
@@ -463,7 +463,7 @@ public class GraphLayer extends BaseJosmLayer
             {
                 if (canvas != null && canvas.mapWidth().isLessThan(Distance.miles(50)) && !edges.isEmpty())
                 {
-                    final var edge = edges.get(0);
+                    var edge = edges.get(0);
                     select(edge);
                     if (edge.isTwoWay())
                     {
@@ -489,12 +489,12 @@ public class GraphLayer extends BaseJosmLayer
         return selected;
     }
 
-    private boolean clickEdgeRelation(final MouseEvent event)
+    private boolean clickEdgeRelation(MouseEvent event)
     {
         var selected = false;
         if (!event.isPopupTrigger())
         {
-            final var relations = selection().relationsForPoint(event.getPoint());
+            var relations = selection().relationsForPoint(event.getPoint());
             if (!relations.isEmpty())
             {
                 if (!selection().sameRelationStack(relations))
@@ -525,10 +525,10 @@ public class GraphLayer extends BaseJosmLayer
         return selected;
     }
 
-    private boolean clickPlace(final MouseEvent event)
+    private boolean clickPlace(MouseEvent event)
     {
-        final var place = selection().placeForPoint(event.getPoint());
-        final var exactlyOnEdge = !selection().edgesForPoint(canvas, graph, DrawingPoint.point(event.getPoint()), false).isEmpty();
+        var place = selection().placeForPoint(event.getPoint());
+        var exactlyOnEdge = !selection().edgesForPoint(canvas, graph, DrawingPoint.point(event.getPoint()), false).isEmpty();
         if (place != null && !exactlyOnEdge)
         {
             select(place);
@@ -538,9 +538,9 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    private boolean clickShapePoint(final MouseEvent event)
+    private boolean clickShapePoint(MouseEvent event)
     {
-        final var point = selection().shapePointForPoint(graph, event.getPoint());
+        var point = selection().shapePointForPoint(graph, event.getPoint());
         if (point != null)
         {
             select(point);
@@ -550,9 +550,9 @@ public class GraphLayer extends BaseJosmLayer
         return false;
     }
 
-    private boolean clickVertex(final MouseEvent event)
+    private boolean clickVertex(MouseEvent event)
     {
-        final var vertexes = selection().vertexesForPoint(event.getPoint());
+        var vertexes = selection().vertexesForPoint(event.getPoint());
         var selected = false;
         if (!vertexes.isEmpty())
         {
@@ -583,9 +583,9 @@ public class GraphLayer extends BaseJosmLayer
         return selected;
     }
 
-    private void describe(final Edge edge)
+    private void describe(Edge edge)
     {
-        final var relations = new StringList();
+        var relations = new StringList();
         edge.relations().forEach(relation -> relations.add(relation.asString(HTML)));
         panel().status("Selected edge $", edge.identifier());
         html(edge.asString(HTML)
@@ -597,17 +597,17 @@ public class GraphLayer extends BaseJosmLayer
                 + (relations.isEmpty() ? "" : relations.join("<br/>")));
     }
 
-    private void describe(final Vertex vertex)
+    private void describe(Vertex vertex)
     {
         html(vertex.asString(HTML));
     }
 
-    private void describe(final EdgeRelation relation)
+    private void describe(EdgeRelation relation)
     {
         html(relation.asString(HTML));
     }
 
-    private void describe(final GraphElement element)
+    private void describe(GraphElement element)
     {
         if (element instanceof Edge)
         {
@@ -623,7 +623,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void html(final String message, final Object... arguments)
+    private void html(String message, Object... arguments)
     {
         panel().html(Message.format(message + "\n\n\n", arguments));
         forceRepaint();
@@ -641,7 +641,7 @@ public class GraphLayer extends BaseJosmLayer
         forceRepaint();
     }
 
-    private void select(final Edge edge)
+    private void select(Edge edge)
     {
         if (edge != null)
         {
@@ -650,7 +650,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void select(final EdgeRelation relation)
+    private void select(EdgeRelation relation)
     {
         if (relation != null)
         {
@@ -659,7 +659,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void select(final Place place)
+    private void select(Place place)
     {
         if (place != null)
         {
@@ -668,7 +668,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void select(final Polyline line)
+    private void select(Polyline line)
     {
         if (line != null)
         {
@@ -677,7 +677,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void select(final ShapePoint point)
+    private void select(ShapePoint point)
     {
         if (point != null)
         {
@@ -693,7 +693,7 @@ public class GraphLayer extends BaseJosmLayer
         }
     }
 
-    private void select(final Vertex vertex)
+    private void select(Vertex vertex)
     {
         if (vertex != null)
         {
@@ -712,7 +712,7 @@ public class GraphLayer extends BaseJosmLayer
         return model().selection();
     }
 
-    private void zoomInOn(final GraphElement element)
+    private void zoomInOn(GraphElement element)
     {
         zoomTo(element.bounds());
     }

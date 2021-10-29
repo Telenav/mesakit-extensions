@@ -21,19 +21,19 @@ import java.lang.reflect.Type;
 public class LocationGsonSerializer implements GsonSerializer<Location>
 {
     @Override
-    public Location deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public Location deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
-        final var location = json.getAsJsonObject();
+        var location = json.getAsJsonObject();
         return Location.degrees(
                 location.get("latitude").getAsDouble(),
                 location.get("longitude").getAsDouble());
     }
 
     @Override
-    public JsonElement serialize(final Location src, final Type typeOfSrc, final JsonSerializationContext context)
+    public JsonElement serialize(Location src, Type typeOfSrc, JsonSerializationContext context)
     {
-        final var location = new JsonObject();
+        var location = new JsonObject();
         location.add("latitude", new JsonPrimitive(src.latitudeInDegrees()));
         location.add("longitude", new JsonPrimitive(src.longitudeInDegrees()));
         return location;

@@ -36,13 +36,13 @@ public class RectangleGsonSerializer extends PrimitiveGsonSerializer<Rectangle, 
     }
 
     @Override
-    protected Rectangle toObject(final String rectangle)
+    protected Rectangle toObject(String rectangle)
     {
         return Rectangle.parse(rectangle);
     }
 
     @Override
-    protected String toPrimitive(final Rectangle bounds)
+    protected String toPrimitive(Rectangle bounds)
     {
         return bounds.toString();
     }

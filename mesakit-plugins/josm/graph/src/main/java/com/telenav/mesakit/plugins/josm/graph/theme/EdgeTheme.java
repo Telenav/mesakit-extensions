@@ -58,7 +58,7 @@ public class EdgeTheme extends BaseTheme
                         .withDrawStroke(MapStroke.stroke(meters(0.5))));
     }
 
-    public MapPolyline fattenPolyline(final MapPolyline line, final Edge edge)
+    public MapPolyline fattenPolyline(MapPolyline line, Edge edge)
     {
         switch (edge.roadFunctionalClass())
         {
@@ -88,7 +88,7 @@ public class EdgeTheme extends BaseTheme
         }
     }
 
-    public MapPolyline polylineEdge(final MapCanvas canvas, final Selection.Type type, final Edge edge)
+    public MapPolyline polylineEdge(MapCanvas canvas, Selection.Type type, Edge edge)
     {
         switch (type)
         {
@@ -108,11 +108,11 @@ public class EdgeTheme extends BaseTheme
                 throw new IllegalArgumentException();
         }
 
-        final var line = fattenPolyline(edgeUnselected(), edge);
+        var line = fattenPolyline(edgeUnselected(), edge);
 
-        final Color color;
+        Color color;
 
-        final var zoomedIn = canvas.scale().isZoomedIn(MapScale.CITY);
+        var zoomedIn = canvas.scale().isZoomedIn(MapScale.CITY);
         switch (edge.roadFunctionalClass())
         {
             case MAIN:

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  */
 public class KeysColumn extends JPanel
 {
-    KeysColumn(final TagPanel tagPanel)
+    KeysColumn(TagPanel tagPanel)
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 

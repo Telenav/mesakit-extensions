@@ -37,11 +37,11 @@ public class ViewPanel extends JPanel
     {
         Column()
         {
-            final var layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+            var layout = new BoxLayout(this, BoxLayout.Y_AXIS);
             setLayout(layout);
         }
 
-        public void add(final JComponent header, final JComponent column)
+        public void add(JComponent header, JComponent column)
         {
             header.setAlignmentY(Component.TOP_ALIGNMENT);
             header.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -61,14 +61,14 @@ public class ViewPanel extends JPanel
     {
         EdgesColumn()
         {
-            final var outer = ViewPanel.this;
+            var outer = ViewPanel.this;
             outer.viewEdges = new ViewCheckBox(graphPanel, "edges");
 
-            final var values = RoadType.values();
+            var values = RoadType.values();
             Arrays.sort(values, Comparator.comparing(Enum::name));
             outer.viewRoadTypes = new ViewMultiSelectList<>(graphPanel, values);
             outer.viewRoadTypes.getSelectionModel().setSelectionInterval(0, values.length - 1);
-            final var scroll = new JScrollPane(outer.viewRoadTypes, VERTICAL_SCROLLBAR_ALWAYS,
+            var scroll = new JScrollPane(outer.viewRoadTypes, VERTICAL_SCROLLBAR_ALWAYS,
                     HORIZONTAL_SCROLLBAR_NEVER);
             scroll.setPreferredSize(new Dimension(190, 100));
             scroll.setMinimumSize(new Dimension(150, 150));
@@ -84,14 +84,14 @@ public class ViewPanel extends JPanel
     {
         PlacesColumn()
         {
-            final var outer = ViewPanel.this;
+            var outer = ViewPanel.this;
             outer.viewPlaces = new ViewCheckBox(graphPanel, "places");
 
-            final var values = Place.Type.values();
+            var values = Place.Type.values();
             Arrays.sort(values, Comparator.comparing(Enum::name));
             outer.viewPlaceTypes = new ViewMultiSelectList<>(graphPanel, values);
             outer.viewPlaceTypes.getSelectionModel().setSelectionInterval(0, values.length - 1);
-            final var scroll = new JScrollPane(outer.viewPlaceTypes, VERTICAL_SCROLLBAR_ALWAYS,
+            var scroll = new JScrollPane(outer.viewPlaceTypes, VERTICAL_SCROLLBAR_ALWAYS,
                     HORIZONTAL_SCROLLBAR_NEVER);
             scroll.setPreferredSize(new Dimension(190, 100));
             scroll.setMinimumSize(new Dimension(150, 150));
@@ -107,14 +107,14 @@ public class ViewPanel extends JPanel
     {
         RelationsColumn()
         {
-            final var outer = ViewPanel.this;
+            var outer = ViewPanel.this;
             outer.viewRelations = new ViewCheckBox(graphPanel, "relations");
 
-            final var values = EdgeRelation.Type.values();
+            var values = EdgeRelation.Type.values();
             Arrays.sort(values, Comparator.comparing(Enum::name));
             outer.viewRelationTypes = new ViewMultiSelectList<>(graphPanel, values);
             outer.viewRelationTypes.getSelectionModel().setSelectionInterval(0, values.length - 1);
-            final var scroll = new JScrollPane(outer.viewRelationTypes, VERTICAL_SCROLLBAR_ALWAYS,
+            var scroll = new JScrollPane(outer.viewRelationTypes, VERTICAL_SCROLLBAR_ALWAYS,
                     HORIZONTAL_SCROLLBAR_NEVER);
             scroll.setPreferredSize(new Dimension(190, 100));
             scroll.setMinimumSize(new Dimension(150, 150));
@@ -137,7 +137,7 @@ public class ViewPanel extends JPanel
 
     private ViewMultiSelectList<Place.Type> viewPlaceTypes;
 
-    public ViewPanel(final GraphPanel graphPanel)
+    public ViewPanel(GraphPanel graphPanel)
     {
         this.graphPanel = graphPanel;
 

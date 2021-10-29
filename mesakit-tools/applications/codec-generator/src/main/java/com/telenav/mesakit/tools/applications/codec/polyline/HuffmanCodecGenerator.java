@@ -57,33 +57,33 @@ public class HuffmanCodecGenerator extends BaseRepeater
         }
     }
 
-    public void run(final CommandLine commandLine)
+    public void run(CommandLine commandLine)
     {
-        final var graph = new SmartGraphLoader(commandLine.argument(CodecGeneratorApplication.INPUT)).load();
+        var graph = new SmartGraphLoader(commandLine.argument(CodecGeneratorApplication.INPUT)).load();
 
-        final var frequencies = new CountMap<Integer>();
+        var frequencies = new CountMap<Integer>();
 
         // Go through edges,
-        final var progress = Progress.create(LOGGER);
-        for (final var edge : graph.edges())
+        var progress = Progress.create(LOGGER);
+        for (var edge : graph.edges())
         {
             // and if the edge is not a segment,
             if (edge.isShaped())
             {
                 // get the road shape
-                final var polyline = edge.roadShape();
+                var polyline = edge.roadShape();
 
                 // and go through the locations
-                final var last = polyline.get(0);
+                var last = polyline.get(0);
                 for (var index = 1; index < polyline.size(); index++)
                 {
                     // find the latitude and longitude offsets from the last location in DM5
-                    final var latitudeInDm5 = polyline.get(index).latitude().asDm5();
-                    final var latitudeOffsetInDm5 = latitudeInDm5 - last.latitude().asDm5();
+                    var latitudeInDm5 = polyline.get(index).latitude().asDm5();
+                    var latitudeOffsetInDm5 = latitudeInDm5 - last.latitude().asDm5();
 
                     // and the longitude offset
-                    final var longitudeInDm5 = polyline.get(index).longitude().asDm5();
-                    final var longitudeOffsetInDm5 = longitudeInDm5 - last.longitude().asDm5();
+                    var longitudeInDm5 = polyline.get(index).longitude().asDm5();
+                    var longitudeOffsetInDm5 = longitudeInDm5 - last.longitude().asDm5();
 
                     // and add them to the frequencies array
                     addOffsets(offsetsInDm5, frequencies, latitudeOffsetInDm5);
@@ -96,15 +96,15 @@ public class HuffmanCodecGenerator extends BaseRepeater
         }
 
         // then build and save the codec
-        final var symbols = new Symbols<>(frequencies, Minimum._1);
-        final var codec = HuffmanCodec.from(symbols, Maximum._24);
+        var symbols = new Symbols<>(frequencies, Minimum._1);
+        var codec = HuffmanCodec.from(symbols, Maximum._24);
         codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parse("polyline.codec"));
     }
 
-    private void addOffsets(final int[] offsetsInDm5, final CountMap<Integer> frequencies, int destinationInDm5)
+    private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)
     {
         // While we have not arrived at the destination offset,
-        final var sign = destinationInDm5 < 0 ? -1 : 1;
+        var sign = destinationInDm5 < 0 ? -1 : 1;
         destinationInDm5 = Math.abs(destinationInDm5);
         while (destinationInDm5 > 0)
         {
@@ -112,7 +112,7 @@ public class HuffmanCodecGenerator extends BaseRepeater
             for (var index = 0; index < offsetsInDm5.length; index++)
             {
                 var offset = offsetsInDm5[index];
-                final var newDestination = destinationInDm5 - offset;
+                var newDestination = destinationInDm5 - offset;
                 if (newDestination == 0)
                 {
                     destinationInDm5 -= offset;

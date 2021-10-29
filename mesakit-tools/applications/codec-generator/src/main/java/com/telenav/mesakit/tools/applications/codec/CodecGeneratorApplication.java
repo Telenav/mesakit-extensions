@@ -101,7 +101,7 @@ public class CodecGeneratorApplication extends Application
                     .defaultValue(Minimum._1024)
                     .build();
 
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new CodecGeneratorApplication().run(arguments);
     }

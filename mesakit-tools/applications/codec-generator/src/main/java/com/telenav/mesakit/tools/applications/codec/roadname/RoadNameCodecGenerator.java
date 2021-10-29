@@ -23,16 +23,16 @@ public class RoadNameCodecGenerator extends BaseRepeater
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
-    public void run(final CommandLine commandLine)
+    public void run(CommandLine commandLine)
     {
-        final var graph = new SmartGraphLoader(commandLine.argument(CodecGeneratorApplication.INPUT)).load();
+        var graph = new SmartGraphLoader(commandLine.argument(CodecGeneratorApplication.INPUT)).load();
 
-        final var characters = new CharacterFrequencies();
-        final var strings = new StringFrequencies(Count._10_000_000, Maximum._100_000_000);
-        final var progress = Progress.create(LOGGER);
-        for (final var edge : graph.edges())
+        var characters = new CharacterFrequencies();
+        var strings = new StringFrequencies(Count._10_000_000, Maximum._100_000_000);
+        var progress = Progress.create(LOGGER);
+        for (var edge : graph.edges())
         {
-            for (final var name : edge.roadNames())
+            for (var name : edge.roadNames())
             {
                 characters.add(name.name());
                 strings.add(name.name());
@@ -45,10 +45,10 @@ public class RoadNameCodecGenerator extends BaseRepeater
             characters.frequencies().add(HuffmanCharacterCodec.ESCAPE, Count._1024);
         }
 
-        final var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
+        var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
         characterCodec.asProperties().save(characterCodec.toString(), File.parse("default-road-name-character.codec"));
 
-        final var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
+        var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
         stringCodec.asProperties().save(stringCodec.toString(), File.parse("string.codec"));
     }
 }

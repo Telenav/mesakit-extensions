@@ -56,16 +56,16 @@ public class TurnRestrictionStatistics
 
     private int badOnlyStraightOns;
 
-    public void add(final EdgeRelation relation)
+    public void add(EdgeRelation relation)
     {
         if (relation.isTurnRestriction())
         {
-            final var restriction = relation.turnRestriction();
+            var restriction = relation.turnRestriction();
             add(relation, restriction.isBad());
         }
     }
 
-    public void add(final EdgeRelation relation, final boolean bad)
+    public void add(EdgeRelation relation, boolean bad)
     {
         if (relation.isTurnRestriction())
         {
@@ -159,7 +159,7 @@ public class TurnRestrictionStatistics
         }
     }
 
-    public void addAll(final Iterable<EdgeRelation> relations)
+    public void addAll(Iterable<EdgeRelation> relations)
     {
         relations.forEach(this::add);
     }
@@ -176,7 +176,7 @@ public class TurnRestrictionStatistics
 
     public StringList summary()
     {
-        final var turns = new StringList();
+        var turns = new StringList();
         turns.add("restrictions = " + Count.count(restrictions));
         turns.add("no lefts = " + Count.count(noLefts));
         turns.add("no rights = " + Count.count(noRights));

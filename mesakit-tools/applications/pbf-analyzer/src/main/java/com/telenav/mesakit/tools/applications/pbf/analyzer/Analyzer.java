@@ -69,13 +69,13 @@ public class Analyzer
 
     private final boolean computeLengths;
 
-    Analyzer(final CommandLine commandLine)
+    Analyzer(CommandLine commandLine)
     {
         input = commandLine.argument(INPUT);
         showWarnings = commandLine.get(PbfAnalyzerApplication.SHOW_WARNINGS);
         computeLengths = commandLine.get(PbfAnalyzerApplication.COMPUTE_LENGTHS);
 
-        final var feedback = new StringList();
+        var feedback = new StringList();
         feedback.add("input = $", input);
         feedback.add("way filter = $", commandLine.get(WAY_FILTER));
         feedback.add("show warnings = $", showWarnings);
@@ -87,18 +87,18 @@ public class Analyzer
         locationForNode.initialize();
     }
 
-    public void addWay(final PbfWay way)
+    public void addWay(PbfWay way)
     {
         ways++;
         if (computeLengths)
         {
-            for (final var tag : way)
+            for (var tag : way)
             {
                 if ("highway".equalsIgnoreCase(tag.getKey()))
                 {
-                    final var type = tag.getValue();
-                    final var builder = new PolylineBuilder();
-                    for (final var node : way.nodes())
+                    var type = tag.getValue();
+                    var builder = new PolylineBuilder();
+                    for (var node : way.nodes())
                     {
                         builder.add(Location.dm7(locationForNode.get(node.getNodeId())));
                     }
@@ -116,15 +116,15 @@ public class Analyzer
         }
     }
 
-    void addNode(final PbfNode node)
+    void addNode(PbfNode node)
     {
         nodes++;
         if (computeLengths)
         {
-            final var location = Location.degrees(node.latitude(), node.longitude());
+            var location = Location.degrees(node.latitude(), node.longitude());
             locationForNode.put(node.identifierAsLong(), location.asDm7Long());
         }
-        final var tags = node.tagMap();
+        var tags = node.tagMap();
         if (tags.containsKey("place"))
         {
             if (tags.containsKey("population"))
@@ -135,14 +135,14 @@ public class Analyzer
         }
     }
 
-    void addRelation(final PbfRelation relation)
+    void addRelation(PbfRelation relation)
     {
         relations++;
-        for (final var tag : relation)
+        for (var tag : relation)
         {
             if (tag.getKey() != null && "restriction".equalsIgnoreCase(tag.getKey()))
             {
-                final var value = tag.getValue().toLowerCase();
+                var value = tag.getValue().toLowerCase();
                 if (value.startsWith("no_"))
                 {
                     if (value.startsWith("no_left_turn"))
@@ -214,7 +214,7 @@ public class Analyzer
 
     void report()
     {
-        final var report = new StringList();
+        var report = new StringList();
 
         report.add("nodes = " + Count.count(nodes));
         report.add("ways = " + Count.count(ways));
@@ -255,9 +255,9 @@ public class Analyzer
         if (computeLengths)
         {
             System.out.println(AsciiArt.line());
-            final var keys = new StringList(lengthForHighwayType.keySet());
+            var keys = new StringList(lengthForHighwayType.keySet());
             keys.sort(Comparator.naturalOrder());
-            for (final var type : keys)
+            for (var type : keys)
             {
                 System.out.println("highway['" + type + "'] = " + lengthForHighwayType.get(type));
             }

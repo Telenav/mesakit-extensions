@@ -56,8 +56,10 @@ public class MesaKitGsonFactory extends com.telenav.kivakit.serialization.json.G
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
     @Override
-    protected void onAddSerializers(final GsonBuilder builder)
+    protected void onAddSerializers(GsonBuilder builder)
     {
+        super.onAddSerializers(builder);
+
         addSerializer(builder, Identifier.class, new IdentifierGsonSerializer());
         addSerializer(builder, LocalTime.class, serializer(new UtcDateTimeConverter(LOGGER)));
         addSerializer(builder, Count.class, new CountGsonSerializer());
@@ -81,7 +83,8 @@ public class MesaKitGsonFactory extends com.telenav.kivakit.serialization.json.G
     }
 
     @Override
-    protected void onInitialize(final GsonBuilder builder)
+    protected void onInitialize(GsonBuilder builder)
     {
+        super.onInitialize(builder);
     }
 }

@@ -62,7 +62,7 @@ public class PbfToGraphConverterApplication extends Application
      * Program entrypoint. Parses command line arguments and switches, constructs application object and calls the run
      * method with {@link CommandLine}
      */
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfToGraphConverterApplication().run(arguments);
     }
@@ -180,13 +180,13 @@ public class PbfToGraphConverterApplication extends Application
     protected void onRun()
     {
         // Start the clock,
-        final var start = Time.now();
+        var start = Time.now();
 
         // show application arguments
         showCommandLine();
 
         // check the input files,
-        final var inputFiles = argument(INPUT_FILES);
+        var inputFiles = argument(INPUT_FILES);
         checkInputFiles(commandLine(), inputFiles);
 
         // show what will be converted
@@ -205,15 +205,15 @@ public class PbfToGraphConverterApplication extends Application
         }
 
         // For each input file,
-        final var outputFiles = new FileList();
-        final var conversion = listenTo(new Conversion(this, commandLine(), outputFolder));
-        for (final var input : inputFiles)
+        var outputFiles = new FileList();
+        var conversion = listenTo(new Conversion(this, commandLine(), outputFolder));
+        for (var input : inputFiles)
         {
             // if it's a file,
             if (input.isFile())
             {
                 // convert just that one file,
-                final var outputFile = conversion.convert(input);
+                var outputFile = conversion.convert(input);
                 if (outputFile != null)
                 {
                     outputFiles.add(outputFile);
@@ -222,13 +222,13 @@ public class PbfToGraphConverterApplication extends Application
             else
             {
                 // otherwise we're converting a whole folder
-                final var folder = input.asFolder();
+                var folder = input.asFolder();
 
                 // so go through each file in the folder,
-                for (final var nestedFile : folder.nestedFiles(Extension.OSM_PBF.fileMatcher()))
+                for (var nestedFile : folder.nestedFiles(Extension.OSM_PBF.fileMatcher()))
                 {
                     // and convert those files.
-                    final var outputFile = conversion.convert(nestedFile);
+                    var outputFile = conversion.convert(nestedFile);
                     if (outputFile != null)
                     {
                         outputFiles.add(outputFile);
@@ -238,8 +238,8 @@ public class PbfToGraphConverterApplication extends Application
         }
 
         // Finally, show what new files were built.
-        final var built = new ObjectList<>();
-        for (final var graphFile : outputFiles)
+        var built = new ObjectList<>();
+        for (var graphFile : outputFiles)
         {
             built.append(graphFile.path().absolute());
         }
@@ -261,9 +261,9 @@ public class PbfToGraphConverterApplication extends Application
     /**
      * Ensures that input files exist
      */
-    private void checkInputFiles(final CommandLine commandLine, final FileList inputFiles)
+    private void checkInputFiles(CommandLine commandLine, FileList inputFiles)
     {
-        for (final var input : inputFiles)
+        for (var input : inputFiles)
         {
             // and make sure each exists
             if (!input.exists())
@@ -277,7 +277,7 @@ public class PbfToGraphConverterApplication extends Application
     /**
      * Shows what files will be converted
      */
-    private void showConversionInformation(final FileList inputFiles)
+    private void showConversionInformation(FileList inputFiles)
     {
         information(AsciiArt.textBox("Converting PBF Files", AsciiArt.bulleted(inputFiles)));
     }
