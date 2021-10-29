@@ -92,7 +92,7 @@ public class ViewModel
 
     public void drawn(Rectangle2D drawn)
     {
-        final var expansion = 20;
+        var expansion = 20;
         Rectangle2D expanded = new Rectangle2D.Double(drawn.getX() - expansion, drawn.getY() - expansion,
                 drawn.getWidth() + 2 * expansion, drawn.getHeight() + 2 * expansion);
         drawnRectangles.add(expanded);

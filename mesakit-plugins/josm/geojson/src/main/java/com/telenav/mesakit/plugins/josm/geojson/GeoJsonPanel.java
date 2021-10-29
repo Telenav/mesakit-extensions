@@ -310,7 +310,7 @@ public class GeoJsonPanel extends BaseJosmPanel
 
     private void addNextShortCut()
     {
-        final var shortcutName = "Next GeoJson Feature";
+        var shortcutName = "Next GeoJson Feature";
         var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
                 Shortcut.ALT_CTRL_SHIFT);
         var next = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
@@ -335,7 +335,7 @@ public class GeoJsonPanel extends BaseJosmPanel
 
     private void addPreviousShortCut()
     {
-        final var shortcutName = "Previous GeoJson Feature";
+        var shortcutName = "Previous GeoJson Feature";
         var shortcut = Shortcut.registerShortcut(shortcutName, shortcutName, KeyEvent.VK_DOWN,
                 Shortcut.ALT_CTRL_SHIFT);
         var previous = new JosmAction(shortcutName, null, shortcutName, shortcut, false)
