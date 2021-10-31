@@ -50,12 +50,12 @@ public class GraphToPbfConverterApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("The graph to convert to PBF")
+            fileArgumentParser(this, "The graph to convert to PBF")
                     .required()
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser("output-folder", "Folder in which the output files are to be saved")
+            folderSwitchParser(this, "output-folder", "Folder in which the output files are to be saved")
                     .optional()
                     .build();
 
@@ -121,7 +121,7 @@ public class GraphToPbfConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(OUTPUT_FOLDER, QUIET);
+        return ObjectSet.objectSet(OUTPUT_FOLDER, QUIET);
     }
 
     private void convertOne(Folder outputFolder, Folder folder, File input)

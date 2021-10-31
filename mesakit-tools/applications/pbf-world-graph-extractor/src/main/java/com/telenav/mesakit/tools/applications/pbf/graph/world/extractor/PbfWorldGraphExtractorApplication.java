@@ -78,40 +78,40 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     /** The input PBF resource to split into a grid */
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("The PBF file to split into a new world graph")
+            fileArgumentParser(this, "The PBF file to split into a new world graph")
                     .required()
                     .build();
 
     public final SwitchParser<File> EXCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("excluded-highway-types", "A text file containing excluded highway types (one per line)")
+            fileSwitchParser(this, "excluded-highway-types", "A text file containing excluded highway types (one per line)")
                     .optional()
                     .build();
 
     public final SwitchParser<File> FREE_FLOW_SIDE_FILE =
-            fileSwitchParser("free-flow-side-file", "The file to load free flow from")
+            fileSwitchParser(this, "free-flow-side-file", "The file to load free flow from")
                     .optional()
                     .build();
 
     public final SwitchParser<File> INCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("included-highway-types", "A text file containing included highway types (one per line)")
+            fileSwitchParser(this, "included-highway-types", "A text file containing included highway types (one per line)")
                     .optional()
                     .build();
 
     public final SwitchParser<Boolean> REGION_INFORMATION =
-            booleanSwitchParser("region-information", "Include region information (expensive in OSM)")
+            booleanSwitchParser(this, "region-information", "Include region information (expensive in OSM)")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     /** Filter for relations */
     public final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .required()
                     .build();
 
     /** Filter for ways */
     public final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .defaultValue(new OsmNavigableWayFilter())
                     .build();
@@ -126,46 +126,46 @@ public class PbfWorldGraphExtractorApplication extends Application
     private SwitchParser<Deployment> DEPLOYMENT;
 
     private final SwitchParser<Boolean> OVERWRITE =
-            booleanSwitchParser("overwrite", "True to overwrite any existing graph")
+            booleanSwitchParser(this, "overwrite", "True to overwrite any existing graph")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Mode> MODE =
-            enumSwitchParser("mode", "TimeFormat of operation (extract or convert)", Mode.class)
+            enumSwitchParser(this, "mode", "TimeFormat of operation (extract or convert)", Mode.class)
                     .optional()
                     .defaultValue(Mode.EXTRACT)
                     .build();
 
     final SwitchParser<Boolean> PARALLEL =
-            booleanSwitchParser("parallel", "True to use the parallel PBF reader")
+            booleanSwitchParser(this, "parallel", "True to use the parallel PBF reader")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     /** Number of threads to use when extracting and converting */
-    final SwitchParser<Count> THREADS = threadCountSwitchParser(Count.count(24));
+    final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count.count(24));
 
     public final SwitchParser<Boolean> VERIFY =
-            booleanSwitchParser("verify", "True to verify output graphs")
+            booleanSwitchParser(this, "verify", "True to verify output graphs")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> WARN =
-            booleanSwitchParser("warn", "False to suppress detailed warnings")
+            booleanSwitchParser(this, "warn", "False to suppress detailed warnings")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     /** The input speed pattern file to compile into each cell */
     public final SwitchParser<File> SPEED_PATTERN_FILE =
-            fileSwitchParser("speed-pattern", "The speed pattern file to compile into each cell")
+            fileSwitchParser(this, "speed-pattern", "The speed pattern file to compile into each cell")
                     .optional()
                     .build();
 
     private final SwitchParser<Boolean> PROFILE_FORCE_LOAD =
-            booleanSwitchParser("profile-force-load", "True to profile force-loading")
+            booleanSwitchParser(this, "profile-force-load", "True to profile force-loading")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -331,7 +331,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 .required()
                 .build();
 
-        return ObjectSet.of(WARN,
+        return ObjectSet.objectSet(WARN,
                 MODE,
                 PARALLEL,
                 THREADS,

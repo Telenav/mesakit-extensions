@@ -49,17 +49,17 @@ public class GraphSlicerApplication extends Application
     }
 
     private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE =
-            graphSwitchParser("graph", "The input graph to slice")
+            graphSwitchParser(this, "graph", "The input graph to slice")
                     .required()
                     .build();
 
     private final SwitchParser<File> OUTPUT =
-            fileSwitchParser("output", "The output file")
+            fileSwitchParser(this, "output", "The output file")
                     .required()
                     .build();
 
     private final SwitchParser<Rectangle> BOUNDS =
-            rectangleSwitchParser("bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
+            rectangleSwitchParser(this, "bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
                     .required()
                     .build();
 
@@ -89,6 +89,6 @@ public class GraphSlicerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
+        return ObjectSet.objectSet(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
     }
 }

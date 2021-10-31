@@ -1,5 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
+import com.telenav.kivakit.component.ComponentMixin;
 import com.telenav.kivakit.kernel.language.strings.Strings;
 import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
 import com.telenav.kivakit.ui.desktop.component.panel.output.OutputPanel;
@@ -22,7 +23,7 @@ import static com.telenav.kivakit.ui.desktop.layout.Spacing.MANUAL_SPACING;
 /**
  * @author jonathanl (shibo)
  */
-public class SearchPanel extends JPanel
+public class SearchPanel extends JPanel implements ComponentMixin
 {
     private final JTextField searchField = KivaKitTheme.get().newTextField();
 
@@ -47,7 +48,7 @@ public class SearchPanel extends JPanel
                 {
                     searchField.setSelectionStart(0);
                     searchField.setSelectionEnd(searchString.length());
-                    show(new Searcher(graphPanel.layer()).search(searchString));
+                    show(listenTo(new Searcher(graphPanel.layer())).search(searchString));
                 }
             }
             else

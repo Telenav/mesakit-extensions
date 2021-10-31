@@ -18,6 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
+import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.kernel.language.collections.list.StringList;
 import com.telenav.kivakit.kernel.language.objects.Objects;
 import com.telenav.kivakit.kernel.language.patterns.Pattern;
@@ -61,7 +62,7 @@ import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLI
  *
  * @author jonathanl (shibo)
  */
-public class Searcher
+public class Searcher extends BaseComponent
 {
     static UserFeedback help()
     {
@@ -346,7 +347,7 @@ public class Searcher
             var nodeIdentifier = findNodeIdentifier(identifier);
             var relationIdentifier = findRelationIdentifier(identifier);
 
-            var edgeIndex = Ints.parse(identifier);
+            var edgeIndex = Ints.parse(this, identifier);
             if (edgeIndex > 0)
             {
                 Edge indexedEdge = graph().edgeStore().edgeForIndex(edgeIndex);

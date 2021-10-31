@@ -52,29 +52,29 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfAnalyzerApplication extends Application
 {
-    static final ArgumentParser<File> INPUT =
-            fileArgumentParser("Input PBF file")
+    final ArgumentParser<File> INPUT =
+            fileArgumentParser(this, "Input PBF file")
                     .required()
                     .build();
 
-    static final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+    final SwitchParser<WayFilter> WAY_FILTER =
+            wayFilterSwitchParser(this)
                     .required()
                     .build();
 
-    static final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+    final SwitchParser<RelationFilter> RELATION_FILTER =
+            relationFilterSwitchParser(this)
                     .required()
                     .build();
 
-    static final SwitchParser<Boolean> SHOW_WARNINGS =
-            booleanSwitchParser("show-warnings", "Show warnings for problems like bad turn restrictions")
+    final SwitchParser<Boolean> SHOW_WARNINGS =
+            booleanSwitchParser(this, "show-warnings", "Show warnings for problems like bad turn restrictions")
                     .optional()
                     .defaultValue(false)
                     .build();
 
-    static final SwitchParser<Boolean> COMPUTE_LENGTHS =
-            booleanSwitchParser("compute-lengths", "Compute lengths by highway type")
+    final SwitchParser<Boolean> COMPUTE_LENGTHS =
+            booleanSwitchParser(this, "compute-lengths", "Compute lengths by highway type")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -143,7 +143,7 @@ public class PbfAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of
+        return ObjectSet.objectSet
                 (
                         WAY_FILTER,
                         RELATION_FILTER,

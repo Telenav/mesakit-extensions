@@ -19,6 +19,7 @@
 package com.telenav.mesakit.plugins.josm.library.tile;
 
 import com.telenav.kivakit.collections.set.ConcurrentHashSet;
+import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.kernel.language.threading.Threads;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
@@ -32,7 +33,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile>
+public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile> extends BaseComponent
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 

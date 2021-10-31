@@ -41,7 +41,7 @@ public class GeoJsonFileImporter extends FileImporter
     {
         try
         {
-            var input = File.of(file);
+            var input = File.file(file);
             var document = GeoJsonDocument.forJson(input.reader().string());
             if (document != null)
             {

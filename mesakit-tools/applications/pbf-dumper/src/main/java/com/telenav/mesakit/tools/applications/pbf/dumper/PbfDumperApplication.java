@@ -46,12 +46,12 @@ public class PbfDumperApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            File.fileArgumentParser("The PBF file to preprocess")
+            File.fileArgumentParser(this, "The PBF file to preprocess")
                     .required()
                     .build();
 
     private final ArgumentParser<Long> IDENTIFIER =
-            ArgumentParser.longArgumentParser("The node, way or relation identifier to find")
+            ArgumentParser.longArgumentParser(this, "The node, way or relation identifier to find")
                     .required()
                     .build();
 

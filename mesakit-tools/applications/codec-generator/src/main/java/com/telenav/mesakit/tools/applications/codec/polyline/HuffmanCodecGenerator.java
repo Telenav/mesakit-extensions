@@ -1,6 +1,7 @@
 package com.telenav.mesakit.tools.applications.codec.polyline;
 
 import com.telenav.kivakit.commandline.CommandLine;
+import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.data.compression.codecs.huffman.HuffmanCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.tree.Symbols;
 import com.telenav.kivakit.filesystem.File;
@@ -11,7 +12,6 @@ import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.values.count.Minimum;
 import com.telenav.kivakit.kernel.logging.Logger;
 import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.geography.shape.polyline.compression.huffman.HuffmanPolylineCodec;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
@@ -19,7 +19,7 @@ import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 /**
  * @author jonathanl (shibo)
  */
-public class HuffmanCodecGenerator extends BaseRepeater
+public class HuffmanCodecGenerator extends BaseComponent
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
@@ -59,7 +59,7 @@ public class HuffmanCodecGenerator extends BaseRepeater
 
     public void run(CommandLine commandLine)
     {
-        var graph = new SmartGraphLoader(commandLine.argument(CodecGeneratorApplication.INPUT)).load();
+        var graph = new SmartGraphLoader(commandLine.argument(require(CodecGeneratorApplication.class).INPUT)).load();
 
         var frequencies = new CountMap<Integer>();
 
@@ -98,7 +98,7 @@ public class HuffmanCodecGenerator extends BaseRepeater
         // then build and save the codec
         var symbols = new Symbols<>(frequencies, Minimum._1);
         var codec = HuffmanCodec.from(symbols, Maximum._24);
-        codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parse("polyline.codec"));
+        codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parse(this, "polyline.codec"));
     }
 
     private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)

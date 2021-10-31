@@ -57,9 +57,9 @@ public class EdgeAttributeChecker extends Application
 
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
-    private static final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE = graphSwitchParser().required().build();
+    private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE = graphSwitchParser(this).required().build();
 
-    private static final SwitchParser<Folder> OUTPUT_FOLDER = outputFolderSwitchParser().required().build();
+    private final SwitchParser<Folder> OUTPUT_FOLDER = outputFolderSwitchParser(this).required().build();
 
     static
     {
@@ -378,7 +378,7 @@ public class EdgeAttributeChecker extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(GRAPH_RESOURCE, OUTPUT_FOLDER);
+        return ObjectSet.objectSet(GRAPH_RESOURCE, OUTPUT_FOLDER);
     }
 
     private boolean check(Edge edge, Attribute<Edge> attribute)

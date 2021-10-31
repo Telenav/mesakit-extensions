@@ -68,92 +68,92 @@ public class PbfToGraphConverterApplication extends Application
     }
 
     final ArgumentParser<FileList> INPUT_FILES =
-            fileListArgumentParser("The comma separated list of input PBF file(s) and/or folders to process", Extension.OSM_PBF)
+            fileListArgumentParser(this, "The comma separated list of input PBF file(s) and/or folders to process", Extension.OSM_PBF)
                     .required()
                     .build();
 
     final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .required()
                     .build();
 
     final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .required()
                     .build();
 
     final SwitchParser<? extends Region> CLEAN_CUT_TO =
-            regionSwitchParser("clean-cut-to", "True to cut edges cleanly at the given border")
+            regionSwitchParser(this, "clean-cut-to", "True to cut edges cleanly at the given border")
                     .optional()
                     .build();
 
     final SwitchParser<File> EXCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("excluded-highway-types", "A text file containing excluded highway types (one per line)")
+            fileSwitchParser(this, "excluded-highway-types", "A text file containing excluded highway types (one per line)")
                     .optional()
                     .build();
 
     final SwitchParser<File> FREE_FLOW_SIDE_FILE =
-            fileSwitchParser("free-flow-side-file", "The file to load free flow from")
+            fileSwitchParser(this, "free-flow-side-file", "The file to load free flow from")
                     .optional()
                     .build();
 
     final SwitchParser<File> INCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("included-highway-types", "A text file containing included highway types (one per line)")
+            fileSwitchParser(this, "included-highway-types", "A text file containing included highway types (one per line)")
                     .optional()
                     .build();
 
     final SwitchParser<Boolean> INCLUDE_TAGS =
-            booleanSwitchParser("include-tags", "True to include tags even if the data specification doesn't normally include them")
+            booleanSwitchParser(this, "include-tags", "True to include tags even if the data specification doesn't normally include them")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     final SwitchParser<Boolean> INCLUDE_FULL_NODE_INFORMATION =
-            booleanSwitchParser("include-full-node-information", "True to include shape point information for Cygnus")
+            booleanSwitchParser(this, "include-full-node-information", "True to include shape point information for Cygnus")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser("output-folder", "Folder in which the output files are to be saved")
+            folderSwitchParser(this, "output-folder", "Folder in which the output files are to be saved")
                     .optional()
                     .build();
 
     final SwitchParser<Boolean> PARALLEL_READER =
-            booleanSwitchParser("parallel", "True to use the parallel PBF reader")
+            booleanSwitchParser(this, "parallel", "True to use the parallel PBF reader")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     final SwitchParser<Count> THREADS =
-            countSwitchParser("threads", "The number of threads to use when using the parallel PBF reader")
+            countSwitchParser(this, "threads", "The number of threads to use when using the parallel PBF reader")
                     .optional()
                     .defaultValue(Count._4)
                     .build();
 
     final SwitchParser<Boolean> REGION_INFORMATION =
-            booleanSwitchParser("region-information", "Include region information (expensive in OSM)")
+            booleanSwitchParser(this, "region-information", "Include region information (expensive in OSM)")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     final SwitchParser<File> SPEED_PATTERN_FILE =
-            fileSwitchParser("speed-pattern-file", "The file to load speed pattern from")
+            fileSwitchParser(this, "speed-pattern-file", "The file to load speed pattern from")
                     .optional()
                     .build();
 
     final SwitchParser<File> TRACE_COUNTS_SIDE_FILE =
-            fileSwitchParser("trace-counts-side-file", "The file to load probe counts from")
+            fileSwitchParser(this, "trace-counts-side-file", "The file to load probe counts from")
                     .optional()
                     .build();
 
     final SwitchParser<File> TURN_RESTRICTIONS_SIDE_FILE =
-            fileSwitchParser("turn-restrictions-side-file", "The file to load turn restrictions from")
+            fileSwitchParser(this, "turn-restrictions-side-file", "The file to load turn restrictions from")
                     .optional()
                     .build();
 
     final SwitchParser<Boolean> VERIFY =
-            booleanSwitchParser("verify", "Verify the written graph against the in memory graph")
+            booleanSwitchParser(this, "verify", "Verify the written graph against the in memory graph")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -252,7 +252,7 @@ public class PbfToGraphConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
+        return ObjectSet.objectSet(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
                 INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
                 PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
                 TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);

@@ -92,23 +92,23 @@ public class GraphAnalyzerApplication extends Application
     }
 
     private final ArgumentParser<SmartGraphLoader> GRAPH_RESOURCE =
-            graphArgumentParser("The graph(s) to analyze")
+            graphArgumentParser(this, "The graph(s) to analyze")
                     .oneOrMore()
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            Folder.outputFolderSwitchParser()
+            Folder.outputFolderSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<Boolean> PRINT =
-            booleanSwitchParser("print", "Print output to the console")
+            booleanSwitchParser(this, "print", "Print output to the console")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> BY_HIGHWAY_TYPE =
-            booleanSwitchParser("byHighwayType", "Show lengths by highway type")
+            booleanSwitchParser(this, "byHighwayType", "Show lengths by highway type")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -163,7 +163,7 @@ public class GraphAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
+        return ObjectSet.objectSet(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
     private void analyze(boolean print, Folder output, Graph graph)

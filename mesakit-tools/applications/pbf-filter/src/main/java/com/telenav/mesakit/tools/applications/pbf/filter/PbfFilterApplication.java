@@ -117,12 +117,12 @@ public class PbfFilterApplication extends Application
     }
 
     private final SwitchParser<File> INPUT =
-            fileSwitchParser("input", "The PBF file to preprocess")
+            fileSwitchParser(this, "input", "The PBF file to preprocess")
                     .required()
                     .build();
 
     private final SwitchParser<File> OUTPUT =
-            fileSwitchParser("output", "File to save the new PBF")
+            fileSwitchParser(this, "output", "File to save the new PBF")
                     .required()
                     .build();
 
@@ -132,12 +132,12 @@ public class PbfFilterApplication extends Application
                     .build();
 
     private final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .build();
 
@@ -239,7 +239,7 @@ public class PbfFilterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
+        return ObjectSet.objectSet(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
     }
 
     private static LongSet referencedNodes(WayFilter filter, File graphFile)

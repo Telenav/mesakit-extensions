@@ -57,30 +57,30 @@ public class PbfMetadataApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("Input PBF file")
+            fileArgumentParser(this, "Input PBF file")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> VIEW =
-            booleanSwitchParser("view", "View existing metadata")
+            booleanSwitchParser(this, "view", "View existing metadata")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> ADD =
-            booleanSwitchParser("add", "Add or replace metadata")
+            booleanSwitchParser(this, "add", "Add or replace metadata")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<PbfFileMetadataAnnotator.Mode> MODE =
-            enumSwitchParser("mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
+            enumSwitchParser(this, "mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
                     .optional()
                     .defaultValue(PbfFileMetadataAnnotator.Mode.STRIP_UNREFERENCED_NODES)
                     .build();
 
     private final SwitchParser<String> DATA_DESCRIPTOR =
-            stringSwitchParser("data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
+            stringSwitchParser(this, "data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
                     .optional()
                     .build();
 
@@ -90,12 +90,12 @@ public class PbfMetadataApplication extends Application
                     .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .optional()
                     .build();
 
@@ -197,6 +197,6 @@ public class PbfMetadataApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
+        return ObjectSet.objectSet(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
     }
 }

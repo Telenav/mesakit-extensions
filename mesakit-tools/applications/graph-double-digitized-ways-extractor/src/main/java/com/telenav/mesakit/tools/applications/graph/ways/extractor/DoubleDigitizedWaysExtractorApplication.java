@@ -44,13 +44,13 @@ import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchPars
  */
 public class DoubleDigitizedWaysExtractorApplication extends Application
 {
-    private static final SwitchParser<SmartGraphLoader> GRAPH =
-            graphSwitchParser()
+    private final SwitchParser<SmartGraphLoader> GRAPH =
+            graphSwitchParser(this)
                     .required()
                     .build();
 
-    private static final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser("output", "The output folder")
+    private final SwitchParser<Folder> OUTPUT_FOLDER =
+            folderSwitchParser(this, "output", "The output folder")
                     .optional()
                     .build();
 
@@ -81,7 +81,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
             if (outputFolder == null)
             {
                 // default to the same folder as the input graph
-                outputFolder = parse(path.parent().toString());
+                outputFolder = parse(this, path.parent().toString());
             }
 
             if (outputFolder != null)
@@ -112,6 +112,6 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(GRAPH, OUTPUT_FOLDER, QUIET);
+        return ObjectSet.objectSet(GRAPH, OUTPUT_FOLDER, QUIET);
     }
 }

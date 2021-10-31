@@ -47,7 +47,6 @@ import java.util.Set;
 
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
-import static com.telenav.kivakit.filesystem.File.parse;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 
 /**
@@ -65,12 +64,12 @@ public class GraphVerifierApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("The graph to verify")
+            fileArgumentParser(this, "The graph to verify")
                     .required()
                     .build();
 
     private final SwitchParser<File> SUB_GRAPH =
-            fileSwitchParser("sub-graph", "The sub-graph to verify against the input graph")
+            fileSwitchParser(this, "sub-graph", "The sub-graph to verify against the input graph")
                     .optional()
                     .build();
 
@@ -121,7 +120,7 @@ public class GraphVerifierApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(SUB_GRAPH, QUIET);
+        return ObjectSet.objectSet(SUB_GRAPH, QUIET);
     }
 
     private Edge matchingEdge(Graph graph, Edge edge)
@@ -175,7 +174,7 @@ public class GraphVerifierApplication extends Application
                 warning("$ edge $ not found in $", subgraph.name(), edge, graph.name());
             }
         }
-        var output = parse("differences.geojson");
+        var output = File.parse(this, "differences.geojson");
         if (document.size() != 0)
         {
             document.save(output);
@@ -248,7 +247,7 @@ public class GraphVerifierApplication extends Application
         });
 
         information("Checked " + nodes + " nodes against " + graph.vertexCount() + " graph vertexes");
-        information("Checked " + Count.parse(ways.size() + " ways against " + graph.edgeCount()
+        information("Checked " + Count.parseCount(this, ways.size() + " ways against " + graph.edgeCount()
                 + " graph edges derived from " + graph.wayCount() + " ways"));
 
         information("Way tags had " + wayTagDifferences + " differences");

@@ -50,53 +50,53 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class CodecGeneratorApplication extends Application
 {
-    public static final ArgumentParser<File> INPUT =
-            fileArgumentParser("The input .graph or .osm.pbf file")
+    public final ArgumentParser<File> INPUT =
+            fileArgumentParser(this, "The input .graph or .osm.pbf file")
                     .required()
                     .build();
 
-    public static final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+    public final SwitchParser<WayFilter> WAY_FILTER =
+            wayFilterSwitchParser(this)
                     .optional()
                     .build();
 
-    public static final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+    public final SwitchParser<RelationFilter> RELATION_FILTER =
+            relationFilterSwitchParser(this)
                     .optional()
                     .build();
 
-    public static final SwitchParser<Integer> TAG_CODEC_SAMPLE_FREQUENCY =
-            integerSwitchParser("tag-codec-sample-frequency", "Only use every nth entity to build codecs to improve performance")
+    public final SwitchParser<Integer> TAG_CODEC_SAMPLE_FREQUENCY =
+            integerSwitchParser(this, "tag-codec-sample-frequency", "Only use every nth entity to build codecs to improve performance")
                     .optional()
                     .defaultValue(1)
                     .build();
 
-    public static final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM =
-            maximumSwitchParser("tag-codec-strings-maximum", "The maximum number of strings in a string codec")
+    public final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM =
+            maximumSwitchParser(this, "tag-codec-strings-maximum", "The maximum number of strings in a string codec")
                     .optional()
                     .defaultValue(Maximum._256)
                     .build();
 
-    public static final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM_BITS =
-            maximumSwitchParser("tag-codec-strings-maximum-bits", "The maximum number of bits for a symbol in a string codec")
+    public final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM_BITS =
+            maximumSwitchParser(this, "tag-codec-strings-maximum-bits", "The maximum number of bits for a symbol in a string codec")
                     .optional()
                     .defaultValue(Maximum._12)
                     .build();
 
-    public static final SwitchParser<Minimum> TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES =
-            minimumSwitchParser("tag-codec-strings-minimum-occurrences", "The minimum number of occurrences for a string to be included in a string codec")
+    public final SwitchParser<Minimum> TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES =
+            minimumSwitchParser(this, "tag-codec-strings-minimum-occurrences", "The minimum number of occurrences for a string to be included in a string codec")
                     .optional()
                     .defaultValue(Minimum._1024)
                     .build();
 
-    public static final SwitchParser<Maximum> TAG_CODEC_CHARACTERS_MAXIMUM_BITS =
-            maximumSwitchParser("tag-codec-characters-maximum-bits", "The maximum number of bits for a symbol in an ASCII character codec")
+    public final SwitchParser<Maximum> TAG_CODEC_CHARACTERS_MAXIMUM_BITS =
+            maximumSwitchParser(this, "tag-codec-characters-maximum-bits", "The maximum number of bits for a symbol in an ASCII character codec")
                     .optional()
                     .defaultValue(Maximum._12)
                     .build();
 
-    public static final SwitchParser<Minimum> TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES =
-            minimumSwitchParser("tag-codec-characters-minimum-occurrences", "The minimum number of occurrences for an ASCII character to be included in a character codec")
+    public final SwitchParser<Minimum> TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES =
+            minimumSwitchParser(this, "tag-codec-characters-minimum-occurrences", "The minimum number of occurrences for an ASCII character to be included in a character codec")
                     .optional()
                     .defaultValue(Minimum._1024)
                     .build();
@@ -114,7 +114,7 @@ public class CodecGeneratorApplication extends Application
     }
 
     private final SwitchParser<Type> TYPE =
-            enumSwitchParser("type", "The type of codec(s) to generate", Type.class)
+            enumSwitchParser(this, "type", "The type of codec(s) to generate", Type.class)
                     .required()
                     .build();
 
@@ -158,7 +158,7 @@ public class CodecGeneratorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of
+        return ObjectSet.objectSet
                 (
                         TYPE,
                         WAY_FILTER,

@@ -1,6 +1,7 @@
 package com.telenav.mesakit.tools.applications.pbf.analyzer;
 
 import com.telenav.kivakit.commandline.CommandLine;
+import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.collections.list.StringList;
 import com.telenav.kivakit.kernel.language.strings.AsciiArt;
@@ -20,14 +21,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.telenav.mesakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.INPUT;
-import static com.telenav.mesakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.WAY_FILTER;
-
 /**
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class Analyzer
+public class Analyzer extends BaseComponent
 {
     private static final Logger LOGGER = LoggerFactory.newLogger();
 
@@ -71,13 +69,14 @@ public class Analyzer
 
     Analyzer(CommandLine commandLine)
     {
-        input = commandLine.argument(INPUT);
-        showWarnings = commandLine.get(PbfAnalyzerApplication.SHOW_WARNINGS);
-        computeLengths = commandLine.get(PbfAnalyzerApplication.COMPUTE_LENGTHS);
+        var application = require(PbfAnalyzerApplication.class);
+        input = commandLine.argument(application.INPUT);
+        showWarnings = commandLine.get(application.SHOW_WARNINGS);
+        computeLengths = commandLine.get(application.COMPUTE_LENGTHS);
 
         var feedback = new StringList();
         feedback.add("input = $", input);
-        feedback.add("way filter = $", commandLine.get(WAY_FILTER));
+        feedback.add("way filter = $", commandLine.get(application.WAY_FILTER));
         feedback.add("show warnings = $", showWarnings);
         feedback.add("compute lengths = $", computeLengths);
         LOGGER.information(feedback.titledBox("Analyzing " + input.fileName()));

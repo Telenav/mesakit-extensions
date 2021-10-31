@@ -54,41 +54,41 @@ public class PbfComparatorApplication extends Application
     }
 
     private final SwitchParser<File> BEFORE =
-            fileSwitchParser("before", "The before PBF file to process")
+            fileSwitchParser(this, "before", "The before PBF file to process")
                     .required()
                     .build();
 
     private final SwitchParser<File> AFTER =
-            fileSwitchParser("after", "The after PBF file to process")
+            fileSwitchParser(this, "after", "The after PBF file to process")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_NODES =
-            booleanSwitchParser("compareNodes", "True to compare nodes")
+            booleanSwitchParser(this, "compareNodes", "True to compare nodes")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_WAYS =
-            booleanSwitchParser("compareWays", "True to compare ways")
+            booleanSwitchParser(this, "compareWays", "True to compare ways")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_RELATIONS =
-            booleanSwitchParser("compareRelations", "True to compare relations")
+            booleanSwitchParser(this, "compareRelations", "True to compare relations")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> SHOW_REMOVED =
-            booleanSwitchParser("showRemoved", "True to show removed nodes, ways and relations")
+            booleanSwitchParser(this, "showRemoved", "True to show removed nodes, ways and relations")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> SHOW_ADDED =
-            booleanSwitchParser("showAdded", "True to show added nodes, ways and relations")
+            booleanSwitchParser(this, "showAdded", "True to show added nodes, ways and relations")
                     .optional()
                     .defaultValue(true)
                     .build();
@@ -257,6 +257,6 @@ public class PbfComparatorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
+        return ObjectSet.objectSet(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
     }
 }

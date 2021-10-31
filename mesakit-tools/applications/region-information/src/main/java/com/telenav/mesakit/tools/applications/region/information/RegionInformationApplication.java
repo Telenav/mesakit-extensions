@@ -57,42 +57,42 @@ public class RegionInformationApplication extends Application
     }
 
     private final ArgumentParser<String> REGION =
-            stringArgumentParser("A pattern matching the MesaKit code of the region to give information on")
+            stringArgumentParser(this, "A pattern matching the MesaKit code of the region to give information on")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> PARENT =
-            booleanSwitchParser("parent", "Show the parent of the given region")
+            booleanSwitchParser(this, "parent", "Show the parent of the given region")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> CODE =
-            booleanSwitchParser("code", "Show only the region code")
+            booleanSwitchParser(this, "code", "Show only the region code")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> FOLDER =
-            booleanSwitchParser("folder", "Show only the region repository folder")
+            booleanSwitchParser(this, "folder", "Show only the region repository folder")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> URI =
-            booleanSwitchParser("uri", "The URI on Geofabrik where this region can be downloaded")
+            booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> ALL =
-            booleanSwitchParser("all", "Show all attributes for the region")
+            booleanSwitchParser(this, "all", "Show all attributes for the region")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> RECURSE =
-            booleanSwitchParser("recurse", "Show sub-regions")
+            booleanSwitchParser(this, "recurse", "Show sub-regions")
                     .optional()
                     .defaultValue(false)
                     .build();
@@ -143,7 +143,7 @@ public class RegionInformationApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
+        return ObjectSet.objectSet(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
     private Region region(CommandLine commandLine, String name)

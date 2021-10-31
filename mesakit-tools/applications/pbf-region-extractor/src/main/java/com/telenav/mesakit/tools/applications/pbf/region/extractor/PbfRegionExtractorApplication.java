@@ -46,7 +46,7 @@ import static com.telenav.mesakit.map.region.Region.regionListSwitchParser;
  */
 public class PbfRegionExtractorApplication extends Application
 {
-    private static final SwitchParser<Count> THREADS = threadCountSwitchParser(Count._16);
+    private final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count._16);
 
     public static void main(String[] arguments)
     {
@@ -54,27 +54,27 @@ public class PbfRegionExtractorApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("The input PBF file to process")
+            fileArgumentParser(this, "The input PBF file to process")
                     .required()
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            outputFolderSwitchParser()
+            outputFolderSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<RegionSet> EXTRACT =
-            regionListSwitchParser("extract", "Comma separated list of region patterns to extract")
+            regionListSwitchParser(this, "extract", "Comma separated list of region patterns to extract")
                     .optional()
                     .build();
 
     private final SwitchParser<RegionSet> EXTRACT_UNDER =
-            regionListSwitchParser("extractUnder", "Comma separated list of region patterns to extract under (includes the region itself)")
+            regionListSwitchParser(this, "extractUnder", "Comma separated list of region patterns to extract under (includes the region itself)")
                     .optional()
                     .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .required()
                     .build();
 
@@ -128,6 +128,6 @@ public class PbfRegionExtractorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(OUTPUT_FOLDER, EXTRACT, EXTRACT_UNDER, WAY_FILTER, THREADS, QUIET);
+        return ObjectSet.objectSet(OUTPUT_FOLDER, EXTRACT, EXTRACT_UNDER, WAY_FILTER, THREADS, QUIET);
     }
 }
