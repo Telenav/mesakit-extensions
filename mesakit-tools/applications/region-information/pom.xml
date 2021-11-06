@@ -17,7 +17,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mesakit-tools-applications-region-information</artifactId>
     <packaging>jar</packaging>
-    <name>MesaKit - Tools - Applications - Region Information</name>
 
     <dependencies>
 

@@ -17,7 +17,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mesakit-tools</artifactId>
     <packaging>pom</packaging>
-    <name>MesaKit - Tools</name>
 
     <modules>
         <module>applications</module>

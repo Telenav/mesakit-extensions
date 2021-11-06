@@ -24,7 +24,6 @@
 
     <!-- Project -->
 
-    <name>MesaKit Extensions</name>
     <description>MesaKit extensions contains modules that extend MesaKit</description>
     <url>https://www.mesakit.org</url>
     <inceptionYear>2011</inceptionYear>

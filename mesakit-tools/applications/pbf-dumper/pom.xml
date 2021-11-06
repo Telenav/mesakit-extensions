@@ -17,7 +17,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mesakit-tools-applications-pbf-dumper</artifactId>
     <packaging>jar</packaging>
-    <name>MesaKit - Tools - Applications - PBF Dumper</name>
 
     <dependencies>
 

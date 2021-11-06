@@ -17,7 +17,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mesakit-tools-applications-graph-dumper</artifactId>
     <packaging>jar</packaging>
-    <name>MesaKit - Tools - Applications - Graph Dumper</name>
 
     <dependencies>
 

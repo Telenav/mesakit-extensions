@@ -17,7 +17,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mesakit-plugins-josm-library</artifactId>
     <packaging>jar</packaging>
-    <name>MesaKit - Plugins - JOSM - Library</name>
 
     <dependencies>
 
