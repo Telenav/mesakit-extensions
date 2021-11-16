@@ -22,7 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.configuration.settings.deployment.Deployment;
+import com.telenav.kivakit.configuration.settings.Deployment;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
@@ -182,7 +182,7 @@ public class PbfWorldGraphExtractorApplication extends Application
         var start = Time.now();
 
         // Install deployment
-        get(DEPLOYMENT).install();
+        registerSettingsIn(get(DEPLOYMENT));
 
         // Ensure this works later
         get(WAY_FILTER);
