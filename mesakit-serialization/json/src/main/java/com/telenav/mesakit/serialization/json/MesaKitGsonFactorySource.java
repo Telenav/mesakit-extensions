@@ -2,7 +2,7 @@
 //
 // © 2011-2021 Telenav, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License".
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -18,15 +18,15 @@
 
 package com.telenav.mesakit.serialization.json;
 
-import com.google.gson.GsonBuilder;
 import com.telenav.kivakit.kernel.language.strings.formatting.Separators;
 import com.telenav.kivakit.kernel.language.time.LocalTime;
 import com.telenav.kivakit.kernel.language.time.conversion.converters.UtcDateTimeConverter;
 import com.telenav.kivakit.kernel.language.values.count.Bytes;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.serialization.json.BaseGsonFactorySource;
+import com.telenav.kivakit.serialization.json.FunctionalGsonFactory;
+import com.telenav.kivakit.serialization.json.GsonFactory;
 import com.telenav.kivakit.serialization.json.serializers.CountGsonSerializer;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
@@ -51,40 +51,31 @@ import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer
 import com.telenav.mesakit.serialization.json.serializers.LongitudeGsonSerializer;
 import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSerializer;
 
-public class MesaKitGsonFactory extends com.telenav.kivakit.serialization.json.GsonFactory
+public class MesaKitGsonFactorySource extends BaseGsonFactorySource
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    @Override
-    protected void onAddSerializers(GsonBuilder builder)
+    public GsonFactory gsonFactory()
     {
-        super.onAddSerializers(builder);
-
-        addSerializer(builder, Identifier.class, new IdentifierGsonSerializer());
-        addSerializer(builder, LocalTime.class, serializer(new UtcDateTimeConverter(LOGGER)));
-        addSerializer(builder, Count.class, new CountGsonSerializer());
-        addSerializer(builder, Bytes.class, serializer(new Bytes.Converter(LOGGER)));
-        addSerializer(builder, Continent.class, serializer(new Continent.Converter<Continent>(LOGGER)));
-        addSerializer(builder, Country.class, serializer(new Region.Converter<Country>(LOGGER)));
-        addSerializer(builder, State.class, serializer(new State.Converter<State>(LOGGER)));
-        addSerializer(builder, MetropolitanArea.class, serializer(new MetropolitanArea.Converter<MetropolitanArea>(LOGGER)));
-        addSerializer(builder, DataBuild.class, serializer(new DataBuild.Converter(LOGGER)));
-        addSerializer(builder, Location.class, serializer(new Location.DegreesConverter(LOGGER)));
-        addSerializer(builder, Latitude.class, new LatitudeGsonSerializer());
-        addSerializer(builder, Longitude.class, new LongitudeGsonSerializer());
-        addSerializer(builder, Rectangle.class, serializer(new Rectangle.Converter(LOGGER)));
-        addSerializer(builder, RoadName.class, serializer(new RoadNameConverter(LOGGER)));
-        addSerializer(builder, MapEdgeIdentifier.class, serializer(new MapEdgeIdentifier.Converter(LOGGER)));
-        addSerializer(builder, Speed.class, serializer(new Speed.Converter(LOGGER)));
-        addSerializer(builder, SpeedCategory.class, new SpeedCategoryGsonSerializer());
-        addSerializer(builder, Distance.class, serializer(new Distance.Converter(LOGGER)));
-        addSerializer(builder, WayIdentifierList.class, serializer(new WayIdentifierList.Converter(LOGGER, Separators.DEFAULT)));
-        addSerializer(builder, NodeIdentifierList.class, serializer(new NodeIdentifierList.Converter(LOGGER, Separators.DEFAULT)));
-    }
-
-    @Override
-    protected void onInitialize(GsonBuilder builder)
-    {
-        super.onInitialize(builder);
+        return new FunctionalGsonFactory(this)
+                .withSerialization(Identifier.class, new IdentifierGsonSerializer())
+                .withSerialization(LocalTime.class, serializer(new UtcDateTimeConverter(this)))
+                .withSerialization(Count.class, new CountGsonSerializer())
+                .withSerialization(Bytes.class, serializer(new Bytes.Converter(this)))
+                .withSerialization(Continent.class, serializer(new Continent.Converter<Continent>(this)))
+                .withSerialization(Country.class, serializer(new Region.Converter<Country>(this)))
+                .withSerialization(State.class, serializer(new State.Converter<State>(this)))
+                .withSerialization(MetropolitanArea.class, serializer(new MetropolitanArea.Converter<MetropolitanArea>(this)))
+                .withSerialization(DataBuild.class, serializer(new DataBuild.Converter(this)))
+                .withSerialization(Location.class, serializer(new Location.DegreesConverter(this)))
+                .withSerialization(Latitude.class, new LatitudeGsonSerializer())
+                .withSerialization(Longitude.class, new LongitudeGsonSerializer())
+                .withSerialization(Rectangle.class, serializer(new Rectangle.Converter(this)))
+                .withSerialization(RoadName.class, serializer(new RoadNameConverter(this)))
+                .withSerialization(MapEdgeIdentifier.class, serializer(new MapEdgeIdentifier.Converter(this)))
+                .withSerialization(Speed.class, serializer(new Speed.Converter(this)))
+                .withSerialization(SpeedCategory.class, new SpeedCategoryGsonSerializer())
+                .withSerialization(Distance.class, serializer(new Distance.Converter(this)))
+                .withSerialization(WayIdentifierList.class, serializer(new WayIdentifierList.Converter(this, Separators.DEFAULT)))
+                .withSerialization(NodeIdentifierList.class, serializer(new NodeIdentifierList.Converter(this, Separators.DEFAULT)));
     }
 }
+
