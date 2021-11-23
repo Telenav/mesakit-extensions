@@ -25,7 +25,7 @@ import com.telenav.kivakit.kernel.language.values.count.Bytes;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
 import com.telenav.kivakit.serialization.json.BaseGsonFactorySource;
-import com.telenav.kivakit.serialization.json.FunctionalGsonFactory;
+import com.telenav.kivakit.serialization.json.DefaultGsonFactory;
 import com.telenav.kivakit.serialization.json.GsonFactory;
 import com.telenav.kivakit.serialization.json.serializers.CountGsonSerializer;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
@@ -53,9 +53,10 @@ import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSeria
 
 public class MesaKitGsonFactorySource extends BaseGsonFactorySource
 {
+    @Override
     public GsonFactory gsonFactory()
     {
-        return new FunctionalGsonFactory(this)
+        return new DefaultGsonFactory(this)
                 .withSerialization(Identifier.class, new IdentifierGsonSerializer())
                 .withSerialization(LocalTime.class, serializer(new UtcDateTimeConverter(this)))
                 .withSerialization(Count.class, new CountGsonSerializer())
