@@ -385,19 +385,19 @@ public class GraphAnalyzerApplication extends Application
                         + ofType[RoadType.URBAN_HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
         result.add("LOCAL_ROAD + LOW_SPEED_ROAD", miles(
                 ofType[RoadType.LOCAL_ROAD.identifier()] + ofType[RoadType.LOW_SPEED_ROAD.identifier()], total));
-        result.add("NO LEFT TURN", Count.count(noLeftTurn).toCommaSeparatedString());
-        result.add("NO RIGHT TURN", Count.count(noRightTurn).toCommaSeparatedString());
-        result.add("NO U-TURN", Count.count(noUTurn).toCommaSeparatedString());
-        result.add("NO STRAIGHT ON", Count.count(noStraightOn).toCommaSeparatedString());
-        result.add("ONLY LEFT TURN", Count.count(onlyLeftTurn).toCommaSeparatedString());
-        result.add("ONLY RIGHT TURN", Count.count(onlyRightTurn).toCommaSeparatedString());
-        result.add("ONLY STRAIGHT ON", Count.count(onlyStraightOn).toCommaSeparatedString());
-        result.add("OTHER TURN RESTRICTIONS", Count.count(otherTurnRestriction).toCommaSeparatedString());
-        result.add("TURN RESTRICTIONS", Count.count(turnRestrictions).toCommaSeparatedString());
+        result.add("NO LEFT TURN", Count.count(noLeftTurn).asCommaSeparatedString());
+        result.add("NO RIGHT TURN", Count.count(noRightTurn).asCommaSeparatedString());
+        result.add("NO U-TURN", Count.count(noUTurn).asCommaSeparatedString());
+        result.add("NO STRAIGHT ON", Count.count(noStraightOn).asCommaSeparatedString());
+        result.add("ONLY LEFT TURN", Count.count(onlyLeftTurn).asCommaSeparatedString());
+        result.add("ONLY RIGHT TURN", Count.count(onlyRightTurn).asCommaSeparatedString());
+        result.add("ONLY STRAIGHT ON", Count.count(onlyStraightOn).asCommaSeparatedString());
+        result.add("OTHER TURN RESTRICTIONS", Count.count(otherTurnRestriction).asCommaSeparatedString());
+        result.add("TURN RESTRICTIONS", Count.count(turnRestrictions).asCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.turnRestrictions()",
-                Count.count(turnRestrictionsByEdgeTurnRestrictions).toCommaSeparatedString());
+                Count.count(turnRestrictionsByEdgeTurnRestrictions).asCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.getRelations()",
-                Count.count(turnRestrictionsByEdgeGetRelations).toCommaSeparatedString());
+                Count.count(turnRestrictionsByEdgeGetRelations).asCommaSeparatedString());
 
         all.removeAll(restrictions);
         var i = 0;
@@ -446,7 +446,7 @@ public class GraphAnalyzerApplication extends Application
 
     private String miles(double miles)
     {
-        return Count.count((int) Math.round(miles)).toCommaSeparatedString() + " miles";
+        return Count.count((int) Math.round(miles)).asCommaSeparatedString() + " miles";
     }
 
     private String miles(double miles, double total)
