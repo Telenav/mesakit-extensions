@@ -72,7 +72,7 @@ import java.awt.event.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.telenav.kivakit.kernel.language.strings.conversion.StringFormat.HTML;
+import static com.telenav.kivakit.interfaces.string.Stringable.Format.HTML;
 import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.FIRST_CLASS;
 import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.MAIN;
 
@@ -95,17 +95,17 @@ public class GraphLayer extends BaseJosmLayer
 
     private MapCanvas canvas;
 
-    private final ViewModel model;
-
     private Graph graph;
 
-    private Graph state;
-
-    private Graph region;
+    private Timer indexingTimer = new Timer();
 
     private Bounds lastPaintBounds;
 
-    private Timer indexingTimer = new Timer();
+    private final ViewModel model;
+
+    private Graph region;
+
+    private Graph state;
 
     public GraphLayer(GraphPlugin plugin, String name)
     {

@@ -19,7 +19,7 @@
 package com.telenav.mesakit.plugins.josm.geojson;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.interfaces.naming.NamedObject;
+import com.telenav.kivakit.interfaces.naming.NamedObject;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.level.Percent;
 import com.telenav.kivakit.kernel.logging.Logger;

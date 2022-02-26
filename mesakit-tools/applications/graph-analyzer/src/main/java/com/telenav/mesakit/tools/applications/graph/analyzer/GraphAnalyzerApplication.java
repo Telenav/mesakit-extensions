@@ -22,7 +22,8 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
+import com.telenav.kivakit.interfaces.comparison.Filter;
+import com.telenav.kivakit.interfaces.comparison.Matcher;
 import com.telenav.kivakit.kernel.language.collections.list.StringList;
 import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.kivakit.kernel.language.primitives.Doubles;
@@ -32,7 +33,6 @@ import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.kernel.language.values.count.Maximum;
 import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.kivakit.kernel.messaging.filters.operators.All;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
@@ -91,6 +91,12 @@ public class GraphAnalyzerApplication extends Application
         }
     }
 
+    private final SwitchParser<Boolean> BY_HIGHWAY_TYPE =
+            booleanSwitchParser(this, "byHighwayType", "Show lengths by highway type")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
+
     private final ArgumentParser<SmartGraphLoader> GRAPH_RESOURCE =
             graphArgumentParser(this, "The graph(s) to analyze")
                     .oneOrMore()
@@ -107,15 +113,9 @@ public class GraphAnalyzerApplication extends Application
                     .defaultValue(true)
                     .build();
 
-    private final SwitchParser<Boolean> BY_HIGHWAY_TYPE =
-            booleanSwitchParser(this, "byHighwayType", "Show lengths by highway type")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+    private final Set<EdgeRelation> all = new HashSet<>();
 
     private final Set<EdgeRelation> restrictions = new HashSet<>();
-
-    private final Set<EdgeRelation> all = new HashSet<>();
 
     protected GraphAnalyzerApplication()
     {
@@ -168,7 +168,7 @@ public class GraphAnalyzerApplication extends Application
 
     private void analyze(boolean print, Folder output, Graph graph)
     {
-        var matcherResult = analyze(graph, new All<>());
+        var matcherResult = analyze(graph, Filter.all());
         if (print)
         {
             var writer = new PrintWriter(System.out);
@@ -441,7 +441,7 @@ public class GraphAnalyzerApplication extends Application
 
     private Matcher<Edge> matcher4()
     {
-        return new All<>();
+        return Filter.all();
     }
 
     private String miles(double miles)
