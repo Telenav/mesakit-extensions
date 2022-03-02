@@ -1,13 +1,13 @@
 package com.telenav.mesakit.tools.applications.codec.polyline;
 
+import com.telenav.kivakit.collections.map.count.CountMap;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.conversion.string.primitive.IntegerConverter;
+import com.telenav.kivakit.core.language.progress.reporters.Progress;
 import com.telenav.kivakit.data.compression.codecs.huffman.HuffmanCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.tree.Symbols;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.conversion.string.primitive.IntegerConverter;
-import com.telenav.kivakit.collections.map.count.CountMap;
-import com.telenav.kivakit.core.language.progress.reporters.Progress;
 import com.telenav.kivakit.language.count.Maximum;
 import com.telenav.kivakit.language.count.Minimum;
 import com.telenav.kivakit.messaging.logging.Logger;
@@ -98,7 +98,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         // then build and save the codec
         var symbols = new Symbols<>(frequencies, Minimum._1);
         var codec = HuffmanCodec.from(symbols, Maximum._24);
-        codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parse(this, "polyline.codec"));
+        codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parseFile(this, "polyline.codec"));
     }
 
     private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)

@@ -62,7 +62,7 @@ public class VectorTileDownloader extends AbstractTileDownloader<VectorTileReque
         variables.put("x", "" + tile.x());
         variables.put("y", "" + tile.y());
         variables.put("baseurl", server);
-        var host = Host.parse(this, "hqd-vectortilefs.telenav.com");
+        var host = Host.parseHost(this, "hqd-vectortilefs.telenav.com");
         var location = new HttpNetworkLocation(host.http()
                 .path(this, "/tools/bin/vm_decoder" + (version == Version.V4 ? "_v4" : "") + ".py"))
                 .withQueryParameters(new QueryParameters(variables));
