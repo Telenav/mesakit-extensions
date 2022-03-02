@@ -21,8 +21,8 @@ package com.telenav.mesakit.tools.applications.graph.ways.extractor;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.GraphProject;
@@ -90,7 +90,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
                 var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
 
                 // Save graph file
-                try (var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.NULL))
+                try (var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.none()))
                 {
                     filtered.save(archive);
                 }

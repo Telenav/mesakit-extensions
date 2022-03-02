@@ -18,9 +18,9 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile.vector;
 
-import com.telenav.kivakit.kernel.language.collections.map.string.VariableMap;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.collections.map.string.VariableMap;
+import com.telenav.kivakit.messaging.logging.Logger;
+import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.kivakit.network.core.Host;
 import com.telenav.kivakit.network.core.QueryParameters;
 import com.telenav.kivakit.network.http.HttpNetworkLocation;

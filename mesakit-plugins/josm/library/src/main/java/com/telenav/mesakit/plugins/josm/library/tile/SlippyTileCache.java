@@ -18,8 +18,8 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile;
 
-import com.telenav.kivakit.collections.map.CacheMap;
-import com.telenav.kivakit.kernel.language.values.count.Maximum;
+import com.telenav.kivakit.core.collections.map.CacheMap;
+import com.telenav.kivakit.language.count.Maximum;
 
 import java.util.Map;
 

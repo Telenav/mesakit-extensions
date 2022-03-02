@@ -19,15 +19,15 @@
 package com.telenav.mesakit.plugins.josm.graph;
 
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.progress.ProgressListener;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.values.level.Percent;
-import com.telenav.kivakit.kernel.language.values.mutable.MutableValue;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.listeners.MessageList;
+import com.telenav.kivakit.core.language.progress.ProgressListener;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
+import com.telenav.kivakit.core.language.progress.reporters.Progress;
+import com.telenav.kivakit.core.language.strings.AsciiArt;
+import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.core.language.values.mutable.MutableValue;
+import com.telenav.kivakit.messaging.logging.Logger;
+import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.messaging.listeners.MessageList;
 import com.telenav.kivakit.resource.compression.archive.ZipArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
@@ -37,7 +37,7 @@ import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
 import java.io.IOException;
 
-import static com.telenav.kivakit.kernel.messaging.Message.Status.COMPLETED;
+import static com.telenav.kivakit.messaging.Message.Status.COMPLETED;
 
 /**
  * Imports a Graph file, creating a GraphLayer in JOSM.
@@ -76,7 +76,7 @@ public class GraphFileImporter extends FileImporter
                     progressMonitor.worked(100 - previous.get());
                     var metadata = graph.metadata();
                     var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
-                    layer.graph(graph, ProgressReporter.NULL);
+                    layer.graph(graph, ProgressReporter.none());
                     LOGGER.information("Loaded graph '$':\n$", graph.name(), metadata);
                     layer.add();
 

@@ -19,16 +19,16 @@
 package com.telenav.mesakit.tools.applications.region.information;
 
 import com.telenav.kivakit.application.Application;
+import com.telenav.kivakit.collections.set.ObjectSet;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.patterns.Pattern;
-import com.telenav.kivakit.kernel.language.patterns.SimplifiedPattern;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.core.string.IndentingStringBuilder;
+import com.telenav.kivakit.core.language.patterns.Pattern;
+import com.telenav.kivakit.core.language.patterns.SimplifiedPattern;
+import com.telenav.kivakit.core.language.strings.AsciiArt;
+import com.telenav.kivakit.messaging.logging.Logger;
+import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.RegionProject;
 import com.telenav.mesakit.map.region.RegionSet;
@@ -37,9 +37,9 @@ import com.telenav.mesakit.map.region.regions.Continent;
 import java.util.List;
 
 import static com.telenav.kivakit.commandline.ArgumentParser.stringArgumentParser;
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder.Indentation;
-import static com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder.Style;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
+import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 
 /**
  * Shows information about a region matching the pattern given as an argument

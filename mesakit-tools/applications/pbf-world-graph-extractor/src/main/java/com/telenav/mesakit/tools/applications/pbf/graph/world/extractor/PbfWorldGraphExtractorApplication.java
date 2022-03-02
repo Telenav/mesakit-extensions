@@ -22,13 +22,13 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.configuration.settings.Deployment;
+import com.telenav.kivakit.settings.settings.Deployment;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
+import com.telenav.kivakit.core.language.progress.reporters.Progress;
+import com.telenav.kivakit.language.time.Time;
+import com.telenav.kivakit.language.count.Count;
 import com.telenav.kivakit.resource.CopyMode;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Metadata;
@@ -46,9 +46,9 @@ import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversi
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.threadCountSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.PARALLEL_READER;
@@ -275,7 +275,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                         if (repositoryInstallFolder != null)
                         {
                             // then copy the data (both PBFs and graphs)
-                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.NULL);
+                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.none());
                         }
                     }
                 }

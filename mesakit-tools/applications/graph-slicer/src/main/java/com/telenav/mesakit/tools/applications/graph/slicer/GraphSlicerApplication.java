@@ -21,8 +21,8 @@ package com.telenav.mesakit.tools.applications.graph.slicer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphProject;
@@ -80,7 +80,7 @@ public class GraphSlicerApplication extends Application
         }
         var clipped = graph.clippedTo(bounds);
         information("clipped to $, producing $", bounds, clipped.asString());
-        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.NULL))
+        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.none()))
         {
             clipped.save(archive);
         }

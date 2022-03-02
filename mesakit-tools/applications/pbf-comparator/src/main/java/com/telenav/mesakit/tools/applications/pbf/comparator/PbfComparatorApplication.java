@@ -22,9 +22,9 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.collections.set.SetDifferencer;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.time.Time;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.progress.reporters.Progress;
+import com.telenav.kivakit.language.time.Time;
 import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
@@ -36,7 +36,7 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfRead
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 

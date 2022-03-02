@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.kernel.language.strings.StringTo;
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.core.language.strings.StringTo;
+import com.telenav.kivakit.messaging.Message;
 
 /**
  * @author jonathanl (shibo)

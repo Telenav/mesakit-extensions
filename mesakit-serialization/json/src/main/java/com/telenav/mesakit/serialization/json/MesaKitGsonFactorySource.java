@@ -18,12 +18,12 @@
 
 package com.telenav.mesakit.serialization.json;
 
-import com.telenav.kivakit.kernel.language.strings.formatting.Separators;
-import com.telenav.kivakit.kernel.language.time.LocalTime;
-import com.telenav.kivakit.kernel.language.time.conversion.converters.UtcDateTimeConverter;
-import com.telenav.kivakit.kernel.language.values.count.Bytes;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.values.identifier.Identifier;
+import com.telenav.kivakit.core.language.strings.formatting.Separators;
+import com.telenav.kivakit.language.time.LocalTime;
+import com.telenav.kivakit.conversion.core.time.UtcDateTimeConverter;
+import com.telenav.kivakit.language.count.Bytes;
+import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.core.language.values.identifier.Identifier;
 import com.telenav.kivakit.serialization.json.BaseGsonFactorySource;
 import com.telenav.kivakit.serialization.json.DefaultGsonFactory;
 import com.telenav.kivakit.serialization.json.GsonFactory;

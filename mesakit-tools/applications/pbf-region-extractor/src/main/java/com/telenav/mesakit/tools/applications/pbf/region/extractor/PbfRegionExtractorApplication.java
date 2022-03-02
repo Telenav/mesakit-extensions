@@ -23,8 +23,8 @@ import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.values.count.Count;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.language.count.Count;
 import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
@@ -33,7 +33,7 @@ import com.telenav.mesakit.map.region.RegionSet;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.threadCountSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;

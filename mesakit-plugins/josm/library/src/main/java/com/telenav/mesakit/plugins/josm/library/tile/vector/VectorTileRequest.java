@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile.vector;
 
-import com.telenav.kivakit.kernel.language.objects.Hash;
+import com.telenav.kivakit.core.language.Hash;
 import com.telenav.mesakit.map.ui.desktop.tiles.SlippyTile;
 import com.telenav.mesakit.plugins.josm.library.tile.AbstractTileRequest;
 import com.telenav.mesakit.plugins.josm.library.tile.MapData;

@@ -18,14 +18,14 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view;
 
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.time.PreciseDuration;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.values.level.Percent;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.core.language.collections.list.StringList;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
+import com.telenav.kivakit.language.time.PreciseDuration;
+import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.messaging.logging.Logger;
+import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.messaging.Message;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingRectangle;
 import com.telenav.mesakit.graph.Edge;

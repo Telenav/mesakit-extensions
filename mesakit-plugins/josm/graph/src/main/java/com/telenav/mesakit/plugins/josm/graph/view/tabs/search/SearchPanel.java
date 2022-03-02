@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
 import com.telenav.kivakit.component.ComponentMixin;
-import com.telenav.kivakit.kernel.language.strings.Strings;
+import com.telenav.kivakit.core.language.strings.Strings;
 import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
 import com.telenav.kivakit.ui.desktop.component.panel.output.OutputPanel;
 import com.telenav.kivakit.ui.desktop.layout.Borders;

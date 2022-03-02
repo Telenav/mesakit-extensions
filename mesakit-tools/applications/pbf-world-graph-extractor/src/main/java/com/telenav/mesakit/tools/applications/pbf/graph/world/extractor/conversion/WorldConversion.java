@@ -1,17 +1,17 @@
 package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion;
 
 import com.telenav.kivakit.commandline.CommandLine;
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.threading.Threads;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Bytes;
-import com.telenav.kivakit.kernel.language.values.count.ConcurrentMutableCount;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.Debug;
+import com.telenav.kivakit.core.language.collections.list.StringList;
+import com.telenav.kivakit.core.language.progress.ProgressReporter;
+import com.telenav.kivakit.core.language.strings.AsciiArt;
+import com.telenav.kivakit.core.language.threading.Threads;
+import com.telenav.kivakit.language.time.Time;
+import com.telenav.kivakit.language.count.Bytes;
+import com.telenav.kivakit.language.count.ConcurrentMutableCount;
+import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.messaging.logging.Logger;
+import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.messaging.Debug;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.world.grid.WorldCell;
 import com.telenav.mesakit.graph.world.grid.WorldGrid;
@@ -167,7 +167,7 @@ public class WorldConversion
                                 LOGGER.listenTo(conversion);
 
                                 // convert the cell, clean cutting to the cell boundary
-                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.NULL);
+                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.none());
                                 LOGGER.information("$ Converting $", prefix.trim(), input);
 
                                 // then convert the PBF to a graph

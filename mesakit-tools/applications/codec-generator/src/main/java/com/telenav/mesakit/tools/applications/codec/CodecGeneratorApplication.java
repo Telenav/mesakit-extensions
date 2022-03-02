@@ -22,9 +22,9 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.values.count.Maximum;
-import com.telenav.kivakit.kernel.language.values.count.Minimum;
+import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.language.count.Maximum;
+import com.telenav.kivakit.language.count.Minimum;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
@@ -34,10 +34,10 @@ import com.telenav.mesakit.tools.applications.codec.tag.TagCodecGenerator;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.integerSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.maximumSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.minimumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.integerSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.maximumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.minimumSwitchParser;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;

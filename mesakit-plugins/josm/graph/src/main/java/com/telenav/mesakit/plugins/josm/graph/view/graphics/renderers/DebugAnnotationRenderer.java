@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.messaging.Message;
 import com.telenav.mesakit.graph.Vertex;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;

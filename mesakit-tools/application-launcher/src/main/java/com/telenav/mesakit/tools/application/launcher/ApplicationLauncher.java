@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.tools.application.launcher;
 
-import com.telenav.kivakit.kernel.language.time.Duration;
+import com.telenav.kivakit.language.time.Duration;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
 import com.telenav.mesakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
