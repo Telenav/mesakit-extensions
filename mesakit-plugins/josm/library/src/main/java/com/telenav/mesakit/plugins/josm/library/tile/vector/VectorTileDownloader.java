@@ -18,9 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile.vector;
 
-import com.telenav.kivakit.collections.map.string.VariableMap;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.core.collections.map.VariableMap;
 import com.telenav.kivakit.network.core.Host;
 import com.telenav.kivakit.network.core.QueryParameters;
 import com.telenav.kivakit.network.http.HttpNetworkLocation;
@@ -32,8 +30,6 @@ import com.telenav.mesakit.plugins.josm.library.tile.SlippyTileCache;
 
 public class VectorTileDownloader extends AbstractTileDownloader<VectorTileRequest, VectorTile>
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     public enum Version
     {
         V3,
@@ -62,12 +58,13 @@ public class VectorTileDownloader extends AbstractTileDownloader<VectorTileReque
         variables.put("x", "" + tile.x());
         variables.put("y", "" + tile.y());
         variables.put("baseurl", server);
+        @SuppressWarnings("SpellCheckingInspection")
         var host = Host.parseHost(this, "hqd-vectortilefs.telenav.com");
         var location = new HttpNetworkLocation(host.http()
                 .path(this, "/tools/bin/vm_decoder" + (version == Version.V4 ? "_v4" : "") + ".py"))
                 .withQueryParameters(new QueryParameters(variables));
         var vectorTile = new VectorTile(tile);
-        LOGGER.information("Downloaded $ ($)", vectorTile, tile.mapArea());
+        information("Downloaded $ ($)", vectorTile, tile.mapArea());
         return vectorTile;
     }
 
@@ -75,7 +72,7 @@ public class VectorTileDownloader extends AbstractTileDownloader<VectorTileReque
     private Polyline polyline(String string)
     {
         var builder = new PolylineBuilder();
-        var converter = new Location.DegreesConverter(LOGGER);
+        var converter = new Location.DegreesConverter(this);
         for (var location : string.split(" "))
         {
             var value = location.substring(1, location.length() - 1);

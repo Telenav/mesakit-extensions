@@ -18,12 +18,13 @@
 
 package com.telenav.mesakit.serialization.json;
 
-import com.telenav.kivakit.core.language.strings.formatting.Separators;
-import com.telenav.kivakit.language.time.LocalTime;
 import com.telenav.kivakit.conversion.core.time.UtcDateTimeConverter;
-import com.telenav.kivakit.language.count.Bytes;
-import com.telenav.kivakit.language.count.Count;
-import com.telenav.kivakit.core.language.values.identifier.Identifier;
+import com.telenav.kivakit.conversion.core.value.BytesConverter;
+import com.telenav.kivakit.core.string.Separators;
+import com.telenav.kivakit.core.time.LocalTime;
+import com.telenav.kivakit.core.value.count.Bytes;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.value.identifier.Identifier;
 import com.telenav.kivakit.serialization.json.BaseGsonFactorySource;
 import com.telenav.kivakit.serialization.json.DefaultGsonFactory;
 import com.telenav.kivakit.serialization.json.GsonFactory;
@@ -60,7 +61,7 @@ public class MesaKitGsonFactorySource extends BaseGsonFactorySource
                 .withSerialization(Identifier.class, new IdentifierGsonSerializer())
                 .withSerialization(LocalTime.class, serializer(new UtcDateTimeConverter(this)))
                 .withSerialization(Count.class, new CountGsonSerializer())
-                .withSerialization(Bytes.class, serializer(new Bytes.Converter(this)))
+                .withSerialization(Bytes.class, serializer(new BytesConverter(this)))
                 .withSerialization(Continent.class, serializer(new Continent.Converter<Continent>(this)))
                 .withSerialization(Country.class, serializer(new Region.Converter<Country>(this)))
                 .withSerialization(State.class, serializer(new State.Converter<State>(this)))

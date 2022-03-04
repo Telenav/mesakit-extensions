@@ -19,7 +19,7 @@
 package com.telenav.mesakit.plugins.josm.graph.model;
 
 import com.telenav.kivakit.core.language.Objects;
-import com.telenav.kivakit.language.count.Estimate;
+import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;

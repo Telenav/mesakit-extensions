@@ -20,9 +20,9 @@ package com.telenav.mesakit.plugins.josm.library.tile;
 
 import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.core.collections.set.ConcurrentHashSet;
-import com.telenav.kivakit.core.language.threading.Threads;
+import com.telenav.kivakit.core.thread.Threads;
 import com.telenav.kivakit.core.vm.JavaVirtualMachine;
-import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.messaging.logging.Logger;
 import com.telenav.kivakit.messaging.logging.LoggerFactory;
 

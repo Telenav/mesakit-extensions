@@ -18,7 +18,8 @@
 
 package com.telenav.mesakit.graph.geocoding.reverse;
 
-import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.core.value.level.Percent;
+
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.geocoding.reverse.matching.FuzzyRoadNameMatcher;

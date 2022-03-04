@@ -19,12 +19,12 @@
 package com.telenav.mesakit.tools.applications.pbf.comparator;
 
 import com.telenav.kivakit.application.Application;
-import com.telenav.kivakit.collections.set.SetDifferencer;
+import com.telenav.kivakit.core.collections.set.SetDifferencer;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.collections.set.ObjectSet;
-import com.telenav.kivakit.core.language.progress.reporters.Progress;
-import com.telenav.kivakit.language.time.Time;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.time.Time;
 import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;

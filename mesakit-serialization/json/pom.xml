@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-core</artifactId>
-        </dependency>
+        </dependency><dependency><groupId>com.telenav.mesakit</groupId><artifactId>mesakit-map-geography</artifactId></dependency><dependency><groupId>com.telenav.mesakit</groupId><artifactId>mesakit-map-road-model</artifactId></dependency>
 
     </dependencies>
 

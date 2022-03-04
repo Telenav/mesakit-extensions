@@ -1,6 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates;
 
-import com.telenav.kivakit.language.primitive.Doubles;
+import com.telenav.kivakit.core.language.primitive.Doubles;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingSize;
 import com.telenav.mesakit.map.geography.Location;

@@ -1,9 +1,9 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.collections.map.MultiMap;
-import com.telenav.kivakit.core.language.collections.list.ObjectList;
-import com.telenav.kivakit.core.language.collections.list.StringList;
-import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.core.collections.map.MultiMap;
+import com.telenav.kivakit.core.collections.list.ObjectList;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.mesakit.graph.collections.EdgeSet;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 

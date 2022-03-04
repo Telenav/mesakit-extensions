@@ -19,13 +19,13 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
 import com.telenav.kivakit.component.BaseComponent;
-import com.telenav.kivakit.core.language.collections.list.StringList;
+import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.language.Objects;
 import com.telenav.kivakit.core.language.patterns.Pattern;
-import com.telenav.kivakit.language.primitive.Ints;
-import com.telenav.kivakit.core.language.strings.formatting.Separators;
-import com.telenav.kivakit.language.count.Estimate;
-import com.telenav.kivakit.language.count.Maximum;
+import com.telenav.kivakit.core.language.primitive.Ints;
+import com.telenav.kivakit.core.string.formatting.Separators;
+import com.telenav.kivakit.core.value.count.Estimate;
+import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.messaging.Listener;
 import com.telenav.mesakit.core.MesaKit;
 import com.telenav.mesakit.graph.Edge;

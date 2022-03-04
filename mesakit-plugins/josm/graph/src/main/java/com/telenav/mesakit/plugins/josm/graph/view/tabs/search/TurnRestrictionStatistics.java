@@ -18,8 +18,8 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.core.language.collections.list.StringList;
-import com.telenav.kivakit.language.count.Count;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.mesakit.graph.EdgeRelation;
 
 public class TurnRestrictionStatistics

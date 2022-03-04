@@ -1,10 +1,10 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.query;
 
-import com.telenav.kivakit.core.language.progress.ProgressReporter;
-import com.telenav.kivakit.core.language.progress.reporters.Progress;
-import com.telenav.kivakit.core.language.strings.Strings;
-import com.telenav.kivakit.language.count.Count;
-import com.telenav.kivakit.language.count.Maximum;
+import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.string.Strings;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.core.language.values.mutable.MutableValue;
 import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
 import com.telenav.kivakit.ui.desktop.component.panel.stack.CardPanel;

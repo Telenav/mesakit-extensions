@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.geojson;
 
-import com.telenav.kivakit.core.language.strings.Strings;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmPanel;

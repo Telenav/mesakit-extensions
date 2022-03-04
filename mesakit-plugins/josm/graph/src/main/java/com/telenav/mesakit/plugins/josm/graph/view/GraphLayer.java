@@ -18,11 +18,13 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view;
 
-import com.telenav.kivakit.core.language.collections.list.StringList;
-import com.telenav.kivakit.core.language.progress.ProgressReporter;
-import com.telenav.kivakit.language.time.PreciseDuration;
-import com.telenav.kivakit.language.count.Count;
-import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.time.PreciseDuration;
+import com.telenav.kivakit.core.value.count.Count;
+
+import com.telenav.kivakit.core.value.level.Percent;
+
 import com.telenav.kivakit.messaging.logging.Logger;
 import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.kivakit.messaging.Message;

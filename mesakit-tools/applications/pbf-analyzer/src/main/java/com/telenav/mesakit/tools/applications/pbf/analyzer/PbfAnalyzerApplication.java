@@ -24,7 +24,7 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanCharacterCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;

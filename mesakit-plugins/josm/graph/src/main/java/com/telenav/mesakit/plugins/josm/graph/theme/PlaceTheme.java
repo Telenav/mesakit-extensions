@@ -1,7 +1,9 @@
 package com.telenav.mesakit.plugins.josm.graph.theme;
 
-import com.telenav.kivakit.language.count.Count;
-import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.core.value.count.Count;
+
+import com.telenav.kivakit.core.value.level.Percent;
+
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
 import com.telenav.mesakit.map.measurements.geographic.Distance;

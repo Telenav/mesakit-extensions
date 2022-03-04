@@ -1,6 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.theme;
 
-import com.telenav.kivakit.language.level.Percent;
+import com.telenav.kivakit.core.value.level.Percent;
+
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Fonts;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;

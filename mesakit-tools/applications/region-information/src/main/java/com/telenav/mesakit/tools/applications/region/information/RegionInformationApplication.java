@@ -19,14 +19,14 @@
 package com.telenav.mesakit.tools.applications.region.information;
 
 import com.telenav.kivakit.application.Application;
-import com.telenav.kivakit.collections.set.ObjectSet;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.core.string.IndentingStringBuilder;
 import com.telenav.kivakit.core.language.patterns.Pattern;
 import com.telenav.kivakit.core.language.patterns.SimplifiedPattern;
-import com.telenav.kivakit.core.language.strings.AsciiArt;
+import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.messaging.logging.Logger;
 import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.mesakit.map.region.Region;
