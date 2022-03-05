@@ -19,19 +19,16 @@
 package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion;
 
 import com.telenav.kivakit.commandline.CommandLine;
-import com.telenav.kivakit.ensure.EnsureFailedException;
-import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.core.ensure.EnsureProblem;
+import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.time.Time;
-import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.messaging.Debug;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.core.vm.JavaVirtualMachine;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.Metadata;
@@ -60,10 +57,6 @@ import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.W
  */
 public class Conversion extends BaseRepeater
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    private static final Debug DEBUG = new Debug(LOGGER);
-
     private final Folder outputFolder;
 
     private final WorldCell worldCell;
@@ -86,7 +79,7 @@ public class Conversion extends BaseRepeater
         assert input != null;
 
         // Materialize the input resource if it's remote (like an HDFS file),
-        input = input.materialized(Progress.create(this));
+        input = input.materialized(BroadcastingProgressReporter.create(this));
         try
         {
             if (metadata.dataSpecification().supports(EdgeAttributes.get().COUNTRY))
@@ -122,7 +115,7 @@ public class Conversion extends BaseRepeater
                     information("Saved $ in $", archive, start.elapsedSince());
                 }
 
-                // and verify it if we're were asked to.
+                // and verify it if we were asked to.
                 if (configuration.verify())
                 {
                     try (var archive = new GraphArchive(this, output, READ, ProgressReporter.none()))
@@ -197,7 +190,7 @@ public class Conversion extends BaseRepeater
         converter.addListener(message ->
         {
             // We don't want to show all the validation failures unless DEBUG mode is on
-            if (!(message instanceof EnsureFailedException) || DEBUG.isDebugOn())
+            if (!(message instanceof EnsureProblem) || isDebugOn())
             {
                 outer.receive(message);
             }

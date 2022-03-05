@@ -19,13 +19,13 @@
 package com.telenav.mesakit.tools.applications.graph.verifier;
 
 import com.telenav.kivakit.application.Application;
-import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.coredata.comparison.Differences;
-import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.string.Differences;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.MutableCount;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
@@ -174,6 +174,7 @@ public class GraphVerifierApplication extends Application
                 warning("$ edge $ not found in $", subgraph.name(), edge, graph.name());
             }
         }
+        @SuppressWarnings("SpellCheckingInspection")
         var output = File.parseFile(this, "differences.geojson");
         if (document.size() != 0)
         {

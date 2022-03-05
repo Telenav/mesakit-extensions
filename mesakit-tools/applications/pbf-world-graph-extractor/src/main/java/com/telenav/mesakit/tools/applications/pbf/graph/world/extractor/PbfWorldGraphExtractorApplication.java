@@ -22,11 +22,11 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.settings.settings.Deployment;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.resource.CopyMode;
@@ -297,9 +297,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 {
                     // then copy just the new graphs to the repository install folder.
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, Extension.GRAPH.fileMatcher(),
-                            Progress.create(this, "bytes"));
+                            BroadcastingProgressReporter.create(this, "bytes"));
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.fileMatcher(),
-                            Progress.create(this, "bytes"));
+                            BroadcastingProgressReporter.create(this, "bytes"));
                 }
             }
         }

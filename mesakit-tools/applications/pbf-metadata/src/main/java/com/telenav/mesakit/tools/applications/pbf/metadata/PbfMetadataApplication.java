@@ -21,10 +21,9 @@ package com.telenav.mesakit.tools.applications.pbf.metadata;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.string.AsciiArt;
-import com.telenav.kivakit.messaging.Message;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
@@ -110,7 +109,7 @@ public class PbfMetadataApplication extends Application
         return List.of(INPUT);
     }
 
-    @SuppressWarnings({ "UseOfSystemOutOrSystemErr" })
+    @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SwitchStatementWithTooFewBranches" })
     @Override
     protected void onRun()
     {
@@ -174,7 +173,7 @@ public class PbfMetadataApplication extends Application
                     boolean replace = existingMetadata != null;
                     if (annotator.write(metadata))
                     {
-                        Message.println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
+                        println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
                                 + input.fileName(), "$", metadata));
                     }
                     else

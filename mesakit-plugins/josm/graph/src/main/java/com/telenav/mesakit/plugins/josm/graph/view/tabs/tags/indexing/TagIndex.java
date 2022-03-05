@@ -1,6 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.core.collections.map.MultiMap;
+import com.telenav.kivakit.collections.map.MultiMap;
 import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.value.count.Count;

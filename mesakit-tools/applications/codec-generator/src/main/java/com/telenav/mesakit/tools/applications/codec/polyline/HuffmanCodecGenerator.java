@@ -1,17 +1,15 @@
 package com.telenav.mesakit.tools.applications.codec.polyline;
 
-import com.telenav.kivakit.core.collections.map.count.CountMap;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.conversion.core.language.primitive.IntegerConverter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.collections.map.CountMap;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.core.value.count.Minimum;
 import com.telenav.kivakit.data.compression.codecs.huffman.HuffmanCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.tree.Symbols;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.geography.shape.polyline.compression.huffman.HuffmanPolylineCodec;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
@@ -21,8 +19,6 @@ import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
  */
 public class HuffmanCodecGenerator extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     static final int[] offsetsInDm5 = new int[40];
 
     static
@@ -64,7 +60,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         var frequencies = new CountMap<Integer>();
 
         // Go through edges,
-        var progress = Progress.create(LOGGER);
+        var progress = BroadcastingProgressReporter.create(this);
         for (var edge : graph.edges())
         {
             // and if the edge is not a segment,
@@ -98,7 +94,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         // then build and save the codec
         var symbols = new Symbols<>(frequencies, Minimum._1);
         var codec = HuffmanCodec.from(symbols, Maximum._24);
-        codec.asProperties(new IntegerConverter(LOGGER)).save(codec.toString(), File.parseFile(this, "polyline.codec"));
+        codec.asProperties(new IntegerConverter(this)).save(codec.toString(), File.parseFile(this, "polyline.codec"));
     }
 
     private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)

@@ -1,11 +1,11 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.core.thread.latches.CompletionLatch;
 import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
 import com.telenav.kivakit.core.thread.KivaKitThread;
-import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.thread.latches.CompletionLatch;
 import com.telenav.kivakit.core.time.Time;
-import com.telenav.kivakit.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.core.value.count.Count;
 
 import java.util.HashSet;
 

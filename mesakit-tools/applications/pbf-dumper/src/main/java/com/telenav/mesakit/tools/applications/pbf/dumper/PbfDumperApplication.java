@@ -21,7 +21,6 @@ package com.telenav.mesakit.tools.applications.pbf.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -72,11 +71,6 @@ public class PbfDumperApplication extends Application
     private int onlyStraightOn;
 
     private int other;
-
-    private PbfDumperApplication()
-    {
-        super(PbfProject.get());
-    }
 
     @Override
     protected List<ArgumentParser<?>> argumentParsers()

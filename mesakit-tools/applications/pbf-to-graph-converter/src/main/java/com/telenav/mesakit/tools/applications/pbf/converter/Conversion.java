@@ -19,16 +19,14 @@
 package com.telenav.mesakit.tools.applications.pbf.converter;
 
 import com.telenav.kivakit.commandline.CommandLine;
-import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
@@ -56,8 +54,6 @@ import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataAnalys
  */
 public class Conversion extends BaseRepeater
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     private final PbfToGraphConverterApplication application;
 
     private final CommandLine commandLine;
@@ -80,14 +76,14 @@ public class Conversion extends BaseRepeater
         assert input != null;
 
         // Materialize the input resource if it's remote (like an HDFS file),
-        input = input.materialized(Progress.create(LOGGER));
+        input = input.materialized(BroadcastingProgressReporter.create(this));
         try
         {
             // retrieve its metadata,
             var metadata = Metadata.from(input);
             if (metadata != null)
             {
-                // and if the data specification is UniDb and we are not including tags,
+                // and if the data specification is UniDb, and we are not including tags,
                 if (metadata.isUniDb() && !commandLine.get(application.INCLUDE_TAGS))
                 {
                     // then force the data specification to exclude them
@@ -131,19 +127,19 @@ public class Conversion extends BaseRepeater
                         information(AsciiArt.bottomLine(20, "Saved $ in $", archive, start.elapsedSince()));
                     }
 
-                    // and verify it if we're were asked to.
+                    // and verify it if were asked to.
                     if (configuration.verify())
                     {
                         try (var archive = new GraphArchive(this, output, READ, ProgressReporter.none()))
                         {
                             var start = Time.now();
                             information(AsciiArt.topLine("Verifying graph"));
-                            var loaded = archive.load(LOGGER);
+                            var loaded = archive.load(this);
                             loaded.loadAll();
                             var comparison = graph.differencesFrom(loaded, Rectangle.MAXIMUM, Maximum._100);
                             if (comparison.isDifferent())
                             {
-                                LOGGER.problem("Graph verification failed:\n$", comparison);
+                                problem("Graph verification failed:\n$", comparison);
                             }
                             information(AsciiArt.bottomLine("Verified graph in $", start.elapsedSince()));
                         }

@@ -21,11 +21,10 @@ package com.telenav.mesakit.tools.applications.pbf.analyzer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanCharacterCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.core.collections.set.ObjectSet;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -52,6 +51,11 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfAnalyzerApplication extends Application
 {
+    public static void main(String[] arguments)
+    {
+        new PbfAnalyzerApplication().run(arguments);
+    }
+
     final ArgumentParser<File> INPUT =
             fileArgumentParser(this, "Input PBF file")
                     .required()
@@ -78,16 +82,6 @@ public class PbfAnalyzerApplication extends Application
                     .optional()
                     .defaultValue(false)
                     .build();
-
-    public static void main(String[] arguments)
-    {
-        new PbfAnalyzerApplication().run(arguments);
-    }
-
-    public PbfAnalyzerApplication()
-    {
-        super(PbfProject.get());
-    }
 
     @Override
     protected List<ArgumentParser<?>> argumentParsers()

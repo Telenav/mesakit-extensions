@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
 import com.telenav.kivakit.core.string.StringTo;
-import com.telenav.kivakit.messaging.Message;
+import com.telenav.kivakit.core.string.Strings;
 
 /**
  * @author jonathanl (shibo)
@@ -58,21 +58,21 @@ public class UserFeedback
     public UserFeedback withHtml(String message, Object... arguments)
     {
         var copy = new UserFeedback(this);
-        copy.html = Message.format(message, arguments);
+        copy.html = Strings.format(message, arguments);
         return copy;
     }
 
     public UserFeedback withStatus(String message, Object... arguments)
     {
         var copy = new UserFeedback(this);
-        copy.status = Message.format(message, arguments);
+        copy.status = Strings.format(message, arguments);
         return copy;
     }
 
     public UserFeedback withText(String message, Object... arguments)
     {
         var copy = new UserFeedback(this);
-        copy.text = StringTo.html(Message.format(message, arguments));
+        copy.text = StringTo.html(Strings.format(message, arguments));
         return copy;
     }
 }

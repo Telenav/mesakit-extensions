@@ -2,13 +2,11 @@ package com.telenav.mesakit.tools.applications.pbf.analyzer;
 
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.component.BaseComponent;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.Estimate;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.primitive.collections.map.split.SplitLongToLongMap;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
@@ -27,8 +25,6 @@ import java.util.Map;
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class Analyzer extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     private long ways;
 
     private long nodes;
@@ -79,7 +75,7 @@ public class Analyzer extends BaseComponent
         feedback.add("way filter = $", commandLine.get(application.WAY_FILTER));
         feedback.add("show warnings = $", showWarnings);
         feedback.add("compute lengths = $", computeLengths);
-        LOGGER.information(feedback.titledBox("Analyzing " + input.fileName()));
+        information(feedback.titledBox("Analyzing " + input.fileName()));
 
         locationForNode = new SplitLongToLongMap("locationForNode");
         locationForNode.initialSize(Estimate._65536);
@@ -262,6 +258,6 @@ public class Analyzer extends BaseComponent
             }
         }
 
-        LOGGER.information(report.titledBox("Statistics"));
+        information(report.titledBox("Statistics"));
     }
 }

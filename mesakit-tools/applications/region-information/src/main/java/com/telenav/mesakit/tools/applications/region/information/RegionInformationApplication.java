@@ -19,16 +19,13 @@
 package com.telenav.mesakit.tools.applications.region.information;
 
 import com.telenav.kivakit.application.Application;
-import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.core.string.IndentingStringBuilder;
-import com.telenav.kivakit.core.language.patterns.Pattern;
-import com.telenav.kivakit.core.language.patterns.SimplifiedPattern;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.Patterns;
 import com.telenav.kivakit.core.string.AsciiArt;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.core.string.IndentingStringBuilder;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.RegionProject;
 import com.telenav.mesakit.map.region.RegionSet;
@@ -49,8 +46,6 @@ import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 @SuppressWarnings({ "rawtypes", "ConstantConditions", "UseOfSystemOutOrSystemErr" })
 public class RegionInformationApplication extends Application
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     public static void main(String[] arguments)
     {
         new RegionInformationApplication().run(arguments);
@@ -79,6 +74,7 @@ public class RegionInformationApplication extends Application
                     .defaultValue(false)
                     .build();
 
+    @SuppressWarnings("SpellCheckingInspection")
     private final SwitchParser<Boolean> URI =
             booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
                     .optional()
@@ -148,17 +144,17 @@ public class RegionInformationApplication extends Application
 
     private Region region(CommandLine commandLine, String name)
     {
-        Pattern pattern = new SimplifiedPattern(name.toLowerCase());
+        var pattern = Patterns.simplified(name.toLowerCase());
         var matches = new RegionSet();
         for (var continent : Continent.all())
         {
-            if (pattern.matches(continent.identity().mesakit().code().toLowerCase()))
+            if (Patterns.matches(pattern, continent.identity().mesakit().code().toLowerCase()))
             {
                 matches.add(continent);
             }
             for (Region nested : continent.nestedChildren())
             {
-                if (pattern.matches(nested.identity().mesakit().code().toLowerCase()))
+                if (Patterns.matches(pattern, nested.identity().mesakit().code().toLowerCase()))
                 {
                     matches.add(nested);
                 }

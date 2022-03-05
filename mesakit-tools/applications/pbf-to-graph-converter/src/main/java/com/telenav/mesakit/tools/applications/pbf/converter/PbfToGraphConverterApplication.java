@@ -22,17 +22,16 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.filesystem.FileList;
-import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
-import com.telenav.kivakit.messaging.Message;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.FileList;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
-import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.region.Region;
@@ -158,11 +157,6 @@ public class PbfToGraphConverterApplication extends Application
                     .defaultValue(false)
                     .build();
 
-    private PbfToGraphConverterApplication()
-    {
-        super(GraphProject.get());
-    }
-
     @Override
     protected List<ArgumentParser<?>> argumentParsers()
     {
@@ -221,7 +215,7 @@ public class PbfToGraphConverterApplication extends Application
             }
             else
             {
-                // otherwise we're converting a whole folder
+                // otherwise, we're converting a whole folder
                 var folder = input.asFolder();
 
                 // so go through each file in the folder,
@@ -244,7 +238,7 @@ public class PbfToGraphConverterApplication extends Application
             built.append(graphFile.path().absolute());
         }
 
-        announce(AsciiArt.textBox(Message.format("Built ${debug} graph file(s) in ${debug}:",
+        announce(AsciiArt.textBox(Strings.format("Built ${debug} graph file(s) in ${debug}:",
                 outputFiles.size(), start.elapsedSince()), built.bulleted()));
         information("Successfully converted $ file(s)", outputFiles.size());
     }

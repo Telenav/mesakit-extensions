@@ -1,11 +1,11 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.query;
 
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.core.language.values.mutable.MutableValue;
+import com.telenav.kivakit.core.value.mutable.MutableValue;
 import com.telenav.kivakit.ui.desktop.component.icon.search.MagnifyingGlass;
 import com.telenav.kivakit.ui.desktop.component.panel.stack.CardPanel;
 import com.telenav.kivakit.ui.desktop.component.progress.ProgressPanel;
@@ -48,7 +48,7 @@ public class QueryPanel extends JPanel
 
     private CardPanel cardPanel;
 
-    private final ProgressReporter searchProgress = Progress.create();
+    private final ProgressReporter searchProgress = BroadcastingProgressReporter.create();
 
     private GraphQuery graphQuery;
 
@@ -58,7 +58,7 @@ public class QueryPanel extends JPanel
 
         Borders.applyMargin(this, 8);
 
-        // Add the cards panel and the matches panel in a vertical box
+        // Add the cards panel and the 'matches' panel in a vertical box
         new VerticalBoxLayout(this)
                 .add(cardPanel())
                 .add(matchesPanel());

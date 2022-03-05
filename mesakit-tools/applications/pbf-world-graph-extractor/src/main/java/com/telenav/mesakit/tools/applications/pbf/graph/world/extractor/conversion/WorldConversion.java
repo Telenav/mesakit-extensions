@@ -1,6 +1,7 @@
 package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion;
 
 import com.telenav.kivakit.commandline.CommandLine;
+import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.core.string.AsciiArt;
@@ -9,9 +10,6 @@ import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Bytes;
 import com.telenav.kivakit.core.value.count.ConcurrentMutableCount;
 import com.telenav.kivakit.core.value.count.Count;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.Debug;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.world.grid.WorldCell;
 import com.telenav.mesakit.graph.world.grid.WorldGrid;
@@ -24,12 +22,8 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author jonathanl (shibo)
  */
-public class WorldConversion
+public class WorldConversion extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    private static final Debug DEBUG = new Debug(LOGGER);
-
     public static class Statistics
     {
         Count attempted;
@@ -129,7 +123,7 @@ public class WorldConversion
 
         // Get cells with PBF data to convert
         var cells = grid.cells(outputFolder, WorldCell.DataType.PBF).sortedDescendingByPbfSize();
-        LOGGER.information(AsciiArt.box("Converting $ cells", cells.size()));
+        information(AsciiArt.box("Converting $ cells", cells.size()));
 
         // Loop through cells
         var attempted = new ConcurrentMutableCount();
@@ -164,29 +158,29 @@ public class WorldConversion
 
                                 // so create the graph converter
                                 var conversion = new Conversion(application, outputFolder, worldCell);
-                                LOGGER.listenTo(conversion);
+                                listenTo(conversion);
 
                                 // convert the cell, clean cutting to the cell boundary
                                 var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.none());
-                                LOGGER.information("$ Converting $", prefix.trim(), input);
+                                information("$ Converting $", prefix.trim(), input);
 
                                 // then convert the PBF to a graph
                                 var cellGraphFile = worldCell.cellGraphFile(outputFolder);
                                 var cellGraph = conversion.convert(input, metadata
                                         .withName(metadata.name() + "_" + worldCell.gridCell().name().replaceAll("-", "_")));
                                 completed.increment();
-                                LOGGER.information("$ Converted", prefix.trim());
+                                information("$ Converted", prefix.trim());
 
                                 // If we failed to convert the cell,
                                 if (cellGraph == null)
                                 {
                                     // then warn
-                                    LOGGER.warning("Unable to convert $ to $", worldCell.pbfFile(outputFolder), cellGraphFile);
+                                    warning("Unable to convert $ to $", worldCell.pbfFile(outputFolder), cellGraphFile);
                                     failed.increment();
                                 }
                                 else
                                 {
-                                    // otherwise increment converted count
+                                    // otherwise, increment converted count
                                     succeeded.increment();
 
                                     // add to statistics
@@ -200,7 +194,7 @@ public class WorldConversion
                                     worldCell.worldGrid().index().index(worldCell, cellGraph);
 
                                     // Add to total size
-                                    if (DEBUG.isDebugOn())
+                                    if (isDebugOn())
                                     {
                                         var size = cellGraph.estimatedMemorySize();
                                         if (size != null)
@@ -211,7 +205,7 @@ public class WorldConversion
                                 }
 
                                 // Show overall progress
-                                LOGGER.information("OVERALL PROGRESS: $ of $ (succeeded = $, failed = $)",
+                                information("OVERALL PROGRESS: $ of $ (succeeded = $, failed = $)",
                                         completed, cells.count(), succeeded, failed);
                             }
                         }
@@ -241,7 +235,7 @@ public class WorldConversion
         report.add(AsciiArt.line());
         report.add("Total Size: $", Bytes.bytes(totalSize.asLong()));
         report.add("Conversion: $", start.elapsedSince());
-        LOGGER.information(report.titledBox("Conversion Completed"));
+        information(report.titledBox("Conversion Completed"));
 
         // Return the number of successful conversions
         var statistics = new Statistics();

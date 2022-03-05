@@ -19,15 +19,13 @@
 package com.telenav.mesakit.plugins.josm.graph.view;
 
 import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.logging.Logger;
+import com.telenav.kivakit.core.logging.LoggerFactory;
 import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.core.time.PreciseDuration;
 import com.telenav.kivakit.core.value.count.Count;
-
 import com.telenav.kivakit.core.value.level.Percent;
-
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.Message;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingRectangle;
 import com.telenav.mesakit.graph.Edge;
@@ -80,8 +78,8 @@ import static com.telenav.mesakit.map.road.model.RoadFunctionalClass.MAIN;
 
 /**
  * Handles painting by rendering the graph's {@link ViewModel} on the {@link MapCanvas} using a {@link
- * GraphLayerRenderer} to do the actual work. Besides the loaded graph, two other decimated graphs are maintained for
- * display when zoomed out. This makes the redraw more efficient.
+ * GraphLayerRenderer} to do the actual work. In addition to the loaded graph, two other decimated graphs are maintained
+ * for display when zoomed out. This makes to redraw more efficient.
  *
  * @author jonathanl (shibo)
  */
@@ -627,7 +625,7 @@ public class GraphLayer extends BaseJosmLayer
 
     private void html(String message, Object... arguments)
     {
-        panel().html(Message.format(message + "\n\n\n", arguments));
+        panel().html(Strings.format(message + "\n\n\n", arguments));
         forceRepaint();
     }
 

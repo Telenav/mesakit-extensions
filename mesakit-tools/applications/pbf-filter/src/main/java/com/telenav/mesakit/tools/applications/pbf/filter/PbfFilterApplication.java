@@ -20,13 +20,12 @@ package com.telenav.mesakit.tools.applications.pbf.filter;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.core.value.count.MutableCount;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.primitive.collections.set.LongSet;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -140,11 +139,6 @@ public class PbfFilterApplication extends Application
             wayFilterSwitchParser(this)
                     .optional()
                     .build();
-
-    private PbfFilterApplication()
-    {
-        super(PbfProject.get());
-    }
 
     @Override
     protected void onRun()

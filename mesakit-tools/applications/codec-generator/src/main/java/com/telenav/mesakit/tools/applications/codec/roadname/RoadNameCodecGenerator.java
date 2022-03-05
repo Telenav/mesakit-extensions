@@ -2,17 +2,15 @@ package com.telenav.mesakit.tools.applications.codec.roadname;
 
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.component.BaseComponent;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.value.count.Maximum;
+import com.telenav.kivakit.core.value.count.Minimum;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.CharacterFrequencies;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanCharacterCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.StringFrequencies;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.core.value.count.Count;
-import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.core.value.count.Minimum;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 
@@ -21,15 +19,13 @@ import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
  */
 public class RoadNameCodecGenerator extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     public void run(CommandLine commandLine)
     {
         var graph = new SmartGraphLoader(commandLine.argument(require(CodecGeneratorApplication.class).INPUT)).load();
 
         var characters = new CharacterFrequencies();
         var strings = new StringFrequencies(Count._10_000_000, Maximum._100_000_000);
-        var progress = Progress.create(LOGGER);
+        var progress = BroadcastingProgressReporter.create(this);
         for (var edge : graph.edges())
         {
             for (var name : edge.roadNames())
@@ -46,9 +42,9 @@ public class RoadNameCodecGenerator extends BaseComponent
         }
 
         var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
-        characterCodec.asProperties().save(characterCodec.toString(), File.parseFile(LOGGER, "default-road-name-character.codec"));
+        characterCodec.asProperties().save(characterCodec.toString(), File.parseFile(this, "default-road-name-character.codec"));
 
         var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
-        stringCodec.asProperties().save(stringCodec.toString(), File.parseFile(LOGGER, "string.codec"));
+        stringCodec.asProperties().save(stringCodec.toString(), File.parseFile(this, "string.codec"));
     }
 }

@@ -21,10 +21,8 @@ package com.telenav.mesakit.plugins.josm.library.tile;
 import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.core.collections.set.ConcurrentHashSet;
 import com.telenav.kivakit.core.thread.Threads;
-import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 import com.telenav.kivakit.core.value.count.Count;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 
 import java.util.Collection;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -35,8 +33,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile> extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     private static final Count THREADS = JavaVirtualMachine.local().processors();
 
     private final ExecutorService executor = Threads.threadPool("Downloader", THREADS);
@@ -98,7 +94,7 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
             stop = false;
             frozen = false;
             running = true;
-            LOGGER.information("Starting ${class}", getClass());
+            information("Starting ${class}", getClass());
             THREADS.loop(() ->
                     executor.execute(() ->
                     {
@@ -137,7 +133,7 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
                         running = false;
                         if (runningThreads.decrementAndGet() == 0)
                         {
-                            LOGGER.information("Stopped ${class}", getClass());
+                            information("Stopped ${class}", getClass());
                         }
                     }));
         }
@@ -145,12 +141,12 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
 
     public void stop()
     {
-        LOGGER.information("Stopping ${class}", getClass());
+        information("Stopping ${class}", getClass());
         freeze(true);
         stop = true;
         if (runningThreads.get() == 0)
         {
-            LOGGER.information("Stopped ${class}", getClass());
+            information("Stopped ${class}", getClass());
         }
     }
 
@@ -182,7 +178,7 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
             }
             catch (Exception e)
             {
-                LOGGER.problem(e, "Unable to retrieve $", request);
+                problem(e, "Unable to retrieve $", request);
             }
         }
     }

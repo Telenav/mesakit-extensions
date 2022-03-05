@@ -19,6 +19,7 @@
 package com.telenav.mesakit.plugins.josm.library.tile;
 
 import com.telenav.kivakit.core.collections.map.CacheMap;
+import com.telenav.kivakit.core.time.Duration;
 import com.telenav.kivakit.core.value.count.Maximum;
 
 import java.util.Map;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class SlippyTileCache<Request extends AbstractTileRequest, Tile extends AbstractTile>
         extends AbstractTileCache<Request, Tile>
 {
-    private final Map<Request, Tile> cache = new CacheMap<>(Maximum._100);
+    private final Map<Request, Tile> cache = new CacheMap<>(Maximum._100, Duration.days(1));
 
     @Override
     public synchronized Tile get(Request request)

@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.messaging.Message;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.mesakit.graph.Vertex;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
@@ -52,7 +52,7 @@ public class DebugAnnotationRenderer extends Renderer
         {
             if (edge.isForward())
             {
-                var text = Message.format("e${long} [v${long} \u2192 v${long}] id${long}",
+                var text = Strings.format("e${long} [v${long} \u2192 v${long}] id${long}",
                         edge.index(),
                         edge.fromVertexIdentifier(),
                         edge.toVertexIdentifier(),
@@ -70,7 +70,7 @@ public class DebugAnnotationRenderer extends Renderer
     {
         if (!drawn.contains(vertex))
         {
-            var text = Message.format("v${long} in[$] out[$] n${long}",
+            var text = Strings.format("v${long} in[$] out[$] n${long}",
                     vertex.index(),
                     vertex.inEdges().asString(USER_LABEL),
                     vertex.outEdges().asString(USER_LABEL),

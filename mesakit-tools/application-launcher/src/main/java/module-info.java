@@ -14,6 +14,4 @@ open module mesakit.application.launcher
     requires mesakit.tools.applications.pbf.metadata;
     requires mesakit.tools.applications.pbf.region.extractor;
     requires mesakit.tools.applications.region.information;
-
-    requires kivakit.kernel;
 }

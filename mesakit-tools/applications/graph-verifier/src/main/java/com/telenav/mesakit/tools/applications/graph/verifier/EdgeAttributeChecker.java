@@ -20,15 +20,11 @@ package com.telenav.mesakit.tools.applications.graph.verifier;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
-
 import com.telenav.kivakit.core.value.level.Percent;
-
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
@@ -56,12 +52,6 @@ public class EdgeAttributeChecker extends Application
     static final Set<Attribute<Edge>> scope_all = new HashSet<>();
 
     static final Set<Attribute<Edge>> scope_output = new HashSet<>();
-
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE = graphSwitchParser(this).required().build();
-
-    private final SwitchParser<Folder> OUTPUT_FOLDER = outputFolderSwitchParser(this).required().build();
 
     static
     {
@@ -180,6 +170,10 @@ public class EdgeAttributeChecker extends Application
             return writer;
         }
     }
+
+    private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE = graphSwitchParser(this).required().build();
+
+    private final SwitchParser<Folder> OUTPUT_FOLDER = outputFolderSwitchParser(this).required().build();
 
     public boolean checkCountry(Edge edge)
     {
@@ -363,7 +357,7 @@ public class EdgeAttributeChecker extends Application
 
                 if (i % 1000000 == 0)
                 {
-                    LOGGER.information("Finished ${debug} ${debug}", i, Percent.of(i * 100.0 / total.asInt()));
+                    information("Finished ${debug} ${debug}", i, Percent.of(i * 100.0 / total.asInt()));
                 }
             }
 
@@ -374,7 +368,7 @@ public class EdgeAttributeChecker extends Application
             ex.printStackTrace();
         }
 
-        LOGGER.information("Finish check in ${debug} and output result to ${debug}", time.elapsedSince(), outputFolder);
+        information("Finish check in ${debug} and output result to ${debug}", time.elapsedSince(), outputFolder);
     }
 
     @Override

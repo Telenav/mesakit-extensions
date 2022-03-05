@@ -21,13 +21,12 @@ package com.telenav.mesakit.tools.applications.graph.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
-import com.telenav.kivakit.core.language.iteration.Streams;
+import com.telenav.kivakit.core.language.Streams;
 import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.vm.JavaVirtualMachine;
-import com.telenav.kivakit.messaging.Message;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphElement;
 import com.telenav.mesakit.graph.GraphProject;
@@ -43,6 +42,7 @@ import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
+import static com.telenav.kivakit.core.os.Console.println;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
@@ -59,6 +59,11 @@ import static com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayI
  */
 public class GraphDumperApplication extends Application
 {
+    public static void main(String[] arguments)
+    {
+        new GraphDumperApplication().run(arguments);
+    }
+
     private final ArgumentParser<SmartGraphLoader> INPUT =
             graphArgumentParser(this, "The graph to dump")
                     .required()
@@ -111,11 +116,6 @@ public class GraphDumperApplication extends Application
                     .defaultValue(Count.MAXIMUM)
                     .build();
 
-    public static void main(String[] arguments)
-    {
-        new GraphDumperApplication().run(arguments);
-    }
-
     protected GraphDumperApplication()
     {
         super(GraphProject.get());
@@ -166,7 +166,7 @@ public class GraphDumperApplication extends Application
             var number = 1;
             for (var edge : graph.edgesIntersecting(Rectangle.CONTINENTAL_US))
             {
-                Message.println("edge $: $", number++, edge);
+                println("edge $: $", number++, edge);
             }
         }
         else if (has(VERTEX))

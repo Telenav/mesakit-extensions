@@ -20,12 +20,11 @@ package com.telenav.mesakit.tools.applications.graph.ways.extractor;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.Edge;
-import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
@@ -44,6 +43,11 @@ import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchPars
  */
 public class DoubleDigitizedWaysExtractorApplication extends Application
 {
+    public static void main(String[] arguments)
+    {
+        new DoubleDigitizedWaysExtractorApplication().run(arguments);
+    }
+
     private final SwitchParser<SmartGraphLoader> GRAPH =
             graphSwitchParser(this)
                     .required()
@@ -53,16 +57,6 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
             folderSwitchParser(this, "output", "The output folder")
                     .optional()
                     .build();
-
-    public static void main(String[] arguments)
-    {
-        new DoubleDigitizedWaysExtractorApplication().run(arguments);
-    }
-
-    private DoubleDigitizedWaysExtractorApplication()
-    {
-        super(GraphProject.get());
-    }
 
     @Override
     protected void onRun()

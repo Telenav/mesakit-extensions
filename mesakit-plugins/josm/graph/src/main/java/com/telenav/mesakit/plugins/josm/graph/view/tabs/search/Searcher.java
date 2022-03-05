@@ -21,12 +21,11 @@ package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.language.Objects;
-import com.telenav.kivakit.core.language.patterns.Pattern;
 import com.telenav.kivakit.core.language.primitive.Ints;
-import com.telenav.kivakit.core.string.formatting.Separators;
+import com.telenav.kivakit.core.messaging.Listener;
+import com.telenav.kivakit.core.string.Separators;
 import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.messaging.Listener;
 import com.telenav.mesakit.core.MesaKit;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
@@ -53,6 +52,7 @@ import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.regex.Pattern;
 
 import static com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION;
 import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
@@ -64,6 +64,7 @@ import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLI
  */
 public class Searcher extends BaseComponent
 {
+    @SuppressWarnings("SpellCheckingInspection")
     static UserFeedback help()
     {
         var help = new StringList();
@@ -77,7 +78,7 @@ public class Searcher extends BaseComponent
         help.add("<ul class='aqua'>");
         help.add("    <li>bounds - show the bounds of the visible area</li>");
         help.add("    <li>center - show the center of the visible area</li>");
-        help.add("    <li>clear - clear any polylines drawn by routing or as geographic locations</li>");
+        help.add("    <li>clear - clear any poly-lines drawn by routing or as geographic locations</li>");
         help.add("    <li>graph - show details about the active graph layer</li>");
         help.add("    <li>help - see this help message again</li>");
         help.add("    <li>query help - see help for query syntax used on query tab</li>");
@@ -114,6 +115,7 @@ public class Searcher extends BaseComponent
         return UserFeedback.html(help.join("\n")).withStatus("Showing help screen");
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     static UserFeedback queryHelp()
     {
         var help = new StringList();
@@ -190,15 +192,11 @@ public class Searcher extends BaseComponent
 
     public EdgeSet findTagged(Maximum maximum, String searchString)
     {
-        var tagGroup = Pattern.ANYTHING.group(Listener.none());
-        var pattern = Pattern.constant("tag")
-                .then(Pattern.WHITESPACE)
-                .then(tagGroup);
-
+        var pattern = Pattern.compile("tag\\s+(<?tag>.*)");
         var matcher = pattern.matcher(searchString);
         if (matcher.matches())
         {
-            var tag = PbfTags.parse(tagGroup.get(matcher));
+            var tag = PbfTags.parse(matcher.group("tag"));
             if (tag != null)
             {
                 var found = new EdgeSet(Estimate._1024);
@@ -255,7 +253,7 @@ public class Searcher extends BaseComponent
             case "clear":
                 layer.model().selection().clearPolylines();
                 layer.forceRepaint();
-                return UserFeedback.status("Cleared highlights and polylines");
+                return UserFeedback.status("Cleared highlights and poly-lines");
 
             case "debug":
             {
@@ -327,17 +325,14 @@ public class Searcher extends BaseComponent
             }
         }
 
-        var prefixGroup = Pattern.expression("e|v|n|w|r|edge|vertex|node|way|relation").group(Listener.none());
-        var identifierGroup = Pattern.INTEGER.group(Listener.none());
-        var identifierPattern = Pattern.WHITESPACE.optional()
-                .then(prefixGroup.then(Pattern.OPTIONAL_WHITESPACE)).optional()
-                .then(identifierGroup).then(Pattern.character('L').optional());
+        var identifierPattern = Pattern.compile(
+                "\\s*(?<prefix>e|v|n|w|r|edge|vertex|node|way|relation)\\s*(?<identifier>\\d+)L?");
 
         var matcher = identifierPattern.matcher(searchString);
         if (matcher.matches())
         {
-            var prefix = prefixGroup.get(matcher);
-            var identifier = identifierGroup.get(matcher);
+            var prefix = matcher.group("prefix");
+            var identifier = matcher.group("identifier");
 
             // All of these identifiers can be ambiguous (thus the optional prefix string)
 
@@ -347,7 +342,7 @@ public class Searcher extends BaseComponent
             var nodeIdentifier = findNodeIdentifier(identifier);
             var relationIdentifier = findRelationIdentifier(identifier);
 
-            var edgeIndex = Ints.parse(this, identifier);
+            var edgeIndex = Ints.parseInt(this, identifier);
             if (edgeIndex > 0)
             {
                 Edge indexedEdge = graph().edgeStore().edgeForIndex(edgeIndex);
@@ -546,6 +541,7 @@ public class Searcher extends BaseComponent
         return null;
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     private EdgeSet findRoadName(String searchString)
     {
 

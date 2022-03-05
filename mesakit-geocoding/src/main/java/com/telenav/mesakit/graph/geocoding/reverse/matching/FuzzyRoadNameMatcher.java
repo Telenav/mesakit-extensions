@@ -18,10 +18,8 @@
 
 package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
-import com.telenav.kivakit.core.string.StringComparison;
-
+import com.telenav.kivakit.core.string.StringSimilarity;
 import com.telenav.kivakit.core.value.level.Percent;
-
 import com.telenav.mesakit.map.road.model.RoadName;
 
 public class FuzzyRoadNameMatcher implements RoadNameMatcher
@@ -45,7 +43,7 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
         }
 
         // compute the edit distance between the two names
-        var distance = StringComparison.levenshteinDistance(candidate.name().toLowerCase(), desired.name().toLowerCase());
+        var distance = StringSimilarity.levenshteinDistance(candidate.name().toLowerCase(), desired.name().toLowerCase());
 
         // and the two names match if the percentage of characters that would need to be
         // changed is less than the configuration setting,

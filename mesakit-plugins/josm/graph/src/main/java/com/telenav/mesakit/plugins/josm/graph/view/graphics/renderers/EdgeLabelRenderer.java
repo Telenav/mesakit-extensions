@@ -18,9 +18,9 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.Debug;
+import com.telenav.kivakit.core.logging.Logger;
+import com.telenav.kivakit.core.logging.LoggerFactory;
+import com.telenav.kivakit.core.messaging.Debug;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;

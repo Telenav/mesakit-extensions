@@ -18,18 +18,16 @@
 
 package com.telenav.mesakit.plugins.josm.graph;
 
-import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.core.logging.Logger;
+import com.telenav.kivakit.core.logging.LoggerFactory;
+import com.telenav.kivakit.core.messaging.listeners.MessageList;
 import com.telenav.kivakit.core.progress.ProgressListener;
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.string.AsciiArt;
-
 import com.telenav.kivakit.core.value.level.Percent;
-
-import com.telenav.kivakit.core.language.values.mutable.MutableValue;
-import com.telenav.kivakit.messaging.logging.Logger;
-import com.telenav.kivakit.messaging.logging.LoggerFactory;
-import com.telenav.kivakit.messaging.listeners.MessageList;
+import com.telenav.kivakit.core.value.mutable.MutableValue;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.compression.archive.ZipArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
@@ -39,7 +37,7 @@ import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
 import java.io.IOException;
 
-import static com.telenav.kivakit.messaging.Message.Status.COMPLETED;
+import static com.telenav.kivakit.core.messaging.Message.Status.COMPLETED;
 
 /**
  * Imports a Graph file, creating a GraphLayer in JOSM.
@@ -68,7 +66,7 @@ public class GraphFileImporter extends FileImporter
             if (ZipArchive.is(LOGGER, input))
             {
                 var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
-                var reporter = Progress.create();
+                var reporter = BroadcastingProgressReporter.create();
                 progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
                 var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));

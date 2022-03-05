@@ -19,13 +19,12 @@
 package com.telenav.mesakit.tools.applications.pbf.comparator;
 
 import com.telenav.kivakit.application.Application;
-import com.telenav.kivakit.core.collections.set.SetDifferencer;
+import com.telenav.kivakit.collections.set.SetDifferencer;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
-import com.telenav.kivakit.core.progress.reporters.Progress;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.time.Time;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -45,7 +44,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcess
  *
  * @author jonathanl (shibo)
  */
-@SuppressWarnings("UseOfSystemOutOrSystemErr")
+@SuppressWarnings({ "UseOfSystemOutOrSystemErr", "DuplicatedCode" })
 public class PbfComparatorApplication extends Application
 {
     public static void main(String[] arguments)
@@ -93,11 +92,6 @@ public class PbfComparatorApplication extends Application
                     .defaultValue(true)
                     .build();
 
-    protected PbfComparatorApplication()
-    {
-        super(PbfProject.get());
-    }
-
     public void compare(File before, File after)
     {
         var start = Time.now();
@@ -106,9 +100,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> beforeWays = new HashSet<>();
         Set<Long> beforeRelations = new HashSet<>();
 
-        var beforeNodeProgress = Progress.create(this);
-        var beforeWayProgress = Progress.create(this);
-        var beforeRelationsProgress = Progress.create(this);
+        var beforeNodeProgress = BroadcastingProgressReporter.create(this);
+        var beforeWayProgress = BroadcastingProgressReporter.create(this);
+        var beforeRelationsProgress = BroadcastingProgressReporter.create(this);
 
         new SerialPbfReader(before).process(new PbfDataProcessor()
         {
@@ -152,9 +146,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> afterNodes = new HashSet<>();
         Set<Long> afterWays = new HashSet<>();
         Set<Long> afterRelations = new HashSet<>();
-        var afterNodeProgress = Progress.create(this);
-        var afterWayProgress = Progress.create(this);
-        var afterRelationsProgress = Progress.create(this);
+        var afterNodeProgress = BroadcastingProgressReporter.create(this);
+        var afterWayProgress = BroadcastingProgressReporter.create(this);
+        var afterRelationsProgress = BroadcastingProgressReporter.create(this);
 
         new SerialPbfReader(after).process(new PbfDataProcessor()
         {

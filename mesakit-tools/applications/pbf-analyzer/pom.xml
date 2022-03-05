@@ -33,6 +33,14 @@
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-measurements</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-data-formats-pbf</artifactId>
+        </dependency>
 
     </dependencies>
 

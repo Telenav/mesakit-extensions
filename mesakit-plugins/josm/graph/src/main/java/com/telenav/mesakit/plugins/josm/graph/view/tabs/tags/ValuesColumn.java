@@ -1,8 +1,8 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.conversion.language.IdentityConverter;
+import com.telenav.kivakit.conversion.core.language.IdentityConverter;
+import com.telenav.kivakit.core.messaging.Listener;
 import com.telenav.kivakit.core.string.Plural;
-import com.telenav.kivakit.messaging.Listener;
 import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
 import com.telenav.kivakit.ui.desktop.layout.Layouts;
 import com.telenav.kivakit.ui.desktop.layout.VerticalBoxLayout;
