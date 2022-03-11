@@ -23,13 +23,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.json.GsonSerializer;
+import com.telenav.kivakit.serialization.kryo.BaseSerializer;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import java.lang.reflect.Type;
 
-public class RectangleInDegreesGsonSerializer implements GsonSerializer<Rectangle>
+public class RectangleInDegreesGsonSerializer extends BaseSerializer<Rectangle>
 {
     @Override
     public Rectangle deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

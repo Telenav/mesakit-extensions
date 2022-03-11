@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.telenav.kivakit</groupId>
-            <artifactId>kivakit-serialization-json</artifactId>
+            <artifactId>kivakit-serialization-gson</artifactId>
         </dependency>
 
         <!-- MesaKit -->
@@ -36,7 +36,15 @@
         <dependency>
             <groupId>com.telenav.mesakit</groupId>
             <artifactId>mesakit-graph-core</artifactId>
-        </dependency><dependency><groupId>com.telenav.mesakit</groupId><artifactId>mesakit-map-geography</artifactId></dependency><dependency><groupId>com.telenav.mesakit</groupId><artifactId>mesakit-map-road-model</artifactId></dependency>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-geography</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-road-model</artifactId>
+        </dependency>
 
     </dependencies>
 

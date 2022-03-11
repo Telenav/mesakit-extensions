@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
+import com.telenav.kivakit.serialization.gson.serializers.PrimitiveGsonSerializer;
 import com.telenav.mesakit.map.road.model.SpeedCategory;
 
 public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCategory, Integer>

@@ -1,6 +1,6 @@
 open module mesakit.serialization.json
 {
-    requires transitive kivakit.serialization.json;
+    requires transitive kivakit.serialization.gson;
     requires transitive mesakit.graph.core;
     requires transitive kivakit.component;
 

@@ -11,7 +11,6 @@ import com.telenav.kivakit.data.compression.codecs.huffman.HuffmanCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.tree.Symbols;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.map.geography.shape.polyline.compression.huffman.HuffmanPolylineCodec;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 
 /**
@@ -83,9 +82,7 @@ public class HuffmanCodecGenerator extends BaseComponent
 
                     // and add them to the frequencies array
                     addOffsets(offsetsInDm5, frequencies, latitudeOffsetInDm5);
-                    frequencies.add(HuffmanPolylineCodec.END_OF_OFFSETS, 2);
                     addOffsets(offsetsInDm5, frequencies, longitudeOffsetInDm5);
-                    frequencies.add(HuffmanPolylineCodec.END_OF_OFFSETS, 2);
                 }
             }
             progress.next();
