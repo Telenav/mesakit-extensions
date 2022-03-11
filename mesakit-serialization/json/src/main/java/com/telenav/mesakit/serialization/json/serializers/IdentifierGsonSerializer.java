@@ -19,7 +19,7 @@
 package com.telenav.mesakit.serialization.json.serializers;
 
 import com.telenav.kivakit.core.value.identifier.Identifier;
-import com.telenav.kivakit.serialization.gson.serializers.PrimitiveGsonSerializer;
+import com.telenav.kivakit.serialization.gson.PrimitiveGsonSerializer;
 
 public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier, Long>
 {
@@ -29,9 +29,9 @@ public class IdentifierGsonSerializer extends PrimitiveGsonSerializer<Identifier
     }
 
     @Override
-    protected Identifier toObject(Long scalar)
+    protected Identifier toObject(Long primitive)
     {
-        return new Identifier(scalar);
+        return new Identifier(primitive);
     }
 
     @Override

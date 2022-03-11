@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.json.GsonSerializer;
+import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.geography.Location;
 
@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  * @author junwei
  */
 @LexakaiJavadoc(complete = true)
-public class LocationGsonSerializer implements GsonSerializer<Location>
+public class LocationGsonSerializer implements JsonSerializerDeserializer<Location>
 {
     @Override
     public Location deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

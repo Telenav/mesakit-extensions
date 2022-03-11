@@ -22,11 +22,12 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
+import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
 import com.telenav.mesakit.map.geography.Latitude;
 
 import java.lang.reflect.Type;
 
-public class LatitudeGsonSerializer implements BaseGsonSerializer<Latitude>
+public class LatitudeGsonSerializer implements JsonSerializerDeserializer<Latitude>
 {
     @Override
     public Latitude deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

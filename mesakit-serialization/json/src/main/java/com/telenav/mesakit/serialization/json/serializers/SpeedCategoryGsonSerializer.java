@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.gson.serializers.PrimitiveGsonSerializer;
+import com.telenav.kivakit.serialization.gson.PrimitiveGsonSerializer;
 import com.telenav.mesakit.map.road.model.SpeedCategory;
 
 public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCategory, Integer>
@@ -29,9 +29,9 @@ public class SpeedCategoryGsonSerializer extends PrimitiveGsonSerializer<SpeedCa
     }
 
     @Override
-    protected SpeedCategory toObject(Integer scalar)
+    protected SpeedCategory toObject(Integer primitive)
     {
-        return SpeedCategory.forIdentifier(scalar);
+        return SpeedCategory.forIdentifier(primitive);
     }
 
     @Override
