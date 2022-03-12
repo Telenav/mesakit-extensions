@@ -3,6 +3,7 @@ package com.telenav.mesakit.serialization.json;
 import com.telenav.kivakit.conversion.core.time.UtcDateTimeConverter;
 import com.telenav.kivakit.conversion.core.value.BytesConverter;
 import com.telenav.kivakit.core.project.Project;
+import com.telenav.kivakit.core.project.ProjectTrait;
 import com.telenav.kivakit.core.string.Separators;
 import com.telenav.kivakit.core.time.LocalTime;
 import com.telenav.kivakit.core.value.count.Bytes;
@@ -33,6 +34,13 @@ import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer
 import com.telenav.mesakit.serialization.json.serializers.LongitudeGsonSerializer;
 import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSerializer;
 
+/**
+ * This class defines a KivaKit {@link Project}. It cannot be constructed with the new operator since it has a private
+ * constructor. To access the singleton instance of this class, call {@link Project#resolveProject(Class)}, or use
+ * {@link ProjectTrait#project(Class)}.
+ *
+ * @author jonathanl (shibo)
+ */
 public class MesaKitGsonProject extends Project
 {
     @Override

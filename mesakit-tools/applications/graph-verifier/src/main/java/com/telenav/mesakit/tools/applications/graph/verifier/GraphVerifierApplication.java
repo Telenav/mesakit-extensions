@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
@@ -77,7 +78,7 @@ public class GraphVerifierApplication extends Application
 
     private GraphVerifierApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

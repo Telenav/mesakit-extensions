@@ -38,6 +38,7 @@ import java.util.List;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.stringSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -100,7 +101,7 @@ public class PbfMetadataApplication extends Application
 
     private PbfMetadataApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

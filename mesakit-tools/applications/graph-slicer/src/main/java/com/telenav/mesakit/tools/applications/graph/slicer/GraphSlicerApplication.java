@@ -20,9 +20,9 @@ package com.telenav.mesakit.tools.applications.graph.slicer;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphProject;
@@ -30,6 +30,7 @@ import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
@@ -65,7 +66,7 @@ public class GraphSlicerApplication extends Application
 
     protected GraphSlicerApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

@@ -29,6 +29,7 @@ import org.openstreetmap.josm.plugins.PluginInformation;
 
 import java.awt.event.KeyEvent;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static org.openstreetmap.josm.actions.ExtensionFileFilter.addImporter;
 
 /**
@@ -46,7 +47,7 @@ public class GraphPlugin extends BaseJosmPlugin
         addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        GraphProject.get().initialize();
+        resolveProject(GraphProject.class).initialize();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();

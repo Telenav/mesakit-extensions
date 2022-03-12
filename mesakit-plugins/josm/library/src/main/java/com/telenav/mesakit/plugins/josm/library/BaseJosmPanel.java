@@ -18,6 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.library;
 
+import com.telenav.kivakit.component.ComponentMixin;
 import org.openstreetmap.josm.gui.MainApplication;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
 import org.openstreetmap.josm.gui.layer.Layer;
@@ -28,7 +29,7 @@ import javax.swing.KeyStroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public abstract class BaseJosmPanel extends ToggleDialog
+public abstract class BaseJosmPanel extends ToggleDialog implements ComponentMixin
 {
     private static final long serialVersionUID = -684114141790912097L;
 

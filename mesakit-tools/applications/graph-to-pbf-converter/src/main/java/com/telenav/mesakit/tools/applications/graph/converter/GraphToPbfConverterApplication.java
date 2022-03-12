@@ -21,10 +21,10 @@ package com.telenav.mesakit.tools.applications.graph.converter;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.time.Time;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
@@ -33,6 +33,7 @@ import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 
@@ -65,7 +66,7 @@ public class GraphToPbfConverterApplication extends Application
 
     public GraphToPbfConverterApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

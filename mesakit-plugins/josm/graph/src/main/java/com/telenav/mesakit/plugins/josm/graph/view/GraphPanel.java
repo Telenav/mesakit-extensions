@@ -49,7 +49,7 @@ import java.util.Collections;
  *
  * @author jonathanl (shibo)
  */
-public class GraphPanel extends BaseJosmPanel implements StatusDisplay
+@SuppressWarnings("ClassEscapesDefinedScope") public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 {
     static
     {
@@ -78,7 +78,7 @@ public class GraphPanel extends BaseJosmPanel implements StatusDisplay
 
         createLayout(container(), false, Collections.emptyList());
 
-        status(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
+        status(project(MesaKit.class).projectVersion() + " - " + project(MesaKit.class).build());
 
         SwingUtilities.invokeLater(() ->
                 Components.children(this, component -> component.setFont(Fonts.component(12))));

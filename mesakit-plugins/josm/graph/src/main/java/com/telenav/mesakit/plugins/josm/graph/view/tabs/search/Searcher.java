@@ -19,6 +19,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
 import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.core.KivaKit;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.language.Objects;
 import com.telenav.kivakit.core.language.primitive.Ints;
@@ -54,6 +55,7 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.util.regex.Pattern;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION;
 import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
 
@@ -69,7 +71,7 @@ public class Searcher extends BaseComponent
     {
         var help = new StringList();
 
-        help.add("<span class='section0'>MesaKit $ Graph Plugin</span>", MesaKit.get().projectVersion());
+        help.add("<span class='section0'>MesaKit $ Graph Plugin</span>", resolveProject(KivaKit.class).projectVersion());
         help.add("<p class='aqua'>To make a graph active, double click on it in the view area or select it in the Layers panel.</p>" +
                 "<p class='aqua'>Select edges, vertexes and relations of an active graph to see their details.</p> " +
                 "<p class= 'aqua'>Select a rectangle to zoom in. " +
@@ -120,7 +122,7 @@ public class Searcher extends BaseComponent
     {
         var help = new StringList();
 
-        help.add("<span class='section0'>MesaKit $ Graph Query Help</span>", MesaKit.get().projectVersion());
+        help.add("<span class='section0'>MesaKit $ Graph Query Help</span>", resolveProject(MesaKit.class).projectVersion());
         help.add("<p class='aqua'>Graph queries can be entered into the search box as 'select [query-string]', " +
                 "where the query string is composed<br/>of operators, attributes and scalar constants.</p>");
         help.add("<p class='aqua'>For example, the query \"edge.roadName contains 'Lomas'\" would find " +
@@ -236,7 +238,9 @@ public class Searcher extends BaseComponent
         }
         if (searchString.equals("version"))
         {
-            return UserFeedback.html(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
+            return UserFeedback.html(
+                    resolveProject(KivaKit.class).projectVersion() + " - " +
+                            resolveProject(KivaKit.class).build());
         }
 
         var viewBounds = layer.model().bounds();

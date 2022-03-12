@@ -21,10 +21,10 @@ package com.telenav.mesakit.tools.applications.codec;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.core.value.count.Minimum;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
@@ -38,6 +38,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.integerSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.maximumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.minimumSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -50,6 +51,18 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class CodecGeneratorApplication extends Application
 {
+    public static void main(String[] arguments)
+    {
+        new CodecGeneratorApplication().run(arguments);
+    }
+
+    enum Type
+    {
+        POLYLINE,
+        TAG,
+        ROAD_NAME
+    }
+
     public final ArgumentParser<File> INPUT =
             fileArgumentParser(this, "The input .graph or .osm.pbf file")
                     .required()
@@ -101,18 +114,6 @@ public class CodecGeneratorApplication extends Application
                     .defaultValue(Minimum._1024)
                     .build();
 
-    public static void main(String[] arguments)
-    {
-        new CodecGeneratorApplication().run(arguments);
-    }
-
-    enum Type
-    {
-        POLYLINE,
-        TAG,
-        ROAD_NAME
-    }
-
     private final SwitchParser<Type> TYPE =
             enumSwitchParser(this, "type", "The type of codec(s) to generate", Type.class)
                     .required()
@@ -120,7 +121,7 @@ public class CodecGeneratorApplication extends Application
 
     protected CodecGeneratorApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

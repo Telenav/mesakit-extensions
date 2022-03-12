@@ -35,6 +35,7 @@ import java.util.List;
 
 import static com.telenav.kivakit.commandline.ArgumentParser.stringArgumentParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 
@@ -95,7 +96,7 @@ public class RegionInformationApplication extends Application
 
     public RegionInformationApplication()
     {
-        super(RegionProject.get());
+        super(resolveProject(RegionProject.class));
     }
 
     @Override

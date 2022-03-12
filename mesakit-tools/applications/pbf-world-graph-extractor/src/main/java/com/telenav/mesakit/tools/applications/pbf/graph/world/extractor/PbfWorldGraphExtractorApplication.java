@@ -22,21 +22,21 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
-import com.telenav.kivakit.settings.Deployment;
-import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.CopyMode;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.settings.Deployment;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory;
 import com.telenav.mesakit.graph.world.WorldGraph;
 import com.telenav.mesakit.graph.world.WorldGraphConfiguration;
 import com.telenav.mesakit.graph.world.WorldGraphDeployments;
-import com.telenav.mesakit.graph.world.WorldGraphProject;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepository;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepositoryFolder;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
@@ -49,6 +49,7 @@ import java.util.List;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.PARALLEL_READER;
@@ -172,7 +173,7 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     private PbfWorldGraphExtractorApplication()
     {
-        super(WorldGraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override

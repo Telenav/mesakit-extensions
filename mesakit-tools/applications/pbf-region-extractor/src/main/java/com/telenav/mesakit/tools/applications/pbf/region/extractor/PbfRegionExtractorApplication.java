@@ -21,10 +21,10 @@ package com.telenav.mesakit.tools.applications.pbf.region.extractor;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
@@ -34,6 +34,7 @@ import com.telenav.mesakit.map.region.RegionSet;
 import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -46,12 +47,12 @@ import static com.telenav.mesakit.map.region.Region.regionListSwitchParser;
  */
 public class PbfRegionExtractorApplication extends Application
 {
-    private final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count._16);
-
     public static void main(String[] arguments)
     {
         new PbfRegionExtractorApplication().run(arguments);
     }
+
+    private final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count._16);
 
     private final ArgumentParser<File> INPUT =
             fileArgumentParser(this, "The input PBF file to process")
@@ -80,7 +81,7 @@ public class PbfRegionExtractorApplication extends Application
 
     protected PbfRegionExtractorApplication()
     {
-        super(RegionProject.get());
+        super(resolveProject(RegionProject.class));
     }
 
     @Override

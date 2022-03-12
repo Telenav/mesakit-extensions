@@ -21,18 +21,18 @@ package com.telenav.mesakit.tools.applications.graph.analyzer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
-import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.interfaces.comparison.Filter;
-import com.telenav.kivakit.interfaces.comparison.Matcher;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.language.primitive.Doubles;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.string.Align;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.core.vm.JavaVirtualMachine;
+import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.kivakit.interfaces.comparison.Filter;
+import com.telenav.kivakit.interfaces.comparison.Matcher;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.EdgeRelation;
 import com.telenav.mesakit.graph.Graph;
@@ -52,6 +52,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
 
 /**
@@ -119,7 +120,7 @@ public class GraphAnalyzerApplication extends Application
 
     protected GraphAnalyzerApplication()
     {
-        super(GraphProject.get());
+        super(resolveProject(GraphProject.class));
     }
 
     @Override
