@@ -36,6 +36,7 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfRead
 import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.FILTERED_OUT;
@@ -137,13 +138,11 @@ public class PbfAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet
-                (
-                        WAY_FILTER,
-                        RELATION_FILTER,
-                        SHOW_WARNINGS,
-                        COMPUTE_LENGTHS,
-                        QUIET
-                );
+        return objectSet(
+                WAY_FILTER,
+                RELATION_FILTER,
+                SHOW_WARNINGS,
+                COMPUTE_LENGTHS,
+                QUIET);
     }
 }

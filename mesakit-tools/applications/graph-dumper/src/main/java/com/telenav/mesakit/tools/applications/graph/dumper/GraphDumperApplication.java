@@ -42,7 +42,7 @@ import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
-import static com.telenav.kivakit.core.project.Project.resolveProject;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
@@ -118,7 +118,7 @@ public class GraphDumperApplication extends Application
 
     protected GraphDumperApplication()
     {
-        super(resolveProject(GraphProject.class));
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -194,7 +194,7 @@ public class GraphDumperApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(
+        return objectSet(
                 WAY,
                 EDGE,
                 VERTEX,
@@ -204,8 +204,7 @@ public class GraphDumperApplication extends Application
                 SPATIAL_INDEX,
                 DUMP_EDGE_IDENTIFIERS,
                 DUMP_HEAP,
-                QUIET
-        );
+                QUIET);
     }
 
     private void dump(GraphElement element)

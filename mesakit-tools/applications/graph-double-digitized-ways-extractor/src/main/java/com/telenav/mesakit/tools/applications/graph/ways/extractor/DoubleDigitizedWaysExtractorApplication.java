@@ -30,6 +30,7 @@ import com.telenav.mesakit.graph.io.load.GraphConstraints;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parse;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
@@ -106,6 +107,6 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(GRAPH, OUTPUT_FOLDER, QUIET);
+        return objectSet(GRAPH, OUTPUT_FOLDER, QUIET);
     }
 }

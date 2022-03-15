@@ -33,7 +33,7 @@ import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.telenav.kivakit.core.project.Project.resolveProject;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 
@@ -66,7 +66,7 @@ public class GraphToPbfConverterApplication extends Application
 
     public GraphToPbfConverterApplication()
     {
-        super(resolveProject(GraphProject.class));
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class GraphToPbfConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(OUTPUT_FOLDER, QUIET);
+        return objectSet(OUTPUT_FOLDER, QUIET);
     }
 
     private void convertOne(Folder outputFolder, Folder folder, File input)

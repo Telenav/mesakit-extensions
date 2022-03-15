@@ -38,7 +38,7 @@ import java.util.List;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.stringSwitchParser;
-import static com.telenav.kivakit.core.project.Project.resolveProject;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -101,7 +101,7 @@ public class PbfMetadataApplication extends Application
 
     private PbfMetadataApplication()
     {
-        super(resolveProject(GraphProject.class));
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -197,6 +197,6 @@ public class PbfMetadataApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
+        return objectSet(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
     }
 }

@@ -38,7 +38,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.integerSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.maximumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.minimumSwitchParser;
-import static com.telenav.kivakit.core.project.Project.resolveProject;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -121,7 +121,7 @@ public class CodecGeneratorApplication extends Application
 
     protected CodecGeneratorApplication()
     {
-        super(resolveProject(GraphProject.class));
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -159,18 +159,16 @@ public class CodecGeneratorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet
-                (
-                        TYPE,
-                        WAY_FILTER,
-                        RELATION_FILTER,
-                        TAG_CODEC_SAMPLE_FREQUENCY,
-                        TAG_CODEC_STRINGS_MAXIMUM,
-                        TAG_CODEC_STRINGS_MAXIMUM_BITS,
-                        TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES,
-                        TAG_CODEC_CHARACTERS_MAXIMUM_BITS,
-                        TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES,
-                        QUIET
-                );
+        return objectSet(
+                TYPE,
+                WAY_FILTER,
+                RELATION_FILTER,
+                TAG_CODEC_SAMPLE_FREQUENCY,
+                TAG_CODEC_STRINGS_MAXIMUM,
+                TAG_CODEC_STRINGS_MAXIMUM_BITS,
+                TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES,
+                TAG_CODEC_CHARACTERS_MAXIMUM_BITS,
+                TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES,
+                QUIET);
     }
 }

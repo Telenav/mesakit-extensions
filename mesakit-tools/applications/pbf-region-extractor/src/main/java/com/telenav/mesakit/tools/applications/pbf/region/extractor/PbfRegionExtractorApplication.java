@@ -34,7 +34,7 @@ import com.telenav.mesakit.map.region.RegionSet;
 import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
-import static com.telenav.kivakit.core.project.Project.resolveProject;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -81,7 +81,7 @@ public class PbfRegionExtractorApplication extends Application
 
     protected PbfRegionExtractorApplication()
     {
-        super(resolveProject(RegionProject.class));
+        addProject(RegionProject.class);
     }
 
     @Override
@@ -129,6 +129,6 @@ public class PbfRegionExtractorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(OUTPUT_FOLDER, EXTRACT, EXTRACT_UNDER, WAY_FILTER, THREADS, QUIET);
+        return objectSet(OUTPUT_FOLDER, EXTRACT, EXTRACT_UNDER, WAY_FILTER, THREADS, QUIET);
     }
 }

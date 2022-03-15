@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 
@@ -374,7 +375,7 @@ public class EdgeAttributeChecker extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(GRAPH_RESOURCE, OUTPUT_FOLDER);
+        return objectSet(GRAPH_RESOURCE, OUTPUT_FOLDER);
     }
 
     private boolean check(Edge edge, Attribute<Edge> attribute)

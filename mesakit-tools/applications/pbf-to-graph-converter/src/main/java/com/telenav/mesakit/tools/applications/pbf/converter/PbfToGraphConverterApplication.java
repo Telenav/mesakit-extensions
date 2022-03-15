@@ -42,6 +42,7 @@ import java.util.List;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileListArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
@@ -164,7 +165,7 @@ public class PbfToGraphConverterApplication extends Application
     }
 
     @Override
-    protected void onProjectInitialized()
+    protected void onProjectsInitialized()
     {
         // Load G2 for english in the background
         RoadNameStandardizer.loadInBackground(MapLocale.ENGLISH_UNITED_STATES.get(), RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION);
@@ -246,7 +247,7 @@ public class PbfToGraphConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.objectSet(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
+        return objectSet(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
                 INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
                 PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
                 TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);
