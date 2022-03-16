@@ -35,7 +35,7 @@ This module contains extensions to the core MesaKit project
  &nbsp; &nbsp; [**mesakit-plugins-josm-graph**](mesakit-plugins/josm/graph/README.md)  
 &nbsp; <img src="https://www.mesakit.org/images/meter-50-96.png" srcset="https://www.mesakit.org/images/meter-50-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-plugins-josm-library**](mesakit-plugins/josm/library/README.md)  
-&nbsp; <img src="https://www.mesakit.org/images/meter-60-96.png" srcset="https://www.mesakit.org/images/meter-60-96-2x.png 2x"/>
+&nbsp; <img src="https://www.mesakit.org/images/meter-70-96.png" srcset="https://www.mesakit.org/images/meter-70-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-serialization-json**](mesakit-serialization/json/README.md)  
 &nbsp; <img src="https://www.mesakit.org/images/meter-50-96.png" srcset="https://www.mesakit.org/images/meter-50-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-application-launcher**](mesakit-tools/application-launcher/README.md)  

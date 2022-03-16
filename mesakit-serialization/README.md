@@ -24,7 +24,7 @@ This module contains code for serializing MesaKit objects
 
 ### Javadoc Coverage <a name = "javadoc-coverage"></a> &nbsp; <img src="https://www.kivakit.org/images/bargraph-32.png" srcset="https://www.kivakit.org/images/bargraph-32-2x.png 2x"/>
 
-&nbsp; <img src="https://www.mesakit.org/images/meter-60-96.png" srcset="https://www.mesakit.org/images/meter-60-96-2x.png 2x"/>
+&nbsp; <img src="https://www.mesakit.org/images/meter-70-96.png" srcset="https://www.mesakit.org/images/meter-70-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-serialization-json**](json/README.md)
 
 [//]: # (start-user-text)

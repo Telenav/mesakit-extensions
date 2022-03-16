@@ -20,14 +20,14 @@ This module contains code for serializing MesaKit objects to JSON
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.9-SNAPSHOT/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-serialization-json</artifactId>
-        <version>0.9.9-SNAPSHOT</version>
+        <version>0.9.10</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,31 +48,31 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.serialization.json*](https://www.mesakit.org/0.9.9-SNAPSHOT/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.svg)  
-[*com.telenav.mesakit.serialization.json.serializers*](https://www.mesakit.org/0.9.9-SNAPSHOT/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.serializers.svg)
+[*com.telenav.mesakit.serialization.json*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.svg)  
+[*com.telenav.mesakit.serialization.json.serializers*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.serializers.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
 ### Javadoc <a name="javadoc"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/books-32.png" srcset="https://www.kivakit.org/images/books-32-2x.png 2x"/>
 
-Javadoc coverage for this project is 58.3%.  
+Javadoc coverage for this project is 65.1%.  
   
-&nbsp; &nbsp; <img src="https://www.mesakit.org/images/meter-60-96.png" srcset="https://www.mesakit.org/images/meter-60-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://www.mesakit.org/images/meter-70-96.png" srcset="https://www.mesakit.org/images/meter-70-96-2x.png 2x"/>
 
 
 
 
 | Class | Documentation Sections |
 |---|---|
-| [*DistanceGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/DistanceGsonSerializer.html) |  |  
-| [*IdentifierGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/IdentifierGsonSerializer.html) |  |  
-| [*LatitudeGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LatitudeGsonSerializer.html) |  |  
-| [*LocationGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LocationGsonSerializer.html) |  |  
-| [*LongitudeGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LongitudeGsonSerializer.html) |  |  
-| [*MesaKitGsonFactorySource*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/MesaKitGsonFactorySource.html) |  |  
-| [*RectangleGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/RectangleGsonSerializer.html) |  |  
-| [*RectangleInDegreesGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/RectangleInDegreesGsonSerializer.html) |  |  
-| [*SpeedCategoryGsonSerializer*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/SpeedCategoryGsonSerializer.html) |  |  
+| [*DistanceGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/DistanceGsonSerializer.html) |  |  
+| [*IdentifierGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/IdentifierGsonSerializer.html) |  |  
+| [*LatitudeGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LatitudeGsonSerializer.html) |  |  
+| [*LocationGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LocationGsonSerializer.html) |  |  
+| [*LongitudeGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/LongitudeGsonSerializer.html) |  |  
+| [*MesaKitGsonProject*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/MesaKitGsonProject.html) |  |  
+| [*RectangleGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/RectangleGsonSerializer.html) |  |  
+| [*RectangleInDegreesGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/RectangleInDegreesGsonSerializer.html) |  |  
+| [*SpeedCategoryGsonSerializer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.serialization.json/com/telenav/mesakit/serialization/json/serializers/SpeedCategoryGsonSerializer.html) |  |  
 
 [//]: # (start-user-text)
 
