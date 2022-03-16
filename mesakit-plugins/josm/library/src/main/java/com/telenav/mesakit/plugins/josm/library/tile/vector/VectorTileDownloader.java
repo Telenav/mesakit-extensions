@@ -18,9 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile.vector;
 
-import com.telenav.kivakit.kernel.language.collections.map.string.VariableMap;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.core.collections.map.VariableMap;
 import com.telenav.kivakit.network.core.Host;
 import com.telenav.kivakit.network.core.QueryParameters;
 import com.telenav.kivakit.network.http.HttpNetworkLocation;
@@ -32,8 +30,6 @@ import com.telenav.mesakit.plugins.josm.library.tile.SlippyTileCache;
 
 public class VectorTileDownloader extends AbstractTileDownloader<VectorTileRequest, VectorTile>
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     public enum Version
     {
         V3,
@@ -44,7 +40,7 @@ public class VectorTileDownloader extends AbstractTileDownloader<VectorTileReque
 
     private final Version version;
 
-    public VectorTileDownloader(final HttpNetworkLocation location, final Version version)
+    public VectorTileDownloader(HttpNetworkLocation location, Version version)
     {
         super(new SlippyTileCache<>());
         this.location = location;
@@ -52,33 +48,34 @@ public class VectorTileDownloader extends AbstractTileDownloader<VectorTileReque
     }
 
     @Override
-    protected VectorTile onDownload(final VectorTileRequest request)
+    protected VectorTile onDownload(VectorTileRequest request)
     {
-        final var tile = request.tile();
-        final var server = location + request.mapData().getVectorName()
+        var tile = request.tile();
+        var server = location + request.mapData().getVectorName()
                 + (version == Version.V3 ? "/NA/current/version.json" : "");
-        final var variables = new VariableMap<String>();
+        var variables = new VariableMap<String>();
         variables.put("zoom", "" + tile.getZoomLevel().level());
         variables.put("x", "" + tile.x());
         variables.put("y", "" + tile.y());
         variables.put("baseurl", server);
-        final var host = Host.parse("hqd-vectortilefs.telenav.com");
-        final var location = new HttpNetworkLocation(host.http()
-                .path("/tools/bin/vm_decoder" + (version == Version.V4 ? "_v4" : "") + ".py"))
+        @SuppressWarnings("SpellCheckingInspection")
+        var host = Host.parseHost(this, "hqd-vectortilefs.telenav.com");
+        var location = new HttpNetworkLocation(host.http()
+                .path(this, "/tools/bin/vm_decoder" + (version == Version.V4 ? "_v4" : "") + ".py"))
                 .withQueryParameters(new QueryParameters(variables));
-        final var vectorTile = new VectorTile(tile);
-        LOGGER.information("Downloaded $ ($)", vectorTile, tile.mapArea());
+        var vectorTile = new VectorTile(tile);
+        information("Downloaded $ ($)", vectorTile, tile.mapArea());
         return vectorTile;
     }
 
     // (37.63799,-122.40458) (37.6343,-122.40299) (37.62697,-122.40183)
-    private Polyline polyline(final String string)
+    private Polyline polyline(String string)
     {
-        final var builder = new PolylineBuilder();
-        final var converter = new Location.DegreesConverter(LOGGER);
-        for (final var location : string.split(" "))
+        var builder = new PolylineBuilder();
+        var converter = new Location.DegreesConverter(this);
+        for (var location : string.split(" "))
         {
-            final var value = location.substring(1, location.length() - 1);
+            var value = location.substring(1, location.length() - 1);
             builder.add(converter.convert(value));
         }
         return builder.build();

@@ -1,6 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.theme;
 
-import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.kivakit.core.value.level.Percent;
+
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Fonts;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
@@ -58,7 +59,7 @@ public class EdgeTheme extends BaseTheme
                         .withDrawStroke(MapStroke.stroke(meters(0.5))));
     }
 
-    public MapPolyline fattenPolyline(final MapPolyline line, final Edge edge)
+    public MapPolyline fattenPolyline(MapPolyline line, Edge edge)
     {
         switch (edge.roadFunctionalClass())
         {
@@ -88,7 +89,7 @@ public class EdgeTheme extends BaseTheme
         }
     }
 
-    public MapPolyline polylineEdge(final MapCanvas canvas, final Selection.Type type, final Edge edge)
+    public MapPolyline polylineEdge(MapCanvas canvas, Selection.Type type, Edge edge)
     {
         switch (type)
         {
@@ -108,11 +109,11 @@ public class EdgeTheme extends BaseTheme
                 throw new IllegalArgumentException();
         }
 
-        final var line = fattenPolyline(edgeUnselected(), edge);
+        var line = fattenPolyline(edgeUnselected(), edge);
 
-        final Color color;
+        Color color;
 
-        final var zoomedIn = canvas.scale().isZoomedIn(MapScale.CITY);
+        var zoomedIn = canvas.scale().isZoomedIn(MapScale.CITY);
         switch (edge.roadFunctionalClass())
         {
             case MAIN:

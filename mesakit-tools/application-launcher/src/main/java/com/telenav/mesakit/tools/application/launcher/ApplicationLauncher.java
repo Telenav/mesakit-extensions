@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.tools.application.launcher;
 
-import com.telenav.kivakit.kernel.language.time.Duration;
+import com.telenav.kivakit.core.time.Duration;
 import com.telenav.mesakit.tools.applications.codec.CodecGeneratorApplication;
 import com.telenav.mesakit.tools.applications.graph.analyzer.GraphAnalyzerApplication;
 import com.telenav.mesakit.tools.applications.graph.converter.GraphToPbfConverterApplication;
@@ -39,7 +39,7 @@ import java.util.Arrays;
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class ApplicationLauncher
 {
-    protected static void help(final String tool)
+    protected static void help(String tool)
     {
         System.out.println();
         System.out.println("mesakit-tools <tool-name>");
@@ -89,7 +89,7 @@ public class ApplicationLauncher
     {
         if (arguments.length >= 1)
         {
-            final var application = arguments[0];
+            var application = arguments[0];
             arguments = shift(arguments);
 
             switch (application.toLowerCase())
@@ -169,7 +169,7 @@ public class ApplicationLauncher
         }
     }
 
-    private static String[] shift(final String[] arguments)
+    private static String[] shift(String[] arguments)
     {
         return Arrays.copyOfRange(arguments, 1, arguments.length);
     }

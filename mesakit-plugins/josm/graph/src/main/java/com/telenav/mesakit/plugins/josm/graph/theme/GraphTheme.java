@@ -8,7 +8,7 @@ import static com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.measureme
 
 public class GraphTheme extends BaseTheme
 {
-    public MapBox boxGraphBounds(final Graph graph, final boolean active)
+    public MapBox boxGraphBounds(Graph graph, boolean active)
     {
         return MapBox.box(active ? styleGraphActive() : styleGraphInactive())
                 .withLabelText(graph.name())
@@ -16,7 +16,7 @@ public class GraphTheme extends BaseTheme
                 .withDrawStrokeWidth(pixels(3));
     }
 
-    public MapLabel labelMap(final String text)
+    public MapLabel labelMap(String text)
     {
         return MapLabel.label(styleLabelMap())
                 .withLabelText(text)

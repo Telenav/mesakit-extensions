@@ -22,21 +22,21 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.configuration.settings.deployment.Deployment;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
+import com.telenav.kivakit.core.time.Time;
+import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Count;
 import com.telenav.kivakit.resource.CopyMode;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.settings.Deployment;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory;
 import com.telenav.mesakit.graph.world.WorldGraph;
 import com.telenav.mesakit.graph.world.WorldGraphConfiguration;
 import com.telenav.mesakit.graph.world.WorldGraphDeployments;
-import com.telenav.mesakit.graph.world.WorldGraphProject;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepository;
 import com.telenav.mesakit.graph.world.repository.WorldGraphRepositoryFolder;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
@@ -46,9 +46,10 @@ import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversi
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.threadCountSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.PARALLEL_READER;
@@ -65,7 +66,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfWorldGraphExtractorApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfWorldGraphExtractorApplication().run(arguments);
     }
@@ -78,40 +79,40 @@ public class PbfWorldGraphExtractorApplication extends Application
 
     /** The input PBF resource to split into a grid */
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("The PBF file to split into a new world graph")
+            fileArgumentParser(this, "The PBF file to split into a new world graph")
                     .required()
                     .build();
 
     public final SwitchParser<File> EXCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("excluded-highway-types", "A text file containing excluded highway types (one per line)")
+            fileSwitchParser(this, "excluded-highway-types", "A text file containing excluded highway types (one per line)")
                     .optional()
                     .build();
 
     public final SwitchParser<File> FREE_FLOW_SIDE_FILE =
-            fileSwitchParser("free-flow-side-file", "The file to load free flow from")
+            fileSwitchParser(this, "free-flow-side-file", "The file to load free flow from")
                     .optional()
                     .build();
 
     public final SwitchParser<File> INCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser("included-highway-types", "A text file containing included highway types (one per line)")
+            fileSwitchParser(this, "included-highway-types", "A text file containing included highway types (one per line)")
                     .optional()
                     .build();
 
     public final SwitchParser<Boolean> REGION_INFORMATION =
-            booleanSwitchParser("region-information", "Include region information (expensive in OSM)")
+            booleanSwitchParser(this, "region-information", "Include region information (expensive in OSM)")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     /** Filter for relations */
     public final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .required()
                     .build();
 
     /** Filter for ways */
     public final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .defaultValue(new OsmNavigableWayFilter())
                     .build();
@@ -126,70 +127,70 @@ public class PbfWorldGraphExtractorApplication extends Application
     private SwitchParser<Deployment> DEPLOYMENT;
 
     private final SwitchParser<Boolean> OVERWRITE =
-            booleanSwitchParser("overwrite", "True to overwrite any existing graph")
+            booleanSwitchParser(this, "overwrite", "True to overwrite any existing graph")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Mode> MODE =
-            enumSwitchParser("mode", "TimeFormat of operation (extract or convert)", Mode.class)
+            enumSwitchParser(this, "mode", "TimeFormat of operation (extract or convert)", Mode.class)
                     .optional()
                     .defaultValue(Mode.EXTRACT)
                     .build();
 
     final SwitchParser<Boolean> PARALLEL =
-            booleanSwitchParser("parallel", "True to use the parallel PBF reader")
+            booleanSwitchParser(this, "parallel", "True to use the parallel PBF reader")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     /** Number of threads to use when extracting and converting */
-    final SwitchParser<Count> THREADS = threadCountSwitchParser(Count.count(24));
+    final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count.count(24));
 
     public final SwitchParser<Boolean> VERIFY =
-            booleanSwitchParser("verify", "True to verify output graphs")
+            booleanSwitchParser(this, "verify", "True to verify output graphs")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> WARN =
-            booleanSwitchParser("warn", "False to suppress detailed warnings")
+            booleanSwitchParser(this, "warn", "False to suppress detailed warnings")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     /** The input speed pattern file to compile into each cell */
     public final SwitchParser<File> SPEED_PATTERN_FILE =
-            fileSwitchParser("speed-pattern", "The speed pattern file to compile into each cell")
+            fileSwitchParser(this, "speed-pattern", "The speed pattern file to compile into each cell")
                     .optional()
                     .build();
 
     private final SwitchParser<Boolean> PROFILE_FORCE_LOAD =
-            booleanSwitchParser("profile-force-load", "True to profile force-loading")
+            booleanSwitchParser(this, "profile-force-load", "True to profile force-loading")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private PbfWorldGraphExtractorApplication()
     {
-        super(WorldGraphProject.get());
+        addProject(GraphProject.class);
     }
 
     @Override
     public void onRun()
     {
         // Start time
-        final var start = Time.now();
+        var start = Time.now();
 
         // Install deployment
-        get(DEPLOYMENT).install();
+        registerSettingsIn(get(DEPLOYMENT));
 
         // Ensure this works later
         get(WAY_FILTER);
 
         // Get input resource
-        final var input = argument(INPUT);
-        final var metadata = Metadata.from(input);
+        var input = argument(INPUT);
+        var metadata = Metadata.from(input);
         if (metadata == null)
         {
             exit("Unable get metadata for $", input);
@@ -197,23 +198,23 @@ public class PbfWorldGraphExtractorApplication extends Application
         }
 
         // Get number of threads to use
-        final var threads = get(THREADS);
+        var threads = get(THREADS);
 
         // Get mode (extract-and-convert or convert only)
-        final var mode = get(MODE);
+        var mode = get(MODE);
 
         // Get the repository install folder
-        final var repositoryInstallFolder = repositoryInstallFolder(commandLine(), metadata, mode);
+        var repositoryInstallFolder = repositoryInstallFolder(commandLine(), metadata, mode);
 
         // Get the local repository
-        final var localRepository = configuration().localRepository();
+        var localRepository = configuration().localRepository();
 
         // Get temporary and local install folders
-        final var localRepositoryInstallFolder = localRepository.folder(metadata);
+        var localRepositoryInstallFolder = localRepository.folder(metadata);
 
         // Create world graph to populate
-        final var worldGraph = WorldGraph.create(localRepositoryInstallFolder, metadata);
-        final var worldGrid = worldGraph.worldGrid();
+        var worldGraph = WorldGraph.create(localRepositoryInstallFolder, metadata);
+        var worldGrid = worldGraph.worldGrid();
 
         // If we're extracting
         if (mode == Mode.EXTRACT)
@@ -233,32 +234,32 @@ public class PbfWorldGraphExtractorApplication extends Application
             }
 
             // get the input file to extract
-            if (arguments().size() != 1)
+            if (argumentList().size() != 1)
             {
                 exit("Input PBF file is required to extract");
             }
-            final var speedPattern = get(SPEED_PATTERN_FILE);
+            var speedPattern = get(SPEED_PATTERN_FILE);
             if (speedPattern != null && !speedPattern.exists())
             {
                 exit("Speed pattern file doesn't exist! File path: " + speedPattern);
             }
 
             // and a temporary folder in the local repository
-            final var localRepositoryTemporaryFolder = localRepository.temporaryFolder();
+            var localRepositoryTemporaryFolder = localRepository.temporaryFolder();
             if (localRepositoryTemporaryFolder != null)
             {
                 // and extract PBF cells into the local repository temporary folder
-                final var factory = listenTo(new PbfDataSourceFactory(input,
+                var factory = listenTo(new PbfDataSourceFactory(input,
                         get(THREADS), get(PARALLEL) ? PARALLEL_READER : SERIAL_READER));
-                final var extracted = worldGrid.extract(localRepositoryTemporaryFolder,
+                var extracted = worldGrid.extract(localRepositoryTemporaryFolder,
                         () -> factory.newInstance(metadata));
 
                 // and if anything was extracted,
                 if (extracted.isNonZero())
                 {
                     // convert the extracted PBF files
-                    final var conversion = new WorldConversion();
-                    final var statistics = conversion.convert(this, worldGrid, commandLine(), metadata, localRepositoryTemporaryFolder, threads);
+                    var conversion = new WorldConversion();
+                    var statistics = conversion.convert(this, worldGrid, commandLine(), metadata, localRepositoryTemporaryFolder, threads);
 
                     // and if we succeeded
                     if (statistics.succeeded().isNonZero())
@@ -275,7 +276,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                         if (repositoryInstallFolder != null)
                         {
                             // then copy the data (both PBFs and graphs)
-                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.NULL);
+                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.none());
                         }
                     }
                 }
@@ -284,7 +285,7 @@ public class PbfWorldGraphExtractorApplication extends Application
         else if (mode == Mode.CONVERT)
         {
             // We're only converting PBF to graph files in-place
-            final var statistics = new WorldConversion().convert(this, worldGrid, commandLine(), metadata, localRepositoryInstallFolder, threads);
+            var statistics = new WorldConversion().convert(this, worldGrid, commandLine(), metadata, localRepositoryInstallFolder, threads);
 
             // If some PBFs were converted
             if (statistics.succeeded().isNonZero())
@@ -297,17 +298,17 @@ public class PbfWorldGraphExtractorApplication extends Application
                 {
                     // then copy just the new graphs to the repository install folder.
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, Extension.GRAPH.fileMatcher(),
-                            Progress.create(this, "bytes"));
+                            BroadcastingProgressReporter.create(this, "bytes"));
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.fileMatcher(),
-                            Progress.create(this, "bytes"));
+                            BroadcastingProgressReporter.create(this, "bytes"));
                 }
             }
         }
 
         if (get(PROFILE_FORCE_LOAD))
         {
-            final var startLoad = Time.now();
-            final var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
+            var startLoad = Time.now();
+            var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
             forceLoad.loadAll();
             information("Force-loaded $ world graph in $", forceLoad.estimatedMemorySize(), startLoad.elapsedSince());
         }
@@ -331,7 +332,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 .required()
                 .build();
 
-        return ObjectSet.of(WARN,
+        return objectSet(WARN,
                 MODE,
                 PARALLEL,
                 THREADS,
@@ -358,17 +359,17 @@ public class PbfWorldGraphExtractorApplication extends Application
     /**
      * @return The repository install folder specified on the command line
      */
-    private WorldGraphRepositoryFolder repositoryInstallFolder(final CommandLine commandLine, final Metadata metadata,
-                                                               final Mode mode)
+    private WorldGraphRepositoryFolder repositoryInstallFolder(CommandLine commandLine, Metadata metadata,
+                                                               Mode mode)
     {
         // Get any repository that was specified
-        final var repository = commandLine.get(WORLD_GRAPH_REPOSITORY);
+        var repository = commandLine.get(WORLD_GRAPH_REPOSITORY);
 
         // If a repository was specified
         if (repository != null)
         {
             // then get the install folder for the specified data date
-            final var installFolder = repository.folder(metadata);
+            var installFolder = repository.folder(metadata);
             installFolder.mkdirs();
 
             // If we're extracting from scratch and the install folder exists and its not empty,

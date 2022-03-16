@@ -1,17 +1,15 @@
 package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion;
 
 import com.telenav.kivakit.commandline.CommandLine;
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.threading.Threads;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Bytes;
-import com.telenav.kivakit.kernel.language.values.count.ConcurrentMutableCount;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.Debug;
+import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.thread.Threads;
+import com.telenav.kivakit.core.time.Time;
+import com.telenav.kivakit.core.value.count.Bytes;
+import com.telenav.kivakit.core.value.count.ConcurrentMutableCount;
+import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.world.grid.WorldCell;
 import com.telenav.mesakit.graph.world.grid.WorldGrid;
@@ -24,12 +22,8 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author jonathanl (shibo)
  */
-public class WorldConversion
+public class WorldConversion extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    private static final Debug DEBUG = new Debug(LOGGER);
-
     public static class Statistics
     {
         Count attempted;
@@ -82,7 +76,7 @@ public class WorldConversion
             return forwardEdges;
         }
 
-        public Metadata metadata(final Metadata metadata)
+        public Metadata metadata(Metadata metadata)
         {
             return metadata
                     .withVertexCount(vertexes())
@@ -117,35 +111,35 @@ public class WorldConversion
     /**
      * @return The number of graph files created by converting the pbf files of cells in the given grid folder
      */
-    public Statistics convert(final PbfWorldGraphExtractorApplication application,
-                              final WorldGrid grid,
-                              final CommandLine commandLine,
-                              final Metadata metadata,
-                              final WorldGraphRepositoryFolder outputFolder,
-                              final Count threads)
+    public Statistics convert(PbfWorldGraphExtractorApplication application,
+                              WorldGrid grid,
+                              CommandLine commandLine,
+                              Metadata metadata,
+                              WorldGraphRepositoryFolder outputFolder,
+                              Count threads)
     {
         // Start time
-        final var start = Time.now();
+        var start = Time.now();
 
         // Get cells with PBF data to convert
-        final var cells = grid.cells(outputFolder, WorldCell.DataType.PBF).sortedDescendingByPbfSize();
-        LOGGER.information(AsciiArt.box("Converting $ cells", cells.size()));
+        var cells = grid.cells(outputFolder, WorldCell.DataType.PBF).sortedDescendingByPbfSize();
+        information(AsciiArt.box("Converting $ cells", cells.size()));
 
         // Loop through cells
-        final var attempted = new ConcurrentMutableCount();
-        final var completed = new ConcurrentMutableCount();
-        final var failed = new ConcurrentMutableCount();
-        final var succeeded = new ConcurrentMutableCount();
-        final var vertexes = new ConcurrentMutableCount();
-        final var edges = new ConcurrentMutableCount();
-        final var forwardEdges = new ConcurrentMutableCount();
-        final var edgeRelations = new ConcurrentMutableCount();
-        final var places = new ConcurrentMutableCount();
-        final var totalSize = new ConcurrentMutableCount();
+        var attempted = new ConcurrentMutableCount();
+        var completed = new ConcurrentMutableCount();
+        var failed = new ConcurrentMutableCount();
+        var succeeded = new ConcurrentMutableCount();
+        var vertexes = new ConcurrentMutableCount();
+        var edges = new ConcurrentMutableCount();
+        var forwardEdges = new ConcurrentMutableCount();
+        var edgeRelations = new ConcurrentMutableCount();
+        var places = new ConcurrentMutableCount();
+        var totalSize = new ConcurrentMutableCount();
 
-        final var toConvert = new ConcurrentLinkedQueue<>(cells);
-        final var converterThreads = new CountDownLatch(threads.asInt());
-        final var executor = Threads.threadPool("Converter", threads);
+        var toConvert = new ConcurrentLinkedQueue<>(cells);
+        var converterThreads = new CountDownLatch(threads.asInt());
+        var executor = Threads.threadPool("Converter", threads);
 
         threads.loop(() ->
                 executor.execute(() ->
@@ -154,39 +148,39 @@ public class WorldConversion
                     {
                         while (!toConvert.isEmpty())
                         {
-                            final var worldCell = toConvert.poll();
+                            var worldCell = toConvert.poll();
                             if (worldCell != null)
                             {
                                 // We are attempting to convert a cell
                                 attempted.increment();
-                                final var attempt = attempted.get();
-                                final var prefix = "Cell " + attempt + " of " + cells.count() + ": ";
+                                var attempt = attempted.get();
+                                var prefix = "Cell " + attempt + " of " + cells.count() + ": ";
 
                                 // so create the graph converter
-                                final var conversion = new Conversion(application, outputFolder, worldCell);
-                                LOGGER.listenTo(conversion);
+                                var conversion = new Conversion(application, outputFolder, worldCell);
+                                listenTo(conversion);
 
                                 // convert the cell, clean cutting to the cell boundary
-                                final var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.NULL);
-                                LOGGER.information("$ Converting $", prefix.trim(), input);
+                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.none());
+                                information("$ Converting $", prefix.trim(), input);
 
                                 // then convert the PBF to a graph
-                                final var cellGraphFile = worldCell.cellGraphFile(outputFolder);
-                                final var cellGraph = conversion.convert(input, metadata
+                                var cellGraphFile = worldCell.cellGraphFile(outputFolder);
+                                var cellGraph = conversion.convert(input, metadata
                                         .withName(metadata.name() + "_" + worldCell.gridCell().name().replaceAll("-", "_")));
                                 completed.increment();
-                                LOGGER.information("$ Converted", prefix.trim());
+                                information("$ Converted", prefix.trim());
 
                                 // If we failed to convert the cell,
                                 if (cellGraph == null)
                                 {
                                     // then warn
-                                    LOGGER.warning("Unable to convert $ to $", worldCell.pbfFile(outputFolder), cellGraphFile);
+                                    warning("Unable to convert $ to $", worldCell.pbfFile(outputFolder), cellGraphFile);
                                     failed.increment();
                                 }
                                 else
                                 {
-                                    // otherwise increment converted count
+                                    // otherwise, increment converted count
                                     succeeded.increment();
 
                                     // add to statistics
@@ -200,9 +194,9 @@ public class WorldConversion
                                     worldCell.worldGrid().index().index(worldCell, cellGraph);
 
                                     // Add to total size
-                                    if (DEBUG.isDebugOn())
+                                    if (isDebugOn())
                                     {
-                                        final var size = cellGraph.estimatedMemorySize();
+                                        var size = cellGraph.estimatedMemorySize();
                                         if (size != null)
                                         {
                                             totalSize.add(size);
@@ -211,7 +205,7 @@ public class WorldConversion
                                 }
 
                                 // Show overall progress
-                                LOGGER.information("OVERALL PROGRESS: $ of $ (succeeded = $, failed = $)",
+                                information("OVERALL PROGRESS: $ of $ (succeeded = $, failed = $)",
                                         completed, cells.count(), succeeded, failed);
                             }
                         }
@@ -226,12 +220,12 @@ public class WorldConversion
         {
             converterThreads.await();
         }
-        catch (final InterruptedException ignored)
+        catch (InterruptedException ignored)
         {
         }
 
         // We're done
-        final var report = new StringList();
+        var report = new StringList();
         report.add("Succeeded: $", succeeded);
         report.add("Failed: $", failed);
         report.add(AsciiArt.line());
@@ -241,10 +235,10 @@ public class WorldConversion
         report.add(AsciiArt.line());
         report.add("Total Size: $", Bytes.bytes(totalSize.asLong()));
         report.add("Conversion: $", start.elapsedSince());
-        report.titledBox(LOGGER, "Conversion Completed");
+        information(report.titledBox("Conversion Completed"));
 
         // Return the number of successful conversions
-        final var statistics = new Statistics();
+        var statistics = new Statistics();
         statistics.attempted = attempted.asCount();
         statistics.completed = completed.asCount();
         statistics.failed = failed.asCount();

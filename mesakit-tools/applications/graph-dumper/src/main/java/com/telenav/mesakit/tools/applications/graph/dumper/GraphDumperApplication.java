@@ -21,28 +21,28 @@ package com.telenav.mesakit.tools.applications.graph.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.Streams;
+import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.iteration.Streams;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.kivakit.kernel.messaging.Message;
 import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphElement;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
 import com.telenav.mesakit.graph.identifiers.PlaceIdentifier;
 import com.telenav.mesakit.graph.identifiers.RelationIdentifier;
 import com.telenav.mesakit.graph.identifiers.VertexIdentifier;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.countSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
@@ -59,66 +59,66 @@ import static com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayI
  */
 public class GraphDumperApplication extends Application
 {
-    private static final ArgumentParser<SmartGraphLoader> INPUT =
-            graphArgumentParser("The graph to dump")
-                    .required()
-                    .build();
-
-    private static final SwitchParser<EdgeIdentifier> EDGE =
-            edgeIdentifierSwitchParser("edge", "A specific edge identifier to dump")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<VertexIdentifier> VERTEX =
-            vertexIdentifierSwitchParser("vertex", "A specific vertex identifier to dump")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<RelationIdentifier> RELATION =
-            relationIdentifierSwitchParser("relation", "A specific relation identifier to dump")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<PbfWayIdentifier> WAY =
-            pbfWayIdentifierSwitchParser("way", "A specific way identifier to dump")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<PlaceIdentifier> PLACE =
-            placeIdentifierSwitchParser("place", "A specific place identifier to dump")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<Boolean> SPATIAL_INDEX =
-            booleanSwitchParser("spatial-index", "Dump the spatial index")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<Boolean> DUMP_EDGE_IDENTIFIERS =
-            booleanSwitchParser("all-edge-identifiers", "Dump all edge identifiers to the console")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
-
-    private static final SwitchParser<File> DUMP_HEAP =
-            fileSwitchParser("dump-heap-to", "Force load all data and dump graph heap to the given file")
-                    .optional()
-                    .build();
-
-    private static final SwitchParser<Count> LIMIT =
-            countSwitchParser("entity-limit", "The maximum number of edges, vertexes and relations to dump")
-                    .optional()
-                    .defaultValue(Count.MAXIMUM)
-                    .build();
-
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new GraphDumperApplication().run(arguments);
     }
 
+    private final ArgumentParser<SmartGraphLoader> INPUT =
+            graphArgumentParser(this, "The graph to dump")
+                    .required()
+                    .build();
+
+    private final SwitchParser<EdgeIdentifier> EDGE =
+            edgeIdentifierSwitchParser(this, "edge", "A specific edge identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<VertexIdentifier> VERTEX =
+            vertexIdentifierSwitchParser(this, "vertex", "A specific vertex identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<RelationIdentifier> RELATION =
+            relationIdentifierSwitchParser(this, "relation", "A specific relation identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<PbfWayIdentifier> WAY =
+            pbfWayIdentifierSwitchParser(this, "way", "A specific way identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<PlaceIdentifier> PLACE =
+            placeIdentifierSwitchParser(this, "place", "A specific place identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<Boolean> SPATIAL_INDEX =
+            booleanSwitchParser(this, "spatial-index", "Dump the spatial index")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<Boolean> DUMP_EDGE_IDENTIFIERS =
+            booleanSwitchParser(this, "all-edge-identifiers", "Dump all edge identifiers to the console")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
+
+    private final SwitchParser<File> DUMP_HEAP =
+            fileSwitchParser(this, "dump-heap-to", "Force load all data and dump graph heap to the given file")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<Count> LIMIT =
+            countSwitchParser(this, "entity-limit", "The maximum number of edges, vertexes and relations to dump")
+                    .optional()
+                    .defaultValue(Count.MAXIMUM)
+                    .build();
+
     protected GraphDumperApplication()
     {
-        super(GraphProject.get());
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -131,27 +131,27 @@ public class GraphDumperApplication extends Application
     @Override
     protected void onRun()
     {
-        final var graph = argument(INPUT).load();
+        var graph = argument(INPUT).load();
 
         if (has(DUMP_HEAP))
         {
             graph.loadAll();
-            final var file = get(DUMP_HEAP);
+            var file = get(DUMP_HEAP);
             file.delete();
-            file.withExtension(Extension.parse(".idom"));
+            file.withExtension(Extension.parse(this, ".idom"));
             information("Dumping heap to: $", file);
             JavaVirtualMachine.local().dumpHeap(file.path().asJavaPath());
         }
         else if (get(DUMP_EDGE_IDENTIFIERS))
         {
-            for (final var edge : graph.edges())
+            for (var edge : graph.edges())
             {
                 System.out.println(edge.identifier());
             }
         }
         else if (has(WAY))
         {
-            for (final var edge : graph.routeForWayIdentifier(get(WAY)))
+            for (var edge : graph.routeForWayIdentifier(get(WAY)))
             {
                 dump(edge);
             }
@@ -164,9 +164,9 @@ public class GraphDumperApplication extends Application
         {
             graph.edgeStore().spatialIndex().dump(System.out);
             var number = 1;
-            for (final var edge : graph.edgesIntersecting(Rectangle.CONTINENTAL_US))
+            for (var edge : graph.edgesIntersecting(Rectangle.CONTINENTAL_US))
             {
-                Message.println("edge $: $", number++, edge);
+                println("edge $: $", number++, edge);
             }
         }
         else if (has(VERTEX))
@@ -183,7 +183,7 @@ public class GraphDumperApplication extends Application
         }
         else
         {
-            final var limit = get(LIMIT);
+            var limit = get(LIMIT);
             graph.edges().stream().limit(limit.asInt()).forEach(this::dump);
             graph.vertexes().stream().limit(limit.asInt()).forEach(this::dump);
             Streams.stream(graph.relations()).limit(limit.asInt()).forEach(this::dump);
@@ -194,7 +194,7 @@ public class GraphDumperApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(
+        return objectSet(
                 WAY,
                 EDGE,
                 VERTEX,
@@ -204,11 +204,10 @@ public class GraphDumperApplication extends Application
                 SPATIAL_INDEX,
                 DUMP_EDGE_IDENTIFIERS,
                 DUMP_HEAP,
-                QUIET
-        );
+                QUIET);
     }
 
-    private void dump(final GraphElement element)
+    private void dump(GraphElement element)
     {
         information(AsciiArt.line(element.name()));
         information(element.asString());

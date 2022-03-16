@@ -22,12 +22,12 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.json.GsonSerializer;
+import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
 import com.telenav.mesakit.map.geography.Longitude;
 
 import java.lang.reflect.Type;
 
-public class LongitudeGsonSerializer implements GsonSerializer<Longitude>
+public class LongitudeGsonSerializer implements JsonSerializerDeserializer<Longitude>
 {
     @Override
     public Longitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)

@@ -22,24 +22,22 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.patterns.Pattern;
-import com.telenav.kivakit.kernel.language.patterns.SimplifiedPattern;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.language.Patterns;
+import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.string.IndentingStringBuilder;
 import com.telenav.mesakit.map.region.Region;
-import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.RegionProject;
+import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.regions.Continent;
 
 import java.util.List;
 
 import static com.telenav.kivakit.commandline.ArgumentParser.stringArgumentParser;
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder.Indentation;
-import static com.telenav.kivakit.kernel.language.strings.formatting.IndentingStringBuilder.Style;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
+import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 
 /**
  * Shows information about a region matching the pattern given as an argument
@@ -49,57 +47,56 @@ import static com.telenav.kivakit.kernel.language.strings.formatting.IndentingSt
 @SuppressWarnings({ "rawtypes", "ConstantConditions", "UseOfSystemOutOrSystemErr" })
 public class RegionInformationApplication extends Application
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new RegionInformationApplication().run(arguments);
     }
 
     private final ArgumentParser<String> REGION =
-            stringArgumentParser("A pattern matching the MesaKit code of the region to give information on")
+            stringArgumentParser(this, "A pattern matching the MesaKit code of the region to give information on")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> PARENT =
-            booleanSwitchParser("parent", "Show the parent of the given region")
+            booleanSwitchParser(this, "parent", "Show the parent of the given region")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> CODE =
-            booleanSwitchParser("code", "Show only the region code")
+            booleanSwitchParser(this, "code", "Show only the region code")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> FOLDER =
-            booleanSwitchParser("folder", "Show only the region repository folder")
+            booleanSwitchParser(this, "folder", "Show only the region repository folder")
                     .optional()
                     .defaultValue(false)
                     .build();
 
+    @SuppressWarnings("SpellCheckingInspection")
     private final SwitchParser<Boolean> URI =
-            booleanSwitchParser("uri", "The URI on Geofabrik where this region can be downloaded")
+            booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> ALL =
-            booleanSwitchParser("all", "Show all attributes for the region")
+            booleanSwitchParser(this, "all", "Show all attributes for the region")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> RECURSE =
-            booleanSwitchParser("recurse", "Show sub-regions")
+            booleanSwitchParser(this, "recurse", "Show sub-regions")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     public RegionInformationApplication()
     {
-        super(RegionProject.get());
+        addProject(RegionProject.class);
     }
 
     @Override
@@ -111,30 +108,30 @@ public class RegionInformationApplication extends Application
     @Override
     protected void onRun()
     {
-        var region = region(commandLine(), arguments().first().get(REGION));
+        var region = region(commandLine(), argumentList().first().get(REGION));
         if (get(PARENT))
         {
             region = region.parent();
         }
-        final boolean showAll = get(ALL);
-        final boolean showCode = get(CODE);
+        boolean showAll = get(ALL);
+        boolean showCode = get(CODE);
         if (showCode || showAll)
         {
             System.out.println(region.identity().mesakit().code());
         }
-        final boolean showFolder = get(FOLDER);
+        boolean showFolder = get(FOLDER);
         if (showFolder || showAll)
         {
             System.out.println(region.folder());
         }
-        final boolean showUri = get(URI);
+        boolean showUri = get(URI);
         if (showUri || showAll)
         {
             System.out.println(region.geofabrikUri());
         }
         if (!showCode && !showFolder && !showUri && !showAll)
         {
-            final var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
+            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
             regionCodes(region, builder, get(RECURSE));
             System.out.println(builder);
         }
@@ -143,22 +140,22 @@ public class RegionInformationApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
+        return objectSet(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
-    private Region region(final CommandLine commandLine, final String name)
+    private Region region(CommandLine commandLine, String name)
     {
-        final Pattern pattern = new SimplifiedPattern(name.toLowerCase());
-        final var matches = new RegionSet();
-        for (final var continent : Continent.all())
+        var pattern = Patterns.simplified(name.toLowerCase());
+        var matches = new RegionSet();
+        for (var continent : Continent.all())
         {
-            if (pattern.matches(continent.identity().mesakit().code().toLowerCase()))
+            if (Patterns.matches(pattern, continent.identity().mesakit().code().toLowerCase()))
             {
                 matches.add(continent);
             }
-            for (final Region nested : continent.nestedChildren())
+            for (Region nested : continent.nestedChildren())
             {
-                if (pattern.matches(nested.identity().mesakit().code().toLowerCase()))
+                if (Patterns.matches(pattern, nested.identity().mesakit().code().toLowerCase()))
                 {
                     matches.add(nested);
                 }
@@ -176,12 +173,12 @@ public class RegionInformationApplication extends Application
         return matches.first();
     }
 
-    private void regionCodes(final Region region, final IndentingStringBuilder builder, final boolean recurse)
+    private void regionCodes(Region region, IndentingStringBuilder builder, boolean recurse)
     {
         builder.appendLine(region.identity().mesakit().code() + " (" + region.type() + ")");
         if (recurse)
         {
-            for (final Region<?> child : region.children())
+            for (Region<?> child : region.children())
             {
                 builder.indent();
                 regionCodes(child, builder, recurse);

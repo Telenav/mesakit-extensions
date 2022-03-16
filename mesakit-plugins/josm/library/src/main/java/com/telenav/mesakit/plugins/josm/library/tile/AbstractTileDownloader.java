@@ -18,12 +18,11 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile;
 
-import com.telenav.kivakit.collections.set.ConcurrentHashSet;
-import com.telenav.kivakit.kernel.language.threading.Threads;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.vm.JavaVirtualMachine;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
+import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.core.collections.set.ConcurrentHashSet;
+import com.telenav.kivakit.core.thread.Threads;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 
 import java.util.Collection;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -32,10 +31,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile>
+public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile> extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     private static final Count THREADS = JavaVirtualMachine.local().processors();
 
     private final ExecutorService executor = Threads.threadPool("Downloader", THREADS);
@@ -54,56 +51,56 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
 
     private final AbstractTileCache<Request, Tile> cache;
 
-    protected AbstractTileDownloader(final AbstractTileCache<Request, Tile> cache)
+    protected AbstractTileDownloader(AbstractTileCache<Request, Tile> cache)
     {
         this.cache = cache;
     }
 
-    public Tile get(final Request request)
+    public Tile get(Request request)
     {
-        final var tile = this.cache.get(request);
+        var tile = cache.get(request);
         if (tile != null && tile.isExpired())
         {
-            if (!this.frozen)
+            if (!frozen)
             {
-                this.cache.remove(request);
+                cache.remove(request);
             }
             return null;
         }
         return tile;
     }
 
-    public void request(final Request request)
+    public void request(Request request)
     {
         // A request is already satisfied if we can get data for it from the cache
-        final var isAlreadySatisfied = get(request) != null;
+        var isAlreadySatisfied = get(request) != null;
 
         // A request is already requested if the queue contains it or it is being processed
-        final var isAlreadyRequested = this.requestQueue.contains(request) || this.processing.contains(request);
+        var isAlreadyRequested = requestQueue.contains(request) || processing.contains(request);
 
         // If the request is forcing an update OR it is not already satisfied and not
         // already requested
         if (request.forceUpdate() || (!isAlreadySatisfied && !isAlreadyRequested))
         {
             // then add it to the queue
-            this.requestQueue.offer(request);
+            var ignored = requestQueue.offer(request);
         }
     }
 
-    public void start(final TileDownloadedListener<? super Request, ? super Tile> listener)
+    public void start(TileDownloadedListener<? super Request, ? super Tile> listener)
     {
-        if (!this.running)
+        if (!running)
         {
-            this.stop = false;
-            this.frozen = false;
-            this.running = true;
-            LOGGER.information("Starting ${class}", getClass());
+            stop = false;
+            frozen = false;
+            running = true;
+            information("Starting ${class}", getClass());
             THREADS.loop(() ->
-                    this.executor.execute(() ->
+                    executor.execute(() ->
                     {
 
-                        AbstractTileDownloader.this.runningThreads.incrementAndGet();
-                        while (!AbstractTileDownloader.this.stop)
+                        runningThreads.incrementAndGet();
+                        while (!stop)
                         {
                             try
                             {
@@ -115,28 +112,28 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
                                 // nobody will even notice. Since take() is a blocking call, simple
                                 // synchronization would fail and so solving this perfectly is just
                                 // not worth the effort.
-                                final var request = AbstractTileDownloader.this.requestQueue.poll(1, TimeUnit.SECONDS);
-                                if (request != null && !AbstractTileDownloader.this.processing.contains(request))
+                                var request = requestQueue.poll(1, TimeUnit.SECONDS);
+                                if (request != null && !processing.contains(request))
                                 {
-                                    AbstractTileDownloader.this.processing.add(request);
+                                    processing.add(request);
                                     try
                                     {
                                         download(listener, request);
                                     }
                                     finally
                                     {
-                                        AbstractTileDownloader.this.processing.remove(request);
+                                        processing.remove(request);
                                     }
                                 }
                             }
-                            catch (final InterruptedException ignored)
+                            catch (InterruptedException ignored)
                             {
                             }
                         }
-                        AbstractTileDownloader.this.running = false;
-                        if (AbstractTileDownloader.this.runningThreads.decrementAndGet() == 0)
+                        running = false;
+                        if (runningThreads.decrementAndGet() == 0)
                         {
-                            LOGGER.information("Stopped ${class}", AbstractTileDownloader.this.getClass());
+                            information("Stopped ${class}", getClass());
                         }
                     }));
         }
@@ -144,18 +141,18 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
 
     public void stop()
     {
-        LOGGER.information("Stopping ${class}", getClass());
+        information("Stopping ${class}", getClass());
         freeze(true);
-        this.stop = true;
-        if (this.runningThreads.get() == 0)
+        stop = true;
+        if (runningThreads.get() == 0)
         {
-            LOGGER.information("Stopped ${class}", getClass());
+            information("Stopped ${class}", getClass());
         }
     }
 
-    protected abstract Tile onDownload(final Request request);
+    protected abstract Tile onDownload(Request request);
 
-    private void download(final TileDownloadedListener<? super Request, ? super Tile> listener, final Request request)
+    private void download(TileDownloadedListener<? super Request, ? super Tile> listener, Request request)
     {
         for (var attempt = 0; attempt < 3; attempt++)
         {
@@ -163,13 +160,13 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
             {
                 if (shouldDownload(request))
                 {
-                    final var newTile = onDownload(request);
+                    var newTile = onDownload(request);
                     if (newTile != null)
                     {
                         if (shouldDownload(request))
                         {
-                            final var oldTile = this.cache.get(request);
-                            AbstractTileDownloader.this.cache.put(request, newTile);
+                            var oldTile = cache.get(request);
+                            cache.put(request, newTile);
                             if (listener != null)
                             {
                                 listener.onDownloaded(request, oldTile, newTile);
@@ -179,20 +176,20 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
                     }
                 }
             }
-            catch (final Exception e)
+            catch (Exception e)
             {
-                LOGGER.problem(e, "Unable to retrieve $", request);
+                problem(e, "Unable to retrieve $", request);
             }
         }
     }
 
-    private void freeze(final boolean freeze)
+    private void freeze(boolean freeze)
     {
-        this.frozen = freeze;
+        frozen = freeze;
     }
 
-    private boolean shouldDownload(final Request request)
+    private boolean shouldDownload(Request request)
     {
-        return request.forceUpdate() || get(request) == null || !AbstractTileDownloader.this.frozen;
+        return request.forceUpdate() || get(request) == null || !frozen;
     }
 }

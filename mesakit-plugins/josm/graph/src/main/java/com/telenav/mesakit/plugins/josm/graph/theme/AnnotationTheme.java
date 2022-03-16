@@ -23,7 +23,7 @@ public class AnnotationTheme extends BaseTheme
                 .withRadius(meters(5));
     }
 
-    public MapLabel labelAnnotation(final String text)
+    public MapLabel labelAnnotation(String text)
     {
         return MapLabel.label(styleAnnotationLabel())
                 .withLabelText(text);

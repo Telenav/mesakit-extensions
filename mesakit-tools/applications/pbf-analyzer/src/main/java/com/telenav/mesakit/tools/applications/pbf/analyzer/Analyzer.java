@@ -1,13 +1,12 @@
 package com.telenav.mesakit.tools.applications.pbf.analyzer;
 
 import com.telenav.kivakit.commandline.CommandLine;
+import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.value.count.Count;
+import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.language.values.count.Estimate;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
 import com.telenav.kivakit.primitive.collections.map.split.SplitLongToLongMap;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
@@ -20,17 +19,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.telenav.mesakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.INPUT;
-import static com.telenav.mesakit.tools.applications.pbf.analyzer.PbfAnalyzerApplication.WAY_FILTER;
-
 /**
  * @author jonathanl (shibo)
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
-public class Analyzer
+public class Analyzer extends BaseComponent
 {
-    private static final Logger LOGGER = LoggerFactory.newLogger();
-
     private long ways;
 
     private long nodes;
@@ -69,36 +63,37 @@ public class Analyzer
 
     private final boolean computeLengths;
 
-    Analyzer(final CommandLine commandLine)
+    Analyzer(CommandLine commandLine)
     {
-        input = commandLine.argument(INPUT);
-        showWarnings = commandLine.get(PbfAnalyzerApplication.SHOW_WARNINGS);
-        computeLengths = commandLine.get(PbfAnalyzerApplication.COMPUTE_LENGTHS);
+        var application = require(PbfAnalyzerApplication.class);
+        input = commandLine.argument(application.INPUT);
+        showWarnings = commandLine.get(application.SHOW_WARNINGS);
+        computeLengths = commandLine.get(application.COMPUTE_LENGTHS);
 
-        final var feedback = new StringList();
+        var feedback = new StringList();
         feedback.add("input = $", input);
-        feedback.add("way filter = $", commandLine.get(WAY_FILTER));
+        feedback.add("way filter = $", commandLine.get(application.WAY_FILTER));
         feedback.add("show warnings = $", showWarnings);
         feedback.add("compute lengths = $", computeLengths);
-        feedback.titledBox(LOGGER, "Analyzing " + input.fileName());
+        information(feedback.titledBox("Analyzing " + input.fileName()));
 
         locationForNode = new SplitLongToLongMap("locationForNode");
         locationForNode.initialSize(Estimate._65536);
         locationForNode.initialize();
     }
 
-    public void addWay(final PbfWay way)
+    public void addWay(PbfWay way)
     {
         ways++;
         if (computeLengths)
         {
-            for (final var tag : way)
+            for (var tag : way)
             {
                 if ("highway".equalsIgnoreCase(tag.getKey()))
                 {
-                    final var type = tag.getValue();
-                    final var builder = new PolylineBuilder();
-                    for (final var node : way.nodes())
+                    var type = tag.getValue();
+                    var builder = new PolylineBuilder();
+                    for (var node : way.nodes())
                     {
                         builder.add(Location.dm7(locationForNode.get(node.getNodeId())));
                     }
@@ -116,15 +111,15 @@ public class Analyzer
         }
     }
 
-    void addNode(final PbfNode node)
+    void addNode(PbfNode node)
     {
         nodes++;
         if (computeLengths)
         {
-            final var location = Location.degrees(node.latitude(), node.longitude());
+            var location = Location.degrees(node.latitude(), node.longitude());
             locationForNode.put(node.identifierAsLong(), location.asDm7Long());
         }
-        final var tags = node.tagMap();
+        var tags = node.tagMap();
         if (tags.containsKey("place"))
         {
             if (tags.containsKey("population"))
@@ -135,14 +130,14 @@ public class Analyzer
         }
     }
 
-    void addRelation(final PbfRelation relation)
+    void addRelation(PbfRelation relation)
     {
         relations++;
-        for (final var tag : relation)
+        for (var tag : relation)
         {
             if (tag.getKey() != null && "restriction".equalsIgnoreCase(tag.getKey()))
             {
-                final var value = tag.getValue().toLowerCase();
+                var value = tag.getValue().toLowerCase();
                 if (value.startsWith("no_"))
                 {
                     if (value.startsWith("no_left_turn"))
@@ -214,7 +209,7 @@ public class Analyzer
 
     void report()
     {
-        final var report = new StringList();
+        var report = new StringList();
 
         report.add("nodes = " + Count.count(nodes));
         report.add("ways = " + Count.count(ways));
@@ -255,14 +250,14 @@ public class Analyzer
         if (computeLengths)
         {
             System.out.println(AsciiArt.line());
-            final var keys = new StringList(lengthForHighwayType.keySet());
+            var keys = new StringList(lengthForHighwayType.keySet());
             keys.sort(Comparator.naturalOrder());
-            for (final var type : keys)
+            for (var type : keys)
             {
                 System.out.println("highway['" + type + "'] = " + lengthForHighwayType.get(type));
             }
         }
 
-        report.titledBox(LOGGER, "Statistics");
+        information(report.titledBox("Statistics"));
     }
 }

@@ -33,13 +33,13 @@ public class GeoJsonPlugin extends BaseJosmPlugin
 {
     protected int changeSetIdentifier;
 
-    public GeoJsonPlugin(final PluginInformation info)
+    public GeoJsonPlugin(PluginInformation info)
     {
         super(info, GeoJsonLayer.class);
         ExtensionFileFilter.addImporter(new GeoJsonFileImporter(this));
         OsmServerWriter.registerPostprocessor((primitives, monitor) ->
         {
-            for (final IPrimitive primitive : primitives)
+            for (IPrimitive primitive : primitives)
             {
                 changeSetIdentifier = primitive.getChangesetId();
             }
@@ -76,7 +76,7 @@ public class GeoJsonPlugin extends BaseJosmPlugin
     }
 
     @Override
-    protected GeoJsonLayer newLayer(final String name)
+    protected GeoJsonLayer newLayer(String name)
     {
         return new GeoJsonLayer(this, name);
     }

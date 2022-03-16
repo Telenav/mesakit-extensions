@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
+import com.telenav.kivakit.serialization.gson.PrimitiveGsonSerializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
@@ -36,13 +36,13 @@ public class RectangleGsonSerializer extends PrimitiveGsonSerializer<Rectangle, 
     }
 
     @Override
-    protected Rectangle toObject(final String rectangle)
+    protected Rectangle toObject(String rectangle)
     {
         return Rectangle.parse(rectangle);
     }
 
     @Override
-    protected String toPrimitive(final Rectangle bounds)
+    protected String toPrimitive(Rectangle bounds)
     {
         return bounds.toString();
     }

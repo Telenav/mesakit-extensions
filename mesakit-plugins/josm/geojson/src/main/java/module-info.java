@@ -5,5 +5,7 @@ open module mesakit.josm.plugins.geojson
     requires transitive mesakit.map.ui.desktop;
     requires transitive mesakit.map.data.library;
 
+    requires josm;
+
     exports com.telenav.mesakit.plugins.josm.geojson;
 }

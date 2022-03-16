@@ -10,13 +10,13 @@ import javax.swing.JList;
  */
 public class ViewMultiSelectList<T> extends JList<T>
 {
-    public ViewMultiSelectList(final GraphPanel graphPanel, final T[] values)
+    public ViewMultiSelectList(GraphPanel graphPanel, T[] values)
     {
         super(values);
         KivaKitTheme.get().applyTo(this);
         getSelectionModel().addListSelectionListener((event) ->
         {
-            final var layer = graphPanel.layer();
+            var layer = graphPanel.layer();
             if (layer != null)
             {
                 layer.forceRepaint();

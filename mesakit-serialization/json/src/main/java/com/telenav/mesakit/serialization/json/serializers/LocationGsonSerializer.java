@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.json.GsonSerializer;
+import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.geography.Location;
 
@@ -18,22 +18,22 @@ import java.lang.reflect.Type;
  * @author junwei
  */
 @LexakaiJavadoc(complete = true)
-public class LocationGsonSerializer implements GsonSerializer<Location>
+public class LocationGsonSerializer implements JsonSerializerDeserializer<Location>
 {
     @Override
-    public Location deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public Location deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
-        final var location = json.getAsJsonObject();
+        var location = json.getAsJsonObject();
         return Location.degrees(
                 location.get("latitude").getAsDouble(),
                 location.get("longitude").getAsDouble());
     }
 
     @Override
-    public JsonElement serialize(final Location src, final Type typeOfSrc, final JsonSerializationContext context)
+    public JsonElement serialize(Location src, Type typeOfSrc, JsonSerializationContext context)
     {
-        final var location = new JsonObject();
+        var location = new JsonObject();
         location.add("latitude", new JsonPrimitive(src.latitudeInDegrees()));
         location.add("longitude", new JsonPrimitive(src.longitudeInDegrees()));
         return location;

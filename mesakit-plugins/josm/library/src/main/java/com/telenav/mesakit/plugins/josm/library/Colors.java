@@ -67,9 +67,9 @@ public class Colors
         colorForSeverity.put("LOW_IMPACT", Color.GREEN);
     }
 
-    public static Color colorForIncidentSeverity(final String severity)
+    public static Color colorForIncidentSeverity(String severity)
     {
-        final var color = colorForSeverity.get(severity);
+        var color = colorForSeverity.get(severity);
         if (color != null)
         {
             return color;

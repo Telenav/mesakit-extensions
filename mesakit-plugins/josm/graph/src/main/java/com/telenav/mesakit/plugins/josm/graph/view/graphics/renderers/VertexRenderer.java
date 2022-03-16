@@ -37,31 +37,31 @@ public class VertexRenderer
 
     private final ViewModel model;
 
-    public VertexRenderer(final MapCanvas canvas, final ViewModel model)
+    public VertexRenderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Edge selected)
+    public void draw(Edge selected)
     {
         if (selected != null)
         {
             // Draw from vertex
-            final var from = NORMAL.withLocation(selected.fromLocation()).draw(canvas);
+            var from = NORMAL.withLocation(selected.fromLocation()).draw(canvas);
             model.selection().shape(selected.from(), from);
 
             // Draw to vertex
-            final var to = NORMAL.withLocation(selected.toLocation()).draw(canvas);
+            var to = NORMAL.withLocation(selected.toLocation()).draw(canvas);
             model.selection().shape(selected.to(), to);
         }
     }
 
-    public void draw(final Selection.Type type)
+    public void draw(Selection.Type type)
     {
         if (type == Selection.Type.SELECTED)
         {
-            final var vertex = model.selection().selectedVertex();
+            var vertex = model.selection().selectedVertex();
             if (vertex != null)
             {
                 SELECTED.withLocation(vertex.location()).draw(canvas);

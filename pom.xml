@@ -12,21 +12,20 @@
     <parent>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>superpom</artifactId>
-        <version>1.0.0</version>
+        <version>0.9.10</version>
         <relativePath>../mesakit/superpom</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-extensions</artifactId>
-    <version>0.9.9-SNAPSHOT</version>
+    <version>0.9.10</version>
     <packaging>pom</packaging>
 
     <!-- Project -->
 
-    <name>MesaKit Extensions</name>
     <description>MesaKit extensions contains modules that extend MesaKit</description>
-    <url>http://www.mesakit.org</url>
+    <url>https://www.mesakit.org</url>
     <inceptionYear>2011</inceptionYear>
     <organization>
         <name>Telenav</name>
@@ -54,7 +53,7 @@
             <name>Jonathan Locke (Luo Shibo)</name>
             <email>jonathanl@telenav.com</email>
             <organization>Telenav</organization>
-            <organizationUrl>http://www.telenav.com/</organizationUrl>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
             <roles>
                 <role>lead</role>
                 <role>administrator</role>
@@ -66,7 +65,7 @@
             <name>Haifeng Zhu</name>
             <email>hfzhu@telenav.com</email>
             <organization>Telenav</organization>
-            <organizationUrl>http://www.telenav.com/</organizationUrl>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
             <roles>
                 <role>developer</role>
                 <role>administrator</role>

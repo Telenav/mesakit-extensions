@@ -18,14 +18,14 @@
 
 package com.telenav.mesakit.graph.geocoding.reverse.matching;
 
-import com.telenav.kivakit.kernel.language.strings.StringComparison;
-import com.telenav.kivakit.kernel.language.values.level.Percent;
+import com.telenav.kivakit.core.string.StringSimilarity;
+import com.telenav.kivakit.core.value.level.Percent;
 import com.telenav.mesakit.map.road.model.RoadName;
 
 public class FuzzyRoadNameMatcher implements RoadNameMatcher
 {
     @Override
-    public Percent matches(final RoadName candidate, final RoadName desired)
+    public Percent matches(RoadName candidate, RoadName desired)
     {
         // If the candidate precisely matches (ignoring case) the name we're looking for
         if (candidate.equals(desired))
@@ -34,8 +34,8 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
         }
 
         // If directions were specified and they don't match
-        final var candidateDirection = candidate.extractDirection();
-        final var desiredDirection = desired.extractDirection();
+        var candidateDirection = candidate.extractDirection();
+        var desiredDirection = desired.extractDirection();
         if (candidateDirection != null && desiredDirection != null && !candidateDirection.equals(desiredDirection))
         {
             // then the road names don't match
@@ -43,11 +43,11 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
         }
 
         // compute the edit distance between the two names
-        final var distance = StringComparison.levenshteinDistance(candidate.name().toLowerCase(), desired.name().toLowerCase());
+        var distance = StringSimilarity.levenshteinDistance(candidate.name().toLowerCase(), desired.name().toLowerCase());
 
         // and the two names match if the percentage of characters that would need to be
         // changed is less than the configuration setting,
-        final var length = desired.name().length();
+        var length = desired.name().length();
         var percentage = (length - distance) * 100.0 / length;
         if (percentage < 0.0)
         {

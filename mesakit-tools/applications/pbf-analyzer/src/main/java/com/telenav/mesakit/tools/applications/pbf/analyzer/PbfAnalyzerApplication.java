@@ -21,10 +21,10 @@ package com.telenav.mesakit.tools.applications.pbf.analyzer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.data.compression.codecs.huffman.character.HuffmanCharacterCodec;
 import com.telenav.kivakit.data.compression.codecs.huffman.string.HuffmanStringCodec;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -32,11 +32,11 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.FILTERED_OUT;
@@ -52,42 +52,37 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfAnalyzerApplication extends Application
 {
-    static final ArgumentParser<File> INPUT =
-            fileArgumentParser("Input PBF file")
-                    .required()
-                    .build();
-
-    static final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
-                    .required()
-                    .build();
-
-    static final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
-                    .required()
-                    .build();
-
-    static final SwitchParser<Boolean> SHOW_WARNINGS =
-            booleanSwitchParser("show-warnings", "Show warnings for problems like bad turn restrictions")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
-
-    static final SwitchParser<Boolean> COMPUTE_LENGTHS =
-            booleanSwitchParser("compute-lengths", "Compute lengths by highway type")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
-
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfAnalyzerApplication().run(arguments);
     }
 
-    public PbfAnalyzerApplication()
-    {
-        super(PbfProject.get());
-    }
+    final ArgumentParser<File> INPUT =
+            fileArgumentParser(this, "Input PBF file")
+                    .required()
+                    .build();
+
+    final SwitchParser<WayFilter> WAY_FILTER =
+            wayFilterSwitchParser(this)
+                    .required()
+                    .build();
+
+    final SwitchParser<RelationFilter> RELATION_FILTER =
+            relationFilterSwitchParser(this)
+                    .required()
+                    .build();
+
+    final SwitchParser<Boolean> SHOW_WARNINGS =
+            booleanSwitchParser(this, "show-warnings", "Show warnings for problems like bad turn restrictions")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
+
+    final SwitchParser<Boolean> COMPUTE_LENGTHS =
+            booleanSwitchParser(this, "compute-lengths", "Compute lengths by highway type")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
 
     @Override
     protected List<ArgumentParser<?>> argumentParsers()
@@ -98,24 +93,24 @@ public class PbfAnalyzerApplication extends Application
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var wayFilter = get(WAY_FILTER);
-        final var relationFilter = get(RELATION_FILTER);
+        var input = argument(INPUT);
+        var wayFilter = get(WAY_FILTER);
+        var relationFilter = get(RELATION_FILTER);
 
-        final Analyzer analyzer = new Analyzer(commandLine());
+        Analyzer analyzer = new Analyzer(commandLine());
 
-        final var reader = listenTo(new SerialPbfReader(input));
+        var reader = listenTo(new SerialPbfReader(input));
         reader.process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 analyzer.addNode(node);
                 return ACCEPTED;
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (relationFilter.accepts(relation))
                 {
@@ -126,7 +121,7 @@ public class PbfAnalyzerApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (wayFilter.accepts(way))
                 {
@@ -143,13 +138,11 @@ public class PbfAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of
-                (
-                        WAY_FILTER,
-                        RELATION_FILTER,
-                        SHOW_WARNINGS,
-                        COMPUTE_LENGTHS,
-                        QUIET
-                );
+        return objectSet(
+                WAY_FILTER,
+                RELATION_FILTER,
+                SHOW_WARNINGS,
+                COMPUTE_LENGTHS,
+                QUIET);
     }
 }

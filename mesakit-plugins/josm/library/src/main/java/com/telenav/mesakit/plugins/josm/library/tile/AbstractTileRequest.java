@@ -24,11 +24,11 @@ public abstract class AbstractTileRequest
 
     public boolean forceUpdate()
     {
-        return this.forceUpdate;
+        return forceUpdate;
     }
 
-    public void forceUpdate(final boolean force)
+    public void forceUpdate(boolean force)
     {
-        this.forceUpdate = force;
+        forceUpdate = force;
     }
 }

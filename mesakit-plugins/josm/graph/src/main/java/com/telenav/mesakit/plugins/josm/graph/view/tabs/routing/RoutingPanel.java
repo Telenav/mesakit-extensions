@@ -25,16 +25,16 @@ public class RoutingPanel extends JPanel
 
     private Vertex to;
 
-    public RoutingPanel(final GraphPanel graphPanel)
+    public RoutingPanel(GraphPanel graphPanel)
     {
-        final var theme = KivaKitTheme.get();
-        final var from = theme.newButton("set from vertex");
-        final var to = theme.newButton("set to vertex");
-        final var route = theme.newButton("find route");
+        var theme = KivaKitTheme.get();
+        var from = theme.newButton("set from vertex");
+        var to = theme.newButton("set to vertex");
+        var route = theme.newButton("find route");
 
         Borders.applyMargin(this, 16);
 
-        final var layout = new JPanel();
+        var layout = new JPanel();
         layout.setLayout(new GridLayout(3, 3, 8, 8));
 
         fromLabel = theme.newComponentLabel("from-vertex: N/A");

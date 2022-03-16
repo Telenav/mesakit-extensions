@@ -40,18 +40,18 @@ public class PolylineRenderer
 
     private final PolylineTheme theme = new PolylineTheme();
 
-    public PolylineRenderer(final MapCanvas canvas, final ViewModel model)
+    public PolylineRenderer(MapCanvas canvas, ViewModel model)
     {
         this.canvas = canvas;
         this.model = model;
     }
 
-    public void draw(final Polyline polyline)
+    public void draw(Polyline polyline)
     {
         draw(polyline, theme.styleUnselected());
     }
 
-    public void draw(final Polyline polyline, final Style style)
+    public void draw(Polyline polyline, Style style)
     {
         MapPolyline.polyline(style)
                 .withPolyline(polyline)
@@ -60,8 +60,8 @@ public class PolylineRenderer
 
     public void drawSelectedPolylines()
     {
-        final var style = canvas.scale().isZoomedIn(MapScale.CITY) ? theme.styleZoomedIn() : theme.styleZoomedOut();
-        for (final var selectedPolyline : model.selection().selectedPolylines())
+        var style = canvas.scale().isZoomedIn(MapScale.CITY) ? theme.styleZoomedIn() : theme.styleZoomedOut();
+        for (var selectedPolyline : model.selection().selectedPolylines())
         {
             if (model.selection().is(Selection.Type.SELECTED, selectedPolyline))
             {

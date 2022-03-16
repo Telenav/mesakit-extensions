@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.json.PrimitiveGsonSerializer;
+import com.telenav.kivakit.serialization.gson.PrimitiveGsonSerializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
 
@@ -36,13 +36,13 @@ public class DistanceGsonSerializer extends PrimitiveGsonSerializer<Distance, St
     }
 
     @Override
-    protected Distance toObject(final String text)
+    protected Distance toObject(String text)
     {
         return Distance.parse(text);
     }
 
     @Override
-    protected String toPrimitive(final Distance distance)
+    protected String toPrimitive(Distance distance)
     {
         return distance.toString();
     }

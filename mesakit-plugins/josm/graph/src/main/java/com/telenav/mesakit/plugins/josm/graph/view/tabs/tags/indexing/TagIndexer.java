@@ -1,11 +1,11 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.threading.KivaKitThread;
-import com.telenav.kivakit.kernel.language.threading.latches.CompletionLatch;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Count;
-import com.telenav.kivakit.kernel.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
+import com.telenav.kivakit.core.thread.KivaKitThread;
+import com.telenav.kivakit.core.thread.latches.CompletionLatch;
+import com.telenav.kivakit.core.time.Time;
+import com.telenav.kivakit.core.value.count.Count;
 
 import java.util.HashSet;
 
@@ -33,7 +33,7 @@ public class TagIndexer extends BaseRepeater
                 if (request != null)
                 {
                     requestPending = false;
-                    final var index = buildIndex(request);
+                    var index = buildIndex(request);
                     if (index != null)
                     {
                         synchronized (TagIndexer.this)
@@ -46,7 +46,7 @@ public class TagIndexer extends BaseRepeater
         })).start();
     }
 
-    public synchronized void index(final TagIndexRequest request)
+    public synchronized void index(TagIndexRequest request)
     {
         if (this.request == null || !this.request.equals(request))
         {
@@ -56,39 +56,39 @@ public class TagIndexer extends BaseRepeater
         }
     }
 
-    private TagIndex buildIndex(final TagIndexRequest request)
+    private TagIndex buildIndex(TagIndexRequest request)
     {
-        final var graph = request.graph;
+        var graph = request.graph;
         if (graph.hasTags())
         {
-            final var started = Time.now();
+            var started = Time.now();
             information("Building tag index for '$'...", graph.name());
 
-            final var index = new TagIndex(request);
+            var index = new TagIndex(request);
 
-            for (final var edge : graph.edgesIntersecting(request.bounds))
+            for (var edge : graph.edgesIntersecting(request.bounds))
             {
-                for (final var tag : edge.tagList())
+                for (var tag : edge.tagList())
                 {
                     if (requestPending)
                     {
                         return null;
                     }
-                    final var key = tag.getKey();
-                    final var value = tag.getValue();
+                    var key = tag.getKey();
+                    var value = tag.getValue();
                     index.keyToValues.add(key, value);
                     index.identifiers.add(key + "=" + value, edge.identifier());
                 }
             }
 
-            for (final var key : new HashSet<>(index.keyToValues.keySet()))
+            for (var key : new HashSet<>(index.keyToValues.keySet()))
             {
                 if (requestPending)
                 {
                     return null;
                 }
-                final var values = index.keyToValues.get(key).first(Count.count(500));
-                final var sorted = new StringList(values.asSet()).sorted();
+                var values = index.keyToValues.get(key).first(Count.count(500));
+                var sorted = new StringList(values.asSet()).sorted();
                 index.keyToValues.put(key, sorted);
             }
 

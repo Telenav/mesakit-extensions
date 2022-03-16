@@ -29,6 +29,7 @@ import org.openstreetmap.josm.plugins.PluginInformation;
 
 import java.awt.event.KeyEvent;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static org.openstreetmap.josm.actions.ExtensionFileFilter.addImporter;
 
 /**
@@ -38,7 +39,7 @@ import static org.openstreetmap.josm.actions.ExtensionFileFilter.addImporter;
  */
 public class GraphPlugin extends BaseJosmPlugin
 {
-    public GraphPlugin(final PluginInformation info)
+    public GraphPlugin(PluginInformation info)
     {
 
         super(info, GraphLayer.class);
@@ -46,7 +47,7 @@ public class GraphPlugin extends BaseJosmPlugin
         addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        GraphProject.get().initialize();
+        resolveProject(GraphProject.class).initialize();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();
@@ -77,7 +78,7 @@ public class GraphPlugin extends BaseJosmPlugin
     }
 
     @Override
-    protected GraphLayer newLayer(final String name)
+    protected GraphLayer newLayer(String name)
     {
         return new GraphLayer(this, name);
     }
@@ -89,12 +90,12 @@ public class GraphPlugin extends BaseJosmPlugin
     }
 
     @Override
-    protected void onLayerRemoving(final Layer layer)
+    protected void onLayerRemoving(Layer layer)
     {
         super.onLayerRemoving(layer);
         if (layer instanceof GraphLayer)
         {
-            final var graphLayer = (GraphLayer) layer;
+            var graphLayer = (GraphLayer) layer;
             graphLayer.graph().close();
         }
     }

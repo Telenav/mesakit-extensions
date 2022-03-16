@@ -21,22 +21,22 @@ package com.telenav.mesakit.tools.applications.pbf.comparator;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.collections.set.SetDifferencer;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
+import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.time.Time;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.osm.Osm;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 
@@ -45,75 +45,70 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcess
  *
  * @author jonathanl (shibo)
  */
-@SuppressWarnings("UseOfSystemOutOrSystemErr")
+@SuppressWarnings({ "UseOfSystemOutOrSystemErr", "DuplicatedCode" })
 public class PbfComparatorApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfComparatorApplication().run(arguments);
     }
 
     private final SwitchParser<File> BEFORE =
-            fileSwitchParser("before", "The before PBF file to process")
+            fileSwitchParser(this, "before", "The before PBF file to process")
                     .required()
                     .build();
 
     private final SwitchParser<File> AFTER =
-            fileSwitchParser("after", "The after PBF file to process")
+            fileSwitchParser(this, "after", "The after PBF file to process")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_NODES =
-            booleanSwitchParser("compareNodes", "True to compare nodes")
+            booleanSwitchParser(this, "compareNodes", "True to compare nodes")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_WAYS =
-            booleanSwitchParser("compareWays", "True to compare ways")
+            booleanSwitchParser(this, "compareWays", "True to compare ways")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> COMPARE_RELATIONS =
-            booleanSwitchParser("compareRelations", "True to compare relations")
+            booleanSwitchParser(this, "compareRelations", "True to compare relations")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> SHOW_REMOVED =
-            booleanSwitchParser("showRemoved", "True to show removed nodes, ways and relations")
+            booleanSwitchParser(this, "showRemoved", "True to show removed nodes, ways and relations")
                     .optional()
                     .defaultValue(true)
                     .build();
 
     private final SwitchParser<Boolean> SHOW_ADDED =
-            booleanSwitchParser("showAdded", "True to show added nodes, ways and relations")
+            booleanSwitchParser(this, "showAdded", "True to show added nodes, ways and relations")
                     .optional()
                     .defaultValue(true)
                     .build();
 
-    protected PbfComparatorApplication()
+    public void compare(File before, File after)
     {
-        super(PbfProject.get());
-    }
+        var start = Time.now();
 
-    public void compare(final File before, final File after)
-    {
-        final var start = Time.now();
+        Set<Long> beforeNodes = new HashSet<>();
+        Set<Long> beforeWays = new HashSet<>();
+        Set<Long> beforeRelations = new HashSet<>();
 
-        final Set<Long> beforeNodes = new HashSet<>();
-        final Set<Long> beforeWays = new HashSet<>();
-        final Set<Long> beforeRelations = new HashSet<>();
-
-        final var beforeNodeProgress = Progress.create(this);
-        final var beforeWayProgress = Progress.create(this);
-        final var beforeRelationsProgress = Progress.create(this);
+        var beforeNodeProgress = BroadcastingProgressReporter.create(this);
+        var beforeWayProgress = BroadcastingProgressReporter.create(this);
+        var beforeRelationsProgress = BroadcastingProgressReporter.create(this);
 
         new SerialPbfReader(before).process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (get(COMPARE_NODES))
                 {
@@ -124,7 +119,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (get(COMPARE_RELATIONS))
                 {
@@ -135,7 +130,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (get(COMPARE_WAYS))
                 {
@@ -149,17 +144,17 @@ public class PbfComparatorApplication extends Application
             }
         });
 
-        final Set<Long> afterNodes = new HashSet<>();
-        final Set<Long> afterWays = new HashSet<>();
-        final Set<Long> afterRelations = new HashSet<>();
-        final var afterNodeProgress = Progress.create(this);
-        final var afterWayProgress = Progress.create(this);
-        final var afterRelationsProgress = Progress.create(this);
+        Set<Long> afterNodes = new HashSet<>();
+        Set<Long> afterWays = new HashSet<>();
+        Set<Long> afterRelations = new HashSet<>();
+        var afterNodeProgress = BroadcastingProgressReporter.create(this);
+        var afterWayProgress = BroadcastingProgressReporter.create(this);
+        var afterRelationsProgress = BroadcastingProgressReporter.create(this);
 
         new SerialPbfReader(after).process(new PbfDataProcessor()
         {
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (get(COMPARE_NODES))
                 {
@@ -170,7 +165,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (get(COMPARE_RELATIONS))
                 {
@@ -181,7 +176,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (get(COMPARE_WAYS))
                 {
@@ -195,10 +190,10 @@ public class PbfComparatorApplication extends Application
             }
         });
 
-        final SetDifferencer<Long> differencer = new SetDifferencer<>(null)
+        SetDifferencer<Long> differencer = new SetDifferencer<>(null)
         {
             @Override
-            protected void onAdded(final Long id)
+            protected void onAdded(Long id)
             {
                 if (get(SHOW_ADDED))
                 {
@@ -207,7 +202,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            protected void onRemoved(final Long id)
+            protected void onRemoved(Long id)
             {
                 if (get(SHOW_REMOVED))
                 {
@@ -216,7 +211,7 @@ public class PbfComparatorApplication extends Application
             }
 
             @Override
-            protected void onUpdated(final Long id)
+            protected void onUpdated(Long id)
             {
             }
         };
@@ -241,12 +236,12 @@ public class PbfComparatorApplication extends Application
     @Override
     protected void onRun()
     {
-        final var before = get(BEFORE);
+        var before = get(BEFORE);
         if (!before.exists())
         {
             exit("Before file does not exist: " + before);
         }
-        final var after = get(AFTER);
+        var after = get(AFTER);
         if (!after.exists())
         {
             exit("After file does not exist: " + after);
@@ -257,6 +252,6 @@ public class PbfComparatorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
+        return objectSet(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
     }
 }

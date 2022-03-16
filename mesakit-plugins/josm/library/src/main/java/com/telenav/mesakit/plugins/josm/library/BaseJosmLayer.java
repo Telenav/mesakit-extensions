@@ -63,12 +63,12 @@ public abstract class BaseJosmLayer extends Layer
 
     private final Map<Integer, Font> fontForWidth = new HashMap<>();
 
-    protected BaseJosmLayer(final BaseJosmPlugin plugin)
+    protected BaseJosmLayer(BaseJosmPlugin plugin)
     {
         this(plugin, plugin.name());
     }
 
-    protected BaseJosmLayer(final BaseJosmPlugin plugin, final String name)
+    protected BaseJosmLayer(BaseJosmPlugin plugin, String name)
     {
         super(name);
         this.plugin = plugin;
@@ -129,18 +129,22 @@ public abstract class BaseJosmLayer extends Layer
     }
 
     @Override
-    public boolean isMergable(final Layer other)
+    public boolean isMergable(Layer other)
     {
         return false;
     }
 
     @Override
-    public void mergeFrom(final Layer from)
+    public void mergeFrom(Layer from)
+    {
+    }
+
+    public void onInitialize()
     {
     }
 
     @Override
-    public void paint(final Graphics2D graphics, final MapView view, final Bounds bounds)
+    public void paint(Graphics2D graphics, MapView view, Bounds bounds)
     {
         this.view = view;
 
@@ -157,8 +161,8 @@ public abstract class BaseJosmLayer extends Layer
                 // Do anti-aliasing
                 graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                final var originalStroke = graphics.getStroke();
-                final var originalFont = graphics.getFont();
+                var originalStroke = graphics.getStroke();
+                var originalFont = graphics.getFont();
                 onPaint(graphics, view, bounds);
                 graphics.setFont(originalFont);
                 graphics.setStroke(originalStroke);
@@ -183,14 +187,14 @@ public abstract class BaseJosmLayer extends Layer
     }
 
     @Override
-    public void visitBoundingBox(final BoundingXYVisitor v)
+    public void visitBoundingBox(BoundingXYVisitor v)
     {
     }
 
-    protected Rectangle2D awtRectangleForRectangle(final Rectangle rectangle)
+    protected Rectangle2D awtRectangleForRectangle(Rectangle rectangle)
     {
-        final var topLeft = pointForLocation(rectangle.topLeft());
-        final var bottomRight = pointForLocation(rectangle.bottomRight());
+        var topLeft = pointForLocation(rectangle.topLeft());
+        var bottomRight = pointForLocation(rectangle.bottomRight());
         return new Rectangle2D.Double(topLeft.getX(), topLeft.getY(), Math.abs(topLeft.getX() - bottomRight.getX()),
                 Math.abs(topLeft.getY() - bottomRight.getY()));
     }
@@ -205,15 +209,15 @@ public abstract class BaseJosmLayer extends Layer
      * @return The largest font that will draw the given string within the given pixel width
      */
     @SuppressWarnings("SameParameterValue")
-    protected Font font(final Graphics2D graphics, final String string, final int width)
+    protected Font font(Graphics2D graphics, String string, int width)
     {
         var font = fontForWidth.get(width);
         if (font == null)
         {
-            final var base = new Font("Helvetica", Font.BOLD, 8);
+            var base = new Font("Helvetica", Font.BOLD, 8);
             for (var points = 8F; points < 50; points += 0.5f)
             {
-                final var next = base.deriveFont(points);
+                var next = base.deriveFont(points);
                 if (graphics.getFontMetrics(next).stringWidth(string) < width)
                 {
                     font = next;
@@ -228,16 +232,16 @@ public abstract class BaseJosmLayer extends Layer
         return font;
     }
 
-    protected Location location(final LatLon latlon)
+    protected Location location(LatLon latlon)
     {
-        final var latitudeInDegrees = Math.min(90, Math.max(-90, latlon.getY()));
-        final var longitudeInDegrees = Math.min(180, Math.max(-180, latlon.getX()));
+        var latitudeInDegrees = Math.min(90, Math.max(-90, latlon.getY()));
+        var longitudeInDegrees = Math.min(180, Math.max(-180, latlon.getX()));
         return new Location(Latitude.degrees(latitudeInDegrees), Longitude.degrees(longitudeInDegrees));
     }
 
-    protected Location locationForPoint(final Point2D point)
+    protected Location locationForPoint(Point2D point)
     {
-        final var latitudeLongitude = view.getLatLon(point.getX(), point.getY());
+        var latitudeLongitude = view.getLatLon(point.getX(), point.getY());
         return new Location(Latitude.angle(Latitude.RANGE.constrainTo(Angle.degrees(latitudeLongitude.getY()))),
                 Longitude.angle(Longitude.RANGE.constrainTo(Angle.degrees(latitudeLongitude.getX()))));
     }
@@ -246,17 +250,13 @@ public abstract class BaseJosmLayer extends Layer
     {
     }
 
-    public void onInitialize()
-    {
-    }
-
     protected void onNextSelection()
     {
     }
 
-    protected abstract void onPaint(final Graphics2D graphics, final MapView view, final Bounds bounds);
+    protected abstract void onPaint(Graphics2D graphics, MapView view, Bounds bounds);
 
-    protected void onPopup(final Component parent, final int x, final int y)
+    protected void onPopup(Component parent, int x, int y)
     {
     }
 
@@ -264,17 +264,17 @@ public abstract class BaseJosmLayer extends Layer
     {
     }
 
-    protected boolean onSelect(final MouseEvent event)
+    protected boolean onSelect(MouseEvent event)
     {
         return false;
     }
 
-    protected Point2D pointForLocation(final Location location)
+    protected Point2D pointForLocation(Location location)
     {
         return view.getPoint2D(new LatLon(location.latitude().asDegrees(), location.longitude().asDegrees()));
     }
 
-    protected void popup(final MouseEvent event)
+    protected void popup(MouseEvent event)
     {
         if (onSelect(event))
         {
@@ -282,14 +282,14 @@ public abstract class BaseJosmLayer extends Layer
         }
     }
 
-    protected Rectangle rectangle(final Bounds bounds)
+    protected Rectangle rectangle(Bounds bounds)
     {
         return Rectangle.fromLocations(location(bounds.getMin()), location(bounds.getMax()));
     }
 
     protected Stroke stroke()
     {
-        final var width = strokeWidth();
+        var width = strokeWidth();
         if (width > 1)
         {
             return new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, width / 2);
@@ -299,22 +299,22 @@ public abstract class BaseJosmLayer extends Layer
 
     protected float strokeWidth()
     {
-        final var origin = locationForPoint(new Point2D.Double(0, 0));
-        final var movedEast = origin.moved(Heading.EAST, Distance.kilometers(8));
-        final var pixels = (float) pointForLocation(movedEast).getX() / 1000.0f;
+        var origin = locationForPoint(new Point2D.Double(0, 0));
+        var movedEast = origin.moved(Heading.EAST, Distance.kilometers(8));
+        var pixels = (float) pointForLocation(movedEast).getX() / 1000.0f;
         return pixels < 0.5 ? 0.5f : pixels;
     }
 
     protected Distance viewWidth()
     {
-        final var width = view.getWidth();
-        final var upperLeft = locationForPoint(new Point2D.Double(0, 0));
+        var width = view.getWidth();
+        var upperLeft = locationForPoint(new Point2D.Double(0, 0));
         @SuppressWarnings(
-                "SuspiciousNameCombination") final var location = locationForPoint(new Point2D.Double(width, width));
+                "SuspiciousNameCombination") var location = locationForPoint(new Point2D.Double(width, width));
         return location.distanceTo(upperLeft);
     }
 
-    private void initialize(final MapView view)
+    private void initialize(MapView view)
     {
         // Initialize layer
         onInitialize();
@@ -327,7 +327,7 @@ public abstract class BaseJosmLayer extends Layer
         {
 
             @Override
-            public void mousePressed(final MouseEvent event)
+            public void mousePressed(MouseEvent event)
             {
                 if (event.isPopupTrigger())
                 {
@@ -336,7 +336,7 @@ public abstract class BaseJosmLayer extends Layer
             }
 
             @Override
-            public void mouseReleased(final MouseEvent event)
+            public void mouseReleased(MouseEvent event)
             {
                 if (event.isPopupTrigger())
                 {
@@ -354,7 +354,7 @@ public abstract class BaseJosmLayer extends Layer
         {
 
             @Override
-            public void keyReleased(final KeyEvent e)
+            public void keyReleased(KeyEvent e)
             {
                 if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == KeyEvent.VK_UP)
                 {

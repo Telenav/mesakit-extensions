@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.model;
 
-import com.telenav.kivakit.kernel.interfaces.comparison.Matcher;
+import com.telenav.kivakit.interfaces.comparison.Matcher;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.collections.EdgeSequence;
@@ -55,12 +55,12 @@ public class ViewModel
 
     private boolean activeLayer;
 
-    public ViewModel(final GraphPanel graphPanel)
+    public ViewModel(GraphPanel graphPanel)
     {
         this.graphPanel = graphPanel;
     }
 
-    public void activeLayer(final boolean activeLayer)
+    public void activeLayer(boolean activeLayer)
     {
         this.activeLayer = activeLayer;
     }
@@ -70,7 +70,7 @@ public class ViewModel
         return bounds;
     }
 
-    public void bounds(final Rectangle bounds)
+    public void bounds(Rectangle bounds)
     {
         this.bounds = bounds;
     }
@@ -80,7 +80,7 @@ public class ViewModel
         drawnRectangles.clear();
     }
 
-    public void debug(final boolean debug)
+    public void debug(boolean debug)
     {
         this.debug = debug;
     }
@@ -90,15 +90,15 @@ public class ViewModel
         return debug;
     }
 
-    public void drawn(final Rectangle2D drawn)
+    public void drawn(Rectangle2D drawn)
     {
-        final var expansion = 20;
-        final Rectangle2D expanded = new Rectangle2D.Double(drawn.getX() - expansion, drawn.getY() - expansion,
+        var expansion = 20;
+        Rectangle2D expanded = new Rectangle2D.Double(drawn.getX() - expansion, drawn.getY() - expansion,
                 drawn.getWidth() + 2 * expansion, drawn.getHeight() + 2 * expansion);
         drawnRectangles.add(expanded);
     }
 
-    public EdgeSequence forwardEdges(final Matcher<Edge> matcher)
+    public EdgeSequence forwardEdges(Matcher<Edge> matcher)
     {
         return graph().forwardEdgesIntersecting(bounds(), matcher);
     }
@@ -108,7 +108,7 @@ public class ViewModel
         return graph;
     }
 
-    public void graph(final Graph graph)
+    public void graph(Graph graph)
     {
         this.graph = graph;
     }
@@ -118,9 +118,9 @@ public class ViewModel
         return graphPanel;
     }
 
-    public boolean intersectsDrawnRectangle(final Rectangle2D rectangle)
+    public boolean intersectsDrawnRectangle(Rectangle2D rectangle)
     {
-        for (final var drawn : drawnRectangles)
+        for (var drawn : drawnRectangles)
         {
             if (drawn.intersects(rectangle))
             {
@@ -150,7 +150,7 @@ public class ViewModel
         return visibleEdges;
     }
 
-    public void visibleEdges(final VisibleEdges visibleEdges)
+    public void visibleEdges(VisibleEdges visibleEdges)
     {
         this.visibleEdges = visibleEdges;
     }

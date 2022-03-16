@@ -20,11 +20,11 @@ package com.telenav.mesakit.tools.applications.pbf.filter;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.time.Time;
+import com.telenav.kivakit.core.value.count.Estimate;
+import com.telenav.kivakit.core.value.count.MutableCount;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.time.Time;
-import com.telenav.kivakit.kernel.language.values.count.Estimate;
-import com.telenav.kivakit.kernel.language.values.count.MutableCount;
 import com.telenav.kivakit.primitive.collections.set.LongSet;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
@@ -35,11 +35,11 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilte
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
 import com.telenav.mesakit.map.data.formats.pbf.processing.writers.PbfWriter;
-import com.telenav.mesakit.map.data.formats.pbf.PbfProject;
 import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
 import java.util.ArrayList;
 
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.model.tags.PbfTagPatternFilter.tagFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
@@ -55,7 +55,7 @@ import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFil
  */
 public class PbfFilterApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfFilterApplication().run(arguments);
     }
@@ -117,12 +117,12 @@ public class PbfFilterApplication extends Application
     }
 
     private final SwitchParser<File> INPUT =
-            fileSwitchParser("input", "The PBF file to preprocess")
+            fileSwitchParser(this, "input", "The PBF file to preprocess")
                     .required()
                     .build();
 
     private final SwitchParser<File> OUTPUT =
-            fileSwitchParser("output", "File to save the new PBF")
+            fileSwitchParser(this, "output", "File to save the new PBF")
                     .required()
                     .build();
 
@@ -132,46 +132,41 @@ public class PbfFilterApplication extends Application
                     .build();
 
     private final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .build();
-
-    private PbfFilterApplication()
-    {
-        super(PbfProject.get());
-    }
 
     @Override
     protected void onRun()
     {
-        final var input = get(INPUT);
-        final var output = get(OUTPUT);
-        final var osmTagFilter = get(TAG_FILTER);
-        final var wayFilter = get(WAY_FILTER);
-        final var referencedNodes = referencedNodes(wayFilter, input);
+        var input = get(INPUT);
+        var output = get(OUTPUT);
+        var osmTagFilter = get(TAG_FILTER);
+        var wayFilter = get(WAY_FILTER);
+        var referencedNodes = referencedNodes(wayFilter, input);
 
-        final var relationFilter = get(RELATION_FILTER);
+        var relationFilter = get(RELATION_FILTER);
 
-        final var start = Time.now();
-        final var statistics = new Statistics();
+        var start = Time.now();
+        var statistics = new Statistics();
 
-        final var writer = new PbfWriter(output, false);
-        final var reader = new SerialPbfReader(input);
+        var writer = new PbfWriter(output, false);
+        var reader = new SerialPbfReader(input);
         reader.process(new PbfDataProcessor()
         {
             @Override
-            public void onBounds(final Bound bound)
+            public void onBounds(Bound bound)
             {
                 writer.write(bound);
             }
 
             @Override
-            public Action onNode(final PbfNode node)
+            public Action onNode(PbfNode node)
             {
                 if (referencedNodes == null || referencedNodes.contains(node.identifierAsLong()))
                 {
@@ -187,7 +182,7 @@ public class PbfFilterApplication extends Application
             }
 
             @Override
-            public Action onRelation(final PbfRelation relation)
+            public Action onRelation(PbfRelation relation)
             {
                 if (relationFilter != null && relationFilter.accepts(relation))
                 {
@@ -203,11 +198,11 @@ public class PbfFilterApplication extends Application
             }
 
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (wayFilter != null && wayFilter.accepts(way))
                 {
-                    final var tags = new ArrayList<>(way.tagList().asList());
+                    var tags = new ArrayList<>(way.tagList().asList());
                     tags.removeIf(tag -> !osmTagFilter.accepts(tag));
                     writer.write(way.withTags(tags));
                     statistics.acceptWay();
@@ -229,8 +224,8 @@ public class PbfFilterApplication extends Application
 
         if (osmTagFilter != null)
         {
-            final var allTags = osmTagFilter.allFilteredTags();
-            final var rejectedTags = osmTagFilter.rejectedTags();
+            var allTags = osmTagFilter.allFilteredTags();
+            var rejectedTags = osmTagFilter.rejectedTags();
             information("Osm tag keys before filtering $, after filtering ($), removed ($):  $", allTags.size(),
                     allTags.size() - rejectedTags.size(), rejectedTags.size(), rejectedTags);
         }
@@ -239,29 +234,29 @@ public class PbfFilterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
+        return objectSet(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
     }
 
-    private static LongSet referencedNodes(final WayFilter filter, final File graphFile)
+    private static LongSet referencedNodes(WayFilter filter, File graphFile)
     {
         if (filter == null)
         {
             return null;
         }
 
-        final var referencedNodes = new LongSet("referencedNodes");
+        var referencedNodes = new LongSet("referencedNodes");
         referencedNodes.initialSize(Estimate._1024);
         referencedNodes.initialize();
 
-        final SerialPbfReader reader = new SerialPbfReader(graphFile);
+        SerialPbfReader reader = new SerialPbfReader(graphFile);
         reader.process(new PbfDataProcessor()
         {
             @Override
-            public Action onWay(final PbfWay way)
+            public Action onWay(PbfWay way)
             {
                 if (filter.accepts(way))
                 {
-                    for (final var node : way.nodes())
+                    for (var node : way.nodes())
                     {
                         referencedNodes.add(node.getNodeId());
                     }

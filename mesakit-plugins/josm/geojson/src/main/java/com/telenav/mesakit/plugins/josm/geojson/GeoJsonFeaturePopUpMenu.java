@@ -30,24 +30,24 @@ class GeoJsonFeaturePopUpMenu extends JPopupMenu
 {
     private static final long serialVersionUID = -680977285896859682L;
 
-    public GeoJsonFeaturePopUpMenu(final GeoJsonFeature feature)
+    public GeoJsonFeaturePopUpMenu(GeoJsonFeature feature)
     {
-        final var entityType = feature.properties().get("osmEntityType");
-        final var type = entityType == null ? MapIdentifier.Type.WAY
+        var entityType = feature.properties().get("osmEntityType");
+        var type = entityType == null ? MapIdentifier.Type.WAY
                 : MapIdentifier.Type.valueOf(entityType.toString().toUpperCase());
-        final var typeName = type.name().toLowerCase();
-        final var item = new JMenuItem("View OSM " + typeName + " in browser");
+        var typeName = type.name().toLowerCase();
+        var item = new JMenuItem("View OSM " + typeName + " in browser");
         item.addActionListener(event ->
         {
-            final var identifier = osmIdentifier(feature);
+            var identifier = osmIdentifier(feature);
             if (identifier != null)
             {
                 try
                 {
                     Desktop.getDesktop()
-                            .browse(new URI("http://openstreetmap.org/" + typeName + "/" + identifier));
+                            .browse(new URI("https://openstreetmap.org/" + typeName + "/" + identifier));
                 }
-                catch (final Exception e)
+                catch (Exception e)
                 {
                     e.printStackTrace();
                 }
@@ -56,7 +56,7 @@ class GeoJsonFeaturePopUpMenu extends JPopupMenu
         add(item);
     }
 
-    private Long osmIdentifier(final GeoJsonFeature feature)
+    private Long osmIdentifier(GeoJsonFeature feature)
     {
         var identifier = (Double) feature.properties().get("osmIdentifier");
         if (identifier != null)

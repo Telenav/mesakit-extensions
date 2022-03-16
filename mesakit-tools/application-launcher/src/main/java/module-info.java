@@ -1,6 +1,5 @@
 open module mesakit.application.launcher
 {
-    requires kivakit.kernel;
     requires mesakit.tools.applications.codec;
     requires mesakit.tools.applications.graph.analyzer;
     requires mesakit.tools.applications.graph.dumper;

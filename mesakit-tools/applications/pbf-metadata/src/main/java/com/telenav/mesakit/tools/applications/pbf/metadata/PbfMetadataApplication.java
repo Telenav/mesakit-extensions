@@ -21,12 +21,11 @@ package com.telenav.mesakit.tools.applications.pbf.metadata;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.GraphProject;
+import com.telenav.mesakit.graph.Metadata;
 import com.telenav.mesakit.graph.specifications.library.pbf.PbfFileMetadataAnnotator;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
@@ -36,9 +35,10 @@ import com.telenav.mesakit.map.geography.Precision;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.SwitchParser.booleanSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.enumSwitchParser;
-import static com.telenav.kivakit.commandline.SwitchParser.stringSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
+import static com.telenav.kivakit.commandline.SwitchParsers.stringSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -51,36 +51,36 @@ import static com.telenav.mesakit.map.geography.Precision.precisionSwitchParser;
  */
 public class PbfMetadataApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new PbfMetadataApplication().run(arguments);
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser("Input PBF file")
+            fileArgumentParser(this, "Input PBF file")
                     .required()
                     .build();
 
     private final SwitchParser<Boolean> VIEW =
-            booleanSwitchParser("view", "View existing metadata")
+            booleanSwitchParser(this, "view", "View existing metadata")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<Boolean> ADD =
-            booleanSwitchParser("add", "Add or replace metadata")
+            booleanSwitchParser(this, "add", "Add or replace metadata")
                     .optional()
                     .defaultValue(false)
                     .build();
 
     private final SwitchParser<PbfFileMetadataAnnotator.Mode> MODE =
-            enumSwitchParser("mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
+            enumSwitchParser(this, "mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
                     .optional()
                     .defaultValue(PbfFileMetadataAnnotator.Mode.STRIP_UNREFERENCED_NODES)
                     .build();
 
     private final SwitchParser<String> DATA_DESCRIPTOR =
-            stringSwitchParser("data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
+            stringSwitchParser(this, "data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
                     .optional()
                     .build();
 
@@ -90,18 +90,18 @@ public class PbfMetadataApplication extends Application
                     .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser()
+            wayFilterSwitchParser(this)
                     .optional()
                     .build();
 
     private final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser()
+            relationFilterSwitchParser(this)
                     .optional()
                     .build();
 
     private PbfMetadataApplication()
     {
-        super(GraphProject.get());
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -110,12 +110,12 @@ public class PbfMetadataApplication extends Application
         return List.of(INPUT);
     }
 
-    @SuppressWarnings({ "UseOfSystemOutOrSystemErr" })
+    @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SwitchStatementWithTooFewBranches" })
     @Override
     protected void onRun()
     {
-        final var input = argument(INPUT);
-        final var existingMetadata = Metadata.from(input);
+        var input = argument(INPUT);
+        var existingMetadata = Metadata.from(input);
         if (get(VIEW))
         {
             information(commandLineDescription("PBF Metadata Annotator"));
@@ -125,7 +125,7 @@ public class PbfMetadataApplication extends Application
         {
             if (has(DATA_PRECISION) && has(DATA_DESCRIPTOR))
             {
-                final var metadataFromDescriptor = Metadata.parseDescriptor(get(DATA_DESCRIPTOR));
+                var metadataFromDescriptor = Metadata.parseDescriptor(get(DATA_DESCRIPTOR));
                 if (metadataFromDescriptor == null)
                 {
                     exit("$ is not a valid metadata descriptor", get(DATA_DESCRIPTOR));
@@ -165,16 +165,16 @@ public class PbfMetadataApplication extends Application
                     commandLine().addSwitch("way-filter", wayFilter.name());
                     information(commandLineDescription("PBF Metadata Annotator"));
 
-                    final var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
+                    var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
 
-                    final var metadata = annotator.read()
+                    var metadata = annotator.read()
                             .withDataPrecision(get(DATA_PRECISION))
                             .withMetadata(metadataFromDescriptor);
 
-                    final boolean replace = existingMetadata != null;
+                    boolean replace = existingMetadata != null;
                     if (annotator.write(metadata))
                     {
-                        Message.println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
+                        println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
                                 + input.fileName(), "$", metadata));
                     }
                     else
@@ -197,6 +197,6 @@ public class PbfMetadataApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
+        return objectSet(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
     }
 }

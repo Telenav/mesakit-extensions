@@ -49,20 +49,20 @@ class GraphLayerRenderer
 
     private final GraphTheme theme = new GraphTheme();
 
-    GraphLayerRenderer(final ViewModel model)
+    GraphLayerRenderer(ViewModel model)
     {
         this.model = model;
     }
 
-    void paint(final MapCanvas canvas)
+    void paint(MapCanvas canvas)
     {
-        final var vertexRenderer = new VertexRenderer(canvas, model);
-        final var edgeRenderer = new EdgeRenderer(canvas, model);
-        final var edgeLabelRenderer = new EdgeLabelRenderer(canvas, model);
-        final var relationRenderer = new RelationRenderer(canvas, model);
-        final var placeRenderer = new PlaceRenderer(canvas, model);
-        final var lineRenderer = new PolylineRenderer(canvas, model);
-        final var debugRenderer = new DebugAnnotationRenderer(canvas, model);
+        var vertexRenderer = new VertexRenderer(canvas, model);
+        var edgeRenderer = new EdgeRenderer(canvas, model);
+        var edgeLabelRenderer = new EdgeLabelRenderer(canvas, model);
+        var relationRenderer = new RelationRenderer(canvas, model);
+        var placeRenderer = new PlaceRenderer(canvas, model);
+        var lineRenderer = new PolylineRenderer(canvas, model);
+        var debugRenderer = new DebugAnnotationRenderer(canvas, model);
 
         // Clear any shapes we drew last time
         model.selection().clearShapes();

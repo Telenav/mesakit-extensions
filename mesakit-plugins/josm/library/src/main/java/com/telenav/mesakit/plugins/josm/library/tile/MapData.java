@@ -30,7 +30,7 @@ public enum MapData
 
     private final String trafficName;
 
-    MapData(final String displayName, final String vectorName, final String trafficName)
+    MapData(String displayName, String vectorName, String trafficName)
     {
         this.displayName = displayName;
         this.vectorName = vectorName;
@@ -39,16 +39,16 @@ public enum MapData
 
     public String displayName()
     {
-        return this.displayName;
+        return displayName;
     }
 
     public String getVectorName()
     {
-        return this.vectorName;
+        return vectorName;
     }
 
     public String trafficName()
     {
-        return this.trafficName;
+        return trafficName;
     }
 }

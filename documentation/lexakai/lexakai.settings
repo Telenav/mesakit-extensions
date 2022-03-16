@@ -7,12 +7,11 @@
 #
 # Locations of resources linked to from README.md files
 #
-lexakai-documentation-location = [UNDEFINED] Add root URI or file path to Lexakai documentation folder here
-lexakai-javadoc-location       = [UNDEFINED] Add root URI or file path to project Javadoc
-lexakai-images-location        = [UNDEFINED] Add root URI or file path to Lexakai images here
-lexakai-images-folder          = [UNDEFINED] Add file path to images folder
+lexakai-documentation-location = https://www.mesakit.org/${project-version}/lexakai
+lexakai-javadoc-location       = https://www.mesakit.org/${project-version}/javadoc
+lexakai-images-location        = https://www.mesakit.org/images
 
 #
 # Default project settings
 #
-project-footer                 = [UNDEFINED] Add default project footer here
+project-footer                 = <sub>Copyright &#169; 2011-2021 [Telenav](https://telenav.com), Inc. Distributed under [Apache License, Version 2.0](LICENSE)</sub>

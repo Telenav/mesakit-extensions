@@ -20,16 +20,17 @@ package com.telenav.mesakit.tools.applications.graph.slicer;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.set.ObjectSet;
+import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.collections.set.ObjectSet;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
 import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
-import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
+import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
@@ -43,44 +44,44 @@ import static com.telenav.mesakit.map.geography.shape.rectangle.Rectangle.rectan
  */
 public class GraphSlicerApplication extends Application
 {
-    public static void main(final String[] arguments)
+    public static void main(String[] arguments)
     {
         new GraphSlicerApplication().run(arguments);
     }
 
     private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE =
-            graphSwitchParser("graph", "The input graph to slice")
+            graphSwitchParser(this, "graph", "The input graph to slice")
                     .required()
                     .build();
 
     private final SwitchParser<File> OUTPUT =
-            fileSwitchParser("output", "The output file")
+            fileSwitchParser(this, "output", "The output file")
                     .required()
                     .build();
 
     private final SwitchParser<Rectangle> BOUNDS =
-            rectangleSwitchParser("bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
+            rectangleSwitchParser(this, "bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
                     .required()
                     .build();
 
     protected GraphSlicerApplication()
     {
-        super(GraphProject.get());
+        addProject(GraphProject.class);
     }
 
     @Override
     protected void onRun()
     {
-        final var graph = get(GRAPH_RESOURCE).load();
-        final var bounds = get(BOUNDS);
+        var graph = get(GRAPH_RESOURCE).load();
+        var bounds = get(BOUNDS);
         var output = get(OUTPUT);
         if (output.extension().endsWith(Extension.GZIP))
         {
             output = output.withCodec(new GzipCodec());
         }
-        final var clipped = graph.clippedTo(bounds);
+        var clipped = graph.clippedTo(bounds);
         information("clipped to $, producing $", bounds, clipped.asString());
-        try (final var archive = new GraphArchive(this, output, WRITE, ProgressReporter.NULL))
+        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.none()))
         {
             clipped.save(archive);
         }
@@ -89,6 +90,6 @@ public class GraphSlicerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.of(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
+        return objectSet(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
     }
 }

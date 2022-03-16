@@ -38,7 +38,7 @@ public class EdgeRenderer extends Renderer
 
     private final EdgeTheme theme = new EdgeTheme();
 
-    public EdgeRenderer(final MapCanvas canvas, final ViewModel model)
+    public EdgeRenderer(MapCanvas canvas, ViewModel model)
     {
         super(canvas, model);
 
@@ -48,10 +48,10 @@ public class EdgeRenderer extends Renderer
     /**
      * Draws edges of the given selection type
      */
-    public void draw(final Selection.Type type)
+    public void draw(Selection.Type type)
     {
         // Go through the visible edges of the given selection type
-        for (final var edge : model().visibleEdges().edges(type))
+        for (var edge : model().visibleEdges().edges(type))
         {
             // and if the edge is of that type
             if (model().selection().is(edge, type))
@@ -68,17 +68,17 @@ public class EdgeRenderer extends Renderer
         }
     }
 
-    private void draw(final Edge edge, final Selection.Type type)
+    private void draw(Edge edge, Selection.Type type)
     {
         // Draw the edge polyline
-        final var line = polyline(canvas(), type, edge);
-        final var shape = line.draw(canvas());
+        var line = polyline(canvas(), type, edge);
+        var shape = line.draw(canvas());
 
         // store the shape of the edge in the selection model
         model().selection().shape(edge, shape);
 
         // and draw the edge's shape points
-        final var selectedShapePoint = model().selection().selectedShapePoint();
+        var selectedShapePoint = model().selection().selectedShapePoint();
         if (model().selection().isSelected(edge) || (type == Selection.Type.SELECTED && selectedShapePoint != null))
         {
             if (canvas().scale().isZoomedIn(MapScale.CITY))
@@ -88,9 +88,9 @@ public class EdgeRenderer extends Renderer
         }
     }
 
-    private MapPolyline polyline(final MapCanvas canvas, final Selection.Type type, final Edge edge)
+    private MapPolyline polyline(MapCanvas canvas, Selection.Type type, Edge edge)
     {
-        final var polyline = theme.polylineEdge(canvas, type, edge);
+        var polyline = theme.polylineEdge(canvas, type, edge);
         if (canvas.scale().isZoomedOut(MapScale.REGION))
         {
             return polyline.withDrawStrokeWidth(DrawingWidth.pixels(type == Selection.Type.HIGHLIGHTED ? 4 : 2));

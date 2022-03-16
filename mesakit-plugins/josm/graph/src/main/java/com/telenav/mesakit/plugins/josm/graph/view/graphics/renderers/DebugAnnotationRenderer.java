@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.mesakit.graph.Vertex;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
@@ -27,7 +27,7 @@ import com.telenav.mesakit.plugins.josm.graph.theme.AnnotationTheme;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.telenav.kivakit.kernel.language.strings.conversion.StringFormat.USER_LABEL;
+import static com.telenav.kivakit.interfaces.string.Stringable.Format.USER_LABEL;
 
 /**
  * Draws edges in the appropriate color for zoom level
@@ -40,7 +40,7 @@ public class DebugAnnotationRenderer extends Renderer
 
     private final AnnotationTheme theme = new AnnotationTheme();
 
-    public DebugAnnotationRenderer(final MapCanvas canvas, final ViewModel model)
+    public DebugAnnotationRenderer(MapCanvas canvas, ViewModel model)
     {
         super(canvas, model);
     }
@@ -48,11 +48,11 @@ public class DebugAnnotationRenderer extends Renderer
     public void drawAnnotations()
     {
         // Go through all visible edges
-        for (final var edge : model().visibleEdges().edges())
+        for (var edge : model().visibleEdges().edges())
         {
             if (edge.isForward())
             {
-                final var text = Message.format("e${long} [v${long} \u2192 v${long}] id${long}",
+                var text = Strings.format("e${long} [v${long} \u2192 v${long}] id${long}",
                         edge.index(),
                         edge.fromVertexIdentifier(),
                         edge.toVertexIdentifier(),
@@ -66,11 +66,11 @@ public class DebugAnnotationRenderer extends Renderer
         }
     }
 
-    private void drawVertexAnnotation(final Vertex vertex)
+    private void drawVertexAnnotation(Vertex vertex)
     {
         if (!drawn.contains(vertex))
         {
-            final var text = Message.format("v${long} in[$] out[$] n${long}",
+            var text = Strings.format("v${long} in[$] out[$] n${long}",
                     vertex.index(),
                     vertex.inEdges().asString(USER_LABEL),
                     vertex.outEdges().asString(USER_LABEL),

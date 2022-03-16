@@ -1,24 +1,24 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.kernel.language.strings.StringTo;
-import com.telenav.kivakit.kernel.messaging.Message;
+import com.telenav.kivakit.core.string.StringTo;
+import com.telenav.kivakit.core.string.Strings;
 
 /**
  * @author jonathanl (shibo)
  */
 public class UserFeedback
 {
-    public static UserFeedback html(final String message, final Object... arguments)
+    public static UserFeedback html(String message, Object... arguments)
     {
         return new UserFeedback().withHtml(message, arguments);
     }
 
-    public static UserFeedback status(final String message, final Object... arguments)
+    public static UserFeedback status(String message, Object... arguments)
     {
         return new UserFeedback().withStatus(message, arguments);
     }
 
-    public static UserFeedback text(final String message, final Object... arguments)
+    public static UserFeedback text(String message, Object... arguments)
     {
         return new UserFeedback().withText(message, arguments);
     }
@@ -33,7 +33,7 @@ public class UserFeedback
     {
     }
 
-    private UserFeedback(final UserFeedback that)
+    private UserFeedback(UserFeedback that)
     {
         status = that.status;
         text = that.text;
@@ -55,24 +55,24 @@ public class UserFeedback
         return text;
     }
 
-    public UserFeedback withHtml(final String message, final Object... arguments)
+    public UserFeedback withHtml(String message, Object... arguments)
     {
-        final var copy = new UserFeedback(this);
-        copy.html = Message.format(message, arguments);
+        var copy = new UserFeedback(this);
+        copy.html = Strings.format(message, arguments);
         return copy;
     }
 
-    public UserFeedback withStatus(final String message, final Object... arguments)
+    public UserFeedback withStatus(String message, Object... arguments)
     {
-        final var copy = new UserFeedback(this);
-        copy.status = Message.format(message, arguments);
+        var copy = new UserFeedback(this);
+        copy.status = Strings.format(message, arguments);
         return copy;
     }
 
-    public UserFeedback withText(final String message, final Object... arguments)
+    public UserFeedback withText(String message, Object... arguments)
     {
-        final var copy = new UserFeedback(this);
-        copy.text = StringTo.html(Message.format(message, arguments));
+        var copy = new UserFeedback(this);
+        copy.text = StringTo.html(Strings.format(message, arguments));
         return copy;
     }
 }

@@ -18,9 +18,9 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
 
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.Debug;
+import com.telenav.kivakit.core.logging.Logger;
+import com.telenav.kivakit.core.logging.LoggerFactory;
+import com.telenav.kivakit.core.messaging.Debug;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Style;
 import com.telenav.kivakit.ui.desktop.theme.KivaKitColors;
@@ -70,15 +70,15 @@ public class EdgeLabelRenderer extends Renderer
 
     private final AnnotationTheme annotationTheme = new AnnotationTheme();
 
-    public EdgeLabelRenderer(final MapCanvas canvas, final ViewModel model)
+    public EdgeLabelRenderer(MapCanvas canvas, ViewModel model)
     {
         super(canvas, model);
     }
 
-    public void draw(final Selection.Type type)
+    public void draw(Selection.Type type)
     {
         // Get the set of edges of the given time,
-        final var edges = model().visibleEdges().edges(type);
+        var edges = model().visibleEdges().edges(type);
 
         // and go through edge from the most important to the least,
 
@@ -88,35 +88,35 @@ public class EdgeLabelRenderer extends Renderer
             DEBUG.trace("Drawing labels for $", roadType);
 
             // looping through edges
-            final Set<Edge> labeled = new HashSet<>();
-            for (final var edge : edges)
+            Set<Edge> labeled = new HashSet<>();
+            for (var edge : edges)
             {
                 // of the same functional class and if we haven't already labeled the edge,
                 if (edge.isForward() && edge.roadType().equals(roadType) && !labeled.contains(edge))
                 {
                     // find all the connected edges in a route with the same name
-                    final var roadName = edge.roadName();
+                    var roadName = edge.roadName();
                     if (roadName != null)
                     {
-                        final var route = edge.route(new NamedRoadNavigator(roadName), Distance.MAXIMUM);
+                        var route = edge.route(new NamedRoadNavigator(roadName), Distance.MAXIMUM);
                         if (route != null)
                         {
                             // then trim the route to the edges that are visible
-                            final var visible = trimToVisible(route);
+                            var visible = trimToVisible(route);
                             if (visible != null)
                             {
                                 DEBUG.trace("Found visible route $ for $", visible, roadName);
 
                                 // then traverse the route
                                 Location last = null;
-                                for (final var at : visible)
+                                for (var at : visible)
                                 {
-                                    final var current = at.roadShape().midpoint();
+                                    var current = at.roadShape().midpoint();
                                     if (last == null)
                                     {
                                         last = current;
                                     }
-                                    final var distance = canvas().toDrawing(current.distanceTo(last));
+                                    var distance = canvas().toDrawing(current.distanceTo(last));
                                     if (distance.units() > 300)
                                     {
                                         // and if the edge is long enough,
@@ -150,20 +150,20 @@ public class EdgeLabelRenderer extends Renderer
         }
     }
 
-    private void drawLabel(final Edge edge)
+    private void drawLabel(Edge edge)
     {
         // If the edge has a name to use as the label,
-        final var roadName = edge.roadName();
+        var roadName = edge.roadName();
         if (roadName != null)
         {
             // get the midpoint of its road shape polygon and the label text
-            final var at = edge.roadShape().midpoint();
-            final var text = roadName.name();
+            var at = edge.roadShape().midpoint();
+            var text = roadName.name();
 
             // then draw the label
             DEBUG.trace("Drawing label '$' on edge $", text, edge);
-            final var textColor = roadFunctionalClassToColor.get(edge.roadFunctionalClass());
-            final Style style;
+            var textColor = roadFunctionalClassToColor.get(edge.roadFunctionalClass());
+            Style style;
             switch (edge.roadType())
             {
                 case FREEWAY:
@@ -184,12 +184,12 @@ public class EdgeLabelRenderer extends Renderer
         }
     }
 
-    private Route trimToVisible(final Route route)
+    private Route trimToVisible(Route route)
     {
         try
         {
-            final var builder = new RouteBuilder();
-            for (final var edge : route)
+            var builder = new RouteBuilder();
+            for (var edge : route)
             {
                 if (isVisible(edge) && edge.roadShape().intersects(model().bounds()))
                 {
@@ -198,7 +198,7 @@ public class EdgeLabelRenderer extends Renderer
             }
             return builder.route();
         }
-        catch (final Exception e)
+        catch (Exception e)
         {
 
             // If we can't build a connected route (probably the route is going in and out of the

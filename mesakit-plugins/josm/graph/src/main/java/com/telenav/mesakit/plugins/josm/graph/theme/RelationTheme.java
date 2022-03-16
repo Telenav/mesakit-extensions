@@ -55,7 +55,7 @@ public class RelationTheme extends EdgeTheme
                 .withToArrowHead(MapDot.dot(ARROWHEAD));
     }
 
-    public MapPolyline polylineRoute(final MapPolyline polyline, final Route route)
+    public MapPolyline polylineRoute(MapPolyline polyline, Route route)
     {
         return fattenPolyline(polyline, route.asEdgeSet().mostImportant()).withPolyline(route.polyline());
     }

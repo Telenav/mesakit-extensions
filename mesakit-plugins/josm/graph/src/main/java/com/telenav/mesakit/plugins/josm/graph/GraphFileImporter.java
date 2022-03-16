@@ -18,16 +18,16 @@
 
 package com.telenav.mesakit.plugins.josm.graph;
 
+import com.telenav.kivakit.core.logging.Logger;
+import com.telenav.kivakit.core.logging.LoggerFactory;
+import com.telenav.kivakit.core.messaging.listeners.MessageList;
+import com.telenav.kivakit.core.progress.ProgressListener;
+import com.telenav.kivakit.core.progress.ProgressReporter;
+import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
+import com.telenav.kivakit.core.string.AsciiArt;
+import com.telenav.kivakit.core.value.level.Percent;
+import com.telenav.kivakit.core.value.mutable.MutableValue;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.kernel.language.progress.ProgressListener;
-import com.telenav.kivakit.kernel.language.progress.ProgressReporter;
-import com.telenav.kivakit.kernel.language.progress.reporters.Progress;
-import com.telenav.kivakit.kernel.language.strings.AsciiArt;
-import com.telenav.kivakit.kernel.language.values.level.Percent;
-import com.telenav.kivakit.kernel.language.values.mutable.MutableValue;
-import com.telenav.kivakit.kernel.logging.Logger;
-import com.telenav.kivakit.kernel.logging.LoggerFactory;
-import com.telenav.kivakit.kernel.messaging.listeners.MessageList;
 import com.telenav.kivakit.resource.compression.archive.ZipArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.plugins.josm.graph.view.GraphLayer;
@@ -37,7 +37,7 @@ import org.openstreetmap.josm.gui.progress.ProgressMonitor;
 
 import java.io.IOException;
 
-import static com.telenav.kivakit.kernel.messaging.Message.Status.COMPLETED;
+import static com.telenav.kivakit.core.messaging.Message.Status.COMPLETED;
 
 /**
  * Imports a Graph file, creating a GraphLayer in JOSM.
@@ -50,7 +50,7 @@ public class GraphFileImporter extends FileImporter
 
     private final GraphPlugin plugin;
 
-    public GraphFileImporter(final GraphPlugin plugin)
+    public GraphFileImporter(GraphPlugin plugin)
     {
         super(new ExtensionFileFilter("graph,txd,txd.gz", "graph", "Graph Files (*.graph, *.txd, *.txd.gz)"));
 
@@ -58,25 +58,25 @@ public class GraphFileImporter extends FileImporter
     }
 
     @Override
-    public void importData(final java.io.File file, final ProgressMonitor progressMonitor) throws IOException
+    public void importData(java.io.File file, ProgressMonitor progressMonitor) throws IOException
     {
         try
         {
-            final var input = File.of(file);
-            if (ZipArchive.is(input))
+            var input = File.file(file);
+            if (ZipArchive.is(LOGGER, input))
             {
-                final var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
-                final var reporter = Progress.create();
+                var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
+                var reporter = BroadcastingProgressReporter.create();
                 progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
-                final var previous = new MutableValue<>(0);
+                var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));
-                final var graph = new SmartGraphLoader(input).load(messages, reporter);
+                var graph = new SmartGraphLoader(input).load(messages, reporter);
                 if (graph != null)
                 {
                     progressMonitor.worked(100 - previous.get());
-                    final var metadata = graph.metadata();
-                    final var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
-                    layer.graph(graph, ProgressReporter.NULL);
+                    var metadata = graph.metadata();
+                    var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
+                    layer.graph(graph, ProgressReporter.none());
                     LOGGER.information("Loaded graph '$':\n$", graph.name(), metadata);
                     layer.add();
 
@@ -95,7 +95,7 @@ public class GraphFileImporter extends FileImporter
                 throw new IOException("Not a graph archive: " + file);
             }
         }
-        catch (final Throwable e)
+        catch (Throwable e)
         {
             e.printStackTrace();
             throw new IOException("Unable to open " + file, e);
@@ -108,12 +108,12 @@ public class GraphFileImporter extends FileImporter
         return false;
     }
 
-    private ProgressListener workListener(final ProgressMonitor progressMonitor, final MutableValue<Integer> previous)
+    private ProgressListener workListener(ProgressMonitor progressMonitor, MutableValue<Integer> previous)
     {
         return at ->
         {
-            final var current = at.asInt();
-            final var worked = current - previous.get();
+            var current = at.asInt();
+            var worked = current - previous.get();
             previous.set(current);
             progressMonitor.worked(worked);
         };

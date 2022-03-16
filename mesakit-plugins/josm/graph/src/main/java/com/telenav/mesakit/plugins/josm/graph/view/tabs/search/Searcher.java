@@ -18,14 +18,15 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 
-import com.telenav.kivakit.kernel.language.collections.list.StringList;
-import com.telenav.kivakit.kernel.language.objects.Objects;
-import com.telenav.kivakit.kernel.language.patterns.Pattern;
-import com.telenav.kivakit.kernel.language.primitives.Ints;
-import com.telenav.kivakit.kernel.language.strings.formatting.Separators;
-import com.telenav.kivakit.kernel.language.values.count.Estimate;
-import com.telenav.kivakit.kernel.language.values.count.Maximum;
-import com.telenav.kivakit.kernel.messaging.Listener;
+import com.telenav.kivakit.component.BaseComponent;
+import com.telenav.kivakit.core.KivaKit;
+import com.telenav.kivakit.core.collections.list.StringList;
+import com.telenav.kivakit.core.language.Objects;
+import com.telenav.kivakit.core.language.primitive.Ints;
+import com.telenav.kivakit.core.messaging.Listener;
+import com.telenav.kivakit.core.string.Separators;
+import com.telenav.kivakit.core.value.count.Estimate;
+import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.mesakit.core.MesaKit;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
@@ -52,7 +53,9 @@ import com.telenav.mesakit.plugins.josm.graph.view.GraphPanel;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.regex.Pattern;
 
+import static com.telenav.kivakit.core.project.Project.resolveProject;
 import static com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION;
 import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLIGHT_AND_ZOOM_TO;
 
@@ -61,13 +64,14 @@ import static com.telenav.mesakit.plugins.josm.graph.view.GraphLayer.Show.HIGHLI
  *
  * @author jonathanl (shibo)
  */
-public class Searcher
+public class Searcher extends BaseComponent
 {
+    @SuppressWarnings("SpellCheckingInspection")
     static UserFeedback help()
     {
-        final var help = new StringList();
+        var help = new StringList();
 
-        help.add("<span class='section0'>MesaKit $ Graph Plugin</span>", MesaKit.get().projectVersion());
+        help.add("<span class='section0'>MesaKit $ Graph Plugin</span>", resolveProject(KivaKit.class).projectVersion());
         help.add("<p class='aqua'>To make a graph active, double click on it in the view area or select it in the Layers panel.</p>" +
                 "<p class='aqua'>Select edges, vertexes and relations of an active graph to see their details.</p> " +
                 "<p class= 'aqua'>Select a rectangle to zoom in. " +
@@ -76,7 +80,7 @@ public class Searcher
         help.add("<ul class='aqua'>");
         help.add("    <li>bounds - show the bounds of the visible area</li>");
         help.add("    <li>center - show the center of the visible area</li>");
-        help.add("    <li>clear - clear any polylines drawn by routing or as geographic locations</li>");
+        help.add("    <li>clear - clear any poly-lines drawn by routing or as geographic locations</li>");
         help.add("    <li>graph - show details about the active graph layer</li>");
         help.add("    <li>help - see this help message again</li>");
         help.add("    <li>query help - see help for query syntax used on query tab</li>");
@@ -113,11 +117,12 @@ public class Searcher
         return UserFeedback.html(help.join("\n")).withStatus("Showing help screen");
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     static UserFeedback queryHelp()
     {
-        final var help = new StringList();
+        var help = new StringList();
 
-        help.add("<span class='section0'>MesaKit $ Graph Query Help</span>", MesaKit.get().projectVersion());
+        help.add("<span class='section0'>MesaKit $ Graph Query Help</span>", resolveProject(MesaKit.class).projectVersion());
         help.add("<p class='aqua'>Graph queries can be entered into the search box as 'select [query-string]', " +
                 "where the query string is composed<br/>of operators, attributes and scalar constants.</p>");
         help.add("<p class='aqua'>For example, the query \"edge.roadName contains 'Lomas'\" would find " +
@@ -182,30 +187,26 @@ public class Searcher
 
     private final GraphLayer layer;
 
-    public Searcher(final GraphLayer layer)
+    public Searcher(GraphLayer layer)
     {
         this.layer = layer;
     }
 
-    public EdgeSet findTagged(final Maximum maximum, final String searchString)
+    public EdgeSet findTagged(Maximum maximum, String searchString)
     {
-        final var tagGroup = Pattern.ANYTHING.group(Listener.none());
-        final var pattern = Pattern.constant("tag")
-                .then(Pattern.WHITESPACE)
-                .then(tagGroup);
-
-        final var matcher = pattern.matcher(searchString);
+        var pattern = Pattern.compile("tag\\s+(<?tag>.*)");
+        var matcher = pattern.matcher(searchString);
         if (matcher.matches())
         {
-            final var tag = PbfTags.parse(tagGroup.get(matcher));
+            var tag = PbfTags.parse(matcher.group("tag"));
             if (tag != null)
             {
-                final var found = new EdgeSet(Estimate._1024);
-                for (final var edge : graph().forwardEdges())
+                var found = new EdgeSet(Estimate._1024);
+                for (var edge : graph().forwardEdges())
                 {
                     if (edge.hasTag(tag.getKey()))
                     {
-                        final var value = edge.tagValue(tag.getKey());
+                        var value = edge.tagValue(tag.getKey());
                         if (Objects.equalIgnoringCase(tag.getValue(), value))
                         {
                             found.add(edge);
@@ -237,11 +238,13 @@ public class Searcher
         }
         if (searchString.equals("version"))
         {
-            return UserFeedback.html(MesaKit.get().projectVersion() + " - " + MesaKit.get().build());
+            return UserFeedback.html(
+                    resolveProject(KivaKit.class).projectVersion() + " - " +
+                            resolveProject(KivaKit.class).build());
         }
 
-        final var viewBounds = layer.model().bounds();
-        final var graphBounds = graph().bounds();
+        var viewBounds = layer.model().bounds();
+        var graphBounds = graph().bounds();
 
         switch (searchString)
         {
@@ -254,11 +257,11 @@ public class Searcher
             case "clear":
                 layer.model().selection().clearPolylines();
                 layer.forceRepaint();
-                return UserFeedback.status("Cleared highlights and polylines");
+                return UserFeedback.status("Cleared highlights and poly-lines");
 
             case "debug":
             {
-                final var debug = !layer.model().debug();
+                var debug = !layer.model().debug();
                 layer.model().debug(debug);
                 layer.forceRepaint();
                 return UserFeedback.status(debug ? "Debug information on" : "Debug information off");
@@ -281,14 +284,14 @@ public class Searcher
                 return UserFeedback.text(turnStatistics(graphBounds).bulleted());
         }
 
-        final var edges = findTagged(Maximum._1_000, searchString);
+        var edges = findTagged(Maximum._1_000, searchString);
         if (edges != null && !edges.isEmpty())
         {
             layer.show(edges, HIGHLIGHT_AND_ZOOM_TO);
             return UserFeedback.text("Showing " + edges.size() + " matching edges");
         }
 
-        final var rectangle = findRectangle(searchString);
+        var rectangle = findRectangle(searchString);
         if (rectangle != null)
         {
             layer.show(rectangle.asPolyline());
@@ -296,28 +299,28 @@ public class Searcher
             return UserFeedback.status("Showing rectangle " + rectangle);
         }
 
-        final var line = findPolyline(searchString);
+        var line = findPolyline(searchString);
         if (line != null)
         {
             layer.show(line);
             return UserFeedback.status("Showing " + (line.size() == 1 ? "location" : "polyline") + " " + line);
         }
 
-        final var location = findLocation(searchString);
+        var location = findLocation(searchString);
         if (location != null)
         {
             layer.show(location.bounds().asPolyline());
             return UserFeedback.status("Showing location " + location);
         }
 
-        final var route = findRoute(searchString);
+        var route = findRoute(searchString);
         if (route != null && route.size() > 1)
         {
             layer.show(route);
             return UserFeedback.status("Showing route " + route);
         }
 
-        final var mapEdgeIdentifier = findMapEdgeIdentifier(searchString);
+        var mapEdgeIdentifier = findMapEdgeIdentifier(searchString);
         if (mapEdgeIdentifier != null)
         {
             if (layer.show(mapEdgeIdentifier))
@@ -326,17 +329,14 @@ public class Searcher
             }
         }
 
-        final var prefixGroup = Pattern.expression("e|v|n|w|r|edge|vertex|node|way|relation").group(Listener.none());
-        final var identifierGroup = Pattern.INTEGER.group(Listener.none());
-        final var identifierPattern = Pattern.WHITESPACE.optional()
-                .then(prefixGroup.then(Pattern.OPTIONAL_WHITESPACE)).optional()
-                .then(identifierGroup).then(Pattern.character('L').optional());
+        var identifierPattern = Pattern.compile(
+                "\\s*(?<prefix>e|v|n|w|r|edge|vertex|node|way|relation)\\s*(?<identifier>\\d+)L?");
 
-        final var matcher = identifierPattern.matcher(searchString);
+        var matcher = identifierPattern.matcher(searchString);
         if (matcher.matches())
         {
-            final var prefix = prefixGroup.get(matcher);
-            final var identifier = identifierGroup.get(matcher);
+            var prefix = matcher.group("prefix");
+            var identifier = matcher.group("identifier");
 
             // All of these identifiers can be ambiguous (thus the optional prefix string)
 
@@ -346,10 +346,10 @@ public class Searcher
             var nodeIdentifier = findNodeIdentifier(identifier);
             var relationIdentifier = findRelationIdentifier(identifier);
 
-            final var edgeIndex = Ints.parse(identifier);
+            var edgeIndex = Ints.parseInt(this, identifier);
             if (edgeIndex > 0)
             {
-                final Edge indexedEdge = graph().edgeStore().edgeForIndex(edgeIndex);
+                Edge indexedEdge = graph().edgeStore().edgeForIndex(edgeIndex);
                 if (indexedEdge != null)
                 {
                     edgeIdentifier = indexedEdge.identifier();
@@ -465,7 +465,7 @@ public class Searcher
 
         if (!graph().isComposite())
         {
-            final var roads = findRoadName(searchString);
+            var roads = findRoadName(searchString);
             if (!roads.isEmpty())
             {
                 layer.show(roads, HIGHLIGHT_AND_ZOOM_TO);
@@ -477,9 +477,9 @@ public class Searcher
         return help().withStatus("Couldn't find '" + searchString + "'");
     }
 
-    private EdgeIdentifier findEdgeIdentifier(final String searchString)
+    private EdgeIdentifier findEdgeIdentifier(String searchString)
     {
-        final var identifier = new EdgeIdentifier.Converter(Listener.none()).convert(searchString);
+        var identifier = new EdgeIdentifier.Converter(Listener.none()).convert(searchString);
         if (identifier != null && !graph().isComposite())
         {
             if (graph().contains(identifier))
@@ -490,14 +490,14 @@ public class Searcher
         return null;
     }
 
-    private Location findLocation(final String searchString)
+    private Location findLocation(String searchString)
     {
         return new Location.DegreesConverter(Listener.none()).convert(searchString);
     }
 
-    private MapEdgeIdentifier findMapEdgeIdentifier(final String searchString)
+    private MapEdgeIdentifier findMapEdgeIdentifier(String searchString)
     {
-        final var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.none()).convert(searchString);
+        var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.none()).convert(searchString);
         if (mapEdgeIdentifier != null && !graph().isComposite())
         {
             if (graph().edgeForIdentifier(mapEdgeIdentifier) != null)
@@ -508,9 +508,9 @@ public class Searcher
         return null;
     }
 
-    private PbfNodeIdentifier findNodeIdentifier(final String searchString)
+    private PbfNodeIdentifier findNodeIdentifier(String searchString)
     {
-        final var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.none()).convert(searchString);
+        var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.none()).convert(searchString);
         if (nodeIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(nodeIdentifier))
@@ -521,22 +521,22 @@ public class Searcher
         return null;
     }
 
-    private Polyline findPolyline(final String searchString)
+    private Polyline findPolyline(String searchString)
     {
         return new Polyline.Converter(Listener.none(), new Separators(":", ",")).convert(searchString);
     }
 
-    private Rectangle findRectangle(final String searchString)
+    private Rectangle findRectangle(String searchString)
     {
         return new Rectangle.Converter(Listener.none()).convert(searchString);
     }
 
-    private MapRelationIdentifier findRelationIdentifier(final String searchString)
+    private MapRelationIdentifier findRelationIdentifier(String searchString)
     {
-        final var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.none()).convert(searchString);
+        var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.none()).convert(searchString);
         if (relationIdentifier != null && !graph().isComposite())
         {
-            final var relation = graph().relationForMapRelationIdentifier(relationIdentifier);
+            var relation = graph().relationForMapRelationIdentifier(relationIdentifier);
             if (relation != null)
             {
                 return relationIdentifier;
@@ -545,21 +545,22 @@ public class Searcher
         return null;
     }
 
-    private EdgeSet findRoadName(final String searchString)
+    @SuppressWarnings("SpellCheckingInspection")
+    private EdgeSet findRoadName(String searchString)
     {
 
         // Get standardized base road name we're looking for
-        final var standardizer = RoadNameStandardizer.get(MapLocale.ENGLISH_UNITED_STATES.get(), MESAKIT_STANDARDIZATION);
-        final var searchFor = standardizer.standardize(RoadName.forName(searchString)).baseName();
-        final var searchForUpperCase = searchFor.toUpperCase();
+        var standardizer = RoadNameStandardizer.get(MapLocale.ENGLISH_UNITED_STATES.get(), MESAKIT_STANDARDIZATION);
+        var searchFor = standardizer.standardize(RoadName.forName(searchString)).baseName();
+        var searchForUpperCase = searchFor.toUpperCase();
 
-        final var street = new EdgeSet(Estimate._1024);
-        for (final var edge : graph().edges())
+        var street = new EdgeSet(Estimate._1024);
+        for (var edge : graph().edges())
         {
-            final var roadName = edge.roadName();
+            var roadName = edge.roadName();
             if (roadName != null && roadName.name().toUpperCase().contains(searchForUpperCase))
             {
-                final var baseName = standardizer.standardize(roadName).baseName();
+                var baseName = standardizer.standardize(roadName).baseName();
                 if (baseName != null)
                 {
                     if (searchForUpperCase.equals(baseName.toUpperCase()))
@@ -572,9 +573,9 @@ public class Searcher
         return street;
     }
 
-    private Route findRoute(final String searchString)
+    private Route findRoute(String searchString)
     {
-        final Edge.Converter edgeConverter;
+        Edge.Converter edgeConverter;
         if (searchString.startsWith("cell-") && graph() instanceof WorldGraph)
         {
             edgeConverter = new WorldEdge.Converter((WorldGraph) graph(), Listener.none());
@@ -583,7 +584,7 @@ public class Searcher
         {
             edgeConverter = new Edge.Converter(graph(), Listener.none());
         }
-        final var route = new Route.Converter(graph(), new Separators(":"), Listener.none(), edgeConverter)
+        var route = new Route.Converter(graph(), new Separators(":"), Listener.none(), edgeConverter)
                 .convert(searchString);
         if (route != null)
         {
@@ -593,7 +594,7 @@ public class Searcher
             }
             else
             {
-                for (final var edge : route)
+                for (var edge : route)
                 {
                     if (graph().contains(edge.identifier()))
                     {
@@ -605,9 +606,9 @@ public class Searcher
         return null;
     }
 
-    private VertexIdentifier findVertexIdentifier(final String searchString)
+    private VertexIdentifier findVertexIdentifier(String searchString)
     {
-        final var vertexIdentifier = new VertexIdentifier.Converter(Listener.none()).convert(searchString);
+        var vertexIdentifier = new VertexIdentifier.Converter(Listener.none()).convert(searchString);
         if (vertexIdentifier != null)
         {
             if (graph().contains(vertexIdentifier))
@@ -618,9 +619,9 @@ public class Searcher
         return null;
     }
 
-    private PbfWayIdentifier findWayIdentifier(final String searchString)
+    private PbfWayIdentifier findWayIdentifier(String searchString)
     {
-        final var wayIdentifier = new PbfWayIdentifier.Converter(Listener.none()).convert(searchString);
+        var wayIdentifier = new PbfWayIdentifier.Converter(Listener.none()).convert(searchString);
         if (wayIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(wayIdentifier))
@@ -638,14 +639,14 @@ public class Searcher
 
     private String openInBrowser()
     {
-        final var edge = layer.model().selection().selectedEdge();
+        var edge = layer.model().selection().selectedEdge();
         if (edge != null)
         {
             try
             {
-                Desktop.getDesktop().browse(new URI("http://openstreetmap.org/way/" + edge.wayIdentifier().asLong()));
+                Desktop.getDesktop().browse(new URI("https://openstreetmap.org/way/" + edge.wayIdentifier().asLong()));
             }
-            catch (final Exception ignored)
+            catch (Exception ignored)
             {
             }
             return "Showing " + edge.wayIdentifier();
@@ -656,9 +657,9 @@ public class Searcher
         }
     }
 
-    private StringList turnStatistics(final Rectangle bounds)
+    private StringList turnStatistics(Rectangle bounds)
     {
-        final var statistics = new TurnRestrictionStatistics();
+        var statistics = new TurnRestrictionStatistics();
         statistics.addAll(graph().restrictionRelationsIntersecting(bounds));
         return statistics.summary();
     }

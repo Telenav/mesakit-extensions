@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.kernel.messaging.Message;
-import com.telenav.kivakit.kernel.messaging.messages.MessageFormatter;
+import com.telenav.kivakit.core.string.Formatter.Format;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
 import com.telenav.kivakit.ui.desktop.layout.Borders;
@@ -48,11 +48,11 @@ public class TagPanel extends JPanel
 
     TagIndex index;
 
-    public TagPanel(final GraphPanel graphPanel)
+    public TagPanel(GraphPanel graphPanel)
     {
         this.graphPanel = graphPanel;
 
-        indexer.addListener(message -> graphPanel.status(message.formatted(MessageFormatter.Format.WITH_EXCEPTION)));
+        indexer.addListener(message -> graphPanel.status(message.formatted(Format.WITH_EXCEPTION)));
 
         Borders.insideMarginsOf(Margins.of(10)).apply(this);
 
@@ -61,7 +61,7 @@ public class TagPanel extends JPanel
         searchViewAreaOnly.addActionListener(event -> refresh());
         searchViewAreaOnly.setSelected(true);
 
-        final var columns = new JPanel();
+        var columns = new JPanel();
 
         new HorizontalBoxLayout(columns, Spacing.AUTOMATIC_SPACING)
                 .add(new KeysColumn(this))
@@ -72,7 +72,7 @@ public class TagPanel extends JPanel
                 .add(Layouts.leftJustify(searchViewAreaOnly));
     }
 
-    public void layer(final GraphLayer layer)
+    public void layer(GraphLayer layer)
     {
         if (layer != null)
         {
@@ -85,21 +85,21 @@ public class TagPanel extends JPanel
     {
         if (layer != null && layer.activeLayer() != null)
         {
-            final var selectedKey = keysList.selected();
-            final var selectedValue = valuesList.selected();
+            var selectedKey = keysList.selected();
+            var selectedValue = valuesList.selected();
 
             keysList.elements(Collections.emptyList());
             valuesList.elements(Collections.emptyList());
 
-            final boolean hasTags = graph().hasTags();
+            boolean hasTags = graph().hasTags();
             if (hasTags)
             {
-                final var bounds = searchViewAreaOnly.isSelected()
+                var bounds = searchViewAreaOnly.isSelected()
                         ? layer.activeLayer().model().bounds()
                         : Rectangle.MAXIMUM;
 
-                final var outer = this;
-                final var request = new TagIndexRequest(graph(), bounds, index ->
+                var outer = this;
+                var request = new TagIndexRequest(graph(), bounds, index ->
                 {
                     SwingUtilities.invokeLater(() ->
                     {
@@ -135,15 +135,15 @@ public class TagPanel extends JPanel
         }
     }
 
-    void updateValues(final String key)
+    void updateValues(String key)
     {
-        final var values = index.values(key);
+        var values = index.values(key);
         if (values != null)
         {
-            final var selectedValue = valuesList.selected();
+            var selectedValue = valuesList.selected();
             valuesList.elements(values.copy());
             valuesList.select(selectedValue);
-            valuesLabel.setText(Message.format("$ values", values.count()));
+            valuesLabel.setText(Strings.format("$ values", values.count()));
         }
     }
 
