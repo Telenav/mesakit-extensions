@@ -20,14 +20,14 @@ This module contains a command line tool for comparing PBF files
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.9-SNAPSHOT/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-pbf-comparator</artifactId>
-        <version>0.9.9-SNAPSHOT</version>
+        <version>0.9.10</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.pbf.comparator*](https://www.mesakit.org/0.9.9-SNAPSHOT/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.comparator.svg)
+[*com.telenav.mesakit.tools.applications.pbf.comparator*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.comparator.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
@@ -65,7 +65,7 @@ The following significant classes are undocumented:
 
 | Class | Documentation Sections |
 |---|---|
-| [*PbfComparatorApplication*](https://www.mesakit.org/0.9.9-SNAPSHOT/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.comparator/com/telenav/mesakit/tools/applications/pbf/comparator/PbfComparatorApplication.html) |  |  
+| [*PbfComparatorApplication*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.comparator/com/telenav/mesakit/tools/applications/pbf/comparator/PbfComparatorApplication.html) |  |  
 
 [//]: # (start-user-text)
 
