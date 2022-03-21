@@ -242,8 +242,8 @@ public abstract class BaseJosmLayer extends Layer
     protected Location locationForPoint(Point2D point)
     {
         var latitudeLongitude = view.getLatLon(point.getX(), point.getY());
-        return new Location(Latitude.angle(Latitude.RANGE.constrainTo(Angle.degrees(latitudeLongitude.getY()))),
-                Longitude.angle(Longitude.RANGE.constrainTo(Angle.degrees(latitudeLongitude.getX()))));
+        return new Location(Latitude.angle(Latitude.RANGE.constrain(Angle.degrees(latitudeLongitude.getY()))),
+                Longitude.angle(Longitude.RANGE.constrain(Angle.degrees(latitudeLongitude.getX()))));
     }
 
     protected void onDestroy()
