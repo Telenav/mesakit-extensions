@@ -67,7 +67,7 @@ public class ShapePointRenderer
         {
             var at = 0;
             var shape = edge.roadShape();
-            for (var location : shape.locationSequence())
+            for (var location : shape)
             {
                 if (at != 0 && at != shape.size() - 1)
                 {

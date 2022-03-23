@@ -374,7 +374,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             var line = ((GeoJsonPolyline) geometry).polyline();
             var first = true;
             Path2D path = new Path2D.Float();
-            for (var to : line.locationSequence())
+            for (var to : line)
             {
                 var point = pointForLocation(to);
                 if (first)
@@ -396,7 +396,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
                 var index = 1;
                 var font = font(graphics, "99", width);
                 graphics.setFont(font);
-                for (var location : line.locationSequence())
+                for (var location : line)
                 {
                     var point = pointForLocation(location);
                     var centerX = (int) point.getX();

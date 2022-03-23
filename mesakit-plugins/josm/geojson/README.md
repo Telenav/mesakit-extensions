@@ -20,14 +20,14 @@ This module contains a JOSM (https://josm.openstreetmap.de) plugin for displayin
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-plugins/josm/geojson/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-plugins/josm/geojson/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-plugins-josm-geojson</artifactId>
-        <version>0.9.10</version>
+        <version>0.9.11</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.plugins.josm.geojson*](https://www.mesakit.org/0.9.10/lexakai/mesakit-extensions/mesakit-plugins/josm/geojson/documentation/diagrams/com.telenav.mesakit.plugins.josm.geojson.svg)
+[*com.telenav.mesakit.plugins.josm.geojson*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-plugins/josm/geojson/documentation/diagrams/com.telenav.mesakit.plugins.josm.geojson.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
@@ -66,11 +66,11 @@ The following significant classes are undocumented:
 
 | Class | Documentation Sections |
 |---|---|
-| [*GeoJsonFeaturePopUpMenu*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonFeaturePopUpMenu.html) |  |  
-| [*GeoJsonFileImporter*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonFileImporter.html) |  |  
-| [*GeoJsonLayer*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonLayer.html) |  |  
-| [*GeoJsonPanel*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonPanel.html) |  |  
-| [*GeoJsonPlugin*](https://www.mesakit.org/0.9.10/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonPlugin.html) |  |  
+| [*GeoJsonFeaturePopUpMenu*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonFeaturePopUpMenu.html) |  |  
+| [*GeoJsonFileImporter*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonFileImporter.html) |  |  
+| [*GeoJsonLayer*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonLayer.html) |  |  
+| [*GeoJsonPanel*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonPanel.html) |  |  
+| [*GeoJsonPlugin*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.plugins.josm.geojson/com/telenav/mesakit/plugins/josm/geojson/GeoJsonPlugin.html) |  |  
 
 [//]: # (start-user-text)
 
