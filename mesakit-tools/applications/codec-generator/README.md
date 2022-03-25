@@ -20,14 +20,14 @@ This module creates tag compression codec data
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-codec-generator</artifactId>
-        <version>0.9.11</version>
+        <version>0.9.12</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,10 +48,10 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.codec*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.svg)  
-[*com.telenav.mesakit.tools.applications.codec.polyline*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.polyline.svg)  
-[*com.telenav.mesakit.tools.applications.codec.roadname*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.roadname.svg)  
-[*com.telenav.mesakit.tools.applications.codec.tag*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.tag.svg)
+[*com.telenav.mesakit.tools.applications.codec*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.svg)  
+[*com.telenav.mesakit.tools.applications.codec.polyline*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.polyline.svg)  
+[*com.telenav.mesakit.tools.applications.codec.roadname*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.roadname.svg)  
+[*com.telenav.mesakit.tools.applications.codec.tag*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/codec-generator/documentation/diagrams/com.telenav.mesakit.tools.applications.codec.tag.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
@@ -68,11 +68,11 @@ The following significant classes are undocumented:
 
 | Class | Documentation Sections |
 |---|---|
-| [*CodecGeneratorApplication*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/CodecGeneratorApplication.html) |  |  
-| [*CodecGeneratorApplication.Type*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/CodecGeneratorApplication.Type.html) |  |  
-| [*HuffmanCodecGenerator*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/polyline/HuffmanCodecGenerator.html) |  |  
-| [*RoadNameCodecGenerator*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/roadname/RoadNameCodecGenerator.html) |  |  
-| [*TagCodecGenerator*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/tag/TagCodecGenerator.html) |  |  
+| [*CodecGeneratorApplication*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/CodecGeneratorApplication.html) |  |  
+| [*CodecGeneratorApplication.Type*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/CodecGeneratorApplication.Type.html) |  |  
+| [*HuffmanCodecGenerator*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/polyline/HuffmanCodecGenerator.html) |  |  
+| [*RoadNameCodecGenerator*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/roadname/RoadNameCodecGenerator.html) |  |  
+| [*TagCodecGenerator*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.codec.generator/com/telenav/mesakit/tools/applications/codec/tag/TagCodecGenerator.html) |  |  
 
 [//]: # (start-user-text)
 

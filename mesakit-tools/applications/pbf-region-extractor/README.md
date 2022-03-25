@@ -20,14 +20,14 @@ This module contains a command line tool that extracts administrative regions fr
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-region-extractor/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-region-extractor/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-pbf-region-extractor</artifactId>
-        <version>0.9.11</version>
+        <version>0.9.12</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.pbf.region.extractor*](https://www.mesakit.org/0.9.11/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-region-extractor/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.region.extractor.svg)
+[*com.telenav.mesakit.tools.applications.pbf.region.extractor*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-region-extractor/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.region.extractor.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
@@ -65,7 +65,7 @@ The following significant classes are undocumented:
 
 | Class | Documentation Sections |
 |---|---|
-| [*PbfRegionExtractorApplication*](https://www.mesakit.org/0.9.11/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.region.extractor/com/telenav/mesakit/tools/applications/pbf/region/extractor/PbfRegionExtractorApplication.html) |  |  
+| [*PbfRegionExtractorApplication*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.region.extractor/com/telenav/mesakit/tools/applications/pbf/region/extractor/PbfRegionExtractorApplication.html) |  |  
 
 [//]: # (start-user-text)
 
