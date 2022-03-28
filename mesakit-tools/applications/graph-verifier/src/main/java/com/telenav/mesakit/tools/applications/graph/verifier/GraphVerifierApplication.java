@@ -26,7 +26,7 @@ import com.telenav.kivakit.core.string.Differences;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.MutableCount;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.resource.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.GraphProject;

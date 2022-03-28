@@ -27,7 +27,7 @@ import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.resource.Extension;
 import com.telenav.mesakit.graph.GraphElement;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.identifiers.EdgeIdentifier;
@@ -64,41 +64,6 @@ public class GraphDumperApplication extends Application
         new GraphDumperApplication().run(arguments);
     }
 
-    private final ArgumentParser<SmartGraphLoader> INPUT =
-            graphArgumentParser(this, "The graph to dump")
-                    .required()
-                    .build();
-
-    private final SwitchParser<EdgeIdentifier> EDGE =
-            edgeIdentifierSwitchParser(this, "edge", "A specific edge identifier to dump")
-                    .optional()
-                    .build();
-
-    private final SwitchParser<VertexIdentifier> VERTEX =
-            vertexIdentifierSwitchParser(this, "vertex", "A specific vertex identifier to dump")
-                    .optional()
-                    .build();
-
-    private final SwitchParser<RelationIdentifier> RELATION =
-            relationIdentifierSwitchParser(this, "relation", "A specific relation identifier to dump")
-                    .optional()
-                    .build();
-
-    private final SwitchParser<PbfWayIdentifier> WAY =
-            pbfWayIdentifierSwitchParser(this, "way", "A specific way identifier to dump")
-                    .optional()
-                    .build();
-
-    private final SwitchParser<PlaceIdentifier> PLACE =
-            placeIdentifierSwitchParser(this, "place", "A specific place identifier to dump")
-                    .optional()
-                    .build();
-
-    private final SwitchParser<Boolean> SPATIAL_INDEX =
-            booleanSwitchParser(this, "spatial-index", "Dump the spatial index")
-                    .optional()
-                    .build();
-
     private final SwitchParser<Boolean> DUMP_EDGE_IDENTIFIERS =
             booleanSwitchParser(this, "all-edge-identifiers", "Dump all edge identifiers to the console")
                     .optional()
@@ -110,10 +75,45 @@ public class GraphDumperApplication extends Application
                     .optional()
                     .build();
 
+    private final SwitchParser<EdgeIdentifier> EDGE =
+            edgeIdentifierSwitchParser(this, "edge", "A specific edge identifier to dump")
+                    .optional()
+                    .build();
+
+    private final ArgumentParser<SmartGraphLoader> INPUT =
+            graphArgumentParser(this, "The graph to dump")
+                    .required()
+                    .build();
+
     private final SwitchParser<Count> LIMIT =
             countSwitchParser(this, "entity-limit", "The maximum number of edges, vertexes and relations to dump")
                     .optional()
                     .defaultValue(Count.MAXIMUM)
+                    .build();
+
+    private final SwitchParser<PlaceIdentifier> PLACE =
+            placeIdentifierSwitchParser(this, "place", "A specific place identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<RelationIdentifier> RELATION =
+            relationIdentifierSwitchParser(this, "relation", "A specific relation identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<Boolean> SPATIAL_INDEX =
+            booleanSwitchParser(this, "spatial-index", "Dump the spatial index")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<VertexIdentifier> VERTEX =
+            vertexIdentifierSwitchParser(this, "vertex", "A specific vertex identifier to dump")
+                    .optional()
+                    .build();
+
+    private final SwitchParser<PbfWayIdentifier> WAY =
+            pbfWayIdentifierSwitchParser(this, "way", "A specific way identifier to dump")
+                    .optional()
                     .build();
 
     protected GraphDumperApplication()
@@ -138,7 +138,7 @@ public class GraphDumperApplication extends Application
             graph.loadAll();
             var file = get(DUMP_HEAP);
             file.delete();
-            file.withExtension(Extension.parse(this, ".idom"));
+            file.withExtension(Extension.parseExtension(this, ".idom"));
             information("Dumping heap to: $", file);
             JavaVirtualMachine.local().dumpHeap(file.path().asJavaPath());
         }
