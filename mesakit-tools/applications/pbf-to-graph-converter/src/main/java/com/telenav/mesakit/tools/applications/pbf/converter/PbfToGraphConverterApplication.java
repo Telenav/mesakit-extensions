@@ -46,6 +46,7 @@ import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileListArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.resource.Extension.OSM_PBF;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
 import static com.telenav.mesakit.map.region.Region.regionSwitchParser;
@@ -129,7 +130,7 @@ public class PbfToGraphConverterApplication extends Application
                 var folder = input.asFolder();
 
                 // so go through each file in the folder,
-                for (var nestedFile : folder.nestedFiles(Extension.OSM_PBF.matcher()))
+                for (var nestedFile : folder.nestedFiles(OSM_PBF.fileMatcher()))
                 {
                     // and convert those files.
                     var outputFile = conversion.convert(nestedFile);
@@ -187,7 +188,7 @@ public class PbfToGraphConverterApplication extends Application
     }
 
     final ArgumentParser<FileList> INPUT_FILES =
-            fileListArgumentParser(this, "The comma separated list of input PBF file(s) and/or folders to process", Extension.OSM_PBF)
+            fileListArgumentParser(this, "The comma separated list of input PBF file(s) and/or folders to process", OSM_PBF)
                     .required()
                     .build();
 
