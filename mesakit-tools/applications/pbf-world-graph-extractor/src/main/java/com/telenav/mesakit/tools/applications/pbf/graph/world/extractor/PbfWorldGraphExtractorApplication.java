@@ -29,7 +29,6 @@ import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.resource.CopyMode;
-import com.telenav.kivakit.resource.Extension;
 import com.telenav.kivakit.settings.Deployment;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.Metadata;
@@ -52,6 +51,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchPar
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.resource.Extension.GRAPH;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.PARALLEL_READER;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataSourceFactory.Type.SERIAL_READER;
 import static com.telenav.mesakit.graph.world.repository.WorldGraphRepository.worldGraphRepositorySwitchParser;
@@ -242,9 +242,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 if (repositoryInstallFolder != null)
                 {
                     // then copy just the new graphs to the repository install folder.
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, Extension.GRAPH.matcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.fileMatcher(),
                             BroadcastingProgressReporter.create(this, "bytes"));
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.fileMatcher(),
                             BroadcastingProgressReporter.create(this, "bytes"));
                 }
             }
