@@ -134,7 +134,7 @@ public class CodecGeneratorApplication extends Application
     protected void onRun()
     {
         // show arguments
-        information(commandLineDescription("Codec Generator"));
+        information(startupInformation("Codec Generator"));
 
         switch (get(TYPE))
         {

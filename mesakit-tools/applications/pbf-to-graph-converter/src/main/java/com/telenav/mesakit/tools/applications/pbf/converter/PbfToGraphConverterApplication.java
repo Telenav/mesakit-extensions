@@ -87,9 +87,6 @@ public class PbfToGraphConverterApplication extends Application
         // Start the clock,
         var start = Time.now();
 
-        // show application arguments
-        showCommandLine();
-
         // check the input files,
         var inputFiles = argument(INPUT_FILES);
         checkInputFiles(commandLine(), inputFiles);

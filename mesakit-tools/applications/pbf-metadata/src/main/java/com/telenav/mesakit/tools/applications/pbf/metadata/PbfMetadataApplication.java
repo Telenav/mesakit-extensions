@@ -118,7 +118,7 @@ public class PbfMetadataApplication extends Application
         var existingMetadata = Metadata.from(input);
         if (get(VIEW))
         {
-            information(commandLineDescription("PBF Metadata Annotator"));
+            information(startupInformation("PBF Metadata Annotator"));
             System.out.println(AsciiArt.textBox("Metadata", existingMetadata == null ? "No metadata found" : existingMetadata.asString()));
         }
         else if (get(ADD))
@@ -163,7 +163,7 @@ public class PbfMetadataApplication extends Application
                     }
 
                     commandLine().addSwitch("way-filter", wayFilter.name());
-                    information(commandLineDescription("PBF Metadata Annotator"));
+                    information(startupInformation("PBF Metadata Annotator"));
 
                     var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
 
