@@ -83,7 +83,8 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
         if (request.forceUpdate() || (!isAlreadySatisfied && !isAlreadyRequested))
         {
             // then add it to the queue
-            var ignored = requestQueue.offer(request);
+            //noinspection ResultOfMethodCallIgnored
+            requestQueue.offer(request);
         }
     }
 

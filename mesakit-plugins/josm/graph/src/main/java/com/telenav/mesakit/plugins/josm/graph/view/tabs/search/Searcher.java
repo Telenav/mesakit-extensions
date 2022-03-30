@@ -545,7 +545,6 @@ public class Searcher extends BaseComponent
         return null;
     }
 
-    @SuppressWarnings("SpellCheckingInspection")
     private EdgeSet findRoadName(String searchString)
     {
 

@@ -61,7 +61,7 @@ import com.telenav.mesakit.plugins.josm.graph.GraphPlugin;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 import com.telenav.mesakit.plugins.josm.graph.view.graphics.coordinates.JosmCoordinateMapper;
-import com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges;
+import com.telenav.mesakit.plugins.josm.graph.model.VisibleEdges;
 import com.telenav.mesakit.plugins.josm.library.BaseJosmLayer;
 import org.openstreetmap.josm.data.Bounds;
 import org.openstreetmap.josm.gui.MainApplication;

@@ -1,10 +1,13 @@
 open module mesakit.plugins.josm.library
 {
-    requires transitive mesakit.map.utilities.geojson;
+    // Mesakit
+    requires transitive mesakit.map.geography;
     requires transitive mesakit.map.ui.desktop;
 
+    // KivaKit
+    requires kivakit.component;
+
     requires josm;
-    requires gson;
 
     exports com.telenav.mesakit.plugins.josm.library;
     exports com.telenav.mesakit.plugins.josm.library.tile;

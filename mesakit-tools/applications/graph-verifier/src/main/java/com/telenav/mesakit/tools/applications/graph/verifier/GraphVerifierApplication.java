@@ -175,7 +175,6 @@ public class GraphVerifierApplication extends Application
                 warning("$ edge $ not found in $", subgraph.name(), edge, graph.name());
             }
         }
-        @SuppressWarnings("SpellCheckingInspection")
         var output = File.parseFile(this, "differences.geojson");
         if (document.size() != 0)
         {
