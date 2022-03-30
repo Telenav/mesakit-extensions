@@ -133,9 +133,6 @@ public class CodecGeneratorApplication extends Application
     @Override
     protected void onRun()
     {
-        // show arguments
-        information(startupInformation("Codec Generator"));
-
         switch (get(TYPE))
         {
             case TAG:
