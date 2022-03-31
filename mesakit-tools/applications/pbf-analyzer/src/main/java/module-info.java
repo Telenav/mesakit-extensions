@@ -2,9 +2,8 @@ open module mesakit.tools.applications.pbf.analyzer
 {
     requires transitive kivakit.application;
     requires transitive mesakit.data.formats.pbf;
-    requires transitive mesakit.graph.core;
+    requires mesakit.map.geography;
 
-    requires osmosis.core;
     requires mesakit.map.measurements;
     requires kivakit.primitive.collections;
 

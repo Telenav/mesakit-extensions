@@ -25,7 +25,6 @@ import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.Folder;
-import com.telenav.kivakit.resource.path.Extension;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
@@ -36,6 +35,8 @@ import java.util.List;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.resource.Extension.GRAPH;
+import static com.telenav.kivakit.resource.Extension.OSM_PBF;
 
 /**
  * Converts a graph back to a PBF. This is only going to produce the exact original PBF file if the graph contains full
@@ -60,9 +61,9 @@ public class GraphToPbfConverterApplication extends Application
                     .optional()
                     .build();
 
-    private final List<File> materialized = new ArrayList<>();
-
     private final List<File> converted = new ArrayList<>();
+
+    private final List<File> materialized = new ArrayList<>();
 
     public GraphToPbfConverterApplication()
     {
@@ -100,7 +101,7 @@ public class GraphToPbfConverterApplication extends Application
             var folder = input.asFolder();
 
             // so go through each input file in the folder,
-            for (var file : folder.nestedFiles(Extension.GRAPH.fileMatcher()))
+            for (var file : folder.nestedFiles(GRAPH.fileMatcher()))
             {
                 convertOne(outputFolder, folder, file);
             }
@@ -146,12 +147,12 @@ public class GraphToPbfConverterApplication extends Application
         File outputFile;
         if (outputFolder == null)
         {
-            outputFile = input.withoutCompoundExtension().withExtension(Extension.OSM_PBF);
+            outputFile = input.withoutCompoundExtension().withExtension(OSM_PBF);
         }
         else
         {
             outputFile = outputFolder.file(input.relativeTo(folder)).withoutCompoundExtension()
-                    .withExtension(Extension.OSM_PBF);
+                    .withExtension(OSM_PBF);
         }
         outputFile.parent().ensureExists();
         return outputFile;

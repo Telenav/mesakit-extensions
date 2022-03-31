@@ -75,7 +75,6 @@ public class RegionInformationApplication extends Application
                     .defaultValue(false)
                     .build();
 
-    @SuppressWarnings("SpellCheckingInspection")
     private final SwitchParser<Boolean> URI =
             booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
                     .optional()

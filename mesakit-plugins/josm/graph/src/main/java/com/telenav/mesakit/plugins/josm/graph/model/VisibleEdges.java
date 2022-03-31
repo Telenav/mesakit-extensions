@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-package com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers;
+package com.telenav.mesakit.plugins.josm.graph.model;
 
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
@@ -26,13 +26,11 @@ import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.road.model.RoadType;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapCanvas;
 import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
-import com.telenav.mesakit.plugins.josm.graph.model.Selection;
-import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
 
 import java.util.List;
 
 import static com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale.CITY;
-import static com.telenav.mesakit.plugins.josm.graph.view.graphics.renderers.VisibleEdges.Mode.RELATIONS;
+import static com.telenav.mesakit.plugins.josm.graph.model.VisibleEdges.Mode.RELATIONS;
 
 /**
  * @author jonathanl (shibo)

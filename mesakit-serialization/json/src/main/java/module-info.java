@@ -1,13 +1,13 @@
 open module mesakit.serialization.json
 {
-    requires transitive kivakit.serialization.gson;
     requires transitive mesakit.graph.core;
-    requires transitive kivakit.component;
+    requires transitive mesakit.map.geography;
+    requires transitive mesakit.map.road.model;
+    requires transitive mesakit.map.region;
+
+    requires transitive kivakit.serialization.gson;
 
     requires gson;
-    requires mesakit.map.geography;
-    requires mesakit.map.road.model;
-    requires mesakit.map.region;
 
     exports com.telenav.mesakit.serialization.json;
     exports com.telenav.mesakit.serialization.json.serializers;

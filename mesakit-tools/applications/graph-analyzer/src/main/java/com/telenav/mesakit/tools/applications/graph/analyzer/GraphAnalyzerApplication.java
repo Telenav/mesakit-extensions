@@ -440,11 +440,6 @@ public class GraphAnalyzerApplication extends Application
         }
     }
 
-    private Matcher<Edge> matcher4()
-    {
-        return Filter.all();
-    }
-
     private String miles(double miles)
     {
         return Count.count((int) Math.round(miles)).asCommaSeparatedString() + " miles";

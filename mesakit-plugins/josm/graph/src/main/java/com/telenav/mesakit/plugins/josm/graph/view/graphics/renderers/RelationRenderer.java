@@ -30,6 +30,7 @@ import com.telenav.mesakit.map.ui.desktop.graphics.canvas.MapScale;
 import com.telenav.mesakit.map.ui.desktop.graphics.drawables.MapDot;
 import com.telenav.mesakit.plugins.josm.graph.model.Selection;
 import com.telenav.mesakit.plugins.josm.graph.model.ViewModel;
+import com.telenav.mesakit.plugins.josm.graph.model.VisibleEdges;
 import com.telenav.mesakit.plugins.josm.graph.theme.RelationTheme;
 
 import static com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.measurements.DrawingLength.pixels;

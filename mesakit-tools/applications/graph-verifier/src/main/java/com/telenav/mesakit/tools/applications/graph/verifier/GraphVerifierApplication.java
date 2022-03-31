@@ -26,7 +26,7 @@ import com.telenav.kivakit.core.string.Differences;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.MutableCount;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.resource.path.Extension;
+import com.telenav.kivakit.resource.Extension;
 import com.telenav.mesakit.graph.Edge;
 import com.telenav.mesakit.graph.Graph;
 import com.telenav.mesakit.graph.GraphProject;
@@ -175,7 +175,6 @@ public class GraphVerifierApplication extends Application
                 warning("$ edge $ not found in $", subgraph.name(), edge, graph.name());
             }
         }
-        @SuppressWarnings("SpellCheckingInspection")
         var output = File.parseFile(this, "differences.geojson");
         if (document.size() != 0)
         {

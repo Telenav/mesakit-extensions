@@ -1,6 +1,6 @@
 open module mesakit.tools.applications.pbf.comparator
 {
-    requires transitive mesakit.graph.core;
+    requires mesakit.data.formats.pbf;
 
     requires transitive kivakit.application;
 
