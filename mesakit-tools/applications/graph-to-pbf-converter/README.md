@@ -20,14 +20,14 @@ This module contains a command line tool for converting MesaKit graph files to P
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/dependencies-32.png" srcset="https://www.kivakit.org/images/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/graph-to-pbf-converter/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.13/lexakai/mesakit-extensions/mesakit-tools/applications/graph-to-pbf-converter/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
-        <version>0.9.12</version>
+        <version>0.9.13</version>
     </dependency>
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://www.kivakit.org/images/box-32.png" srcset="https://www.kivakit.org/images/box-32-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.graph.converter*](https://www.mesakit.org/0.9.12/lexakai/mesakit-extensions/mesakit-tools/applications/graph-to-pbf-converter/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.converter.svg)
+[*com.telenav.mesakit.tools.applications.graph.converter*](https://www.mesakit.org/0.9.13/lexakai/mesakit-extensions/mesakit-tools/applications/graph-to-pbf-converter/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.converter.svg)
 
 <img src="https://www.kivakit.org/images/horizontal-line-128.png" srcset="https://www.kivakit.org/images/horizontal-line-128-2x.png 2x"/>
 
@@ -63,7 +63,7 @@ Javadoc coverage for this project is 87.5%.
 
 | Class | Documentation Sections |
 |---|---|
-| [*GraphToPbfConverterApplication*](https://www.mesakit.org/0.9.12/javadoc/mesakit-extensions/mesakit.tools.applications.graph.to.pbf.converter/com/telenav/mesakit/tools/applications/graph/converter/GraphToPbfConverterApplication.html) |  |  
+| [*GraphToPbfConverterApplication*](https://www.mesakit.org/0.9.13/javadoc/mesakit-extensions/mesakit.tools.applications.graph.to.pbf.converter/com/telenav/mesakit/tools/applications/graph/converter/GraphToPbfConverterApplication.html) |  |  
 
 [//]: # (start-user-text)
 
