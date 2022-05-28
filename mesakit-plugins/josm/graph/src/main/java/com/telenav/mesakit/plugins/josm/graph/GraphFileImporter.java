@@ -81,7 +81,7 @@ public class GraphFileImporter extends FileImporter
                     layer.add();
 
                     plugin.panel().showPanel();
-                    plugin.zoomTo(graph.bounds().expanded(Percent.of(10)));
+                    plugin.zoomTo(graph.bounds().expanded(Percent.percent(10)));
                     layer.forceRepaint();
                     plugin.panel().layer(layer);
                 }

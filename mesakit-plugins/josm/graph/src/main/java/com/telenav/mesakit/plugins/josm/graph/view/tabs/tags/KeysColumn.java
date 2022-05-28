@@ -19,7 +19,7 @@ public class KeysColumn extends JPanel
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        tagPanel.keysList = new SearchList<>(new IdentityConverter(Listener.none()));
+        tagPanel.keysList = new SearchList<>(new IdentityConverter(Listener.emptyListener()));
         tagPanel.keysList.addSelectionListener(tagPanel::updateValues);
 
         tagPanel.keysLabel = KivaKitTheme.get().newComponentLabel("");
