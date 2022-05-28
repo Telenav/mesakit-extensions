@@ -26,7 +26,7 @@ public class ValuesColumn extends JPanel
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.none()));
+        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.emptyListener()));
         tagPanel.valuesList.addSelectionListener((value) ->
         {
             var key = tagPanel.keysList.selected();

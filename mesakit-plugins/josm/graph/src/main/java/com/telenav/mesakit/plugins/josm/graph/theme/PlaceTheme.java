@@ -24,7 +24,7 @@ public class PlaceTheme extends BaseTheme
     {
         return dotPlace(population)
                 .withStyle(styleSelected())
-                .scaledBy(Percent.of(10));
+                .scaledBy(Percent.percent(10));
     }
 
     public Style styleUnselected()

@@ -23,7 +23,7 @@ import com.telenav.kivakit.core.logging.Logger;
 import com.telenav.kivakit.core.logging.LoggerFactory;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.core.string.Strings;
-import com.telenav.kivakit.core.time.PreciseDuration;
+import com.telenav.kivakit.core.time.Duration;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.level.Percent;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.geometry.objects.DrawingPoint;
@@ -191,7 +191,7 @@ public class GraphLayer extends BaseJosmLayer
             var paintArea = DrawingRectangle.pixels(0, 0, mapView.getWidth(), mapView.getHeight());
             canvas = MapCanvas.canvas("graph-layer", graphics, MapScale.of(mapView.getScale()), paintArea, new JosmCoordinateMapper(mapView));
 
-            model().bounds(bounds().expanded(Percent.of(5)));
+            model().bounds(bounds().expanded(Percent.percent(5)));
             model().graph(graph);
 
             switch (canvas.scale())
@@ -237,7 +237,7 @@ public class GraphLayer extends BaseJosmLayer
         {
             var router = new BiDijkstraRouter(new SpeedCostFunction());
             RoutingRequest request = new BiDijkstraRoutingRequest(start, end)
-                    .withLimiter(new CpuTimeRoutingLimiter(PreciseDuration.seconds(5)))
+                    .withLimiter(new CpuTimeRoutingLimiter(Duration.seconds(5)))
                     .withDebugger(visualDebug ? new SwingRoutingDebugger("routing") : RoutingDebugger.NULL);
             var result = router.findRoute(request);
             if (result != null)
@@ -361,7 +361,7 @@ public class GraphLayer extends BaseJosmLayer
     {
         if (bounds != null)
         {
-            var expanded = bounds.expanded(Percent.of(10));
+            var expanded = bounds.expanded(Percent.percent(10));
             if (expanded.widthAtBase().isLessThan(Distance._100_METERS))
             {
                 expanded = expanded.expandedLeft(Distance.meters(50));

@@ -198,7 +198,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
             var bounds = feature.bounds();
             if (bounds != null)
             {
-                plugin().zoomTo(bounds.expanded(Percent.of(50)));
+                plugin().zoomTo(bounds.expanded(Percent.percent(50)));
             }
             selectedFeature = feature;
         }

@@ -358,7 +358,7 @@ public class EdgeAttributeChecker extends Application
 
                 if (i % 1000000 == 0)
                 {
-                    information("Finished ${debug} ${debug}", i, Percent.of(i * 100.0 / total.asInt()));
+                    information("Finished ${debug} ${debug}", i, Percent.percent(i * 100.0 / total.asInt()));
                 }
             }
 

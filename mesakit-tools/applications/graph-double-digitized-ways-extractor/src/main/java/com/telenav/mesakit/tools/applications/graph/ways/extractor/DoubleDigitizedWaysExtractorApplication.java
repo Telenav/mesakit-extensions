@@ -32,7 +32,7 @@ import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
-import static com.telenav.kivakit.filesystem.Folder.parse;
+import static com.telenav.kivakit.filesystem.Folder.parseFolder;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 
@@ -76,7 +76,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
             if (outputFolder == null)
             {
                 // default to the same folder as the input graph
-                outputFolder = parse(this, path.parent().toString());
+                outputFolder = parseFolder(this, path.parent().toString());
             }
 
             if (outputFolder != null)

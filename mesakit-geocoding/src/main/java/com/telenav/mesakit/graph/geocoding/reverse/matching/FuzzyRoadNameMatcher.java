@@ -58,6 +58,6 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
             percentage = 100;
         }
 
-        return Percent.of(percentage);
+        return Percent.percent(percentage);
     }
 }
