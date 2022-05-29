@@ -9,20 +9,28 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <groupId>com.telenav.mesakit</groupId>
-    <version>0.9.13</version>
+
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-tools-applications</artifactId>
+    <version>0.9.13</version>
+
     <packaging>pom</packaging>
+
     <modules>
-                <!-- Graph -->
+
+        <!-- Graph -->
+
         <module>graph-analyzer</module>
         <module>graph-double-digitized-ways-extractor</module>
         <module>graph-dumper</module>
         <module>graph-slicer</module>
         <module>graph-verifier</module>
         <module>graph-to-pbf-converter</module>
+
         <!-- PBF -->
+
         <module>pbf-analyzer</module>
         <module>pbf-comparator</module>
         <module>pbf-dumper</module>
@@ -31,9 +39,14 @@
         <module>pbf-to-graph-converter</module>
         <module>pbf-world-graph-extractor</module>
         <module>pbf-filter</module>
-        <!-- CODECS -->
+
+        <!-- Codecs -->
+
         <module>codec-generator</module>
+
         <!-- Region -->
+
         <module>region-information</module>
+
     </modules>
 </project>

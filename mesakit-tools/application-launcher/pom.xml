@@ -17,9 +17,15 @@
         <version>0.9.13</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+
+    <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-tools-application-launcher</artifactId>
+    <version>0.9.13</version>
+
     <dependencies>
-                <!-- Conversions -->
+
+        <!-- Conversions -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-to-graph-converter</artifactId>
@@ -35,7 +41,9 @@
             <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
+
         <!-- Graph Tools -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-analyzer</artifactId>
@@ -61,7 +69,9 @@
             <artifactId>mesakit-tools-applications-graph-verifier</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
+
         <!-- PBF Applications -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-world</artifactId>
@@ -87,7 +97,9 @@
             <artifactId>mesakit-tools-applications-pbf-region-extractor</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
+
         <!-- Other Tools -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-codec-generator</artifactId>
@@ -98,6 +110,7 @@
             <artifactId>mesakit-tools-applications-region-information</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
+
     </dependencies>
 
     <profiles>

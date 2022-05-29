@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<!--  -->
-<!-- © 2011-2021 Telenav, Inc. -->
-<!-- Licensed under Apache License, Version 2.0 -->
-<!--  -->
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<!-- suppress MavenModelInspection -->
-<project
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// © 2011-2022 Telenav, Inc.
+// Licensed under Apache License, Version 2.0
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xmlns = "http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.telenav.mesakit</groupId>
-    <version>0.9.13</version>
     <artifactId>mesakit-extensions</artifactId>
-    <packaging>pom</packaging>
-    <!-- Project -->
+    <version>0.9.13</version>
+
     <description>MesaKit extensions contains modules that extend MesaKit</description>
+
+    <packaging>pom</packaging>
+
+    <!-- Project -->
+
     <url>https://www.mesakit.org</url>
     <inceptionYear>2011</inceptionYear>
-
     <organization>
         <name>Telenav</name>
         <url>https://www.telenav.com</url>
     </organization>
+
     <!-- Licensing -->
 
     <licenses>
@@ -33,6 +40,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <!-- Contributors -->
 
     <developers>
@@ -40,7 +48,6 @@
             <id>jonathanl</id>
             <name>Jonathan Locke (Luo Shibo)</name>
             <email>jonathanl@telenav.com</email>
-
             <organization>Telenav</organization>
             <organizationUrl>https://www.telenav.com/</organizationUrl>
             <roles>
@@ -52,7 +59,17 @@
             <id>haifeng</id>
             <name>Haifeng Zhu</name>
             <email>hfzhu@telenav.com</email>
-
+            <organization>Telenav</organization>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+                <role>administrator</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>timboudreau</id>
+            <name>Tim Boudreau</name>
+            <email>tim@timboudreau.com</email>
             <organization>Telenav</organization>
             <organizationUrl>https://www.telenav.com/</organizationUrl>
             <roles>
@@ -61,6 +78,7 @@
             </roles>
         </developer>
     </developers>
+
     <!-- Source Code -->
 
     <scm>
@@ -68,16 +86,21 @@
         <developerConnection>scm:git:https://Telenav/mesakit-extensions.git</developerConnection>
         <url>https://Telenav/mesakit-extensions.git</url>
     </scm>
+
     <!-- Issue Tracking -->
+
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/Telenav/mesakit/issues</url>
     </issueManagement>
+
     <!-- Modules -->
+
     <modules>
         <module>mesakit-geocoding</module>
         <module>mesakit-plugins</module>
         <module>mesakit-serialization</module>
         <module>mesakit-tools</module>
     </modules>
+
 </project>

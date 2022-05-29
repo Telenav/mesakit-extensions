@@ -17,9 +17,15 @@
         <version>0.9.13</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
+
+    <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-tools-applications-codec-generator</artifactId>
+    <version>0.9.13</version>
+
     <dependencies>
-                <!-- KivaKit -->
+
+        <!-- KivaKit -->
+
         <dependency>
             <groupId>com.telenav.kivakit</groupId>
             <artifactId>kivakit-application</artifactId>
@@ -32,10 +38,13 @@
             <groupId>com.telenav.kivakit</groupId>
             <artifactId>kivakit-filesystems-s3fs</artifactId>
         </dependency>
+
         <!-- MesaKit -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-core</artifactId>
         </dependency>
+
     </dependencies>
 </project>
