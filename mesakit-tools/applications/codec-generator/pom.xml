@@ -16,12 +16,11 @@
 
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>mesakit-extensions</artifactId>
+        <artifactId>mesakit</artifactId>
         <version>0.9.13</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-tools-applications-codec-generator</artifactId>
     <version>0.9.13</version>
 
