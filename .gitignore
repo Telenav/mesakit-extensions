@@ -16,3 +16,10 @@
 **/*.hprof
 **/dependency-reduced-pom.xml
 setup.properties
+nbactions.xml
+nb-configuration.xml
+nbproject/
+.DS_Store
+*.orig
+*~
+

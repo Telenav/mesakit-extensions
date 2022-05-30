@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// © 2011-2022 Telenav, Inc.
-// Licensed under Apache License, Version 2.0
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
--->
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //
+ // © 2011-2022 Telenav, Inc.
+ // Licensed under Apache License, Version 2.0
+ //
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ -->
 
 <project
-     xmlns="http://maven.apache.org/POM/4.0.0"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
-
+    
     <parent>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit</artifactId>
         <version>0.9.13</version>
         <relativePath/>
     </parent>
-
+    
     <artifactId>mesakit-plugins-josm-library</artifactId>
-
+    
     <dependencies>
-
+        
         <!-- MesaKit -->
-
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-navigation-routing</artifactId>
@@ -40,15 +40,15 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-map-ui-desktop</artifactId>
         </dependency>
-
+        
         <!-- JOSM -->
-
+        
         <dependency>
             <groupId>org.openstreetmap.josm</groupId>
             <artifactId>josm</artifactId>
         </dependency>
     </dependencies>
-
+    
     <repositories>
         <repository>
             <id>josm</id>
@@ -56,6 +56,5 @@
             <url>https://josm.openstreetmap.de/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
-
+    
 </project>
-
