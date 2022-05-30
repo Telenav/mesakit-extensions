@@ -7,29 +7,24 @@
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -->
-
-<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-         xmlns = "http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+     xmlns="http://maven.apache.org/POM/4.0.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.telenav.mesakit</groupId>
-    <artifactId>mesakit-extensions</artifactId>
-    <version>0.9.13</version>
+    <parent>
+        <groupId>com.telenav.mesakit</groupId>
+        <artifactId>mesakit</artifactId>
+        <version>0.9.13</version>
+        <relativePath/>
+    </parent>
 
-    <description>MesaKit extensions contains modules that extend MesaKit</description>
+    <artifactId>mesakit-extensions</artifactId>
 
     <packaging>pom</packaging>
-
-    <!-- Project -->
-
-    <url>https://www.mesakit.org</url>
-    <inceptionYear>2011</inceptionYear>
-    <organization>
-        <name>Telenav</name>
-        <url>https://www.telenav.com</url>
-    </organization>
+    <description>MesaKit extensions contains modules that extend MesaKit</description>
 
     <!-- Licensing -->
 
@@ -41,43 +36,14 @@
         </license>
     </licenses>
 
-    <!-- Contributors -->
+    <!-- Modules -->
 
-    <developers>
-        <developer>
-            <id>jonathanl</id>
-            <name>Jonathan Locke (Luo Shibo)</name>
-            <email>jonathanl@telenav.com</email>
-            <organization>Telenav</organization>
-            <organizationUrl>https://www.telenav.com/</organizationUrl>
-            <roles>
-                <role>lead</role>
-                <role>administrator</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>haifeng</id>
-            <name>Haifeng Zhu</name>
-            <email>hfzhu@telenav.com</email>
-            <organization>Telenav</organization>
-            <organizationUrl>https://www.telenav.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-                <role>administrator</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>timboudreau</id>
-            <name>Tim Boudreau</name>
-            <email>tim@timboudreau.com</email>
-            <organization>Telenav</organization>
-            <organizationUrl>https://www.telenav.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-                <role>administrator</role>
-            </roles>
-        </developer>
-    </developers>
+    <modules>
+        <module>mesakit-geocoding</module>
+        <module>mesakit-plugins</module>
+        <module>mesakit-serialization</module>
+        <module>mesakit-tools</module>
+    </modules>
 
     <!-- Source Code -->
 
@@ -87,6 +53,10 @@
         <url>https://Telenav/mesakit-extensions.git</url>
     </scm>
 
+    <!-- Project -->
+
+    <url>https://www.mesakit.org</url>
+
     <!-- Issue Tracking -->
 
     <issueManagement>
@@ -94,13 +64,59 @@
         <url>https://github.com/Telenav/mesakit/issues</url>
     </issueManagement>
 
-    <!-- Modules -->
+    <inceptionYear>2011</inceptionYear>
 
-    <modules>
-        <module>mesakit-geocoding</module>
-        <module>mesakit-plugins</module>
-        <module>mesakit-serialization</module>
-        <module>mesakit-tools</module>
-    </modules>
+    <organization>
+        <name>Telenav</name>
+        <url>https://www.telenav.com</url>
+    </organization>
+
+    <!-- Contributors -->
+
+    <developers>
+
+        <developer>
+
+            <id>jonathanl</id>
+            <name>Jonathan Locke (Luo Shibo)</name>
+            <email>jonathanl@telenav.com</email>
+            <organization>Telenav</organization>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
+            <roles>
+                <role>lead</role>
+                <role>administrator</role>
+            </roles>
+
+        </developer>
+
+        <developer>
+
+            <id>haifeng</id>
+            <name>Haifeng Zhu</name>
+            <email>hfzhu@telenav.com</email>
+            <organization>Telenav</organization>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+                <role>administrator</role>
+            </roles>
+
+        </developer>
+
+        <developer>
+
+            <id>timboudreau</id>
+            <name>Tim Boudreau</name>
+            <email>tim@timboudreau.com</email>
+            <organization>Telenav</organization>
+            <organizationUrl>https://www.telenav.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+                <role>administrator</role>
+            </roles>
+
+        </developer>
+
+    </developers>
 
 </project>
