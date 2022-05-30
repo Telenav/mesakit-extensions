@@ -22,7 +22,7 @@
         <relativePath/>
     </parent>
     
-    <artifactId>mesakit-tools-applications-pbf-metadata</artifactId>
+    <artifactId>mesakit-tools-applications-pbf-region-extractor</artifactId>
     
     <dependencies>
         
@@ -38,6 +38,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.mesakit</groupId>
+            <artifactId>mesakit-map-cutter</artifactId>
+            <version>0.9.13</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     
