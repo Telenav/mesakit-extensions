@@ -7,7 +7,7 @@ open module mesakit.serialization.json
 
     requires transitive kivakit.serialization.gson;
 
-    requires gson;
+    requires com.google.gson;
 
     exports com.telenav.mesakit.serialization.json;
     exports com.telenav.mesakit.serialization.json.serializers;
