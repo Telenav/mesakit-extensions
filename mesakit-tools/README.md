@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//toolbox-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//toolbox-32-2x.png 2x"/>
+# mesakit-tools &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//toolbox-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons//toolbox-24-2x.png 2x"/>
 
 This module contains MesaKit tools
 
