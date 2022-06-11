@@ -115,6 +115,9 @@
                                                 <Release-Version>${project.version}</Release-Version>
                                                 <Built-By>${user.name}</Built-By>
                                                 
+                                                <!-- Make javadoc happy -->
+                                                <Automatic-Module-Name>mesakit.josm.plugins.geojson</Automatic-Module-Name>
+                                                
                                                 <!-- JOSM -->
                                                 
                                                 <Plugin-Class>com.telenav.mesakit.plugins.josm.geojson.GeoJsonPlugin</Plugin-Class>
