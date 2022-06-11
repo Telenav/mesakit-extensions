@@ -22,4 +22,5 @@ nbproject/
 .DS_Store
 *.orig
 *~
-
+${env.KIVAKIT_ASSETS_HOME}/
+${env.MESAKIT_ASSETS_HOME}/
