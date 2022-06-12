@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-extensions &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//math-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//math-32-2x.png 2x"/>
+# mesakit-extensions &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/stars-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/stars-32-2x.png 2x"/>
 
 This module contains extensions to the core MesaKit project 
 
@@ -12,7 +12,12 @@ This module contains extensions to the core MesaKit project
 
 [//]: # (start-user-text)
 
+### Quick Start <a name = "quick-start"></a>&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/rocket-32-2x.png 2x"/>
 
+[**About MesaKit**](#about)  
+[**Example Code**](https://github.com/Telenav/mesakit-examples)  
+[**Published Releases**](https://repo1.maven.org/maven2/com/telenav/mesakit/)  
+[**How to Build This Project**](https://github.com/Telenav/telenav-build/blob/develop/documentation/building.md) <!-- [branch-name] -->   
 
 [//]: # (end-user-text)
 
