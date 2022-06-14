@@ -9,9 +9,9 @@
  -->
 
 <project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xmlns = "http://maven.apache.org/POM/4.0.0"
+        xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -22,7 +22,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>mesakit--plugins-josm-graph</artifactId>
+    <artifactId>mesakit-plugins-josm-graph</artifactId>
     <version>0.9.14</version>
 
     <dependencies>
@@ -120,7 +120,7 @@
                                     </artifactSet>
                                     <transformers>
                                         <transformer
-                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                                implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <manifestEntries>
 
                                                 <Implementation-Vendor>
@@ -190,10 +190,10 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target
-                                        name="Install MesaKit Graph Plugin">
+                                            name = "Install MesaKit Graph Plugin">
                                         <copy
-                                        file="target/mesakit-plugins-josm-graph-${mesakit.version}.jar"
-                                        tofile="${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
+                                                file = "target/mesakit-plugins-josm-graph-${mesakit.version}.jar"
+                                                tofile = "${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>
