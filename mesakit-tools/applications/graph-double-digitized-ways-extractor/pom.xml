@@ -22,8 +22,9 @@
         <relativePath/>
     </parent>
     
-    <artifactId>mesakit-tools-applications-graph-double-digitized-ways-extractor</artifactId>
-    
+    <artifactId>mesakit--tools-applications-graph-double-digitized-ways-extractor</artifactId>
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- KivaKit -->

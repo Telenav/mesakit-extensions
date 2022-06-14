@@ -23,7 +23,8 @@
     </parent>
     
     <artifactId>mesakit-tools-application-launcher</artifactId>
-    
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- Conversions -->

@@ -22,8 +22,9 @@
         <relativePath/>
     </parent>
     
-    <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
-    
+    <artifactId>mesakit--tools-applications-graph-to-pbf-converter</artifactId>
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- KivaKit -->

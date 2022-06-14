@@ -22,8 +22,9 @@
         <relativePath/>
     </parent>
     
-    <artifactId>mesakit-serialization-json</artifactId>
-    
+    <artifactId>mesakit--serialization-json</artifactId>
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- KivaKit -->

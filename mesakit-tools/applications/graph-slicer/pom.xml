@@ -23,7 +23,8 @@
     </parent>
     
     <artifactId>mesakit-tools-applications-graph-slicer</artifactId>
-    
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- KivaKit -->

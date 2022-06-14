@@ -23,7 +23,8 @@
     </parent>
     
     <artifactId>mesakit-tools-applications-region-information</artifactId>
-    
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- KivaKit -->

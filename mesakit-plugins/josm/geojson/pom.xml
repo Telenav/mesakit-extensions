@@ -23,7 +23,8 @@
     </parent>
     
     <artifactId>mesakit-plugins-josm-geojson</artifactId>
-    
+    <version>0.9.13</version>
+
     <dependencies>
         
         <!-- MesaKit -->
