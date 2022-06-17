@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-pbf-to-graph-converter &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//convert-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//convert-32-2x.png 2x"/>
+# mesakit-tools-applications-pbf-to-graph-converter &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/convert-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/convert-32-2x.png 2x"/>
 
 This module contains a command line tool that converts map files in PBF format to a MesaKit .graph files
 
@@ -56,7 +56,7 @@ None
 
 Javadoc coverage for this project is 58.3%.  
   
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-60-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-60-96-2x.png 2x"/>
 
 
 The following significant classes are undocumented:  

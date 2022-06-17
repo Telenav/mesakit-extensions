@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//rocket-32-2x.png 2x"/>
+# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/rocket-32-2x.png 2x"/>
 
 This module contains an omnibus application launcher
 
@@ -56,7 +56,7 @@ None
 
 Javadoc coverage for this project is 50.0%.  
   
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-50-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-50-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-50-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-50-96-2x.png 2x"/>
 
 
 The following significant classes are undocumented:  

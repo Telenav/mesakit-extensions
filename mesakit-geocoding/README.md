@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-geocoding &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//map-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//map-32-2x.png 2x"/>
+# mesakit-geocoding &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/map-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/map-32-2x.png 2x"/>
 
 This module contains geocoding functionality
 
@@ -57,7 +57,7 @@ None
 
 Javadoc coverage for this project is 8.3%.  
   
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-10-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-10-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-10-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-10-96-2x.png 2x"/>
 
 
 The following significant classes are undocumented:  

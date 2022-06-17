@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-region-information &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//gears-32-2x.png 2x"/>
+# mesakit-tools-applications-region-information &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
 
 This module contains a command line tool that shows information about available administrative regions
 
@@ -56,7 +56,7 @@ None
 
 Javadoc coverage for this project is 37.5%.  
   
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-40-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
 
 
 The following significant classes are undocumented:  

@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-serialization &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//map-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//map-32-2x.png 2x"/>
+# mesakit-serialization &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/map-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/map-32-2x.png 2x"/>
 
 This module contains code for serializing MesaKit objects
 
@@ -16,7 +16,7 @@ This module contains code for serializing MesaKit objects
 
 [//]: # (end-user-text)
 
-### Projects <a name = "projects"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
+### Sub-Projects <a name = "projects"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/diagram-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/diagram-32-2x.png 2x"/>
 
 [**mesakit-serialization-json**](json/README.md)  
 
@@ -24,7 +24,7 @@ This module contains code for serializing MesaKit objects
 
 ### Javadoc Coverage <a name = "javadoc-coverage"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/bargraph-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/bargraph-24-2x.png 2x"/>
 
-&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-70-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-70-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-70-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-70-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-serialization-json**](json/README.md)
 
 [//]: # (start-user-text)

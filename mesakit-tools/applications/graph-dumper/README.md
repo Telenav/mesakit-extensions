@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-graph-dumper &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons//gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons//gears-32-2x.png 2x"/>
+# mesakit-tools-applications-graph-dumper &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
 
 This module contains a command line tool for dumping information in MesaKit graph files
 
@@ -56,7 +56,7 @@ None
 
 Javadoc coverage for this project is 87.5%.  
   
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meter/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/images/meter/meter-90-96-2x.png 2x"/>
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-90-96-2x.png 2x"/>
 
 
 
