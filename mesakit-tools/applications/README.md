@@ -39,37 +39,37 @@ This module contains MesaKit tool applications
 
 ### Javadoc Coverage <a name = "javadoc-coverage"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/bargraph-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/bargraph-24-2x.png 2x"/>
 
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-30-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-codec-generator**](codec-generator/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-40-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-analyzer**](graph-analyzer/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-80-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-80-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-80-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-80-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-double-digitized-ways-extractor**](graph-double-digitized-ways-extractor/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-90-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-90-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-dumper**](graph-dumper/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-30-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-slicer**](graph-slicer/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-90-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-90-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-90-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-to-pbf-converter**](graph-to-pbf-converter/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-30-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-graph-verifier**](graph-verifier/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-60-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-60-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-analyzer**](pbf-analyzer/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-30-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-comparator**](pbf-comparator/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-30-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-dumper**](pbf-dumper/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-80-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-80-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-80-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-80-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-filter**](pbf-filter/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-40-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-metadata**](pbf-metadata/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-40-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-region-extractor**](pbf-region-extractor/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-60-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-60-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-60-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-to-graph-converter**](pbf-to-graph-converter/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-40-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-pbf-world-graph-extractor**](pbf-world-graph-extractor/README.md)  
-&nbsp; <img src="https://telenav.github.io/telenav-assets/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/meters/meter-40-96-2x.png 2x"/>
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-40-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-40-96-2x.png 2x"/>
  &nbsp; &nbsp; [**mesakit-tools-applications-region-information**](region-information/README.md)
 
 [//]: # (start-user-text)
