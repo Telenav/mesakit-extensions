@@ -1,25 +1,33 @@
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<!--                                                                                                                 -->
-<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
-<!--  Licensed under Apache License, Version 2.0                                                                     -->
-<!--                                                                                                                 -->
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //
+ // © 2011-2022 Telenav, Inc.
+ // Licensed under Apache License, Version 2.0
+ //
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ -->
 
-<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.telenav.mesakit</groupId>
-        <artifactId>mesakit-plugins-josm</artifactId>
-        <version>0.9.13</version>
-    </parent>
+<project
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xmlns = "http://maven.apache.org/POM/4.0.0"
+        xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.telenav.mesakit</groupId>
+        <artifactId>telenav-superpom-mesakit</artifactId>
+        <version>2.0.0</version>
+        <relativePath/>
+    </parent>
+
     <artifactId>mesakit-plugins-josm-graph</artifactId>
-    <packaging>jar</packaging>
+    <version>0.9.14</version>
 
     <dependencies>
 
-        <!--KivaKit -->
+        <!-- KivaKit -->
 
         <dependency>
             <groupId>com.telenav.kivakit</groupId>
@@ -29,19 +37,19 @@
         <!-- MesaKit -->
 
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-navigation-routing</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-map-ui-desktop</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-plugins-josm-library</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-query</artifactId>
         </dependency>
 
@@ -65,6 +73,7 @@
         <profile>
             <id>tools</id>
             <build>
+
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
@@ -81,8 +90,11 @@
                         </includes>
                     </resource>
                 </resources>
+
                 <plugins>
+
                     <plugin>
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
                         <version>${maven-shade-plugin.version}</version>
@@ -92,7 +104,9 @@
                                 <goals>
                                     <goal>shade</goal>
                                 </goals>
+
                                 <configuration>
+
                                     <finalName>${project.artifactId}-${project.parent.version}</finalName>
                                     <minimizeJar>true</minimizeJar>
                                     <createDependencyReducedPom>false</createDependencyReducedPom>
@@ -105,21 +119,33 @@
                                         </excludes>
                                     </artifactSet>
                                     <transformers>
-                                        <transformer implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <transformer
+                                                implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <manifestEntries>
-                                                <Implementation-Vendor>Telenav Inc.</Implementation-Vendor>
+
+                                                <Implementation-Vendor>
+                                                    Telenav Inc.
+                                                </Implementation-Vendor>
                                                 <Implementation-Title>${project.artifactId}</Implementation-Title>
                                                 <Release-Version>${project.version}</Release-Version>
                                                 <Built-By>${user.name}</Built-By>
 
+                                                <!-- Make javadoc happy -->
+                                                <Automatic-Module-Name>mesakit.plugins.josm.graph</Automatic-Module-Name>
+
                                                 <!-- For JOSM -->
+
                                                 <Plugin-Class>com.telenav.mesakit.plugins.josm.graph.GraphPlugin</Plugin-Class>
                                                 <Plugin-Date>${maven.build.timestamp}</Plugin-Date>
-                                                <Plugin-Description>Enables viewing of Telenav MesaKit graph files</Plugin-Description>
+                                                <Plugin-Description>
+                                                    Enables viewing of Telenav
+                                                    MesaKit graph files
+                                                </Plugin-Description>
                                                 <Plugin-Mainversion>${josm.version}</Plugin-Mainversion>
                                                 <Plugin-Version>${mesakit.version}</Plugin-Version>
                                                 <Plugin-Icon>images/graph.png</Plugin-Icon>
                                                 <Plugin-Link>https://spaces.telenav.com:8443/display/TT/MesaKit+Team+Home</Plugin-Link>
+
                                             </manifestEntries>
                                         </transformer>
                                     </transformers>
@@ -127,6 +153,7 @@
                                         <filter>
                                             <artifact>*:*</artifact>
                                             <excludes>
+
                                                 <exclude>module-info.class</exclude>
                                                 <exclude>license.txt</exclude>
                                                 <exclude>log4j.properties</exclude>
@@ -138,34 +165,49 @@
                                                 <exclude>META-INF/*.SF</exclude>
                                                 <exclude>META-INF/*.DSA</exclude>
                                                 <exclude>META-INF/*.RSA</exclude>
+
                                             </excludes>
                                         </filter>
                                     </filters>
+
                                 </configuration>
+
                             </execution>
                         </executions>
+
                     </plugin>
+
                     <plugin>
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <version>3.0.0</version>
                         <executions>
+
                             <execution>
+
                                 <id>copy</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <target name = "Install MesaKit Graph Plugin">
-                                        <copy file = "target/mesakit-plugins-josm-graph-${mesakit.version}.jar"
-                                              tofile = "${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
+                                    <target
+                                            name = "Install MesaKit Graph Plugin">
+                                        <copy
+                                                file = "target/mesakit-plugins-josm-graph-${mesakit.version}.jar"
+                                                tofile = "${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
+
                             </execution>
+
                         </executions>
+
                     </plugin>
+
                 </plugins>
+
             </build>
         </profile>
     </profiles>

@@ -64,23 +64,23 @@ public class EdgeTheme extends BaseTheme
         switch (edge.roadFunctionalClass())
         {
             case MAIN:
-                return line.fattened(Percent.of(200));
+                return line.fattened(Percent.percent(200));
 
             case FIRST_CLASS:
                 if (edge.roadType() == RoadType.HIGHWAY)
                 {
-                    return line.fattened(Percent.of(100));
+                    return line.fattened(Percent.percent(100));
                 }
                 else
                 {
-                    return line.fattened(Percent.of(50));
+                    return line.fattened(Percent.percent(50));
                 }
 
             case SECOND_CLASS:
-                return line.fattened(Percent.of(30));
+                return line.fattened(Percent.percent(30));
 
             case THIRD_CLASS:
-                return line.fattened(Percent.of(5));
+                return line.fattened(Percent.percent(5));
 
             case UNKNOWN:
             case FOURTH_CLASS:

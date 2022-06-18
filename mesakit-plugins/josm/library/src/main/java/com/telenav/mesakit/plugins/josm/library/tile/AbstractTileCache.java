@@ -18,11 +18,33 @@
 
 package com.telenav.mesakit.plugins.josm.library.tile;
 
+/**
+ * Cache for tiles
+ *
+ * @author jonathanl (shibo)
+ */
 public abstract class AbstractTileCache<Request extends AbstractTileRequest, Tile extends AbstractTile>
 {
+    /**
+     * Gets the tile for the given request
+     *
+     * @param request The request
+     * @return The tile
+     */
     public abstract Tile get(Request request);
 
+    /**
+     * Adds a tile to the cache for the given request
+     *
+     * @param request The request
+     * @param tile The tile to add
+     */
     public abstract void put(Request request, Tile tile);
 
+    /**
+     * Removes the tile for the given request
+     *
+     * @param request The request
+     */
     public abstract void remove(Request request);
 }

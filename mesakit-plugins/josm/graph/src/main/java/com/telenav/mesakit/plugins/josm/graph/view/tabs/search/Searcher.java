@@ -479,7 +479,7 @@ public class Searcher extends BaseComponent
 
     private EdgeIdentifier findEdgeIdentifier(String searchString)
     {
-        var identifier = new EdgeIdentifier.Converter(Listener.none()).convert(searchString);
+        var identifier = new EdgeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (identifier != null && !graph().isComposite())
         {
             if (graph().contains(identifier))
@@ -492,12 +492,12 @@ public class Searcher extends BaseComponent
 
     private Location findLocation(String searchString)
     {
-        return new Location.DegreesConverter(Listener.none()).convert(searchString);
+        return new Location.DegreesConverter(Listener.emptyListener()).convert(searchString);
     }
 
     private MapEdgeIdentifier findMapEdgeIdentifier(String searchString)
     {
-        var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.none()).convert(searchString);
+        var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (mapEdgeIdentifier != null && !graph().isComposite())
         {
             if (graph().edgeForIdentifier(mapEdgeIdentifier) != null)
@@ -510,7 +510,7 @@ public class Searcher extends BaseComponent
 
     private PbfNodeIdentifier findNodeIdentifier(String searchString)
     {
-        var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.none()).convert(searchString);
+        var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (nodeIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(nodeIdentifier))
@@ -523,17 +523,17 @@ public class Searcher extends BaseComponent
 
     private Polyline findPolyline(String searchString)
     {
-        return new Polyline.Converter(Listener.none(), new Separators(":", ",")).convert(searchString);
+        return new Polyline.Converter(Listener.emptyListener(), new Separators(":", ",")).convert(searchString);
     }
 
     private Rectangle findRectangle(String searchString)
     {
-        return new Rectangle.Converter(Listener.none()).convert(searchString);
+        return new Rectangle.Converter(Listener.emptyListener()).convert(searchString);
     }
 
     private MapRelationIdentifier findRelationIdentifier(String searchString)
     {
-        var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.none()).convert(searchString);
+        var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (relationIdentifier != null && !graph().isComposite())
         {
             var relation = graph().relationForMapRelationIdentifier(relationIdentifier);
@@ -577,13 +577,13 @@ public class Searcher extends BaseComponent
         Edge.Converter edgeConverter;
         if (searchString.startsWith("cell-") && graph() instanceof WorldGraph)
         {
-            edgeConverter = new WorldEdge.Converter((WorldGraph) graph(), Listener.none());
+            edgeConverter = new WorldEdge.Converter((WorldGraph) graph(), Listener.emptyListener());
         }
         else
         {
-            edgeConverter = new Edge.Converter(graph(), Listener.none());
+            edgeConverter = new Edge.Converter(graph(), Listener.emptyListener());
         }
-        var route = new Route.Converter(graph(), new Separators(":"), Listener.none(), edgeConverter)
+        var route = new Route.Converter(graph(), new Separators(":"), Listener.emptyListener(), edgeConverter)
                 .convert(searchString);
         if (route != null)
         {
@@ -607,7 +607,7 @@ public class Searcher extends BaseComponent
 
     private VertexIdentifier findVertexIdentifier(String searchString)
     {
-        var vertexIdentifier = new VertexIdentifier.Converter(Listener.none()).convert(searchString);
+        var vertexIdentifier = new VertexIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (vertexIdentifier != null)
         {
             if (graph().contains(vertexIdentifier))
@@ -620,7 +620,7 @@ public class Searcher extends BaseComponent
 
     private PbfWayIdentifier findWayIdentifier(String searchString)
     {
-        var wayIdentifier = new PbfWayIdentifier.Converter(Listener.none()).convert(searchString);
+        var wayIdentifier = new PbfWayIdentifier.Converter(Listener.emptyListener()).convert(searchString);
         if (wayIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(wayIdentifier))

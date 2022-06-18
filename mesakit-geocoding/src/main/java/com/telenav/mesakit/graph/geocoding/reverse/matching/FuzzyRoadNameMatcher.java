@@ -22,6 +22,8 @@ import com.telenav.kivakit.core.string.StringSimilarity;
 import com.telenav.kivakit.core.value.level.Percent;
 import com.telenav.mesakit.map.road.model.RoadName;
 
+import static com.telenav.kivakit.core.value.level.Percent.percent;
+
 public class FuzzyRoadNameMatcher implements RoadNameMatcher
 {
     @Override
@@ -58,6 +60,6 @@ public class FuzzyRoadNameMatcher implements RoadNameMatcher
             percentage = 100;
         }
 
-        return Percent.of(percentage);
+        return percent(percentage);
     }
 }

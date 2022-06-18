@@ -1,119 +1,130 @@
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<!--                                                                                                                 -->
-<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
-<!--  Licensed under Apache License, Version 2.0                                                                     -->
-<!--                                                                                                                 -->
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //
+ // © 2011-2022 Telenav, Inc.
+ // Licensed under Apache License, Version 2.0
+ //
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ -->
 
-<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>mesakit-tools</artifactId>
-        <version>0.9.13</version>
+        <artifactId>telenav-superpom-mesakit</artifactId>
+        <version>2.0.0</version>
+        <relativePath/>
     </parent>
-
-    <modelVersion>4.0.0</modelVersion>
+    
     <artifactId>mesakit-tools-application-launcher</artifactId>
-    <packaging>jar</packaging>
+    <version>0.9.14</version>
 
     <dependencies>
-
+        
         <!-- Conversions -->
-
+        
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-to-graph-converter</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-world-graph-extractor</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
-
+        
         <!-- Graph Tools -->
-
+        
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-analyzer</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-double-digitized-ways-extractor</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-dumper</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-slicer</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-verifier</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
-
+        
         <!-- PBF Applications -->
-
+        
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-world</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-analyzer</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-dumper</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-metadata</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-region-extractor</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
-
+        
         <!-- Other Tools -->
-
+        
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-codec-generator</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-region-information</artifactId>
             <version>${mesakit.version}</version>
         </dependency>
-
+        
     </dependencies>
-
+    
     <profiles>
+        
         <profile>
             <id>tools</id>
             <build>
                 <plugins>
+                    
                     <plugin>
+                        
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
                         <version>${maven-shade-plugin.version}</version>
@@ -123,19 +134,24 @@
                                 <goals>
                                     <goal>shade</goal>
                                 </goals>
+                                
                                 <configuration>
+                                    
                                     <finalName>mesakit-tools-${mesakit.version}</finalName>
                                     <minimizeJar>false</minimizeJar>
                                     <transformers>
-                                        <transformer implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>com.telenav.mesakit.tools.application.launcher.ApplicationLauncher</mainClass>
                                         </transformer>
-                                        <transformer implementation = "org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                        <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                     </transformers>
                                     <filters>
                                         <filter>
                                             <artifact>*:*</artifact>
                                             <excludes>
+                                                
                                                 <exclude>module-info.class</exclude>
                                                 <exclude>license.txt</exclude>
                                                 <exclude>log4j.properties</exclude>
@@ -149,6 +165,7 @@
                                                 <exclude>META-INF/*.SF</exclude>
                                                 <exclude>META-INF/*.DSA</exclude>
                                                 <exclude>META-INF/*.RSA</exclude>
+                                                
                                             </excludes>
                                         </filter>
                                     </filters>
@@ -157,13 +174,19 @@
                                             <include>*:*</include>
                                         </includes>
                                     </artifactSet>
+                                    
                                 </configuration>
+                                
                             </execution>
                         </executions>
+                        
                     </plugin>
+                    
                 </plugins>
+                
             </build>
         </profile>
+        
     </profiles>
-
+    
 </project>

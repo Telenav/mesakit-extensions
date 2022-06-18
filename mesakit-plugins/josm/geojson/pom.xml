@@ -1,56 +1,64 @@
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<!--                                                                                                                 -->
-<!--  © 2011-2021 Telenav, Inc.                                                                                      -->
-<!--  Licensed under Apache License, Version 2.0                                                                     -->
-<!--                                                                                                                 -->
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //
+ // © 2011-2022 Telenav, Inc.
+ // Licensed under Apache License, Version 2.0
+ //
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ -->
 
-<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>mesakit-plugins-josm</artifactId>
-        <version>0.9.13</version>
+        <artifactId>telenav-superpom-mesakit</artifactId>
+        <version>2.0.0</version>
+        <relativePath/>
     </parent>
-
-    <modelVersion>4.0.0</modelVersion>
+    
     <artifactId>mesakit-plugins-josm-geojson</artifactId>
-    <packaging>jar</packaging>
+    <version>0.9.14</version>
 
     <dependencies>
-
+        
         <!-- MesaKit -->
-
+        
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-map-utilities-geojson</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-map-ui-desktop</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.telenav.mesakit</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-plugins-josm-library</artifactId>
         </dependency>
-
+        
         <!-- JSON -->
-
+        
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
     </dependencies>
-
+    
     <profiles>
         <profile>
             <id>tools</id>
             <build>
+                
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
@@ -67,8 +75,11 @@
                         </includes>
                     </resource>
                 </resources>
+                
                 <plugins>
+                    
                     <plugin>
+                        
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
                         <version>${maven-shade-plugin.version}</version>
@@ -78,10 +89,10 @@
                                 <goals>
                                     <goal>shade</goal>
                                 </goals>
+                                
                                 <configuration>
-                                    <finalName>
-                                        ${project.artifactId}-${project.parent.version}
-                                    </finalName>
+                                    
+                                    <finalName>${project.artifactId}-${project.parent.version}</finalName>
                                     <minimizeJar>true</minimizeJar>
                                     <artifactSet>
                                         <includes>
@@ -93,29 +104,34 @@
                                     </artifactSet>
                                     <transformers>
                                         <transformer
-                                                implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <manifestEntries>
-
+                                                
                                                 <!-- MANIFEST -->
-
-                                                <Implementation-Vendor>Telenav Inc.</Implementation-Vendor>
+                                                
+                                                <Implementation-Vendor>
+                                                    Telenav Inc.
+                                                </Implementation-Vendor>
                                                 <Implementation-Title>${project.artifactId}</Implementation-Title>
                                                 <Release-Version>${project.version}</Release-Version>
                                                 <Built-By>${user.name}</Built-By>
-
+                                                
+                                                <!-- Make javadoc happy -->
+                                                <Automatic-Module-Name>mesakit.josm.plugins.geojson</Automatic-Module-Name>
+                                                
                                                 <!-- JOSM -->
-
-                                                <Plugin-Class>com.telenav.mesakit.plugins.josm.geojson.GeoJsonPlugin
-                                                </Plugin-Class>
+                                                
+                                                <Plugin-Class>com.telenav.mesakit.plugins.josm.geojson.GeoJsonPlugin</Plugin-Class>
                                                 <Plugin-Date>${maven.build.timestamp}</Plugin-Date>
-                                                <Plugin-Description>Enables importing of integrity check geojson files
+                                                <Plugin-Description>
+                                                    Enables importing of integrity
+                                                    check geojson files
                                                 </Plugin-Description>
                                                 <Plugin-Mainversion>${josm.version}</Plugin-Mainversion>
                                                 <Plugin-Version>${mesakit.version}</Plugin-Version>
                                                 <Plugin-Icon>images/geojson.png</Plugin-Icon>
-                                                <Plugin-Link>https://spaces.telenav.com:8443/display/TT/MesaKit+Team+Home
-                                                </Plugin-Link>
-
+                                                <Plugin-Link>https://spaces.telenav.com:8443/display/TT/MesaKit+Team+Home</Plugin-Link>
+                                                
                                             </manifestEntries>
                                         </transformer>
                                     </transformers>
@@ -123,6 +139,7 @@
                                         <filter>
                                             <artifact>*:*</artifact>
                                             <excludes>
+                                                
                                                 <exclude>module-info.class</exclude>
                                                 <exclude>license.txt</exclude>
                                                 <exclude>log4j.properties</exclude>
@@ -134,36 +151,51 @@
                                                 <exclude>META-INF/*.SF</exclude>
                                                 <exclude>META-INF/*.DSA</exclude>
                                                 <exclude>META-INF/*.RSA</exclude>
+                                                
                                             </excludes>
                                         </filter>
                                     </filters>
+                                    
                                 </configuration>
+                                
                             </execution>
                         </executions>
+                        
                     </plugin>
+                    
                     <plugin>
+                        
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <version>3.0.0</version>
                         <executions>
+                            
                             <execution>
+                                
                                 <id>copy</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <target name = "Install MesaKit GeoJson Plugins">
-                                        <copy file = "target/mesakit-plugins-josm-geojson-${mesakit.version}.jar"
-                                              tofile = "${env.HOME}/Library/JOSM/plugins/telenav-geojson.jar"/>
+                                    <target
+                                        name="Install MesaKit GeoJson Plugins">
+                                        <copy
+                                        file="target/mesakit-plugins-josm-geojson-${mesakit.version}.jar"
+                                        tofile="${env.HOME}/Library/JOSM/plugins/telenav-geojson.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
+                                
                             </execution>
+                            
                         </executions>
+                        
                     </plugin>
+                    
                 </plugins>
+                
             </build>
         </profile>
     </profiles>
-
+    
 </project>
