@@ -18,7 +18,7 @@
     <parent>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>telenav-superpom-mesakit</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <relativePath/>
     </parent>
 
@@ -119,8 +119,7 @@
                                         </excludes>
                                     </artifactSet>
                                     <transformers>
-                                        <transformer
-                                                implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <manifestEntries>
 
                                                 <Implementation-Vendor>
@@ -189,11 +188,8 @@
                                 <id>copy</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <target
-                                            name = "Install MesaKit Graph Plugin">
-                                        <copy
-                                                file = "target/mesakit-plugins-josm-graph-${mesakit.version}.jar"
-                                                tofile = "${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
+                                    <target name="Install MesaKit Graph Plugin">
+                                        <copy file="target/mesakit-plugins-josm-graph-${mesakit.version}.jar" tofile="${env.HOME}/Library/JOSM/plugins/telenav-graph.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>

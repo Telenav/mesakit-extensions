@@ -18,7 +18,7 @@
     <parent>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>telenav-superpom-mesakit</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <relativePath/>
     </parent>
     
@@ -103,8 +103,7 @@
                                         </excludes>
                                     </artifactSet>
                                     <transformers>
-                                        <transformer
-                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <manifestEntries>
                                                 
                                                 <!-- MANIFEST -->
@@ -175,11 +174,8 @@
                                 <id>copy</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <target
-                                        name="Install MesaKit GeoJson Plugins">
-                                        <copy
-                                        file="target/mesakit-plugins-josm-geojson-${mesakit.version}.jar"
-                                        tofile="${env.HOME}/Library/JOSM/plugins/telenav-geojson.jar"/>
+                                    <target name="Install MesaKit GeoJson Plugins">
+                                        <copy file="target/mesakit-plugins-josm-geojson-${mesakit.version}.jar" tofile="${env.HOME}/Library/JOSM/plugins/telenav-geojson.jar"/>
                                     </target>
                                 </configuration>
                                 <goals>
