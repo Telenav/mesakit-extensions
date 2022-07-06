@@ -101,7 +101,7 @@ public class GraphToPbfConverterApplication extends Application
             var folder = input.asFolder();
 
             // so go through each input file in the folder,
-            for (var file : folder.nestedFiles(GRAPH.fileMatcher()))
+            for (var file : folder.nestedFiles(GRAPH.matcher()))
             {
                 convertOne(outputFolder, folder, file);
             }

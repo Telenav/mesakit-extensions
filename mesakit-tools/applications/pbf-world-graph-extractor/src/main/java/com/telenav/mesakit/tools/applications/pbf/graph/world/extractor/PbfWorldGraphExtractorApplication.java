@@ -116,6 +116,61 @@ public class PbfWorldGraphExtractorApplication extends Application
                     .optional()
                     .build();
 
+    public final SwitchParser<File> EXCLUDED_HIGHWAY_TYPES_FILE =
+            fileSwitchParser(this, "excluded-highway-types", "A text file containing excluded highway types (one per line)")
+                    .optional()
+                    .build();
+
+    public final SwitchParser<File> FREE_FLOW_SIDE_FILE =
+            fileSwitchParser(this, "free-flow-side-file", "The file to load free flow from")
+                    .optional()
+                    .build();
+
+    public final SwitchParser<File> INCLUDED_HIGHWAY_TYPES_FILE =
+            fileSwitchParser(this, "included-highway-types", "A text file containing included highway types (one per line)")
+                    .optional()
+                    .build();
+
+    public final SwitchParser<Boolean> REGION_INFORMATION =
+            booleanSwitchParser(this, "region-information", "Include region information (expensive in OSM)")
+                    .optional()
+                    .defaultValue(true)
+                    .build();
+
+    /** Filter for relations */
+    public final SwitchParser<RelationFilter> RELATION_FILTER =
+            relationFilterSwitchParser(this)
+                    .required()
+                    .build();
+
+    /** Filter for ways */
+    public final SwitchParser<WayFilter> WAY_FILTER =
+            wayFilterSwitchParser(this)
+                    .optional()
+                    .defaultValue(new OsmNavigableWayFilter())
+                    .build();
+
+    final SwitchParser<Boolean> PARALLEL =
+            booleanSwitchParser(this, "parallel", "True to use the parallel PBF reader")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
+
+    /** Number of threads to use when extracting and converting */
+    final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count.count(24));
+
+    public final SwitchParser<Boolean> VERIFY =
+            booleanSwitchParser(this, "verify", "True to verify output graphs")
+                    .optional()
+                    .defaultValue(false)
+                    .build();
+
+    /** The input speed pattern file to compile into each cell */
+    public final SwitchParser<File> SPEED_PATTERN_FILE =
+            fileSwitchParser(this, "speed-pattern", "The speed pattern file to compile into each cell")
+                    .optional()
+                    .build();
+
     private PbfWorldGraphExtractorApplication()
     {
         addProject(GraphProject.class);
@@ -242,9 +297,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 if (repositoryInstallFolder != null)
                 {
                     // then copy just the new graphs to the repository install folder.
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.fileMatcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.matcher(),
                             BroadcastingProgressReporter.create(this, "bytes"));
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.fileMatcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
                             BroadcastingProgressReporter.create(this, "bytes"));
                 }
             }
@@ -333,59 +388,4 @@ public class PbfWorldGraphExtractorApplication extends Application
 
         return null;
     }
-
-    public final SwitchParser<File> EXCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser(this, "excluded-highway-types", "A text file containing excluded highway types (one per line)")
-                    .optional()
-                    .build();
-
-    public final SwitchParser<File> FREE_FLOW_SIDE_FILE =
-            fileSwitchParser(this, "free-flow-side-file", "The file to load free flow from")
-                    .optional()
-                    .build();
-
-    public final SwitchParser<File> INCLUDED_HIGHWAY_TYPES_FILE =
-            fileSwitchParser(this, "included-highway-types", "A text file containing included highway types (one per line)")
-                    .optional()
-                    .build();
-
-    public final SwitchParser<Boolean> REGION_INFORMATION =
-            booleanSwitchParser(this, "region-information", "Include region information (expensive in OSM)")
-                    .optional()
-                    .defaultValue(true)
-                    .build();
-
-    /** Filter for relations */
-    public final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser(this)
-                    .required()
-                    .build();
-
-    /** Filter for ways */
-    public final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser(this)
-                    .optional()
-                    .defaultValue(new OsmNavigableWayFilter())
-                    .build();
-
-    final SwitchParser<Boolean> PARALLEL =
-            booleanSwitchParser(this, "parallel", "True to use the parallel PBF reader")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
-
-    /** Number of threads to use when extracting and converting */
-    final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count.count(24));
-
-    public final SwitchParser<Boolean> VERIFY =
-            booleanSwitchParser(this, "verify", "True to verify output graphs")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
-
-    /** The input speed pattern file to compile into each cell */
-    public final SwitchParser<File> SPEED_PATTERN_FILE =
-            fileSwitchParser(this, "speed-pattern", "The speed pattern file to compile into each cell")
-                    .optional()
-                    .build();
 }

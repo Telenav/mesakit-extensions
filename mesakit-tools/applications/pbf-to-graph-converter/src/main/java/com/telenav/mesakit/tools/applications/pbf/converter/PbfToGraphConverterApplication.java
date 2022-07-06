@@ -67,122 +67,6 @@ public class PbfToGraphConverterApplication extends Application
         new PbfToGraphConverterApplication().run(arguments);
     }
 
-    @Override
-    protected List<ArgumentParser<?>> argumentParsers()
-    {
-        return List.of(INPUT_FILES);
-    }
-
-    @Override
-    protected void onProjectsInitialized()
-    {
-        // Load G2 for english in the background
-        RoadNameStandardizer.loadInBackground(MapLocale.ENGLISH_UNITED_STATES.get(), RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION);
-    }
-
-    @Override
-    protected void onRun()
-    {
-        // Start the clock,
-        var start = Time.now();
-
-        // check the input files,
-        var inputFiles = argument(INPUT_FILES);
-        checkInputFiles(commandLine(), inputFiles);
-
-        // show what will be converted
-        showConversionInformation(inputFiles);
-
-        // and if an output folder was specified,
-        var outputFolder = get(OUTPUT_FOLDER);
-        if (outputFolder != null)
-        {
-            // then be sure it exists.
-            outputFolder.ensureExists();
-        }
-        else
-        {
-            outputFolder = inputFiles.first().parent();
-        }
-
-        // For each input file,
-        var outputFiles = new FileList();
-        var conversion = listenTo(new Conversion(this, commandLine(), outputFolder));
-        for (var input : inputFiles)
-        {
-            // if it's a file,
-            if (input.isFile())
-            {
-                // convert just that one file,
-                var outputFile = conversion.convert(input);
-                if (outputFile != null)
-                {
-                    outputFiles.add(outputFile);
-                }
-            }
-            else
-            {
-                // otherwise, we're converting a whole folder
-                var folder = input.asFolder();
-
-                // so go through each file in the folder,
-                for (var nestedFile : folder.nestedFiles(OSM_PBF.fileMatcher()))
-                {
-                    // and convert those files.
-                    var outputFile = conversion.convert(nestedFile);
-                    if (outputFile != null)
-                    {
-                        outputFiles.add(outputFile);
-                    }
-                }
-            }
-        }
-
-        // Finally, show what new files were built.
-        var built = new ObjectList<>();
-        for (var graphFile : outputFiles)
-        {
-            built.append(graphFile.path().absolute());
-        }
-
-        announce(AsciiArt.textBox(Strings.format("Built ${debug} graph file(s) in ${debug}:",
-                outputFiles.size(), start.elapsedSince()), built.bulleted()));
-        information("Successfully converted $ file(s)", outputFiles.size());
-    }
-
-    @Override
-    protected ObjectSet<SwitchParser<?>> switchParsers()
-    {
-        return objectSet(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
-                INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
-                PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
-                TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);
-    }
-
-    /**
-     * Ensures that input files exist
-     */
-    private void checkInputFiles(CommandLine commandLine, FileList inputFiles)
-    {
-        for (var input : inputFiles)
-        {
-            // and make sure each exists
-            if (!input.exists())
-            {
-                // or give up
-                commandLine.exit("Input file or folder does not exist: " + input);
-            }
-        }
-    }
-
-    /**
-     * Shows what files will be converted
-     */
-    private void showConversionInformation(FileList inputFiles)
-    {
-        information(AsciiArt.textBox("Converting PBF Files", AsciiArt.bulleted(inputFiles)));
-    }
-
     final ArgumentParser<FileList> INPUT_FILES =
             fileListArgumentParser(this, "The comma separated list of input PBF file(s) and/or folders to process", OSM_PBF)
                     .required()
@@ -273,4 +157,120 @@ public class PbfToGraphConverterApplication extends Application
                     .optional()
                     .defaultValue(false)
                     .build();
+
+    @Override
+    protected List<ArgumentParser<?>> argumentParsers()
+    {
+        return List.of(INPUT_FILES);
+    }
+
+    @Override
+    protected void onProjectsInitialized()
+    {
+        // Load G2 for english in the background
+        RoadNameStandardizer.loadInBackground(MapLocale.ENGLISH_UNITED_STATES.get(), RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION);
+    }
+
+    @Override
+    protected void onRun()
+    {
+        // Start the clock,
+        var start = Time.now();
+
+        // check the input files,
+        var inputFiles = argument(INPUT_FILES);
+        checkInputFiles(commandLine(), inputFiles);
+
+        // show what will be converted
+        showConversionInformation(inputFiles);
+
+        // and if an output folder was specified,
+        var outputFolder = get(OUTPUT_FOLDER);
+        if (outputFolder != null)
+        {
+            // then be sure it exists.
+            outputFolder.ensureExists();
+        }
+        else
+        {
+            outputFolder = inputFiles.first().parent();
+        }
+
+        // For each input file,
+        var outputFiles = new FileList();
+        var conversion = listenTo(new Conversion(this, commandLine(), outputFolder));
+        for (var input : inputFiles)
+        {
+            // if it's a file,
+            if (input.isFile())
+            {
+                // convert just that one file,
+                var outputFile = conversion.convert(input);
+                if (outputFile != null)
+                {
+                    outputFiles.add(outputFile);
+                }
+            }
+            else
+            {
+                // otherwise, we're converting a whole folder
+                var folder = input.asFolder();
+
+                // so go through each file in the folder,
+                for (var nestedFile : folder.nestedFiles(OSM_PBF.matcher()))
+                {
+                    // and convert those files.
+                    var outputFile = conversion.convert(nestedFile);
+                    if (outputFile != null)
+                    {
+                        outputFiles.add(outputFile);
+                    }
+                }
+            }
+        }
+
+        // Finally, show what new files were built.
+        var built = new ObjectList<>();
+        for (var graphFile : outputFiles)
+        {
+            built.append(graphFile.path().absolute());
+        }
+
+        announce(AsciiArt.textBox(Strings.format("Built ${debug} graph file(s) in ${debug}:",
+                outputFiles.size(), start.elapsedSince()), built.bulleted()));
+        information("Successfully converted $ file(s)", outputFiles.size());
+    }
+
+    @Override
+    protected ObjectSet<SwitchParser<?>> switchParsers()
+    {
+        return objectSet(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
+                INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
+                PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
+                TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);
+    }
+
+    /**
+     * Ensures that input files exist
+     */
+    private void checkInputFiles(CommandLine commandLine, FileList inputFiles)
+    {
+        for (var input : inputFiles)
+        {
+            // and make sure each exists
+            if (!input.exists())
+            {
+                // or give up
+                commandLine.exit("Input file or folder does not exist: " + input);
+            }
+        }
+    }
+
+    /**
+     * Shows what files will be converted
+     */
+    private void showConversionInformation(FileList inputFiles)
+    {
+        information(AsciiArt.textBox("Converting PBF Files", AsciiArt.bulleted(inputFiles)));
+    }
 }
