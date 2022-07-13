@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/rocket-32-2x.png 2x"/>
+# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/rocket-32-2x.png 2x"/>
 
 This module contains an omnibus application launcher
 
@@ -20,14 +20,14 @@ This module contains an omnibus application launcher
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.14/lexakai/mesakit-extensions/mesakit-tools/application-launcher/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-tools/application-launcher/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-application-launcher</artifactId>
-        <version>0.9.14</version>
+        <version>0.9.15</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.application.launcher*](https://www.mesakit.org/0.9.14/lexakai/mesakit-extensions/mesakit-tools/application-launcher/documentation/diagrams/com.telenav.mesakit.tools.application.launcher.svg)
+[*com.telenav.mesakit.tools.application.launcher*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-tools/application-launcher/documentation/diagrams/com.telenav.mesakit.tools.application.launcher.svg)
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
@@ -65,7 +65,7 @@ The following significant classes are undocumented:
 
 | Class | Documentation Sections |
 |---|---|
-| [*ApplicationLauncher*](https://www.mesakit.org/0.9.14/javadoc/mesakit-extensions/mesakit.tools.application.launcher///////////////////////////////////////////////////////////////////.html) |  |  
+| [*ApplicationLauncher*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.tools.application.launcher///////////////////////////////////////////////////////////////////.html) |  |  
 
 [//]: # (start-user-text)
 
