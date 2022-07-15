@@ -23,7 +23,7 @@
 
     <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-extensions</artifactId>
-    <version>0.9.16</version>
+    <version>0.9.17-SNAPSHOT</version>
     
     <packaging>pom</packaging>
     <description>MesaKit extensions contains modules that extend MesaKit</description>
