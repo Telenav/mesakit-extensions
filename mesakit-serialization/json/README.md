@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-serialization &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/bits-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/bits-32-2x.png 2x"/>
+# mesakit-serialization &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/bits-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/bits-32-2x.png 2x"/>
 
 This module contains code for serializing MesaKit objects to JSON
 

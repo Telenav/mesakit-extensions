@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/rocket-32-2x.png 2x"/>
+# mesakit-tools-application-launcher &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/rocket-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/rocket-32-2x.png 2x"/>
 
 This module contains an omnibus application launcher
 

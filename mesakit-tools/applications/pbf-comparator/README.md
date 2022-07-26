@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-pbf-comparator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/gears-32-2x.png 2x"/>
+# mesakit-tools-applications-pbf-comparator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
 
 This module contains a command line tool for comparing PBF files
 

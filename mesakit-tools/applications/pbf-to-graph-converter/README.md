@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-pbf-to-graph-converter &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/convert-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/convert-32-2x.png 2x"/>
+# mesakit-tools-applications-pbf-to-graph-converter &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/convert-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/convert-32-2x.png 2x"/>
 
 This module contains a command line tool that converts map files in PBF format to a MesaKit .graph files
 

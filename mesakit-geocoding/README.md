@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-geocoding &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/map-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/map-32-2x.png 2x"/>
+# mesakit-geocoding &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/map-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/map-32-2x.png 2x"/>
 
 This module contains geocoding functionality
 

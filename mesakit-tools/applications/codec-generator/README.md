@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-codec-generator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/compress-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/compress-32-2x.png 2x"/>
+# mesakit-tools-applications-codec-generator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/compress-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/compress-32-2x.png 2x"/>
 
 This module creates tag compression codec data
 

@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-plugins-josm-geojson &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/puzzle-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/puzzle-32-2x.png 2x"/>
+# mesakit-plugins-josm-geojson &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/puzzle-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/puzzle-32-2x.png 2x"/>
 
 This module contains a JOSM (https://josm.openstreetmap.de) plugin for displaying GeoJSON files
 
