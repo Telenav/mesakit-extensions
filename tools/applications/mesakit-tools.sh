@@ -7,7 +7,7 @@
 #  terms of the license agreement you entered into with Telenav.                                                       /
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-source mesakit-library-functions.sh
+source mesakit-library-functions
 
 FILTER_OUT="grep -y -v --line-buffered"
 
