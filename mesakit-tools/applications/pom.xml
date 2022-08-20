@@ -32,31 +32,31 @@
 
         <!-- Graph -->
 
-        <module>graph-analyzer</module>
+        <module>pbf-metadata</module>
+        <module>region-information</module>
+        <module>pbf-to-graph-converter</module>
+        <module>pbf-comparator</module>
         <module>graph-double-digitized-ways-extractor</module>
-        <module>graph-dumper</module>
-        <module>graph-slicer</module>
-        <module>graph-verifier</module>
-        <module>graph-to-pbf-converter</module>
+        <module>pbf-analyzer</module>
 
         <!-- PBF -->
 
-        <module>pbf-analyzer</module>
-        <module>pbf-comparator</module>
         <module>pbf-dumper</module>
-        <module>pbf-metadata</module>
         <module>pbf-region-extractor</module>
-        <module>pbf-to-graph-converter</module>
+        <module>graph-analyzer</module>
+        <module>graph-verifier</module>
         <module>pbf-world-graph-extractor</module>
         <module>pbf-filter</module>
+        <module>graph-dumper</module>
+        <module>codec-generator</module>
 
         <!-- Codecs -->
 
-        <module>codec-generator</module>
+        <module>graph-to-pbf-converter</module>
 
         <!-- Region -->
 
-        <module>region-information</module>
+        <module>graph-slicer</module>
 
     </modules>
 </project>

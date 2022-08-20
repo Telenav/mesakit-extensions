@@ -41,10 +41,10 @@
     <!-- Modules -->
     
     <modules>
-        <module>mesakit-geocoding</module>
-        <module>mesakit-plugins</module>
-        <module>mesakit-serialization</module>
         <module>mesakit-tools</module>
+        <module>mesakit-plugins</module>
+        <module>mesakit-geocoding</module>
+        <module>mesakit-serialization</module>
     </modules>
     
     <!-- Source Code -->
