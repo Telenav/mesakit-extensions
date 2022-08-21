@@ -29,8 +29,8 @@
 
     <modules>
         <module>library</module>
-        <module>geojson</module>
         <module>graph</module>
+        <module>geojson</module>
     </modules>
 
 </project>
