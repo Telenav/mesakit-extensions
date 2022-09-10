@@ -17,7 +17,7 @@ This module contains extensions to the core MesaKit project
 [**About MesaKit**](#about)  
 [**Example Code**](https://github.com/Telenav/mesakit-examples)  
 [**Published Releases**](https://repo1.maven.org/maven2/com/telenav/mesakit/)  
-[**How to Build This Project**](https://github.com/Telenav/telenav-build/blob/release/0.9.16/documentation/building.md) <!-- [cactus.replacement-branch-name] -->
+[**How to Build This Project**](https://github.com/Telenav/telenav-build/blob/release/2.0.2/documentation/building.md) <!-- [cactus.replacement-branch-name] -->
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
