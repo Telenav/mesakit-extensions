@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-tools-applications-pbf-comparator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/images/icons/gears-32-2x.png 2x"/>
+# mesakit-tools-applications-pbf-comparator &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
 
 This module contains a command line tool for comparing PBF files
 
@@ -20,14 +20,14 @@ This module contains a command line tool for comparing PBF files
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-pbf-comparator</artifactId>
-        <version>0.9.15</version>
+        <version>0.9.17</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -48,7 +48,7 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.pbf.comparator*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.comparator.svg)
+[*com.telenav.mesakit.tools.applications.pbf.comparator*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-comparator/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.comparator.svg)
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
@@ -61,11 +61,11 @@ Javadoc coverage for this project is 25.0%.
 
 The following significant classes are undocumented:  
 
-- com.telenav.mesakit.tools.applications.pbf.comparator
+- com.telenav.mesakit.tools.applications.pbf.comparator.PbfComparatorApplication
 
 | Class | Documentation Sections |
 |---|---|
-| [*PbfComparatorApplication*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.comparator///////////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*PbfComparatorApplication*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.tools.applications.pbf.comparator///////////////////////////////////////////////////////////////////////////////.html) |  |  
 
 [//]: # (start-user-text)
 
