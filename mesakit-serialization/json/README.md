@@ -20,14 +20,14 @@ This module contains code for serializing MesaKit objects to JSON
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-serialization-json</artifactId>
-        <version>0.9.15</version>
+        <version>0.9.17</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -48,8 +48,8 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.serialization.json*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.svg)  
-[*com.telenav.mesakit.serialization.json.serializers*](https://www.mesakit.org/0.9.15/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.serializers.svg)
+[*com.telenav.mesakit.serialization.json*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.svg)  
+[*com.telenav.mesakit.serialization.json.serializers*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-serialization/json/documentation/diagrams/com.telenav.mesakit.serialization.json.serializers.svg)
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
@@ -64,15 +64,15 @@ Javadoc coverage for this project is 65.1%.
 
 | Class | Documentation Sections |
 |---|---|
-| [*DistanceGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*IdentifierGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json////////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*LatitudeGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*LocationGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*LongitudeGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*MesaKitGsonProject*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////.html) |  |  
-| [*RectangleGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*RectangleInDegreesGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json////////////////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*SpeedCategoryGsonSerializer*](https://www.mesakit.org/0.9.15/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*DistanceGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*IdentifierGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json////////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*LatitudeGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*LocationGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*LongitudeGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*MesaKitGsonProject*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json//////////////////////////////////////////////////////////.html) |  |  
+| [*RectangleGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*RectangleInDegreesGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json////////////////////////////////////////////////////////////////////////////////////.html) |  |  
+| [*SpeedCategoryGsonSerializer*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.serialization.json///////////////////////////////////////////////////////////////////////////////.html) |  |  
 
 [//]: # (start-user-text)
 
