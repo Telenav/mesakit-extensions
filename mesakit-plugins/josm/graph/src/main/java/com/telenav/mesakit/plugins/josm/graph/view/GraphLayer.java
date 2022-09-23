@@ -136,7 +136,7 @@ public class GraphLayer extends BaseJosmLayer
             {
                 region = region.createDecimated(Distance.meters(500), Angle.degrees(10), reporter);
                 region.graphStore().bounds(graph.bounds());
-                region.name(graph.name());
+                region.assignName(graph.name());
                 GraphLayer.LOGGER.information("Created '$':\n$", region.name(), region.metadata());
 
                 state = region.createConstrained(new GraphConstraints()
@@ -146,7 +146,7 @@ public class GraphLayer extends BaseJosmLayer
                 {
                     state = state.createDecimated(Distance.meters(1000), Angle.degrees(20), reporter);
                     state.graphStore().bounds(graph.bounds());
-                    state.name(graph.name());
+                    state.assignName(graph.name());
                     GraphLayer.LOGGER.information("Created '$':\n$", state.name(), state.metadata());
                 }
             }
