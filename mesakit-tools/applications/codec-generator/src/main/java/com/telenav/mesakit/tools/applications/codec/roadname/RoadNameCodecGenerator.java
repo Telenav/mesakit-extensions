@@ -36,9 +36,9 @@ public class RoadNameCodecGenerator extends BaseComponent
             }
         }
         progress.end();
-        if (!characters.frequencies().contains(HuffmanCharacterCodec.ESCAPE))
+        if (!characters.frequencies().containsKey(HuffmanCharacterCodec.ESCAPE))
         {
-            characters.frequencies().add(HuffmanCharacterCodec.ESCAPE, Count._1024);
+            characters.frequencies().plus(HuffmanCharacterCodec.ESCAPE, Count._1024);
         }
 
         var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
