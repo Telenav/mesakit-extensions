@@ -25,6 +25,7 @@ import com.telenav.kivakit.core.language.Objects;
 import com.telenav.kivakit.core.language.primitive.Ints;
 import com.telenav.kivakit.core.messaging.Listener;
 import com.telenav.kivakit.core.string.Separators;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.mesakit.core.MesaKit;
@@ -207,7 +208,7 @@ public class Searcher extends BaseComponent
                     if (edge.hasTag(tag.getKey()))
                     {
                         var value = edge.tagValue(tag.getKey());
-                        if (Objects.equalIgnoringCase(tag.getValue(), value))
+                        if (Strings.equalIgnoringCase(tag.getValue(), value))
                         {
                             found.add(edge);
                             if (found.count().isGreaterThanOrEqualTo(maximum))
