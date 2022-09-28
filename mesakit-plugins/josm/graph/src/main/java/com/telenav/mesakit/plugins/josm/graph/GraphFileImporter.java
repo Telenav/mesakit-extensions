@@ -66,7 +66,7 @@ public class GraphFileImporter extends FileImporter
             if (ZipArchive.is(LOGGER, input))
             {
                 var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
-                var reporter = BroadcastingProgressReporter.create();
+                var reporter = BroadcastingProgressReporter.createProgressReporter();
                 progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
                 var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));

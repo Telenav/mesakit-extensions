@@ -48,7 +48,7 @@ public class QueryPanel extends JPanel
 
     private CardPanel cardPanel;
 
-    private final ProgressReporter searchProgress = BroadcastingProgressReporter.create();
+    private final ProgressReporter searchProgress = BroadcastingProgressReporter.createProgressReporter();
 
     private GraphQuery graphQuery;
 

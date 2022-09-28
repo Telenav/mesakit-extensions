@@ -298,9 +298,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 {
                     // then copy just the new graphs to the repository install folder.
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.matcher(),
-                            BroadcastingProgressReporter.create(this, "bytes"));
+                            BroadcastingProgressReporter.createProgressReporter(this, "bytes"));
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
-                            BroadcastingProgressReporter.create(this, "bytes"));
+                            BroadcastingProgressReporter.createProgressReporter(this, "bytes"));
                 }
             }
         }

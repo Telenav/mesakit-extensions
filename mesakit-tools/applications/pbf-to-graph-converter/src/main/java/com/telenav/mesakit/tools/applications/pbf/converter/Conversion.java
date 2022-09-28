@@ -76,7 +76,7 @@ public class Conversion extends BaseRepeater
         assert input != null;
 
         // Materialize the input resource if it's remote (like an HDFS file),
-        input = input.materialized(BroadcastingProgressReporter.create(this));
+        input = input.materialized(BroadcastingProgressReporter.createProgressReporter(this));
         try
         {
             // retrieve its metadata,
