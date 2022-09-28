@@ -24,7 +24,7 @@ public class RoadNameCodecGenerator extends BaseComponent
         var graph = new SmartGraphLoader(commandLine.argument(require(CodecGeneratorApplication.class).INPUT)).load();
 
         var characters = new CharacterFrequencies();
-        var strings = new StringFrequencies(Count._10_000_000, Maximum._100_000_000);
+        var strings = new StringFrequencies(Maximum._100_000_000);
         var progress = BroadcastingProgressReporter.create(this);
         for (var edge : graph.edges())
         {
