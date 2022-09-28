@@ -130,7 +130,7 @@ public class RegionInformationApplication extends Application
         }
         if (!showCode && !showFolder && !showUri && !showAll)
         {
-            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
+            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.indentation(4));
             regionCodes(region, builder, get(RECURSE));
             System.out.println(builder);
         }
