@@ -141,7 +141,7 @@ public class GraphAnalyzerApplication extends Application
             var start = Time.now();
             graph.loadAll();
             information("Force-loaded in $", start.elapsedSince());
-            information("Rough graph size is $", JavaVirtualMachine.local().sizeOfObjectGraph(graph));
+            information("Rough graph size is $", JavaVirtualMachine.javaVirtualMachine().sizeOfObjectGraph(graph));
             if (byHighwayType)
             {
                 if (graph.supports(EdgeAttributes.get().TAGS))

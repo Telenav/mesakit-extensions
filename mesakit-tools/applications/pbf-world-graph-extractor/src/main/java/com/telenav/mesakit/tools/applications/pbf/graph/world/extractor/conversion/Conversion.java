@@ -162,7 +162,7 @@ public class Conversion extends BaseRepeater
         configuration.freeFlowSideFile(application.get(application.FREE_FLOW_SIDE_FILE));
         configuration.verify(application.get(application.VERIFY));
         configuration.parallel(false);
-        configuration.threads(JavaVirtualMachine.local().processors());
+        configuration.threads(JavaVirtualMachine.javaVirtualMachine().processors());
 
         var speedPatternFile = application.get(application.SPEED_PATTERN_FILE);
         if (speedPatternFile != null && !speedPatternFile.exists())

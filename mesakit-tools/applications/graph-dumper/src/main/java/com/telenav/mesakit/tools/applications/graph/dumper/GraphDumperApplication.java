@@ -141,7 +141,7 @@ public class GraphDumperApplication extends Application
             file.delete();
             file.withExtension(Extension.parseExtension(this, ".idom"));
             information("Dumping heap to: $", file);
-            JavaVirtualMachine.local().dumpHeap(file.path().asJavaPath());
+            JavaVirtualMachine.javaVirtualMachine().dumpHeap(file.path().asJavaPath());
         }
         else if (get(DUMP_EDGE_IDENTIFIERS))
         {
