@@ -212,12 +212,12 @@ public class Conversion extends BaseRepeater
         File outputFile;
         if (outputFolder == null)
         {
-            outputFile = input.withoutKnownExtensions().withExtension(Extension.GRAPH);
+            outputFile = input.withoutAllKnownExtensions().withExtension(Extension.GRAPH);
         }
         else
         {
             outputFile = outputFolder.file(input.relativeTo((input.parent())))
-                    .withoutKnownExtensions()
+                    .withoutAllKnownExtensions()
                     .withExtension(Extension.GRAPH);
         }
         outputFile.parent().ensureExists();
