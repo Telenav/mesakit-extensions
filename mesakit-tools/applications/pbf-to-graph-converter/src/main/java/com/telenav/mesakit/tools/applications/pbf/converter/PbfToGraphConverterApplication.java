@@ -233,7 +233,7 @@ public class PbfToGraphConverterApplication extends Application
         var built = new ObjectList<>();
         for (var graphFile : outputFiles)
         {
-            built.append(graphFile.path().absolute());
+            built.append(graphFile.path().asAbsolute());
         }
 
         announce(AsciiArt.textBox(Strings.format("Built ${debug} graph file(s) in ${debug}:",
