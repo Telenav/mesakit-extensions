@@ -109,7 +109,7 @@ public class WorldConversion extends BaseComponent
     }
 
     /**
-     * @return The number of graph files created by converting the pbf files of cells in the given grid folder
+     * Returns the number of graph files created by converting the pbf files of cells in the given grid folder
      */
     public Statistics convert(PbfWorldGraphExtractorApplication application,
                               WorldGrid grid,
