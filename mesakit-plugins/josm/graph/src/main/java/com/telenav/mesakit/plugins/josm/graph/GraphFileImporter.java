@@ -67,7 +67,7 @@ public class GraphFileImporter extends FileImporter
             {
                 var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
                 var reporter = BroadcastingProgressReporter.createProgressReporter();
-                progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
+                progressMonitor.beginTask("Loading MesaKit graph '" + input.baseFileName() + "'", 100);
                 var previous = new MutableValue<>(0);
                 reporter.listener(workListener(progressMonitor, previous));
                 var graph = new SmartGraphLoader(input).load(messages, reporter);

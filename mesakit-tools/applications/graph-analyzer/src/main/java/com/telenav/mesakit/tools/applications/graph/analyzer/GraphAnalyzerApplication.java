@@ -169,7 +169,7 @@ public class GraphAnalyzerApplication extends Application
 
     private void analyze(boolean print, Folder output, Graph graph)
     {
-        var matcherResult = analyze(graph, Filter.acceptingAll());
+        var matcherResult = analyze(graph, Filter.acceptAll());
         if (print)
         {
             var writer = new PrintWriter(System.out);
