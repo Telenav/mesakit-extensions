@@ -91,7 +91,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         // then build and save the codec
         var symbols = new Symbols<>(frequencies, Minimum._1);
         var codec = HuffmanCodec.from(symbols, Maximum._24);
-        codec.asProperties(new IntegerConverter(this)).save(codec.toString(), File.parseFile(this, "polyline.codec"));
+        codec.asProperties(new IntegerConverter(this)).save(File.parseFile(this, "polyline.codec"), codec.toString());
     }
 
     private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)
