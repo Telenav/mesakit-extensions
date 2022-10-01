@@ -81,7 +81,7 @@ public class GraphSlicerApplication extends Application
         }
         var clipped = graph.clippedTo(bounds);
         information("clipped to $, producing $", bounds, clipped.asString());
-        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.none()))
+        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.nullProgressReporter()))
         {
             clipped.save(archive);
         }

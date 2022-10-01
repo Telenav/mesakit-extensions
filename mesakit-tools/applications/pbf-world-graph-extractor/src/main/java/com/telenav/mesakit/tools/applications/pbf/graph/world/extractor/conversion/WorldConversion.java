@@ -161,7 +161,7 @@ public class WorldConversion extends BaseComponent
                                 listenTo(conversion);
 
                                 // convert the cell, clean cutting to the cell boundary
-                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.none());
+                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.nullProgressReporter());
                                 information("$ Converting $", prefix.trim(), input);
 
                                 // then convert the PBF to a graph

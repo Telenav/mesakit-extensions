@@ -276,7 +276,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                         if (repositoryInstallFolder != null)
                         {
                             // then copy the data (both PBFs and graphs)
-                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.none());
+                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.nullProgressReporter());
                         }
                     }
                 }
