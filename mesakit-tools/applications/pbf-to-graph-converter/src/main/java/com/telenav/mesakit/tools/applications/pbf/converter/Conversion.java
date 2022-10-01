@@ -42,8 +42,8 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.regions.Country;
 
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.READ;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.READ;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataAnalysis.AnalysisType.DEFAULT;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataAnalysis.AnalysisType.FULL_NODE_INFORMATION;
 

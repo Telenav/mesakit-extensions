@@ -63,7 +63,7 @@ public class GraphFileImporter extends FileImporter
         try
         {
             var input = File.file(file);
-            if (ZipArchive.is(LOGGER, input))
+            if (ZipArchive.isZipArchive(LOGGER, input))
             {
                 var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
                 var reporter = BroadcastingProgressReporter.createProgressReporter();

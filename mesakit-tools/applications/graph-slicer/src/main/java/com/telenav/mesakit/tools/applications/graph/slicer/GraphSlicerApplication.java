@@ -32,7 +32,7 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 import static com.telenav.mesakit.map.geography.shape.rectangle.Rectangle.rectangleSwitchParser;
 

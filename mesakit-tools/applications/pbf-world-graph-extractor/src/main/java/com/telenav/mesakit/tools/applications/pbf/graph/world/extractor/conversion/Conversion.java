@@ -47,8 +47,8 @@ import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.regions.Country;
 import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
 
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.READ;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.READ;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 
 /**
  * Performs a single conversion from PBF to graph.
