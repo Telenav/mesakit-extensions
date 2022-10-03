@@ -29,7 +29,6 @@ import com.telenav.kivakit.core.string.Align;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.count.Maximum;
-import com.telenav.kivakit.core.vm.JavaVirtualMachine;
 import com.telenav.kivakit.filesystem.Folder;
 import com.telenav.kivakit.interfaces.comparison.Filter;
 import com.telenav.kivakit.interfaces.comparison.Matcher;
@@ -53,6 +52,7 @@ import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
 
 /**
@@ -104,7 +104,7 @@ public class GraphAnalyzerApplication extends Application
                     .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            Folder.outputFolderSwitchParser(this)
+            folderSwitchParser(this, "output-folder", "Output folder")
                     .optional()
                     .build();
 
@@ -141,7 +141,6 @@ public class GraphAnalyzerApplication extends Application
             var start = Time.now();
             graph.loadAll();
             information("Force-loaded in $", start.elapsedSince());
-            information("Rough graph size is $", JavaVirtualMachine.javaVirtualMachine().sizeOfObjectGraph(graph));
             if (byHighwayType)
             {
                 if (graph.supports(EdgeAttributes.get().TAGS))

@@ -44,8 +44,6 @@ public class WorldConversion extends BaseComponent
 
         Count edgeRelations;
 
-        Bytes totalSize;
-
         public Count attempted()
         {
             return attempted;
@@ -95,11 +93,6 @@ public class WorldConversion extends BaseComponent
         public Count succeeded()
         {
             return succeeded;
-        }
-
-        public Bytes totalSize()
-        {
-            return totalSize;
         }
 
         public Count vertexes()
@@ -192,16 +185,6 @@ public class WorldConversion extends BaseComponent
 
                                     // index this cell
                                     worldCell.worldGrid().index().index(worldCell, cellGraph);
-
-                                    // Add to total size
-                                    if (isDebugOn())
-                                    {
-                                        var size = cellGraph.estimatedMemorySize();
-                                        if (size != null)
-                                        {
-                                            totalSize.add(size);
-                                        }
-                                    }
                                 }
 
                                 // Show overall progress
@@ -248,7 +231,6 @@ public class WorldConversion extends BaseComponent
         statistics.forwardEdges = forwardEdges.asCount();
         statistics.edgeRelations = edgeRelations.asCount();
         statistics.places = places.asCount();
-        statistics.totalSize = Bytes.bytes(totalSize.asLong());
         return statistics;
     }
 }

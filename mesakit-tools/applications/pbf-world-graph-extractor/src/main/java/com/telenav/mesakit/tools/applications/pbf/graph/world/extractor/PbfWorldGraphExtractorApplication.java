@@ -310,7 +310,7 @@ public class PbfWorldGraphExtractorApplication extends Application
             var startLoad = Time.now();
             var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
             forceLoad.loadAll();
-            information("Force-loaded $ world graph in $", forceLoad.estimatedMemorySize(), startLoad.elapsedSince());
+            information("Force-loaded world graph in $", startLoad.elapsedSince());
         }
 
         // We're done

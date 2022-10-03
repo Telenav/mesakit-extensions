@@ -168,7 +168,7 @@ public class PbfToGraphConverterApplication extends Application
     protected void onProjectsInitialized()
     {
         // Load G2 for english in the background
-        RoadNameStandardizer.loadInBackground(MapLocale.ENGLISH_UNITED_STATES.get(), RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION);
+        RoadNameStandardizer.loadInBackground(this, MapLocale.ENGLISH_UNITED_STATES.get(), RoadNameStandardizer.Mode.MESAKIT_STANDARDIZATION);
     }
 
     @Override
