@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.Folder.outputFolderSwitchParser;
+import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 
 /**
@@ -174,7 +174,10 @@ public class EdgeAttributeChecker extends Application
 
     private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE = graphSwitchParser(this).required().build();
 
-    private final SwitchParser<Folder> OUTPUT_FOLDER = outputFolderSwitchParser(this).required().build();
+    private final SwitchParser<Folder> OUTPUT_FOLDER =
+            folderSwitchParser(this, "output-folder", "Output folder")
+                    .required()
+                    .build();
 
     public boolean checkCountry(Edge edge)
     {

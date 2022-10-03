@@ -25,7 +25,7 @@ public class RoadNameCodecGenerator extends BaseComponent
 
         var characters = new CharacterFrequencies();
         var strings = new StringFrequencies(Maximum._100_000_000);
-        var progress = BroadcastingProgressReporter.create(this);
+        var progress = BroadcastingProgressReporter.createProgressReporter(this);
         for (var edge : graph.edges())
         {
             for (var name : edge.roadNames())
@@ -42,9 +42,9 @@ public class RoadNameCodecGenerator extends BaseComponent
         }
 
         var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
-        characterCodec.asProperties().save(characterCodec.toString(), File.parseFile(this, "default-road-name-character.codec"));
+        characterCodec.asProperties().save(File.parseFile(this, "default-road-name-character.codec"), characterCodec.toString());
 
         var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
-        stringCodec.asProperties().save(stringCodec.toString(), File.parseFile(this, "string.codec"));
+        stringCodec.asProperties().save(File.parseFile(this, "string.codec"), stringCodec.toString());
     }
 }

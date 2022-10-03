@@ -276,7 +276,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                         if (repositoryInstallFolder != null)
                         {
                             // then copy the data (both PBFs and graphs)
-                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.none());
+                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.nullProgressReporter());
                         }
                     }
                 }
@@ -298,9 +298,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 {
                     // then copy just the new graphs to the repository install folder.
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.matcher(),
-                            BroadcastingProgressReporter.create(this, "bytes"));
+                            BroadcastingProgressReporter.createProgressReporter(this, "bytes"));
                     localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
-                            BroadcastingProgressReporter.create(this, "bytes"));
+                            BroadcastingProgressReporter.createProgressReporter(this, "bytes"));
                 }
             }
         }
@@ -310,7 +310,7 @@ public class PbfWorldGraphExtractorApplication extends Application
             var startLoad = Time.now();
             var forceLoad = WorldGraph.load(localRepositoryInstallFolder);
             forceLoad.loadAll();
-            information("Force-loaded $ world graph in $", forceLoad.estimatedMemorySize(), startLoad.elapsedSince());
+            information("Force-loaded world graph in $", startLoad.elapsedSince());
         }
 
         // We're done

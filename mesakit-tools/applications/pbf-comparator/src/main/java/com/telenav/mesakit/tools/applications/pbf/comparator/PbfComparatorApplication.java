@@ -101,9 +101,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> beforeWays = new HashSet<>();
         Set<Long> beforeRelations = new HashSet<>();
 
-        var beforeNodeProgress = BroadcastingProgressReporter.create(this);
-        var beforeWayProgress = BroadcastingProgressReporter.create(this);
-        var beforeRelationsProgress = BroadcastingProgressReporter.create(this);
+        var beforeNodeProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var beforeWayProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var beforeRelationsProgress = BroadcastingProgressReporter.createProgressReporter(this);
 
         new SerialPbfReader(before).process(new PbfDataProcessor()
         {
@@ -147,9 +147,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> afterNodes = new HashSet<>();
         Set<Long> afterWays = new HashSet<>();
         Set<Long> afterRelations = new HashSet<>();
-        var afterNodeProgress = BroadcastingProgressReporter.create(this);
-        var afterWayProgress = BroadcastingProgressReporter.create(this);
-        var afterRelationsProgress = BroadcastingProgressReporter.create(this);
+        var afterNodeProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var afterWayProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var afterRelationsProgress = BroadcastingProgressReporter.createProgressReporter(this);
 
         new SerialPbfReader(after).process(new PbfDataProcessor()
         {

@@ -48,7 +48,7 @@ public class GraphPlugin extends BaseJosmPlugin
         addImporter(new GraphFileImporter(this));
 
         // Initialize the graph api
-        Listener.emptyListener().listenTo(resolveProject(GraphProject.class)).initialize();
+        Listener.nullListener().listenTo(resolveProject(GraphProject.class)).initialize();
 
         // Force boundaries to load or it causes UI pauses later
         Region.loadBordersInBackground();

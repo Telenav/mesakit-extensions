@@ -62,21 +62,21 @@ public class GraphFileImporter extends FileImporter
     {
         try
         {
-            var input = File.file(file);
-            if (ZipArchive.is(LOGGER, input))
+            var input = File.file(LOGGER, file);
+            if (ZipArchive.isZipArchive(LOGGER, input))
             {
                 var messages = new MessageList(message -> message.isWorseThan(COMPLETED));
-                var reporter = BroadcastingProgressReporter.create();
-                progressMonitor.beginTask("Loading MesaKit graph '" + input.baseName() + "'", 100);
+                var reporter = BroadcastingProgressReporter.createProgressReporter();
+                progressMonitor.beginTask("Loading MesaKit graph '" + input.baseFileName() + "'", 100);
                 var previous = new MutableValue<>(0);
-                reporter.listener(workListener(progressMonitor, previous));
+                reporter.progressReporter(workListener(progressMonitor, previous));
                 var graph = new SmartGraphLoader(input).load(messages, reporter);
                 if (graph != null)
                 {
                     progressMonitor.worked(100 - previous.get());
                     var metadata = graph.metadata();
                     var layer = (GraphLayer) plugin.createLayer(plugin.name() + " " + metadata.descriptor() + " (" + file.getName() + ")");
-                    layer.graph(graph, ProgressReporter.none());
+                    layer.graph(graph, ProgressReporter.nullProgressReporter());
                     LOGGER.information("Loaded graph '$':\n$", graph.name(), metadata);
                     layer.add();
 
