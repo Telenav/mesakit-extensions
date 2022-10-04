@@ -27,7 +27,7 @@ public class TagIndexer extends BaseRepeater
         {
             while (true)
             {
-                newRequest.waitForCompletion();
+                newRequest.waitForAllThreadsToComplete();
                 newRequest.reset();
 
                 if (request != null)
@@ -52,7 +52,7 @@ public class TagIndexer extends BaseRepeater
         {
             this.request = request;
             requestPending = true;
-            newRequest.completed();
+            newRequest.threadCompleted();
         }
     }
 

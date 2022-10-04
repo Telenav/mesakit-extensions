@@ -18,6 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.geojson;
 
+import com.telenav.kivakit.core.messaging.Listener;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonDocument;
 import org.openstreetmap.josm.actions.ExtensionFileFilter;
@@ -41,7 +42,7 @@ public class GeoJsonFileImporter extends FileImporter
     {
         try
         {
-            var input = File.file(file);
+            var input = File.file(Listener.consoleListener(), file);
             var document = GeoJsonDocument.forJson(input.reader().asString());
             if (document != null)
             {

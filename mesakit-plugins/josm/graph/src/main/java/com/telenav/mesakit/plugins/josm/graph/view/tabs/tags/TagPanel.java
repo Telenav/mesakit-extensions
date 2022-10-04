@@ -1,6 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.core.string.Formatter.Format;
+import com.telenav.kivakit.core.messaging.MessageFormat;
 import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
@@ -52,7 +52,7 @@ public class TagPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        indexer.addListener(message -> graphPanel.status(message.formatted(Format.WITH_EXCEPTION)));
+        indexer.addListener(message -> graphPanel.status(message.formatted(MessageFormat.WITH_EXCEPTION)));
 
         Borders.insideMarginsOf(Margins.of(10)).apply(this);
 

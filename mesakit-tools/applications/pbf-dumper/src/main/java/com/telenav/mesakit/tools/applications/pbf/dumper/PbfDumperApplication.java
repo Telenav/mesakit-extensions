@@ -20,6 +20,7 @@ package com.telenav.mesakit.tools.applications.pbf.dumper;
 
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
+import com.telenav.kivakit.commandline.ArgumentParsers;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
@@ -50,7 +51,7 @@ public class PbfDumperApplication extends Application
                     .build();
 
     private final ArgumentParser<Long> IDENTIFIER =
-            ArgumentParser.longArgumentParser(this, "The node, way or relation identifier to find")
+            ArgumentParsers.longArgumentParser(this, "The node, way or relation identifier to find")
                     .required()
                     .build();
 

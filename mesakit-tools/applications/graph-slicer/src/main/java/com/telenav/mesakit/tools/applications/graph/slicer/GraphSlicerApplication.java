@@ -32,7 +32,7 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 import static com.telenav.mesakit.map.geography.shape.rectangle.Rectangle.rectangleSwitchParser;
 
@@ -81,7 +81,7 @@ public class GraphSlicerApplication extends Application
         }
         var clipped = graph.clippedTo(bounds);
         information("clipped to $, producing $", bounds, clipped.asString());
-        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.none()))
+        try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.nullProgressReporter()))
         {
             clipped.save(archive);
         }

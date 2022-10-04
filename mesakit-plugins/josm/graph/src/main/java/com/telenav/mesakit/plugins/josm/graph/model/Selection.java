@@ -233,22 +233,22 @@ public class Selection
 
     public boolean isSelected(Edge edge)
     {
-        return Objects.equal(edge, selectedEdge);
+        return Objects.isEqual(edge, selectedEdge);
     }
 
     public boolean isSelected(EdgeRelation relation)
     {
-        return Objects.equal(relation, selectedRelation);
+        return Objects.isEqual(relation, selectedRelation);
     }
 
     public boolean isSelected(Layer layer)
     {
-        return Objects.equal(layer, selectedLayer);
+        return Objects.isEqual(layer, selectedLayer);
     }
 
     public boolean isSelected(Place place)
     {
-        return Objects.equal(place, selectedPlace);
+        return Objects.isEqual(place, selectedPlace);
     }
 
     public boolean isSelected(Polyline polyline)
@@ -258,12 +258,12 @@ public class Selection
 
     public boolean isSelected(ShapePoint shapePoint)
     {
-        return Objects.equal(shapePoint, selectedShapePoint);
+        return Objects.isEqual(shapePoint, selectedShapePoint);
     }
 
     public boolean isSelected(Vertex vertex)
     {
-        return Objects.equal(vertex, selectedVertex);
+        return Objects.isEqual(vertex, selectedVertex);
     }
 
     public GraphElement next()

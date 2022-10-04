@@ -27,7 +27,7 @@ import com.telenav.mesakit.plugins.josm.graph.theme.AnnotationTheme;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.telenav.kivakit.interfaces.string.Stringable.Format.USER_LABEL;
+import static com.telenav.kivakit.interfaces.string.StringFormattable.Format.USER_LABEL;
 
 /**
  * Draws edges in the appropriate color for zoom level

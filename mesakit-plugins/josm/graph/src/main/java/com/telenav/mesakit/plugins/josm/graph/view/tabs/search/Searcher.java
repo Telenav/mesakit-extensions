@@ -21,10 +21,10 @@ package com.telenav.mesakit.plugins.josm.graph.view.tabs.search;
 import com.telenav.kivakit.component.BaseComponent;
 import com.telenav.kivakit.core.KivaKit;
 import com.telenav.kivakit.core.collections.list.StringList;
-import com.telenav.kivakit.core.language.Objects;
 import com.telenav.kivakit.core.language.primitive.Ints;
 import com.telenav.kivakit.core.messaging.Listener;
 import com.telenav.kivakit.core.string.Separators;
+import com.telenav.kivakit.core.string.Strings;
 import com.telenav.kivakit.core.value.count.Estimate;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.mesakit.core.MesaKit;
@@ -207,7 +207,7 @@ public class Searcher extends BaseComponent
                     if (edge.hasTag(tag.getKey()))
                     {
                         var value = edge.tagValue(tag.getKey());
-                        if (Objects.equalIgnoringCase(tag.getValue(), value))
+                        if (Strings.equalIgnoringCase(tag.getValue(), value))
                         {
                             found.add(edge);
                             if (found.count().isGreaterThanOrEqualTo(maximum))
@@ -479,7 +479,7 @@ public class Searcher extends BaseComponent
 
     private EdgeIdentifier findEdgeIdentifier(String searchString)
     {
-        var identifier = new EdgeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var identifier = new EdgeIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (identifier != null && !graph().isComposite())
         {
             if (graph().contains(identifier))
@@ -492,12 +492,12 @@ public class Searcher extends BaseComponent
 
     private Location findLocation(String searchString)
     {
-        return new Location.DegreesConverter(Listener.emptyListener()).convert(searchString);
+        return new Location.DegreesConverter(Listener.nullListener()).convert(searchString);
     }
 
     private MapEdgeIdentifier findMapEdgeIdentifier(String searchString)
     {
-        var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var mapEdgeIdentifier = new MapEdgeIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (mapEdgeIdentifier != null && !graph().isComposite())
         {
             if (graph().edgeForIdentifier(mapEdgeIdentifier) != null)
@@ -510,7 +510,7 @@ public class Searcher extends BaseComponent
 
     private PbfNodeIdentifier findNodeIdentifier(String searchString)
     {
-        var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var nodeIdentifier = new PbfNodeIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (nodeIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(nodeIdentifier))
@@ -523,17 +523,17 @@ public class Searcher extends BaseComponent
 
     private Polyline findPolyline(String searchString)
     {
-        return new Polyline.Converter(Listener.emptyListener(), new Separators(":", ",")).convert(searchString);
+        return new Polyline.Converter(Listener.nullListener(), new Separators(":", ",")).convert(searchString);
     }
 
     private Rectangle findRectangle(String searchString)
     {
-        return new Rectangle.Converter(Listener.emptyListener()).convert(searchString);
+        return new Rectangle.Converter(Listener.nullListener()).convert(searchString);
     }
 
     private MapRelationIdentifier findRelationIdentifier(String searchString)
     {
-        var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var relationIdentifier = new PbfRelationIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (relationIdentifier != null && !graph().isComposite())
         {
             var relation = graph().relationForMapRelationIdentifier(relationIdentifier);
@@ -577,13 +577,13 @@ public class Searcher extends BaseComponent
         Edge.Converter edgeConverter;
         if (searchString.startsWith("cell-") && graph() instanceof WorldGraph)
         {
-            edgeConverter = new WorldEdge.Converter((WorldGraph) graph(), Listener.emptyListener());
+            edgeConverter = new WorldEdge.Converter((WorldGraph) graph(), Listener.nullListener());
         }
         else
         {
-            edgeConverter = new Edge.Converter(graph(), Listener.emptyListener());
+            edgeConverter = new Edge.Converter(graph(), Listener.nullListener());
         }
-        var route = new Route.Converter(graph(), new Separators(":"), Listener.emptyListener(), edgeConverter)
+        var route = new Route.Converter(graph(), new Separators(":"), Listener.nullListener(), edgeConverter)
                 .convert(searchString);
         if (route != null)
         {
@@ -607,7 +607,7 @@ public class Searcher extends BaseComponent
 
     private VertexIdentifier findVertexIdentifier(String searchString)
     {
-        var vertexIdentifier = new VertexIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var vertexIdentifier = new VertexIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (vertexIdentifier != null)
         {
             if (graph().contains(vertexIdentifier))
@@ -620,7 +620,7 @@ public class Searcher extends BaseComponent
 
     private PbfWayIdentifier findWayIdentifier(String searchString)
     {
-        var wayIdentifier = new PbfWayIdentifier.Converter(Listener.emptyListener()).convert(searchString);
+        var wayIdentifier = new PbfWayIdentifier.Converter(Listener.nullListener()).convert(searchString);
         if (wayIdentifier != null && !graph().isComposite())
         {
             if (graph().contains(wayIdentifier))

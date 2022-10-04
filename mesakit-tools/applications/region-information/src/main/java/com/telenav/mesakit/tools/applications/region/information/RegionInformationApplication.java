@@ -33,7 +33,7 @@ import com.telenav.mesakit.map.region.regions.Continent;
 
 import java.util.List;
 
-import static com.telenav.kivakit.commandline.ArgumentParser.stringArgumentParser;
+import static com.telenav.kivakit.commandline.ArgumentParsers.stringArgumentParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
@@ -75,6 +75,7 @@ public class RegionInformationApplication extends Application
                     .defaultValue(false)
                     .build();
 
+    @SuppressWarnings("SpellCheckingInspection")
     private final SwitchParser<Boolean> URI =
             booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
                     .optional()
@@ -107,7 +108,7 @@ public class RegionInformationApplication extends Application
     @Override
     protected void onRun()
     {
-        var region = region(commandLine(), argumentList().first().get(REGION));
+        var region = region(commandLine(), argumentList().firstArgumentValue().get(REGION));
         if (get(PARENT))
         {
             region = region.parent();
@@ -130,7 +131,7 @@ public class RegionInformationApplication extends Application
         }
         if (!showCode && !showFolder && !showUri && !showAll)
         {
-            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.of(4));
+            var builder = new IndentingStringBuilder(Style.TEXT, Indentation.indentation(4));
             regionCodes(region, builder, get(RECURSE));
             System.out.println(builder);
         }

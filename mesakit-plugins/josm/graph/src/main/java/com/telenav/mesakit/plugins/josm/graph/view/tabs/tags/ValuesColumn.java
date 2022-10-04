@@ -26,7 +26,7 @@ public class ValuesColumn extends JPanel
     {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.emptyListener()));
+        tagPanel.valuesList = new SearchList<>(new IdentityConverter(Listener.nullListener()));
         tagPanel.valuesList.addSelectionListener((value) ->
         {
             var key = tagPanel.keysList.selected();
@@ -41,7 +41,7 @@ public class ValuesColumn extends JPanel
                 }
                 else
                 {
-                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.status("Highlighting $ $", edges.size(), Plural.pluralize(edges.size(), "match")));
+                    SwingUtilities.invokeLater(() -> tagPanel.graphPanel.status("Highlighting $ $", edges.size(), Plural.pluralizeEnglish(edges.size(), "match")));
                     tagPanel.layer.show(edges, tagPanel.searchViewAreaOnly.isSelected() ? HIGHLIGHT_ONLY : HIGHLIGHT_AND_ZOOM_TO);
                 }
             }

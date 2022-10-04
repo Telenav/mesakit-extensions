@@ -44,8 +44,6 @@ public class WorldConversion extends BaseComponent
 
         Count edgeRelations;
 
-        Bytes totalSize;
-
         public Count attempted()
         {
             return attempted;
@@ -97,11 +95,6 @@ public class WorldConversion extends BaseComponent
             return succeeded;
         }
 
-        public Bytes totalSize()
-        {
-            return totalSize;
-        }
-
         public Count vertexes()
         {
             return vertexes;
@@ -109,7 +102,7 @@ public class WorldConversion extends BaseComponent
     }
 
     /**
-     * @return The number of graph files created by converting the pbf files of cells in the given grid folder
+     * Returns the number of graph files created by converting the pbf files of cells in the given grid folder
      */
     public Statistics convert(PbfWorldGraphExtractorApplication application,
                               WorldGrid grid,
@@ -161,7 +154,7 @@ public class WorldConversion extends BaseComponent
                                 listenTo(conversion);
 
                                 // convert the cell, clean cutting to the cell boundary
-                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.none());
+                                var input = worldCell.pbfFile(outputFolder).materialized(ProgressReporter.nullProgressReporter());
                                 information("$ Converting $", prefix.trim(), input);
 
                                 // then convert the PBF to a graph
@@ -192,16 +185,6 @@ public class WorldConversion extends BaseComponent
 
                                     // index this cell
                                     worldCell.worldGrid().index().index(worldCell, cellGraph);
-
-                                    // Add to total size
-                                    if (isDebugOn())
-                                    {
-                                        var size = cellGraph.estimatedMemorySize();
-                                        if (size != null)
-                                        {
-                                            totalSize.add(size);
-                                        }
-                                    }
                                 }
 
                                 // Show overall progress
@@ -248,7 +231,6 @@ public class WorldConversion extends BaseComponent
         statistics.forwardEdges = forwardEdges.asCount();
         statistics.edgeRelations = edgeRelations.asCount();
         statistics.places = places.asCount();
-        statistics.totalSize = Bytes.bytes(totalSize.asLong());
         return statistics;
     }
 }
