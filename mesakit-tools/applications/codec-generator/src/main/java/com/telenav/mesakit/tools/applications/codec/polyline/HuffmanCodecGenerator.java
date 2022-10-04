@@ -59,7 +59,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         var frequencies = new CountMap<Integer>();
 
         // Go through edges,
-        var progress = BroadcastingProgressReporter.create(this);
+        var progress = BroadcastingProgressReporter.createProgressReporter(this);
         for (var edge : graph.edges())
         {
             // and if the edge is not a segment,
@@ -90,8 +90,8 @@ public class HuffmanCodecGenerator extends BaseComponent
 
         // then build and save the codec
         var symbols = new Symbols<>(frequencies, Minimum._1);
-        var codec = HuffmanCodec.from(symbols, Maximum._24);
-        codec.asProperties(new IntegerConverter(this)).save(codec.toString(), File.parseFile(this, "polyline.codec"));
+        var codec = HuffmanCodec.huffmanCodec(symbols, Maximum._24);
+        codec.asProperties(new IntegerConverter(this)).save(File.parseFile(this, "polyline.codec"), codec.toString());
     }
 
     private void addOffsets(int[] offsetsInDm5, CountMap<Integer> frequencies, int destinationInDm5)

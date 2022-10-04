@@ -24,8 +24,8 @@ public class RoadNameCodecGenerator extends BaseComponent
         var graph = new SmartGraphLoader(commandLine.argument(require(CodecGeneratorApplication.class).INPUT)).load();
 
         var characters = new CharacterFrequencies();
-        var strings = new StringFrequencies(Count._10_000_000, Maximum._100_000_000);
-        var progress = BroadcastingProgressReporter.create(this);
+        var strings = new StringFrequencies(Maximum._100_000_000);
+        var progress = BroadcastingProgressReporter.createProgressReporter(this);
         for (var edge : graph.edges())
         {
             for (var name : edge.roadNames())
@@ -36,15 +36,15 @@ public class RoadNameCodecGenerator extends BaseComponent
             }
         }
         progress.end();
-        if (!characters.frequencies().contains(HuffmanCharacterCodec.ESCAPE))
+        if (!characters.frequencies().containsKey(HuffmanCharacterCodec.ESCAPE))
         {
-            characters.frequencies().add(HuffmanCharacterCodec.ESCAPE, Count._1024);
+            characters.frequencies().plus(HuffmanCharacterCodec.ESCAPE, Count._1024);
         }
 
-        var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
-        characterCodec.asProperties().save(characterCodec.toString(), File.parseFile(this, "default-road-name-character.codec"));
+        var characterCodec = HuffmanCharacterCodec.characterCodec(characters.symbols(Minimum._1024), Maximum._16);
+        characterCodec.asProperties().save(File.parseFile(this, "default-road-name-character.codec"), characterCodec.toString());
 
-        var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
-        stringCodec.asProperties().save(stringCodec.toString(), File.parseFile(this, "string.codec"));
+        var stringCodec = HuffmanStringCodec.stringCodec(strings.symbols(Minimum._1024), Maximum._16);
+        stringCodec.asProperties().save(File.parseFile(this, "string.codec"), stringCodec.toString());
     }
 }

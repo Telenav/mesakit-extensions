@@ -431,7 +431,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
         for (var cell : bounds().cells(size))
         {
             var count = Count.count(spatialIndex.intersecting(cell));
-            maximum = maximum.maximum(count);
+            maximum = maximum.maximize(count);
             counts.put(cell, count);
         }
         for (var cell : bounds().cells(size))

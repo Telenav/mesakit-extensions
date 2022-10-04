@@ -33,7 +33,7 @@ import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parseFolder;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
 
 /**
@@ -85,7 +85,7 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
                 var base = outputFolder.file(path.fileName().withoutCompoundExtension() + "-double-digitized-ways");
 
                 // Save graph file
-                try (var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.none()))
+                try (var archive = new GraphArchive(this, base.withExtension(Extension.GRAPH), WRITE, ProgressReporter.nullProgressReporter()))
                 {
                     filtered.save(archive);
                 }
