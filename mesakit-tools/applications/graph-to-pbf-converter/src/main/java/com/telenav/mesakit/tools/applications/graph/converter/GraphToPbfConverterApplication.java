@@ -116,7 +116,7 @@ public class GraphToPbfConverterApplication extends Application
         information("Built ${debug} PBF file(s) in ${debug}:", converted.size(), start.elapsedSince());
         for (var file : converted)
         {
-            information(" - $", file.path().absolute());
+            information(" - $", file.path().asAbsolute());
         }
     }
 

@@ -53,7 +53,7 @@ public class VectorTileRequest extends AbstractTileRequest
     @Override
     public int hashCode()
     {
-        return Hash.many(mapData, tile);
+        return Hash.hashMany(mapData, tile);
     }
 
     public MapData mapData()

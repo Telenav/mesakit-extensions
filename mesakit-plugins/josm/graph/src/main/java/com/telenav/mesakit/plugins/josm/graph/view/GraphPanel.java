@@ -18,6 +18,7 @@
 
 package com.telenav.mesakit.plugins.josm.graph.view;
 
+import com.telenav.kivakit.core.project.ProjectTrait;
 import com.telenav.kivakit.core.time.Duration;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.kivakit.ui.desktop.component.status.StatusDisplay;
@@ -49,7 +50,10 @@ import java.util.Collections;
  *
  * @author jonathanl (shibo)
  */
-@SuppressWarnings("ClassEscapesDefinedScope") public class GraphPanel extends BaseJosmPanel implements StatusDisplay
+@SuppressWarnings({ "ClassEscapesDefinedScope", "unused" })
+public class GraphPanel extends BaseJosmPanel implements
+        StatusDisplay,
+        ProjectTrait
 {
     static
     {

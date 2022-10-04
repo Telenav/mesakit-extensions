@@ -1,6 +1,6 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags.indexing;
 
-import com.telenav.kivakit.collections.map.MultiMap;
+import com.telenav.kivakit.core.collections.map.MultiMap;
 import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.value.count.Count;
@@ -53,7 +53,7 @@ public class TagIndex
 
     public Count valueCount()
     {
-        return Count.count(keyToValues.totalValues());
+        return Count.count(keyToValues.valueCount());
     }
 
     public synchronized ObjectList<String> values(String key)

@@ -47,8 +47,8 @@ import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.regions.Country;
 import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
 
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.READ;
-import static com.telenav.kivakit.resource.compression.archive.ZipArchive.Mode.WRITE;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.READ;
+import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 
 /**
  * Performs a single conversion from PBF to graph.
@@ -79,7 +79,7 @@ public class Conversion extends BaseRepeater
         assert input != null;
 
         // Materialize the input resource if it's remote (like an HDFS file),
-        input = input.materialized(BroadcastingProgressReporter.create(this));
+        input = input.materialized(BroadcastingProgressReporter.createProgressReporter(this));
         try
         {
             if (metadata.dataSpecification().supports(EdgeAttributes.get().COUNTRY))
@@ -107,7 +107,7 @@ public class Conversion extends BaseRepeater
             else
             {
                 // save the graph to disk,
-                try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.none()))
+                try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.nullProgressReporter()))
                 {
                     var start = Time.now();
                     information("Saving $", archive);
@@ -118,7 +118,7 @@ public class Conversion extends BaseRepeater
                 // and verify it if we were asked to.
                 if (configuration.verify())
                 {
-                    try (var archive = new GraphArchive(this, output, READ, ProgressReporter.none()))
+                    try (var archive = new GraphArchive(this, output, READ, ProgressReporter.nullProgressReporter()))
                     {
                         var start = Time.now();
                         information(AsciiArt.topLine("Verifying graph"));
@@ -162,7 +162,7 @@ public class Conversion extends BaseRepeater
         configuration.freeFlowSideFile(application.get(application.FREE_FLOW_SIDE_FILE));
         configuration.verify(application.get(application.VERIFY));
         configuration.parallel(false);
-        configuration.threads(JavaVirtualMachine.local().processors());
+        configuration.threads(JavaVirtualMachine.javaVirtualMachine().processors());
 
         var speedPatternFile = application.get(application.SPEED_PATTERN_FILE);
         if (speedPatternFile != null && !speedPatternFile.exists())
@@ -206,12 +206,12 @@ public class Conversion extends BaseRepeater
         File outputFile;
         if (outputFolder == null)
         {
-            outputFile = input.withoutKnownExtensions().withExtension(Extension.GRAPH);
+            outputFile = input.withoutAllKnownExtensions().withExtension(Extension.GRAPH);
         }
         else
         {
             outputFile = outputFolder.file(input.relativeTo(input.parent()))
-                    .withoutKnownExtensions()
+                    .withoutAllKnownExtensions()
                     .withExtension(Extension.GRAPH);
         }
         outputFile.parent().ensureExists();

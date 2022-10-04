@@ -43,6 +43,7 @@ import java.util.List;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.os.Console.println;
 import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
@@ -140,7 +141,7 @@ public class GraphDumperApplication extends Application
             file.delete();
             file.withExtension(Extension.parseExtension(this, ".idom"));
             information("Dumping heap to: $", file);
-            JavaVirtualMachine.local().dumpHeap(file.path().asJavaPath());
+            JavaVirtualMachine.javaVirtualMachine().dumpHeap(file.path().asJavaPath());
         }
         else if (get(DUMP_EDGE_IDENTIFIERS))
         {

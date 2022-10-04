@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractTileDownloader<Request extends AbstractTileRequest, Tile extends AbstractTile> extends BaseComponent
 {
-    private static final Count THREADS = JavaVirtualMachine.local().processors();
+    private static final Count THREADS = JavaVirtualMachine.javaVirtualMachine().processors();
 
     private final ExecutorService executor = Threads.threadPool("Downloader", THREADS);
 
@@ -99,7 +99,6 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
             THREADS.loop(() ->
                     executor.execute(() ->
                     {
-
                         runningThreads.incrementAndGet();
                         while (!stop)
                         {
