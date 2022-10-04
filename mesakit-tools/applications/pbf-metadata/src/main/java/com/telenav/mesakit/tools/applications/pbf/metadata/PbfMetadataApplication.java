@@ -116,7 +116,7 @@ public class PbfMetadataApplication extends Application
     protected void onRun()
     {
         var input = argument(INPUT);
-        var existingMetadata = Metadata.from(input);
+        var existingMetadata = Metadata.metadata(input);
         if (get(VIEW))
         {
             System.out.println(AsciiArt.textBox("Metadata", existingMetadata == null ? "No metadata found" : existingMetadata.asString()));

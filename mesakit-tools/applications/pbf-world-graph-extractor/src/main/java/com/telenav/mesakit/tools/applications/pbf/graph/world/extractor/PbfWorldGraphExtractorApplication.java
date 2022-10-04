@@ -190,7 +190,7 @@ public class PbfWorldGraphExtractorApplication extends Application
 
         // Get input resource
         var input = argument(INPUT);
-        var metadata = Metadata.from(input);
+        var metadata = Metadata.metadata(input);
         if (metadata == null)
         {
             exit("Unable get metadata for $", input);

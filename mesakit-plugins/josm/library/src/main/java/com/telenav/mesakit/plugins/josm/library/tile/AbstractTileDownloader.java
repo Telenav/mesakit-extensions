@@ -99,7 +99,6 @@ public abstract class AbstractTileDownloader<Request extends AbstractTileRequest
             THREADS.loop(() ->
                     executor.execute(() ->
                     {
-
                         runningThreads.incrementAndGet();
                         while (!stop)
                         {

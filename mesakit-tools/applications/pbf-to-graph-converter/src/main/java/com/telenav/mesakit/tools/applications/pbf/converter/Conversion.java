@@ -80,7 +80,7 @@ public class Conversion extends BaseRepeater
         try
         {
             // retrieve its metadata,
-            var metadata = Metadata.from(input);
+            var metadata = Metadata.metadata(input);
             if (metadata != null)
             {
                 // and if the data specification is UniDb, and we are not including tags,

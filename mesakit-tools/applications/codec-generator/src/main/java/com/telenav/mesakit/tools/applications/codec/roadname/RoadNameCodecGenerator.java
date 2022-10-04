@@ -41,10 +41,10 @@ public class RoadNameCodecGenerator extends BaseComponent
             characters.frequencies().plus(HuffmanCharacterCodec.ESCAPE, Count._1024);
         }
 
-        var characterCodec = HuffmanCharacterCodec.from(characters.symbols(Minimum._1024), Maximum._16);
+        var characterCodec = HuffmanCharacterCodec.characterCodec(characters.symbols(Minimum._1024), Maximum._16);
         characterCodec.asProperties().save(File.parseFile(this, "default-road-name-character.codec"), characterCodec.toString());
 
-        var stringCodec = HuffmanStringCodec.from(strings.symbols(Minimum._1024), Maximum._16);
+        var stringCodec = HuffmanStringCodec.stringCodec(strings.symbols(Minimum._1024), Maximum._16);
         stringCodec.asProperties().save(File.parseFile(this, "string.codec"), stringCodec.toString());
     }
 }
