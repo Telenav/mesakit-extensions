@@ -23,11 +23,11 @@ This module contains extensions to the core MesaKit project
 
 ### Build Status <a name = "quick-start"></a>&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/gears-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/gears-32-2x.png 2x"/>
 
-| Repository                                                                  | Develop                                                                                                  | Release                                                                                                  |
-|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| [mesakit](https://github.com/Telenav/mesakit/actions)                       | <img src="https://github.com/Telenav/mesakit/actions/workflows/build-develop.yml/badge.svg"/>            | <img src="https://github.com/Telenav/mesakit/actions/workflows/build-release.yml/badge.svg"/>            |
-| [mesakit-extensions](https://github.com/Telenav/mesakit-extensions/actions) | <img src="https://github.com/Telenav/mesakit-extensions/actions/workflows/build-develop.yml/badge.svg"/> | <img src="https://github.com/Telenav/mesakit-extensions/actions/workflows/build-release.yml/badge.svg"/> |
-| [mesakit-examples](https://github.com/Telenav/mesakit-examples/actions)     | <img src="https://github.com/Telenav/mesakit-examples/actions/workflows/build-develop.yml/badge.svg"/>   | <img src="https://github.com/Telenav/mesakit-examples/actions/workflows/build-release.yml/badge.svg"/>   |
+| Repository                                                                  | Develop                                                                                                  |
+|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| [mesakit](https://github.com/Telenav/mesakit/actions)                       | <img src="https://github.com/Telenav/mesakit/actions/workflows/build-develop.yml/badge.svg"/>            |
+| [mesakit-extensions](https://github.com/Telenav/mesakit-extensions/actions) | <img src="https://github.com/Telenav/mesakit-extensions/actions/workflows/build-develop.yml/badge.svg"/> |
+| [mesakit-examples](https://github.com/Telenav/mesakit-examples/actions)     | <img src="https://github.com/Telenav/mesakit-examples/actions/workflows/build-develop.yml/badge.svg"/>   |
 
 <br/>
 
