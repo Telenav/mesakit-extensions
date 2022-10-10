@@ -116,7 +116,7 @@ public class WorldConversion extends BaseComponent
 
         // Get cells with PBF data to convert
         var cells = grid.cells(outputFolder, WorldCell.DataType.PBF).sortedDescendingByPbfSize();
-        information(AsciiArt.box("Converting $ cells", cells.size()));
+        information(AsciiArt.textBox("Converting $ cells", cells.size()));
 
         // Loop through cells
         var attempted = new ConcurrentMutableCount();

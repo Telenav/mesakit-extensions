@@ -59,7 +59,7 @@ public class HuffmanCodecGenerator extends BaseComponent
         var frequencies = new CountMap<Integer>();
 
         // Go through edges,
-        var progress = BroadcastingProgressReporter.createProgressReporter(this);
+        var progress = BroadcastingProgressReporter.progressReporter(this);
         for (var edge : graph.edges())
         {
             // and if the edge is not a segment,

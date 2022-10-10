@@ -208,7 +208,7 @@ public class GraphAnalyzerApplication extends Application
         var otherTurnRestriction = 0;
         var turnRestrictionsByEdgeTurnRestrictions = 0;
         var turnRestrictionsByEdgeGetRelations = 0;
-        var progress = BroadcastingProgressReporter.createProgressReporter(this);
+        var progress = BroadcastingProgressReporter.progressReporter(this);
         var ofType = new double[7];
         var other = 0D;
         var ferry = 0D;

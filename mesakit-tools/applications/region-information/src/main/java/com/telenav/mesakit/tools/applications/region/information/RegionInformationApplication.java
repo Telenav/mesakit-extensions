@@ -145,7 +145,7 @@ public class RegionInformationApplication extends Application
 
     private Region region(CommandLine commandLine, String name)
     {
-        var pattern = Patterns.simplified(name.toLowerCase());
+        var pattern = Patterns.simplifiedPattern(name.toLowerCase());
         var matches = new RegionSet();
         for (var continent : Continent.all())
         {
