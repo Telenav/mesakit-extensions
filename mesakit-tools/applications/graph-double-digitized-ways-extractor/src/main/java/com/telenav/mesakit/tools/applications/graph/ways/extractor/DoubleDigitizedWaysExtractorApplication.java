@@ -31,7 +31,7 @@ import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.graph.library.osm.change.io.PbfSaver;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.kivakit.filesystem.Folder.parseFolder;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;

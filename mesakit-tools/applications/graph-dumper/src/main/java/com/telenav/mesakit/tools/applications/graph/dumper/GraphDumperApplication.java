@@ -44,7 +44,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
 import static com.telenav.kivakit.core.os.Console.println;
-import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.RelationIdentifier.relationIdentifierSwitchParser;

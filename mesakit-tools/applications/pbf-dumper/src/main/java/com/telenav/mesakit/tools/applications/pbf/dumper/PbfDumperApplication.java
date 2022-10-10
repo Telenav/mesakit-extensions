@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.ArgumentParsers;
 import com.telenav.kivakit.filesystem.File;
+import com.telenav.kivakit.filesystem.Files;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfRelation;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
@@ -46,7 +47,7 @@ public class PbfDumperApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            File.fileArgumentParser(this, "The PBF file to preprocess")
+            Files.fileArgumentParser(this, "The PBF file to preprocess")
                     .required()
                     .build();
 

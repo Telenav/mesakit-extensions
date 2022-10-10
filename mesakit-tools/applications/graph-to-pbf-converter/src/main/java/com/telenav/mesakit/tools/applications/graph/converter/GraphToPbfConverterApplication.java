@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
-import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
+import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.kivakit.resource.Extension.GRAPH;
 import static com.telenav.kivakit.resource.Extension.OSM_PBF;
 

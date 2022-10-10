@@ -39,7 +39,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.integerSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.maximumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.minimumSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
+import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
 

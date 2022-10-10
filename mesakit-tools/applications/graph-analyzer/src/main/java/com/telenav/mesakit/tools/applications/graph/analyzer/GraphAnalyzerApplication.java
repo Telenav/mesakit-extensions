@@ -52,7 +52,7 @@ import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
 
 /**
