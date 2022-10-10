@@ -57,6 +57,6 @@ public class JosmCoordinateMapper implements MapProjection
     public Location toMap(DrawingPoint point)
     {
         var latlon = view.getLatLon(point.x(), point.y());
-        return Location.degrees(Doubles.inRange(latlon.getY(), -85, 85), Doubles.inRange(latlon.getX(), -180, 180));
+        return Location.degrees(Doubles.doubleInRange(latlon.getY(), -85, 85), Doubles.doubleInRange(latlon.getX(), -180, 180));
     }
 }

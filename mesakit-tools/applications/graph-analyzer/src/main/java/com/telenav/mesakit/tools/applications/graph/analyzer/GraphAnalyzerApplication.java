@@ -446,6 +446,6 @@ public class GraphAnalyzerApplication extends Application
 
     private String miles(double miles, double total)
     {
-        return miles(miles) + " (" + Doubles.format(miles / total * 100.0, 1) + "%)";
+        return miles(miles) + " (" + Doubles.formatDouble(miles / total * 100.0, 1) + "%)";
     }
 }
