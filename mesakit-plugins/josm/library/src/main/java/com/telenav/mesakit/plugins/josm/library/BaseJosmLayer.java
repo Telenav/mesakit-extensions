@@ -206,7 +206,7 @@ public abstract class BaseJosmLayer extends Layer
     }
 
     /**
-     * @return The largest font that will draw the given string within the given pixel width
+     * Returns the largest font that will draw the given string within the given pixel width
      */
     @SuppressWarnings("SameParameterValue")
     protected Font font(Graphics2D graphics, String string, int width)

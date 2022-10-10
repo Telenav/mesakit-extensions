@@ -135,7 +135,7 @@ public class VisibleEdges
     }
 
     /**
-     * @return True if the edge could be visible
+     * Returns true if the edge could be visible
      */
     private boolean couldBeVisible(Edge edge)
     {

@@ -252,7 +252,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 var factory = listenTo(new PbfDataSourceFactory(input,
                         get(THREADS), get(PARALLEL) ? PARALLEL_READER : SERIAL_READER));
                 var extracted = worldGrid.extract(localRepositoryTemporaryFolder,
-                        () -> factory.newInstance(metadata));
+                        () -> factory.map(metadata));
 
                 // and if anything was extracted,
                 if (extracted.isNonZero())
@@ -357,7 +357,7 @@ public class PbfWorldGraphExtractorApplication extends Application
     }
 
     /**
-     * @return The repository install folder specified on the command line
+     * Returns the repository install folder specified on the command line
      */
     private WorldGraphRepositoryFolder repositoryInstallFolder(CommandLine commandLine, Metadata metadata,
                                                                Mode mode)

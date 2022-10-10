@@ -69,7 +69,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return The output file for the input file
+     * Returns the output file for the input file
      */
     public File convert(File input)
     {
@@ -159,7 +159,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return PbfToGraphConverter configuration for command line
+     * Returns pbfToGraphConverter configuration for command line
      */
     private PbfToGraphConverter.Configuration configuration(CommandLine commandLine, Metadata metadata)
     {
@@ -196,7 +196,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return A configured {@link PbfToGraphConverter} configured by the given command line for the data specification
+     * Returns a configured {@link PbfToGraphConverter} configured by the given command line for the data specification
      * supplied by the metadata.
      */
     private PbfToGraphConverter converter(Metadata metadata)
@@ -205,7 +205,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return The output file to write to
+     * Returns the output file to write to
      */
     private File output(Folder outputFolder, File input)
     {
@@ -225,7 +225,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return A relation filter for the given command line
+     * Returns a relation filter for the given command line
      */
     private RelationFilter relationFilter(CommandLine commandLine)
     {
@@ -238,7 +238,7 @@ public class Conversion extends BaseRepeater
     }
 
     /**
-     * @return A way filter for the given command lines
+     * Returns a way filter for the given command lines
      */
     private WayFilter wayFilter(CommandLine commandLine)
     {
