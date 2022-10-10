@@ -39,7 +39,7 @@ import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.stringSwitchParser;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.core.os.Console.println;
+import static com.telenav.kivakit.core.os.Console.console;
 import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
@@ -173,7 +173,7 @@ public class PbfMetadataApplication extends Application
                     boolean replace = existingMetadata != null;
                     if (annotator.write(metadata))
                     {
-                        println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
+                        console().println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
                                 + input.fileName(), "$", metadata));
                     }
                     else
