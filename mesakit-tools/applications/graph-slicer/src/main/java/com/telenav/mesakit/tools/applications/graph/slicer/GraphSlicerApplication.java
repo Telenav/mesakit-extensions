@@ -30,7 +30,7 @@ import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphSwitchParser;
@@ -90,6 +90,6 @@ public class GraphSlicerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
+        return ObjectSet.set(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
     }
 }

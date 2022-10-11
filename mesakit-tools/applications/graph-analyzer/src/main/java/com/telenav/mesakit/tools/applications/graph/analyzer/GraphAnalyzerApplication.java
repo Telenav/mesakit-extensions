@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
 
@@ -163,7 +163,7 @@ public class GraphAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
+        return ObjectSet.set(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
     private void analyze(boolean print, Folder output, Graph graph)

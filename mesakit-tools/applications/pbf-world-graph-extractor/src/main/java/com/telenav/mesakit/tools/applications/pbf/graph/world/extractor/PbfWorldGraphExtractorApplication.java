@@ -48,7 +48,7 @@ import java.util.List;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.kivakit.resource.Extension.GRAPH;
@@ -332,7 +332,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 .required()
                 .build();
 
-        return objectSet(WARN,
+        return ObjectSet.set(WARN,
                 MODE,
                 PARALLEL,
                 THREADS,

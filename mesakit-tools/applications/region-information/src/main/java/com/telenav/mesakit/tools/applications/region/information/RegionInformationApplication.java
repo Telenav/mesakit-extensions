@@ -35,7 +35,7 @@ import java.util.List;
 
 import static com.telenav.kivakit.commandline.ArgumentParsers.stringArgumentParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 
@@ -140,7 +140,7 @@ public class RegionInformationApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
+        return ObjectSet.set(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
     private Region region(CommandLine commandLine, String name)
