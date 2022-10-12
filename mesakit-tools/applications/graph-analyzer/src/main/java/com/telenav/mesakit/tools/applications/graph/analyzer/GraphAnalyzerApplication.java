@@ -89,7 +89,7 @@ public class GraphAnalyzerApplication extends Application
 
         private String label(String value)
         {
-            return Align.alignRight(value, 32, ' ') + ": ";
+            return Align.rightAlign(value, 32, ' ') + ": ";
         }
     }
 

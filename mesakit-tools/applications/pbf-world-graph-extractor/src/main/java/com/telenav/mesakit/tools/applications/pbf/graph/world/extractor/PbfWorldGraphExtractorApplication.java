@@ -328,7 +328,8 @@ public class PbfWorldGraphExtractorApplication extends Application
     {
         // The deployments can now be created since the graph core is initialized, which means that
         // environment variable expansions are now possible, like ${mesakit.graph.folder} in particular
-        DEPLOYMENT = new WorldGraphDeployments(this).switchParser("deployment")
+        DEPLOYMENT = new WorldGraphDeployments(this)
+                .switchParser("deployment")
                 .required()
                 .build();
 
@@ -359,7 +360,8 @@ public class PbfWorldGraphExtractorApplication extends Application
     /**
      * Returns the repository install folder specified on the command line
      */
-    private WorldGraphRepositoryFolder repositoryInstallFolder(CommandLine commandLine, Metadata metadata,
+    private WorldGraphRepositoryFolder repositoryInstallFolder(CommandLine commandLine,
+                                                               Metadata metadata,
                                                                Mode mode)
     {
         // Get any repository that was specified
