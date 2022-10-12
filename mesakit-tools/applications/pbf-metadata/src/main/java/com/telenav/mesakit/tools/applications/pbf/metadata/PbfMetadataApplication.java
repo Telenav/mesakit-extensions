@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.pbf.metadata;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.filesystem.File;
@@ -33,11 +34,10 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.osm.OsmNaviga
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.osm.OsmRelationsFilter;
 import com.telenav.mesakit.map.geography.Precision;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.stringSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.core.os.Console.console;
 import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
@@ -106,9 +106,9 @@ public class PbfMetadataApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SwitchStatementWithTooFewBranches" })
@@ -196,6 +196,6 @@ public class PbfMetadataApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
+        return set(DATA_DESCRIPTOR, DATA_PRECISION, VIEW, ADD, MODE, WAY_FILTER, RELATION_FILTER, QUIET);
     }
 }

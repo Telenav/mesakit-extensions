@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
@@ -43,11 +44,10 @@ import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.osm.OsmNavigableWayFilter;
 import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion.WorldConversion;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
 import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
@@ -318,9 +318,9 @@ public class PbfWorldGraphExtractorApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @Override
@@ -332,7 +332,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                 .required()
                 .build();
 
-        return ObjectSet.set(WARN,
+        return set(WARN,
                 MODE,
                 PARALLEL,
                 THREADS,

@@ -22,7 +22,7 @@ import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.logging.Logger;
 import com.telenav.kivakit.core.logging.LoggerFactory;
 import com.telenav.kivakit.core.progress.ProgressReporter;
-import com.telenav.kivakit.core.string.Strings;
+import com.telenav.kivakit.core.string.Formatter;
 import com.telenav.kivakit.core.time.Duration;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.level.Percent;
@@ -137,7 +137,7 @@ public class GraphLayer extends BaseJosmLayer
                 region = region.createDecimated(Distance.meters(500), Angle.degrees(10), reporter);
                 region.graphStore().bounds(graph.bounds());
                 region.assignName(graph.name());
-                GraphLayer.LOGGER.information("Created '$':\n$", region.name(), region.metadata());
+                LOGGER.information("Created '$':\n$", region.name(), region.metadata());
 
                 state = region.createConstrained(new GraphConstraints()
                         .withEdgeMatcher((edge) -> edge.roadFunctionalClass().isMoreImportantThanOrEqual(MAIN))
@@ -147,7 +147,7 @@ public class GraphLayer extends BaseJosmLayer
                     state = state.createDecimated(Distance.meters(1000), Angle.degrees(20), reporter);
                     state.graphStore().bounds(graph.bounds());
                     state.assignName(graph.name());
-                    GraphLayer.LOGGER.information("Created '$':\n$", state.name(), state.metadata());
+                    LOGGER.information("Created '$':\n$", state.name(), state.metadata());
                 }
             }
         }
@@ -625,7 +625,7 @@ public class GraphLayer extends BaseJosmLayer
 
     private void html(String message, Object... arguments)
     {
-        panel().html(Strings.format(message + "\n\n\n", arguments));
+        panel().html(Formatter.format(message + "\n\n\n", arguments));
         forceRepaint();
     }
 

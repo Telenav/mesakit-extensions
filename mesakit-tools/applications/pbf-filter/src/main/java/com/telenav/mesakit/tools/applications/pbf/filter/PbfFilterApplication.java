@@ -234,7 +234,7 @@ public class PbfFilterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
+        return set(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
     }
 
     private static LongSet referencedNodes(WayFilter filter, File graphFile)

@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.analyzer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.language.primitive.Doubles;
@@ -46,11 +47,11 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
@@ -88,7 +89,7 @@ public class GraphAnalyzerApplication extends Application
 
         private String label(String value)
         {
-            return Align.right(value, 32, ' ') + ": ";
+            return Align.alignRight(value, 32, ' ') + ": ";
         }
     }
 
@@ -124,9 +125,9 @@ public class GraphAnalyzerApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(GRAPH_RESOURCE);
+        return list(GRAPH_RESOURCE);
     }
 
     @Override
@@ -163,7 +164,7 @@ public class GraphAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
+        return set(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
     private void analyze(boolean print, Folder output, Graph graph)

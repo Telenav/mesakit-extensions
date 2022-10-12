@@ -252,6 +252,6 @@ public class PbfComparatorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
+        return set(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
     }
 }

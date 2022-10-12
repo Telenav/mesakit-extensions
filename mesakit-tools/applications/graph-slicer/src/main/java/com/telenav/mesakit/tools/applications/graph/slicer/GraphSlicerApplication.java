@@ -90,6 +90,6 @@ public class GraphSlicerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
+        return set(GRAPH_RESOURCE, OUTPUT, BOUNDS, QUIET);
     }
 }

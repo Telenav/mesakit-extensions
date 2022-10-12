@@ -107,6 +107,6 @@ public class DoubleDigitizedWaysExtractorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(GRAPH, OUTPUT_FOLDER, QUIET);
+        return set(GRAPH, OUTPUT_FOLDER, QUIET);
     }
 }

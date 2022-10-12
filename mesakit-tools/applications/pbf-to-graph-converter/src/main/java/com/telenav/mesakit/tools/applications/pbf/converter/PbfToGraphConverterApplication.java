@@ -25,7 +25,7 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.string.AsciiArt;
-import com.telenav.kivakit.core.string.Strings;
+import com.telenav.kivakit.core.string.Formatter;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.filesystem.File;
@@ -37,10 +37,9 @@ import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.locale.MapLocale;
 import com.telenav.mesakit.map.road.name.standardizer.RoadNameStandardizer;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
 import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.filesystem.Files.fileListArgumentParser;
 import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
@@ -159,9 +158,9 @@ public class PbfToGraphConverterApplication extends Application
                     .build();
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT_FILES);
+        return list(INPUT_FILES);
     }
 
     @Override
@@ -236,7 +235,7 @@ public class PbfToGraphConverterApplication extends Application
             built.append(graphFile.path().asAbsolute());
         }
 
-        announce(AsciiArt.textBox(Strings.format("Built ${debug} graph file(s) in ${debug}:",
+        announce(AsciiArt.textBox(Formatter.format("Built ${debug} graph file(s) in ${debug}:",
                 outputFiles.size(), start.elapsedSince()), built.bulleted()));
         information("Successfully converted $ file(s)", outputFiles.size());
     }
@@ -244,7 +243,7 @@ public class PbfToGraphConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
+        return set(CLEAN_CUT_TO, EXCLUDED_HIGHWAY_TYPES_FILE, FREE_FLOW_SIDE_FILE,
                 INCLUDED_HIGHWAY_TYPES_FILE, INCLUDE_TAGS, INCLUDE_FULL_NODE_INFORMATION, OUTPUT_FOLDER,
                 PARALLEL_READER, REGION_INFORMATION, RELATION_FILTER, SPEED_PATTERN_FILE,
                 TRACE_COUNTS_SIDE_FILE, TURN_RESTRICTIONS_SIDE_FILE, VERIFY, WAY_FILTER, QUIET);

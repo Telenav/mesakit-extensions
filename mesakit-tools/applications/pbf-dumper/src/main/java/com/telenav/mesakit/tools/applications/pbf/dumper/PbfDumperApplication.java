@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.pbf.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.ArgumentParsers;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.Files;
 import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfNode;
@@ -29,8 +30,7 @@ import com.telenav.mesakit.map.data.formats.pbf.model.entities.PbfWay;
 import com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
 
-import java.util.List;
-
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 
 /**
@@ -75,9 +75,9 @@ public class PbfDumperApplication extends Application
     private int other;
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT, IDENTIFIER);
+        return list(INPUT, IDENTIFIER);
     }
 
     @Override

@@ -232,11 +232,11 @@ public class Searcher extends BaseComponent
             return help();
         }
 
-        if (searchString.equals("query help"))
+        if ("query help".equals(searchString))
         {
             return queryHelp();
         }
-        if (searchString.equals("version"))
+        if ("version".equals(searchString))
         {
             return UserFeedback.html(
                     resolveProject(KivaKit.class).projectVersion() + " - " +

@@ -378,7 +378,7 @@ public class EdgeAttributeChecker extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return ObjectSet.set(GRAPH_RESOURCE, OUTPUT_FOLDER);
+        return set(GRAPH_RESOURCE, OUTPUT_FOLDER);
     }
 
     private boolean check(Edge edge, Attribute<Edge> attribute)

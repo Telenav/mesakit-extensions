@@ -1,7 +1,7 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
 import com.telenav.kivakit.core.messaging.MessageFormat;
-import com.telenav.kivakit.core.string.Strings;
+import com.telenav.kivakit.core.string.Formatter;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
 import com.telenav.kivakit.ui.desktop.layout.Borders;
@@ -143,7 +143,7 @@ public class TagPanel extends JPanel
             var selectedValue = valuesList.selected();
             valuesList.elements(values.copy());
             valuesList.select(selectedValue);
-            valuesLabel.setText(Strings.format("$ values", values.count()));
+            valuesLabel.setText(Formatter.format("$ values", values.count()));
         }
     }
 

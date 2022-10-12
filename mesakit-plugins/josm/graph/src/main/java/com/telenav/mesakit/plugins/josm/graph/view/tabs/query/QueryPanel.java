@@ -154,7 +154,7 @@ public class QueryPanel extends JPanel
             if (graphPanel.layer() != null)
             {
                 var searchString = searchField().getText();
-                if (!Strings.isEmpty(searchString))
+                if (!Strings.isNullOrEmpty(searchString))
                 {
                     searchField().setSelectionStart(0);
                     searchField().setSelectionEnd(searchString.length());

@@ -30,15 +30,15 @@ import java.lang.reflect.Type;
 public class LongitudeGsonSerializer implements JsonSerializerDeserializer<Longitude>
 {
     @Override
-    public Longitude deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public Longitude deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
         return Longitude.degrees(context.deserialize(json, Double.class));
     }
 
     @Override
-    public JsonElement serialize(final Longitude longitude, final Type typeOfSrc,
-                                 final JsonSerializationContext context)
+    public JsonElement serialize(Longitude longitude, Type typeOfSrc,
+                                 JsonSerializationContext context)
     {
         return context.serialize(longitude.asDegrees());
     }
