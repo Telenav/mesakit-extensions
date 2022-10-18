@@ -48,7 +48,7 @@ public class QueryPanel extends JPanel
 
     private CardPanel cardPanel;
 
-    private final ProgressReporter searchProgress = BroadcastingProgressReporter.createProgressReporter();
+    private final ProgressReporter searchProgress = BroadcastingProgressReporter.progressReporter();
 
     private GraphQuery graphQuery;
 
@@ -154,7 +154,7 @@ public class QueryPanel extends JPanel
             if (graphPanel.layer() != null)
             {
                 var searchString = searchField().getText();
-                if (!Strings.isEmpty(searchString))
+                if (!Strings.isNullOrBlank(searchString))
                 {
                     searchField().setSelectionStart(0);
                     searchField().setSelectionEnd(searchString.length());

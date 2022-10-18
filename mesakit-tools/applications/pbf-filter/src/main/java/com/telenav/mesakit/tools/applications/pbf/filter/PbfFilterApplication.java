@@ -39,8 +39,8 @@ import org.openstreetmap.osmosis.core.domain.v0_6.Bound;
 
 import java.util.ArrayList;
 
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.model.tags.PbfTagPatternFilter.tagFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.FILTERED_OUT;
@@ -234,7 +234,7 @@ public class PbfFilterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
+        return set(INPUT, OUTPUT, TAG_FILTER, RELATION_FILTER, WAY_FILTER, QUIET);
     }
 
     private static LongSet referencedNodes(WayFilter filter, File graphFile)

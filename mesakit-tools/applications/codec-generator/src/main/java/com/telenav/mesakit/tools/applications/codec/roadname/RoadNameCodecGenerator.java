@@ -25,7 +25,7 @@ public class RoadNameCodecGenerator extends BaseComponent
 
         var characters = new CharacterFrequencies();
         var strings = new StringFrequencies(Maximum._100_000_000);
-        var progress = BroadcastingProgressReporter.createProgressReporter(this);
+        var progress = BroadcastingProgressReporter.progressReporter(this);
         for (var edge : graph.edges())
         {
             for (var name : edge.roadNames())

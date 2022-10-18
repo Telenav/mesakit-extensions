@@ -24,7 +24,7 @@ package com.telenav.mesakit.plugins.josm.library.tile;
 public abstract class AbstractTile
 {
     /**
-     * @return True if the file is expired
+     * Returns true if the file is expired
      */
     @SuppressWarnings("SameReturnValue")
     public abstract boolean isExpired();

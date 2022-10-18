@@ -36,8 +36,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 
 /**
@@ -101,9 +101,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> beforeWays = new HashSet<>();
         Set<Long> beforeRelations = new HashSet<>();
 
-        var beforeNodeProgress = BroadcastingProgressReporter.createProgressReporter(this);
-        var beforeWayProgress = BroadcastingProgressReporter.createProgressReporter(this);
-        var beforeRelationsProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var beforeNodeProgress = BroadcastingProgressReporter.progressReporter(this);
+        var beforeWayProgress = BroadcastingProgressReporter.progressReporter(this);
+        var beforeRelationsProgress = BroadcastingProgressReporter.progressReporter(this);
 
         new SerialPbfReader(before).process(new PbfDataProcessor()
         {
@@ -147,9 +147,9 @@ public class PbfComparatorApplication extends Application
         Set<Long> afterNodes = new HashSet<>();
         Set<Long> afterWays = new HashSet<>();
         Set<Long> afterRelations = new HashSet<>();
-        var afterNodeProgress = BroadcastingProgressReporter.createProgressReporter(this);
-        var afterWayProgress = BroadcastingProgressReporter.createProgressReporter(this);
-        var afterRelationsProgress = BroadcastingProgressReporter.createProgressReporter(this);
+        var afterNodeProgress = BroadcastingProgressReporter.progressReporter(this);
+        var afterWayProgress = BroadcastingProgressReporter.progressReporter(this);
+        var afterRelationsProgress = BroadcastingProgressReporter.progressReporter(this);
 
         new SerialPbfReader(after).process(new PbfDataProcessor()
         {
@@ -252,6 +252,6 @@ public class PbfComparatorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
+        return set(BEFORE, AFTER, SHOW_REMOVED, SHOW_ADDED, COMPARE_NODES, COMPARE_RELATIONS, COMPARE_WAYS, QUIET);
     }
 }

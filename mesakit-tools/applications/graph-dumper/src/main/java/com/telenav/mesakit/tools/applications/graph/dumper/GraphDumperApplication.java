@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.dumper;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.language.Streams;
 import com.telenav.kivakit.core.string.AsciiArt;
@@ -38,13 +39,12 @@ import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
 import com.telenav.mesakit.map.data.formats.pbf.model.identifiers.PbfWayIdentifier;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.countSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.core.os.Console.println;
-import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.core.os.Console.console;
+import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.EdgeIdentifier.edgeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.PlaceIdentifier.placeIdentifierSwitchParser;
 import static com.telenav.mesakit.graph.identifiers.RelationIdentifier.relationIdentifierSwitchParser;
@@ -123,9 +123,9 @@ public class GraphDumperApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SpellCheckingInspection" })
@@ -167,7 +167,7 @@ public class GraphDumperApplication extends Application
             var number = 1;
             for (var edge : graph.edgesIntersecting(Rectangle.CONTINENTAL_US))
             {
-                println("edge $: $", number++, edge);
+                console().println("edge $: $", number++, edge);
             }
         }
         else if (has(VERTEX))
@@ -195,7 +195,7 @@ public class GraphDumperApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(
+        return set(
                 WAY,
                 EDGE,
                 VERTEX,

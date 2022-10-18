@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.verifier;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.string.Differences;
 import com.telenav.kivakit.core.value.count.Count;
@@ -42,12 +43,12 @@ import com.telenav.mesakit.map.utilities.geojson.GeoJsonFeature;
 import com.telenav.mesakit.map.utilities.geojson.GeoJsonPolyline;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
-import static com.telenav.kivakit.filesystem.File.fileSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
+import static com.telenav.kivakit.filesystem.Files.fileSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.PbfDataProcessor.Action.ACCEPTED;
 
 /**
@@ -82,9 +83,9 @@ public class GraphVerifierApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @Override
@@ -121,7 +122,7 @@ public class GraphVerifierApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(SUB_GRAPH, QUIET);
+        return set(SUB_GRAPH, QUIET);
     }
 
     private Edge matchingEdge(Graph graph, Edge edge)

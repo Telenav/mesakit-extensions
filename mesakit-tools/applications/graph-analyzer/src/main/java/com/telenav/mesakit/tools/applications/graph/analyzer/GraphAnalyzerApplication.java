@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.analyzer;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.list.StringList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.language.primitive.Doubles;
@@ -46,13 +47,13 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.mesakit.graph.io.load.SmartGraphLoader.graphArgumentParser;
 
 /**
@@ -88,7 +89,7 @@ public class GraphAnalyzerApplication extends Application
 
         private String label(String value)
         {
-            return Align.right(value, 32, ' ') + ": ";
+            return Align.rightAlign(value, 32, ' ') + ": ";
         }
     }
 
@@ -124,9 +125,9 @@ public class GraphAnalyzerApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(GRAPH_RESOURCE);
+        return list(GRAPH_RESOURCE);
     }
 
     @Override
@@ -163,7 +164,7 @@ public class GraphAnalyzerApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
+        return set(PRINT, BY_HIGHWAY_TYPE, OUTPUT_FOLDER, QUIET);
     }
 
     private void analyze(boolean print, Folder output, Graph graph)
@@ -208,7 +209,7 @@ public class GraphAnalyzerApplication extends Application
         var otherTurnRestriction = 0;
         var turnRestrictionsByEdgeTurnRestrictions = 0;
         var turnRestrictionsByEdgeGetRelations = 0;
-        var progress = BroadcastingProgressReporter.createProgressReporter(this);
+        var progress = BroadcastingProgressReporter.progressReporter(this);
         var ofType = new double[7];
         var other = 0D;
         var ferry = 0D;
@@ -446,6 +447,6 @@ public class GraphAnalyzerApplication extends Application
 
     private String miles(double miles, double total)
     {
-        return miles(miles) + " (" + Doubles.format(miles / total * 100.0, 1) + "%)";
+        return miles(miles) + " (" + Doubles.formatDouble(miles / total * 100.0, 1) + "%)";
     }
 }

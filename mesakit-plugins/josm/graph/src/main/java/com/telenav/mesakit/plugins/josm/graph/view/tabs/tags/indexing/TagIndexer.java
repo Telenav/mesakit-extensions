@@ -36,7 +36,7 @@ public class TagIndexer extends BaseRepeater
                     var index = buildIndex(request);
                     if (index != null)
                     {
-                        synchronized (TagIndexer.this)
+                        synchronized (this)
                         {
                             request.consumer.accept(index);
                         }

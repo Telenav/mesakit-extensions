@@ -22,6 +22,7 @@ import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.language.Patterns;
 import com.telenav.kivakit.core.string.AsciiArt;
@@ -31,11 +32,10 @@ import com.telenav.mesakit.map.region.RegionProject;
 import com.telenav.mesakit.map.region.RegionSet;
 import com.telenav.mesakit.map.region.regions.Continent;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.ArgumentParsers.stringArgumentParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.booleanSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Indentation;
 import static com.telenav.kivakit.core.string.IndentingStringBuilder.Style;
 
@@ -100,9 +100,9 @@ public class RegionInformationApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(REGION);
+        return list(REGION);
     }
 
     @Override
@@ -140,22 +140,22 @@ public class RegionInformationApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
+        return set(PARENT, CODE, FOLDER, RECURSE, URI, ALL, QUIET);
     }
 
     private Region region(CommandLine commandLine, String name)
     {
-        var pattern = Patterns.simplified(name.toLowerCase());
+        var pattern = Patterns.simplifiedPattern(name.toLowerCase());
         var matches = new RegionSet();
         for (var continent : Continent.all())
         {
-            if (Patterns.matches(pattern, continent.identity().mesakit().code().toLowerCase()))
+            if (Patterns.patternMatches(pattern, continent.identity().mesakit().code().toLowerCase()))
             {
                 matches.add(continent);
             }
             for (Region nested : continent.nestedChildren())
             {
-                if (Patterns.matches(pattern, nested.identity().mesakit().code().toLowerCase()))
+                if (Patterns.patternMatches(pattern, nested.identity().mesakit().code().toLowerCase()))
                 {
                     matches.add(nested);
                 }

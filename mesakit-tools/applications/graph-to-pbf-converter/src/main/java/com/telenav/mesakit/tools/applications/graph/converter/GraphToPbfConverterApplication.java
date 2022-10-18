@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.graph.converter;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.filesystem.File;
@@ -32,9 +33,10 @@ import com.telenav.mesakit.graph.io.save.PbfGraphSaver;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
-import static com.telenav.kivakit.filesystem.Folder.folderSwitchParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
+import static com.telenav.kivakit.filesystem.Folders.folderSwitchParser;
 import static com.telenav.kivakit.resource.Extension.GRAPH;
 import static com.telenav.kivakit.resource.Extension.OSM_PBF;
 
@@ -71,9 +73,9 @@ public class GraphToPbfConverterApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @Override
@@ -123,7 +125,7 @@ public class GraphToPbfConverterApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(OUTPUT_FOLDER, QUIET);
+        return set(OUTPUT_FOLDER, QUIET);
     }
 
     private void convertOne(Folder outputFolder, Folder folder, File input)

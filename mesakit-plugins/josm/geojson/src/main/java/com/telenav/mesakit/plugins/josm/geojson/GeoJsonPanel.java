@@ -255,7 +255,7 @@ public class GeoJsonPanel extends BaseJosmPanel
             {
                 for (var feature : document)
                 {
-                    if (Strings.isEmpty(search.getText())
+                    if (Strings.isNullOrBlank(search.getText())
                             || feature.title().toUpperCase().contains(search.getText().toUpperCase()))
                     {
                         matches.add(feature);

@@ -21,6 +21,7 @@ package com.telenav.mesakit.tools.applications.codec;
 import com.telenav.kivakit.application.Application;
 import com.telenav.kivakit.commandline.ArgumentParser;
 import com.telenav.kivakit.commandline.SwitchParser;
+import com.telenav.kivakit.core.collections.list.ObjectList;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.core.value.count.Minimum;
@@ -32,14 +33,13 @@ import com.telenav.mesakit.tools.applications.codec.polyline.HuffmanCodecGenerat
 import com.telenav.mesakit.tools.applications.codec.roadname.RoadNameCodecGenerator;
 import com.telenav.mesakit.tools.applications.codec.tag.TagCodecGenerator;
 
-import java.util.List;
-
 import static com.telenav.kivakit.commandline.SwitchParsers.enumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.integerSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.maximumSwitchParser;
 import static com.telenav.kivakit.commandline.SwitchParsers.minimumSwitchParser;
-import static com.telenav.kivakit.core.collections.set.ObjectSet.objectSet;
-import static com.telenav.kivakit.filesystem.File.fileArgumentParser;
+import static com.telenav.kivakit.core.collections.list.ObjectList.list;
+import static com.telenav.kivakit.core.collections.set.ObjectSet.set;
+import static com.telenav.kivakit.filesystem.Files.fileArgumentParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.RelationFilter.relationFilterSwitchParser;
 import static com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter.wayFilterSwitchParser;
 
@@ -125,9 +125,9 @@ public class CodecGeneratorApplication extends Application
     }
 
     @Override
-    protected List<ArgumentParser<?>> argumentParsers()
+    protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
-        return List.of(INPUT);
+        return list(INPUT);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class CodecGeneratorApplication extends Application
     @Override
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
-        return objectSet(
+        return set(
                 TYPE,
                 WAY_FILTER,
                 RELATION_FILTER,
