@@ -29,29 +29,12 @@
         
         <!-- KivaKit -->
 
-        <dependency>
-            <groupId>com.telenav.kivakit</groupId>
-            <artifactId>kivakit-component</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.telenav.kivakit</groupId>
-            <artifactId>kivakit-serialization-gson</artifactId>
-        </dependency>
-
         <!-- MesaKit -->
 
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-geography</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-road-model</artifactId>
-        </dependency>
-    </dependencies>
+        </dependencies>
     
 </project>

@@ -33,15 +33,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-navigation-routing</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-utilities-geojson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-ui-desktop</artifactId>
-        </dependency>
-        
         <!-- JOSM -->
         
         <dependency>

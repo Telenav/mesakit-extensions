@@ -33,33 +33,8 @@
             <groupId>com.telenav.kivakit</groupId>
             <artifactId>kivakit-application</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.telenav.kivakit</groupId>
-            <artifactId>kivakit-network-http</artifactId>
-        </dependency>
-        
         <!-- MesaKit -->
         
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-ui-desktop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-utilities-grid</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-measurements</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-geography</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-data-formats-pbf</artifactId>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-map-region</artifactId>

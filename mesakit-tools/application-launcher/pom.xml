@@ -77,11 +77,6 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-graph-world</artifactId>
-            <version>${mesakit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-analyzer</artifactId>
             <version>${mesakit.version}</version>
         </dependency>

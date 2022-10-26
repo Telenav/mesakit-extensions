@@ -31,14 +31,6 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-navigation-routing</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-ui-desktop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-plugins-josm-library</artifactId>
         </dependency>
         <dependency>
@@ -48,19 +40,9 @@
 
         <!-- HTTP -->
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
         <!-- JSON -->
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-    </dependencies>
+        </dependencies>
 
     <profiles>
         <profile>

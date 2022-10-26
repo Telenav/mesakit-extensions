@@ -40,14 +40,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-graph-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-measurements</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-data-formats-pbf</artifactId>
-        </dependency>
-    </dependencies>
+        </dependencies>
     
 </project>

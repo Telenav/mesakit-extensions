@@ -31,28 +31,12 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-graph-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-utilities-geojson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-ui-desktop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-plugins-josm-library</artifactId>
         </dependency>
         
         <!-- JSON -->
         
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-    </dependencies>
+        </dependencies>
     
     <profiles>
         <profile>
