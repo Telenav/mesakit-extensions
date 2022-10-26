@@ -137,13 +137,12 @@ public class PbfMetadataApplication extends Application
                     {
                         switch (metadataFromDescriptor.dataSpecification().type())
                         {
-                            case OSM:
-                                wayFilter = new OsmNavigableWayFilter();
-                                break;
-
-                            default:
+                            case OSM -> wayFilter = new OsmNavigableWayFilter();
+                            default ->
+                            {
                                 exit("No default way filter for $", metadataFromDescriptor.dataSpecification().type());
                                 return;
+                            }
                         }
                     }
 
@@ -152,13 +151,12 @@ public class PbfMetadataApplication extends Application
                     {
                         switch (metadataFromDescriptor.dataSpecification().type())
                         {
-                            case OSM:
-                                relationFilter = new OsmRelationsFilter();
-                                break;
-
-                            default:
+                            case OSM -> relationFilter = new OsmRelationsFilter();
+                            default ->
+                            {
                                 exit("No default relation filter for $", metadataFromDescriptor.dataSpecification().type());
                                 return;
+                            }
                         }
                     }
 

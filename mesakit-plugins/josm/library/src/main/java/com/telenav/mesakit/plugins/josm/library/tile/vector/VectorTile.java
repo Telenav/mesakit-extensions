@@ -33,9 +33,8 @@ public class VectorTile extends AbstractTile
     @Override
     public boolean equals(Object object)
     {
-        if (object instanceof VectorTile)
+        if (object instanceof VectorTile that)
         {
-            var that = (VectorTile) object;
             return tile.equals(that.tile);
         }
         return false;

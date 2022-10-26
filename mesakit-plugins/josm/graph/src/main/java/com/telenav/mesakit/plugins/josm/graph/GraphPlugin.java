@@ -94,9 +94,8 @@ public class GraphPlugin extends BaseJosmPlugin
     protected void onLayerRemoving(Layer layer)
     {
         super.onLayerRemoving(layer);
-        if (layer instanceof GraphLayer)
+        if (layer instanceof GraphLayer graphLayer)
         {
-            var graphLayer = (GraphLayer) layer;
             graphLayer.graph().close();
         }
     }

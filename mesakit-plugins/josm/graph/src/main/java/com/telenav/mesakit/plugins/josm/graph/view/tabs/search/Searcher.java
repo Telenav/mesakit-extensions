@@ -360,45 +360,41 @@ public class Searcher extends BaseComponent
             {
                 switch (prefix)
                 {
-                    case "e":
-                    case "edge":
+                    case "e", "edge" ->
+                    {
                         vertexIdentifier = null;
                         relationIdentifier = null;
                         nodeIdentifier = null;
                         wayIdentifier = null;
-                        break;
-
-                    case "v":
-                    case "vertex":
+                    }
+                    case "v", "vertex" ->
+                    {
                         edgeIdentifier = null;
                         relationIdentifier = null;
                         nodeIdentifier = null;
                         wayIdentifier = null;
-                        break;
-
-                    case "n":
-                    case "node":
+                    }
+                    case "n", "node" ->
+                    {
                         edgeIdentifier = null;
                         vertexIdentifier = null;
                         relationIdentifier = null;
                         wayIdentifier = null;
-                        break;
-
-                    case "w":
-                    case "way":
+                    }
+                    case "w", "way" ->
+                    {
                         edgeIdentifier = null;
                         vertexIdentifier = null;
                         relationIdentifier = null;
                         nodeIdentifier = null;
-                        break;
-
-                    case "r":
-                    case "relation":
+                    }
+                    case "r", "relation" ->
+                    {
                         edgeIdentifier = null;
                         vertexIdentifier = null;
                         nodeIdentifier = null;
                         wayIdentifier = null;
-                        break;
+                    }
                 }
             }
 
