@@ -17,26 +17,16 @@
 
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>telenav-superpom-mesakit</artifactId>
-        <version>2.0.13</version>
-        <relativePath/>
+        <artifactId>mesakit-extensions-parent</artifactId>
+        <version>0.9.19</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
 
     <artifactId>mesakit-plugins-josm-graph</artifactId>
-    <version>0.9.18</version>
-
     <dependencies>
 
         <!-- MesaKit -->
 
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-navigation-routing</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mesakit-map-ui-desktop</artifactId>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-plugins-josm-library</artifactId>
@@ -48,19 +38,9 @@
 
         <!-- HTTP -->
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
         <!-- JSON -->
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-    </dependencies>
+        </dependencies>
 
     <profiles>
         <profile>
