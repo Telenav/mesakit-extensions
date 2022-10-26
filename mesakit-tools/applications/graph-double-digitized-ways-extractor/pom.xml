@@ -17,9 +17,9 @@
     
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>telenav-superpom-mesakit</artifactId>
-        <version>2.0.13</version>
-        <relativePath/>
+        <artifactId>mesakit-extensions-parent</artifactId>
+        <version>0.9.19</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     
     <artifactId>mesakit-tools-applications-graph-double-digitized-ways-extractor</artifactId>
@@ -36,6 +36,13 @@
         <dependency>
             <groupId>com.telenav.kivakit</groupId>
             <artifactId>kivakit-filesystems-s3fs</artifactId>
+            <type>pom</type>
+            <version>${kivakit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.telenav.kivakit</groupId>
+            <artifactId>kivakit-filesystems-s3fs</artifactId>
+            <type>jar</type>
         </dependency>
 
         <!-- MesaKit -->

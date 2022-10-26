@@ -17,9 +17,9 @@
     
     <parent>
         <groupId>com.telenav.mesakit</groupId>
-        <artifactId>telenav-superpom-mesakit</artifactId>
-        <version>2.0.13</version>
-        <relativePath/>
+        <artifactId>mesakit-extensions-parent</artifactId>
+        <version>0.9.19</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     
     <artifactId>mesakit-tools-application-launcher</artifactId>
@@ -32,17 +32,14 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-to-graph-converter</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-world-graph-extractor</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         
         <!-- Graph Tools -->
@@ -50,27 +47,22 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-analyzer</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-double-digitized-ways-extractor</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-dumper</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-slicer</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-graph-verifier</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         
         <!-- PBF Applications -->
@@ -78,22 +70,18 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-analyzer</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-dumper</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-metadata</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-pbf-region-extractor</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         
         <!-- Other Tools -->
@@ -101,12 +89,10 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-codec-generator</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-tools-applications-region-information</artifactId>
-            <version>${mesakit.version}</version>
         </dependency>
         
     </dependencies>
