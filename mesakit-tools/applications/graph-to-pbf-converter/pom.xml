@@ -23,8 +23,6 @@
     </parent>
     
     <artifactId>mesakit-tools-applications-graph-to-pbf-converter</artifactId>
-    <version>0.9.19</version>
-
     <dependencies>
         
         <!-- KivaKit -->

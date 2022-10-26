@@ -23,8 +23,6 @@
     </parent>
     
     <artifactId>mesakit-tools-applications-pbf-world-graph-extractor</artifactId>
-    <version>0.9.19</version>
-
     <dependencies>
         
         <!-- KivaKit -->

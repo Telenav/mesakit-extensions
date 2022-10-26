@@ -23,8 +23,6 @@
     </parent>
 
     <artifactId>mesakit-plugins-josm-graph</artifactId>
-    <version>0.9.19</version>
-
     <dependencies>
 
         <!-- MesaKit -->

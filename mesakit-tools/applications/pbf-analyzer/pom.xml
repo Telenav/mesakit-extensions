@@ -23,8 +23,6 @@
     </parent>
     
     <artifactId>mesakit-tools-applications-pbf-analyzer</artifactId>
-    <version>0.9.19</version>
-
     <dependencies>
         
         <!-- KivaKit -->
