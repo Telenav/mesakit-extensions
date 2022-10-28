@@ -29,9 +29,28 @@
     <modules>
         <module>mesakit-extensions</module>
         <module>mesakit-geocoding</module>
-        <module>mesakit-plugins</module>
-        <module>mesakit-serialization</module>
-        <module>mesakit-tools</module>
+        
+        <module>mesakit-plugins/josm/geojson</module>
+        <module>mesakit-plugins/josm/graph</module>
+        <module>mesakit-plugins/josm/library</module>
+        <module>mesakit-serialization/json</module>
+        <module>mesakit-tools/application-launcher</module>
+        <module>mesakit-tools/applications/codec-generator</module>
+        <module>mesakit-tools/applications/graph-analyzer</module>
+        <module>mesakit-tools/applications/graph-double-digitized-ways-extractor</module>
+        <module>mesakit-tools/applications/graph-dumper</module>
+        <module>mesakit-tools/applications/graph-slicer</module>
+        <module>mesakit-tools/applications/graph-to-pbf-converter</module>
+        <module>mesakit-tools/applications/graph-verifier</module>
+        <module>mesakit-tools/applications/pbf-analyzer</module>
+        <module>mesakit-tools/applications/pbf-comparator</module>
+        <module>mesakit-tools/applications/pbf-dumper</module>
+        <module>mesakit-tools/applications/pbf-filter</module>
+        <module>mesakit-tools/applications/pbf-metadata</module>
+        <module>mesakit-tools/applications/pbf-region-extractor</module>
+        <module>mesakit-tools/applications/pbf-to-graph-converter</module>
+        <module>mesakit-tools/applications/pbf-world-graph-extractor</module>
+        <module>mesakit-tools/applications/region-information</module>
     </modules>
 
     <properties>
