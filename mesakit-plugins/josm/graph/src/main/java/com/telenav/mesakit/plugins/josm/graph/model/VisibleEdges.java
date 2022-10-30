@@ -96,8 +96,7 @@ public class VisibleEdges
         var selected = model.selection().selectedEdge();
         switch (type)
         {
-            case UNSELECTED:
-            case INACTIVE:
+            case UNSELECTED, INACTIVE ->
             {
                 var edges = edges();
                 if (selected != null && selected.isTwoWay())
@@ -106,13 +105,11 @@ public class VisibleEdges
                 }
                 return edges;
             }
-
-            case HIGHLIGHTED:
+            case HIGHLIGHTED ->
             {
                 return EdgeSet.forCollection(Maximum.MAXIMUM, model.selection().highlightedEdges());
             }
-
-            case SELECTED:
+            case SELECTED ->
             {
                 if (selected == null)
                 {
@@ -128,9 +125,7 @@ public class VisibleEdges
                     return edges;
                 }
             }
-
-            default:
-                throw new IllegalArgumentException();
+            default -> throw new IllegalArgumentException();
         }
     }
 

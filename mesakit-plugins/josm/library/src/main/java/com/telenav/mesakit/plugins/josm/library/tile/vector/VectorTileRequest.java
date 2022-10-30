@@ -42,9 +42,8 @@ public class VectorTileRequest extends AbstractTileRequest
     @Override
     public boolean equals(Object object)
     {
-        if (object instanceof VectorTileRequest)
+        if (object instanceof VectorTileRequest that)
         {
-            var that = (VectorTileRequest) object;
             return mapData.equals(that.mapData) && tile.equals(that.tile);
         }
         return false;

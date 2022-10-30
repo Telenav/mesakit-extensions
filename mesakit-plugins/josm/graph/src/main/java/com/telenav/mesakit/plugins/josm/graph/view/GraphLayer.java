@@ -421,9 +421,8 @@ public class GraphLayer extends BaseJosmLayer
             {
                 for (var layer : MainApplication.getLayerManager().getLayers())
                 {
-                    if (layer instanceof GraphLayer)
+                    if (layer instanceof GraphLayer graphLayer)
                     {
-                        var graphLayer = (GraphLayer) layer;
                         var location = canvas.toMap(event.getPoint());
                         if (graphLayer.graph().bounds().contains(location))
                         {

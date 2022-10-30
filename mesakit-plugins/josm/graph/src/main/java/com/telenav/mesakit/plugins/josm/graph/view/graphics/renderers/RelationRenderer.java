@@ -68,18 +68,19 @@ public class RelationRenderer
     {
         switch (type)
         {
-            case RESTRICTED:
+            case RESTRICTED ->
+            {
                 drawRestrictions(UNSELECTED);
                 drawRestrictions(HIGHLIGHTED);
                 drawRestrictions(SELECTED);
-                break;
-
-            case UNSELECTED:
+            }
+            case UNSELECTED ->
+            {
                 drawNonRestrictions();
                 drawRestrictions(type);
-                break;
-
-            case SELECTED:
+            }
+            case SELECTED ->
+            {
                 var selected = model.selection().selectedRelation();
                 if (selected != null)
                 {
@@ -96,10 +97,8 @@ public class RelationRenderer
                                 .draw(canvas);
                     }
                 }
-                break;
-
-            default:
-                throw new IllegalArgumentException();
+            }
+            default -> throw new IllegalArgumentException();
         }
     }
 

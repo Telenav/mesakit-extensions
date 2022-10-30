@@ -135,21 +135,16 @@ public class CodecGeneratorApplication extends Application
     {
         switch (get(TYPE))
         {
-            case TAG:
+            case TAG ->
+            {
                 if (!has(WAY_FILTER) || !has(RELATION_FILTER))
                 {
                     exit("Tag codecs require both the -way-filter and -relation-filter switches");
                 }
                 listenTo(new TagCodecGenerator()).run(commandLine());
-                break;
-
-            case POLYLINE:
-                listenTo(new HuffmanCodecGenerator()).run(commandLine());
-                break;
-
-            case ROAD_NAME:
-                listenTo(new RoadNameCodecGenerator()).run(commandLine());
-                break;
+            }
+            case POLYLINE -> listenTo(new HuffmanCodecGenerator()).run(commandLine());
+            case ROAD_NAME -> listenTo(new RoadNameCodecGenerator()).run(commandLine());
         }
     }
 

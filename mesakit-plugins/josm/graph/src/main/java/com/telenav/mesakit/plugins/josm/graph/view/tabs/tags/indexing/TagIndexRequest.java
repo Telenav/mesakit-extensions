@@ -27,9 +27,8 @@ public class TagIndexRequest
     @Override
     public boolean equals(Object object)
     {
-        if (object instanceof TagIndexRequest)
+        if (object instanceof TagIndexRequest that)
         {
-            TagIndexRequest that = (TagIndexRequest) object;
             return graph.equals(that.graph) && bounds.equals(that.bounds);
         }
         return false;

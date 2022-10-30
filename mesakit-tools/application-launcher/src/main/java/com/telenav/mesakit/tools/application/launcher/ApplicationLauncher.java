@@ -96,71 +96,30 @@ public class ApplicationLauncher
             {
                 // Conversions
 
-                case "pbf-to-graph-converter":
-                    PbfToGraphConverterApplication.main(arguments);
-                    break;
-
-                case "pbf-world-graph-extractor":
-                    PbfWorldGraphExtractorApplication.main(arguments);
-                    break;
-
-                case "graph-to-pbf-converter":
-                    GraphToPbfConverterApplication.main(arguments);
-                    break;
+                case "pbf-to-graph-converter" -> PbfToGraphConverterApplication.main(arguments);
+                case "pbf-world-graph-extractor" -> PbfWorldGraphExtractorApplication.main(arguments);
+                case "graph-to-pbf-converter" -> GraphToPbfConverterApplication.main(arguments);
 
                 // Graph Tools
 
-                case "graph-analyzer":
-                    GraphAnalyzerApplication.main(arguments);
-                    break;
-
-                case "graph-double-digitized-ways-extractor":
-                    DoubleDigitizedWaysExtractorApplication.main(arguments);
-                    break;
-
-                case "graph-dumper":
-                    GraphDumperApplication.main(arguments);
-                    break;
-
-                case "graph-slicer":
-                    GraphSlicerApplication.main(arguments);
-                    break;
-
-                case "graph-verifier":
-                    GraphVerifierApplication.main(arguments);
-                    break;
+                case "graph-analyzer" -> GraphAnalyzerApplication.main(arguments);
+                case "graph-double-digitized-ways-extractor" -> DoubleDigitizedWaysExtractorApplication.main(arguments);
+                case "graph-dumper" -> GraphDumperApplication.main(arguments);
+                case "graph-slicer" -> GraphSlicerApplication.main(arguments);
+                case "graph-verifier" -> GraphVerifierApplication.main(arguments);
 
                 // PBF Tools
 
-                case "pbf-analyzer":
-                    PbfAnalyzerApplication.main(arguments);
-                    break;
-
-                case "pbf-dumper":
-                    PbfDumperApplication.main(arguments);
-                    break;
-
-                case "pbf-metadata":
-                    PbfMetadataApplication.main(arguments);
-                    break;
-
-                case "pbf-region-extractor":
-                    PbfRegionExtractorApplication.main(arguments);
-                    break;
+                case "pbf-analyzer" -> PbfAnalyzerApplication.main(arguments);
+                case "pbf-dumper" -> PbfDumperApplication.main(arguments);
+                case "pbf-metadata" -> PbfMetadataApplication.main(arguments);
+                case "pbf-region-extractor" -> PbfRegionExtractorApplication.main(arguments);
 
                 // Other Tools
 
-                case "codec-generator":
-                    CodecGeneratorApplication.main(arguments);
-                    break;
-
-                case "region-information":
-                    RegionInformationApplication.main(arguments);
-                    break;
-
-                default:
-                    help(application);
-                    break;
+                case "codec-generator" -> CodecGeneratorApplication.main(arguments);
+                case "region-information" -> RegionInformationApplication.main(arguments);
+                default -> help(application);
             }
         }
         else
