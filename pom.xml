@@ -23,7 +23,6 @@
 
     <packaging>pom</packaging>
 
-    <name>Mesakit Extensions Parent</name>
     <description>MesaKit extensions contains modules that extend MesaKit</description>
 
     <modules>
