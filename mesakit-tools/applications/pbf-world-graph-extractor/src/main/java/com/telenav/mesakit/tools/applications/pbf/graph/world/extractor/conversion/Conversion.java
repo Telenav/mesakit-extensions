@@ -47,6 +47,7 @@ import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.regions.Country;
 import com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.PbfWorldGraphExtractorApplication;
 
+import static com.telenav.kivakit.core.string.AsciiArt.bottomLine;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.READ;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 
@@ -130,7 +131,7 @@ public class Conversion extends BaseRepeater
                         {
                             problem("Graph verification failed:\n$", comparison);
                         }
-                        information(AsciiArt.bottomLine("Verified graph in $", start.elapsedSince()));
+                        information(bottomLine("Verified graph in $", start.elapsedSince()));
                     }
                 }
             }

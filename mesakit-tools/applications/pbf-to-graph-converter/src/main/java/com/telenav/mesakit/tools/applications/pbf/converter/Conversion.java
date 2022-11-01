@@ -22,7 +22,6 @@ import com.telenav.kivakit.commandline.CommandLine;
 import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
-import com.telenav.kivakit.core.string.AsciiArt;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Maximum;
 import com.telenav.kivakit.filesystem.File;
@@ -42,6 +41,8 @@ import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import com.telenav.mesakit.map.region.Region;
 import com.telenav.mesakit.map.region.regions.Country;
 
+import static com.telenav.kivakit.core.string.AsciiArt.bottomLine;
+import static com.telenav.kivakit.core.string.AsciiArt.topLine;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.READ;
 import static com.telenav.kivakit.resource.compression.archive.ZipArchive.AccessMode.WRITE;
 import static com.telenav.mesakit.graph.specifications.library.pbf.PbfDataAnalysis.AnalysisType.DEFAULT;
@@ -122,9 +123,9 @@ public class Conversion extends BaseRepeater
                     try (var archive = new GraphArchive(this, output, WRITE, ProgressReporter.nullProgressReporter()))
                     {
                         var start = Time.now();
-                        information(AsciiArt.topLine(20, "Saving $", archive));
+                        information(topLine("Saving $", archive));
                         graph.save(archive);
-                        information(AsciiArt.bottomLine(20, "Saved $ in $", archive, start.elapsedSince()));
+                        information(bottomLine("Saved $ in $", archive, start.elapsedSince()));
                     }
 
                     // and verify it if were asked to.
@@ -133,7 +134,7 @@ public class Conversion extends BaseRepeater
                         try (var archive = new GraphArchive(this, output, READ, ProgressReporter.nullProgressReporter()))
                         {
                             var start = Time.now();
-                            information(AsciiArt.topLine("Verifying graph"));
+                            information(topLine("Verifying graph"));
                             var loaded = archive.load(this);
                             loaded.loadAll();
                             var comparison = graph.differencesFrom(loaded, Rectangle.MAXIMUM, Maximum._100);
@@ -141,7 +142,7 @@ public class Conversion extends BaseRepeater
                             {
                                 problem("Graph verification failed:\n$", comparison);
                             }
-                            information(AsciiArt.bottomLine("Verified graph in $", start.elapsedSince()));
+                            information(bottomLine("Verified graph in $", start.elapsedSince()));
                         }
                     }
                 }
