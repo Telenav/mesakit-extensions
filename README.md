@@ -4,7 +4,7 @@
 
 [//]: # (end-user-text)
 
-# mesakit-extensions &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/math-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/math-32-2x.png 2x"/>
+# mesakit-extensions-parent &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/math-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/math-32-2x.png 2x"/>
 
 This module contains extensions to the core MesaKit project 
 
@@ -37,14 +37,14 @@ This module contains extensions to the core MesaKit project
 
 ### Sub-Projects <a name = "projects"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/diagram-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/diagram-32-2x.png 2x"/>
 
+[**mesakit-extensions**](mesakit-extensions/README.md)  
 [**mesakit-geocoding**](mesakit-geocoding/README.md)  
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
-### Javadoc Coverage <a name = "javadoc-coverage"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/bargraph-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/bargraph-24-2x.png 2x"/>
+### Code Quality <a name = "code-quality"></a> &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/ruler-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/ruler-32-2x.png 2x"/>
 
-&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-10-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-10-96-2x.png 2x"/>
- &nbsp; &nbsp; [**mesakit-geocoding**](mesakit-geocoding/README.md)
+&nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-0-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-0-96-2x.png 2x"/> &nbsp; &nbsp; [**mesakit-geocoding**](mesakit-geocoding/README.md)
 
 [//]: # (start-user-text)
 
