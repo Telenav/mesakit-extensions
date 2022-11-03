@@ -14,20 +14,20 @@ This module checks the integrity of MesaKit graph files
 
 
 
-[**Dependencies**](#dependencies) | [**Class Diagrams**](#class-diagrams) | [**Package Diagrams**](#package-diagrams) | [**Javadoc**](#javadoc)
+[**Dependencies**](#dependencies) | [**Code Quality**](#code-quality) | [**Class Diagrams**](#class-diagrams) | [**Package Diagrams**](#package-diagrams)
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-512.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-512-2x.png 2x"/>
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.19/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-graph-verifier</artifactId>
-        <version>0.9.17</version>
+        <version>0.9.19</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -40,6 +40,20 @@ This module checks the integrity of MesaKit graph files
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
 
+### Code Quality <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/ruler-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/ruler-32-2x.png 2x"/>
+
+Code quality for this project is 0.0%.  
+  
+&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-0-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-0-96-2x.png 2x"/>
+
+| Measurement   | Value                    |
+|---------------|--------------------------|
+| Stability     | 0.0%&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-0-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-0-96-2x.png 2x"/>     |
+| Testing       | 0.0%&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-0-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-0-96-2x.png 2x"/>       |
+| Documentation | 0.0%&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-0-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-0-96-2x.png 2x"/> |
+
+<img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
+
 ### Class Diagrams <a name="class-diagrams"></a> &nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/diagram-40.png" srcset="https://telenav.github.io/telenav-assets/images/icons/diagram-40-2x.png 2x"/>
 
 None
@@ -48,27 +62,15 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.graph.verifier*](https://www.mesakit.org/0.9.17/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.verifier.svg)
+[*com.telenav.mesakit.tools.applications.graph.verifier*](https://www.mesakit.org/0.9.19/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.verifier.svg)
 
-<img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
+### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
-### Javadoc <a name="javadoc"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
-
-Javadoc coverage for this project is 31.4%.  
-  
-&nbsp; &nbsp; <img src="https://telenav.github.io/telenav-assets/images/meters/meter-30-96.png" srcset="https://telenav.github.io/telenav-assets/images/meters/meter-30-96-2x.png 2x"/>
-
-
-The following significant classes are undocumented:  
-
-- com.telenav.mesakit.tools.applications.graph.verifier.EdgeAttributeChecker.CheckResult  
-- com.telenav.mesakit.tools.applications.graph.verifier.EdgeAttributeChecker
-
-| Class | Documentation Sections |
-|---|---|
-| [*EdgeAttributeChecker*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier///////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*EdgeAttributeChecker.CheckResult*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier///////////////////////////////////////////////////////////////////////////////////////.html) |  |  
-| [*GraphVerifierApplication*](https://www.mesakit.org/0.9.17/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier///////////////////////////////////////////////////////////////////////////////.html) |  |  
+| Class | Documentation Sections  |
+|-------|-------------------------|
+| [*EdgeAttributeChecker*](https://www.mesakit.org/0.9.19/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.html) |  |  
+| [*EdgeAttributeChecker.CheckResult*](https://www.mesakit.org/0.9.19/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.CheckResult.html) |  |  
+| [*GraphVerifierApplication*](https://www.mesakit.org/0.9.19/javadoc/mesakit-extensions/mesakit.tools.applications.graph.verifier/com/telenav/mesakit/tools/applications/graph/verifier/GraphVerifierApplication.html) |  |  
 
 [//]: # (start-user-text)
 

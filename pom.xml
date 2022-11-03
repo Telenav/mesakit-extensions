@@ -19,7 +19,7 @@
 
     <groupId>com.telenav.mesakit</groupId>
     <artifactId>mesakit-extensions-parent</artifactId>
-    <version>0.9.19</version>
+    <version>0.9.20</version>
 
     <packaging>pom</packaging>
 
@@ -54,7 +54,7 @@
 
     <properties>
         <josm.version>17428</josm.version>
-        <kivakit.version>1.8.2</kivakit.version>
+        <kivakit.version>1.8.3</kivakit.version>
     </properties>
 
     <dependencyManagement>
