@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  //
@@ -8,13 +9,12 @@
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  -->
 
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<project xmlns = "http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-extensions-parent</artifactId>
@@ -23,28 +23,25 @@
     </parent>
     
     <artifactId>mesakit-plugins-josm-library</artifactId>
+
     <dependencies>
         
-        <!-- MesaKit -->
+        <!-- Mapping -->
         
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mesakit-navigation-routing</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
         <!-- JOSM -->
         
         <dependency>
             <groupId>org.openstreetmap.josm</groupId>
             <artifactId>josm</artifactId>
+            <version>${mapping.josm.version}</version>
         </dependency>
+
     </dependencies>
-    
-    <repositories>
-        <repository>
-            <id>josm</id>
-            <name>openstreetmap josm</name>
-            <url>https://josm.openstreetmap.de/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
     
 </project>
