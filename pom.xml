@@ -78,7 +78,7 @@
         <!-- Project -->
 
         <repository.group.name>mesakit</repository.group.name>
-        <repository.name>mesakit</repository.name>
+        <repository.name>mesakit-extensions</repository.name>
 
         <!-- Tools -->
 
