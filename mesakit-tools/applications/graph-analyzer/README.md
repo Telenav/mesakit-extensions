@@ -20,14 +20,14 @@ This module contains a command line tool for analyzing MesaKit graph files
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.21/lexakai/mesakit-extensions/mesakit-tools/applications/graph-analyzer/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.22/lexakai/mesakit-extensions/mesakit-tools/applications/graph-analyzer/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-graph-analyzer</artifactId>
-        <version>0.9.21</version>
+        <version>0.9.22</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -62,14 +62,14 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.graph.analyzer*](https://www.mesakit.org/0.9.21/lexakai/mesakit-extensions/mesakit-tools/applications/graph-analyzer/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.analyzer.svg)
+[*com.telenav.mesakit.tools.applications.graph.analyzer*](https://www.mesakit.org/0.9.22/lexakai/mesakit-extensions/mesakit-tools/applications/graph-analyzer/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.analyzer.svg)
 
 ### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
 | Class | Documentation Sections  |
 |-------|-------------------------|
-| [*GraphAnalyzerApplication*](https://www.mesakit.org/0.9.21/javadoc/mesakit-extensions/mesakit-tools-applications-graph-analyzer/com/telenav/mesakit/tools/applications/graph/analyzer/GraphAnalyzerApplication.html) |  |  
-| [*GraphAnalyzerApplication.Result*](https://www.mesakit.org/0.9.21/javadoc/mesakit-extensions/mesakit-tools-applications-graph-analyzer/com/telenav/mesakit/tools/applications/graph/analyzer/GraphAnalyzerApplication.Result.html) |  |  
+| [*GraphAnalyzerApplication*](https://www.mesakit.org/0.9.22/javadoc/mesakit-extensions/mesakit-tools-applications-graph-analyzer/com/telenav/mesakit/tools/applications/graph/analyzer/GraphAnalyzerApplication.html) |  |  
+| [*GraphAnalyzerApplication.Result*](https://www.mesakit.org/0.9.22/javadoc/mesakit-extensions/mesakit-tools-applications-graph-analyzer/com/telenav/mesakit/tools/applications/graph/analyzer/GraphAnalyzerApplication.Result.html) |  |  
 
 [//]: # (start-user-text)
 
