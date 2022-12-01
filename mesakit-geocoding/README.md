@@ -20,14 +20,14 @@ This module contains geocoding functionality
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.23/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.24/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-geocoding</artifactId>
-        <version>0.9.23</version>
+        <version>0.9.24</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -62,19 +62,19 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.graph.geocoding.reverse*](https://www.mesakit.org/0.9.23/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/com.telenav.mesakit.graph.geocoding.reverse.svg)  
-[*com.telenav.mesakit.graph.geocoding.reverse.matching*](https://www.mesakit.org/0.9.23/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/com.telenav.mesakit.graph.geocoding.reverse.matching.svg)
+[*com.telenav.mesakit.graph.geocoding.reverse*](https://www.mesakit.org/0.9.24/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/com.telenav.mesakit.graph.geocoding.reverse.svg)  
+[*com.telenav.mesakit.graph.geocoding.reverse.matching*](https://www.mesakit.org/0.9.24/lexakai/mesakit-extensions/mesakit-geocoding/documentation/diagrams/com.telenav.mesakit.graph.geocoding.reverse.matching.svg)
 
 ### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
 | Class | Documentation Sections  |
 |-------|-------------------------|
-| [*FuzzyRoadNameMatcher*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/matching/FuzzyRoadNameMatcher.html) |  |  
-| [*ReverseGeocoder*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.html) |  |  
-| [*ReverseGeocoder.Configuration*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Configuration.html) |  |  
-| [*ReverseGeocoder.Request*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Request.html) |  |  
-| [*ReverseGeocoder.Response*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Response.html) |  |  
-| [*RoadNameMatcher*](https://www.mesakit.org/0.9.23/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/matching/RoadNameMatcher.html) |  |  
+| [*FuzzyRoadNameMatcher*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/matching/FuzzyRoadNameMatcher.html) |  |  
+| [*ReverseGeocoder*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.html) |  |  
+| [*ReverseGeocoder.Configuration*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Configuration.html) |  |  
+| [*ReverseGeocoder.Request*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Request.html) |  |  
+| [*ReverseGeocoder.Response*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/ReverseGeocoder.Response.html) |  |  
+| [*RoadNameMatcher*](https://www.mesakit.org/0.9.24/javadoc/mesakit-extensions/mesakit-geocoding/com/telenav/mesakit/graph/geocoding/reverse/matching/RoadNameMatcher.html) |  |  
 
 [//]: # (start-user-text)
 
