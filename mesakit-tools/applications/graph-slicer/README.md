@@ -20,14 +20,14 @@ This module contains a command line tool for cutting MesaKit graph files on admi
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.9.21/lexakai/mesakit-extensions/mesakit-tools/applications/graph-slicer/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.9.25/lexakai/mesakit-extensions/mesakit-tools/applications/graph-slicer/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-graph-slicer</artifactId>
-        <version>0.9.21</version>
+        <version>0.9.25</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -62,13 +62,13 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.graph.slicer*](https://www.mesakit.org/0.9.21/lexakai/mesakit-extensions/mesakit-tools/applications/graph-slicer/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.slicer.svg)
+[*com.telenav.mesakit.tools.applications.graph.slicer*](https://www.mesakit.org/0.9.25/lexakai/mesakit-extensions/mesakit-tools/applications/graph-slicer/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.slicer.svg)
 
 ### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
 | Class | Documentation Sections  |
 |-------|-------------------------|
-| [*GraphSlicerApplication*](https://www.mesakit.org/0.9.21/javadoc/mesakit-extensions/mesakit-tools-applications-graph-slicer/com/telenav/mesakit/tools/applications/graph/slicer/GraphSlicerApplication.html) |  |  
+| [*GraphSlicerApplication*](https://www.mesakit.org/0.9.25/javadoc/mesakit-extensions/mesakit-tools-applications-graph-slicer/com/telenav/mesakit/tools/applications/graph/slicer/GraphSlicerApplication.html) |  |  
 
 [//]: # (start-user-text)
 
