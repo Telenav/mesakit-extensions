@@ -11,6 +11,7 @@ import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.identifier.Identifier;
 import com.telenav.kivakit.serialization.gson.factory.GsonFactory;
 import com.telenav.kivakit.serialization.gson.serializers.CountGsonSerializer;
+import com.telenav.mesakit.core.BaseMesaKitProject;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
 import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
@@ -41,7 +42,7 @@ import com.telenav.mesakit.serialization.json.serializers.SpeedCategoryGsonSeria
  *
  * @author jonathanl (shibo)
  */
-public class MesaKitGsonProject extends Project
+public class MesaKitGsonProject extends BaseMesaKitProject
 {
     @Override
     public void onInitialize()
@@ -70,3 +71,4 @@ public class MesaKitGsonProject extends Project
                 .addJsonSerializerDeserializer(SpeedCategory.class, new SpeedCategoryGsonSerializer());
     }
 }
+
