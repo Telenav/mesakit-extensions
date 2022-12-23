@@ -29,7 +29,7 @@ import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
 import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.resource.CopyMode;
+import com.telenav.kivakit.resource.WriteMode;
 import com.telenav.kivakit.settings.Deployment;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.Metadata;
@@ -276,7 +276,7 @@ public class PbfWorldGraphExtractorApplication extends Application
                         if (repositoryInstallFolder != null)
                         {
                             // then copy the data (both PBFs and graphs)
-                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, CopyMode.UPDATE, ProgressReporter.nullProgressReporter());
+                            localRepositoryInstallFolder.safeCopyTo(repositoryInstallFolder, WriteMode.UPDATE, ProgressReporter.nullProgressReporter());
                         }
                     }
                 }
@@ -297,9 +297,9 @@ public class PbfWorldGraphExtractorApplication extends Application
                 if (repositoryInstallFolder != null)
                 {
                     // then copy just the new graphs to the repository install folder.
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, GRAPH.matcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, WriteMode.UPDATE, GRAPH.matcher(),
                             BroadcastingProgressReporter.progressReporter(this, "bytes"));
-                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, CopyMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
+                    localRepositoryInstallFolder.copyTo(repositoryInstallFolder, WriteMode.UPDATE, WorldGraphRepositoryFolder.WORLD.matcher(),
                             BroadcastingProgressReporter.progressReporter(this, "bytes"));
                 }
             }
