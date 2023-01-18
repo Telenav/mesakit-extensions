@@ -25,6 +25,7 @@ import com.telenav.kivakit.core.value.level.Percent;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.interfaces.naming.NamedObject;
 import com.telenav.kivakit.ui.desktop.graphics.drawing.style.Color;
+import com.telenav.kivakit.ui.desktop.graphics.drawing.style.ColorConverter;
 import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSettings;
 import com.telenav.mesakit.map.geography.indexing.rtree.RTreeSpatialIndex;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
@@ -63,7 +64,7 @@ public class GeoJsonLayer extends BaseJosmLayer implements NamedObject
 
     private final Map<Shape, GeoJsonFeature> featureForShape = new HashMap<>();
 
-    private final Color.ColorConverter colorConverter = new Color.ColorConverter(LOGGER);
+    private final ColorConverter colorConverter = new ColorConverter(LOGGER);
 
     private RTreeSpatialIndex<GeoJsonFeature> spatialIndex;
 

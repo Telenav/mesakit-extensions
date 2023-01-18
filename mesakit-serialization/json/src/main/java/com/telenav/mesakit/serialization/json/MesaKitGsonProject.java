@@ -1,11 +1,13 @@
 package com.telenav.mesakit.serialization.json;
 
-import com.telenav.kivakit.conversion.core.time.UtcDateTimeConverter;
+import com.telenav.kivakit.conversion.core.time.local.IsoLocalDateTimeConverter;
+import com.telenav.kivakit.conversion.core.time.utc.IsoDateTimeConverter;
 import com.telenav.kivakit.conversion.core.value.BytesConverter;
 import com.telenav.kivakit.core.project.Project;
 import com.telenav.kivakit.core.project.ProjectTrait;
 import com.telenav.kivakit.core.string.Separators;
 import com.telenav.kivakit.core.time.LocalTime;
+import com.telenav.kivakit.core.time.Time;
 import com.telenav.kivakit.core.value.count.Bytes;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.core.value.identifier.Identifier;
@@ -49,26 +51,27 @@ public class MesaKitGsonProject extends BaseMesaKitProject
     {
         // Add serializers and deserializers to whatever GsonFactory is registered
         require(GsonFactory.class)
-                .addConvertingSerializer(Bytes.class, new BytesConverter(this))
-                .addConvertingSerializer(Continent.class, new Continent.Converter<>(this, Continent.class))
-                .addConvertingSerializer(Country.class, new Region.Converter<>(this, Country.class))
-                .addConvertingSerializer(DataBuild.class, new DataBuild.Converter(this))
-                .addConvertingSerializer(Distance.class, new Distance.Converter(this))
-                .addConvertingSerializer(LocalTime.class, new UtcDateTimeConverter(this))
-                .addConvertingSerializer(Location.class, new Location.DegreesConverter(this))
-                .addConvertingSerializer(MapEdgeIdentifier.class, new MapEdgeIdentifier.Converter(this))
-                .addConvertingSerializer(MetropolitanArea.class, new MetropolitanArea.Converter<>(this, MetropolitanArea.class))
-                .addConvertingSerializer(NodeIdentifierList.class, new NodeIdentifierList.Converter(this, Separators.DEFAULT))
-                .addConvertingSerializer(Rectangle.class, new Rectangle.Converter(this))
-                .addConvertingSerializer(RoadName.class, new RoadNameConverter(this))
-                .addConvertingSerializer(Speed.class, new Speed.Converter(this))
-                .addConvertingSerializer(State.class, new State.Converter<>(this, State.class))
-                .addConvertingSerializer(WayIdentifierList.class, new WayIdentifierList.Converter(this, Separators.DEFAULT))
-                .addJsonSerializerDeserializer(Count.class, new CountGsonSerializer())
-                .addJsonSerializerDeserializer(Identifier.class, new IdentifierGsonSerializer())
-                .addJsonSerializerDeserializer(Latitude.class, new LatitudeGsonSerializer())
-                .addJsonSerializerDeserializer(Longitude.class, new LongitudeGsonSerializer())
-                .addJsonSerializerDeserializer(SpeedCategory.class, new SpeedCategoryGsonSerializer());
+            .addConvertingSerializer(Bytes.class, new BytesConverter(this))
+            .addConvertingSerializer(Continent.class, new Continent.Converter<>(this, Continent.class))
+            .addConvertingSerializer(Country.class, new Region.Converter<>(this, Country.class))
+            .addConvertingSerializer(DataBuild.class, new DataBuild.Converter(this))
+            .addConvertingSerializer(Distance.class, new Distance.Converter(this))
+            .addConvertingSerializer(Time.class, new IsoDateTimeConverter(this))
+            .addConvertingSerializer(LocalTime.class, new IsoLocalDateTimeConverter(this))
+            .addConvertingSerializer(Location.class, new Location.DegreesConverter(this))
+            .addConvertingSerializer(MapEdgeIdentifier.class, new MapEdgeIdentifier.Converter(this))
+            .addConvertingSerializer(MetropolitanArea.class, new MetropolitanArea.Converter<>(this, MetropolitanArea.class))
+            .addConvertingSerializer(NodeIdentifierList.class, new NodeIdentifierList.Converter(this, Separators.DEFAULT))
+            .addConvertingSerializer(Rectangle.class, new Rectangle.Converter(this))
+            .addConvertingSerializer(RoadName.class, new RoadNameConverter(this))
+            .addConvertingSerializer(Speed.class, new Speed.Converter(this))
+            .addConvertingSerializer(State.class, new State.Converter<>(this, State.class))
+            .addConvertingSerializer(WayIdentifierList.class, new WayIdentifierList.Converter(this, Separators.DEFAULT))
+            .addJsonSerializerDeserializer(Count.class, new CountGsonSerializer())
+            .addJsonSerializerDeserializer(Identifier.class, new IdentifierGsonSerializer())
+            .addJsonSerializerDeserializer(Latitude.class, new LatitudeGsonSerializer())
+            .addJsonSerializerDeserializer(Longitude.class, new LongitudeGsonSerializer())
+            .addJsonSerializerDeserializer(SpeedCategory.class, new SpeedCategoryGsonSerializer());
     }
 }
 
