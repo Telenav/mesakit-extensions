@@ -20,14 +20,14 @@ This module checks the integrity of MesaKit graph files
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.12.0/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.13.0/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-graph-verifier</artifactId>
-        <version>0.12.0</version>
+        <version>0.13.0</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -62,15 +62,15 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.graph.verifier*](https://www.mesakit.org/0.12.0/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.verifier.svg)
+[*com.telenav.mesakit.tools.applications.graph.verifier*](https://www.mesakit.org/0.13.0/lexakai/mesakit-extensions/mesakit-tools/applications/graph-verifier/documentation/diagrams/com.telenav.mesakit.tools.applications.graph.verifier.svg)
 
 ### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
 | Class | Documentation Sections  |
 |-------|-------------------------|
-| [*EdgeAttributeChecker*](https://www.mesakit.org/0.12.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.html) |  |  
-| [*EdgeAttributeChecker.CheckResult*](https://www.mesakit.org/0.12.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.CheckResult.html) |  |  
-| [*GraphVerifierApplication*](https://www.mesakit.org/0.12.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/GraphVerifierApplication.html) |  |  
+| [*EdgeAttributeChecker*](https://www.mesakit.org/0.13.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.html) |  |  
+| [*EdgeAttributeChecker.CheckResult*](https://www.mesakit.org/0.13.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/EdgeAttributeChecker.CheckResult.html) |  |  
+| [*GraphVerifierApplication*](https://www.mesakit.org/0.13.0/javadoc/mesakit-extensions/mesakit-tools-applications-graph-verifier/com/telenav/mesakit/tools/applications/graph/verifier/GraphVerifierApplication.html) |  |  
 
 [//]: # (start-user-text)
 
