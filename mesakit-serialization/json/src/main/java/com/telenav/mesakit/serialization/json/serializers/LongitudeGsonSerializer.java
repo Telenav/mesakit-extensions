@@ -18,28 +18,25 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonValueSerializer;
 import com.telenav.mesakit.map.geography.Longitude;
 
-import java.lang.reflect.Type;
-
-public class LongitudeGsonSerializer implements JsonSerializerDeserializer<Longitude>
+public class LongitudeGsonSerializer extends BaseGsonValueSerializer<Longitude, Double>
 {
-    @Override
-    public Longitude deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException
+    public LongitudeGsonSerializer()
     {
-        return Longitude.degrees(context.deserialize(json, Double.class));
+        super(Longitude.class, Double.class);
     }
 
     @Override
-    public JsonElement serialize(Longitude longitude, Type typeOfSrc,
-                                 JsonSerializationContext context)
+    protected Longitude onDeserialize(Double serialized)
     {
-        return context.serialize(longitude.asDegrees());
+        return Longitude.degrees(serialized);
+    }
+
+    @Override
+    protected Double onSerialize(Longitude value)
+    {
+        return value.asDegrees();
     }
 }

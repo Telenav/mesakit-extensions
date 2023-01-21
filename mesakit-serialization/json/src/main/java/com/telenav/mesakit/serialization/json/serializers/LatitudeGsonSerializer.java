@@ -18,27 +18,25 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonValueSerializer;
 import com.telenav.mesakit.map.geography.Latitude;
 
-import java.lang.reflect.Type;
-
-public class LatitudeGsonSerializer implements JsonSerializerDeserializer<Latitude>
+public class LatitudeGsonSerializer extends BaseGsonValueSerializer<Latitude, Double>
 {
-    @Override
-    public Latitude deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException
+    public LatitudeGsonSerializer()
     {
-        return Latitude.degrees(context.deserialize(json, Double.class));
+        super(Latitude.class, Double.class);
     }
 
     @Override
-    public JsonElement serialize(Latitude latitude, Type typeOfSrc, JsonSerializationContext context)
+    protected Latitude onDeserialize(Double serialized)
     {
-        return context.serialize(latitude.asDegrees());
+        return Latitude.degrees(serialized);
+    }
+
+    @Override
+    protected Double onSerialize(Latitude value)
+    {
+        return value.asDegrees();
     }
 }
