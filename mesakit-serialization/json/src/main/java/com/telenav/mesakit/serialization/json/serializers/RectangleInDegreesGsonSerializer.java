@@ -18,38 +18,39 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
 import com.telenav.kivakit.serialization.gson.serializers.BaseGsonElementSerializer;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
 public class RectangleInDegreesGsonSerializer extends BaseGsonElementSerializer<Rectangle>
 {
-    public RectangleInDegreesGsonSerializer(Class<Rectangle> valueType)
+    public RectangleInDegreesGsonSerializer()
     {
-        super(valueType);
+        super(Rectangle.class);
     }
 
     @Override
-    protected Rectangle toValue(JsonDeserializationContext context, JsonElement serialized)
+    protected JsonElement toJson(Rectangle value)
     {
-        var object = serialized.getAsJsonObject();
-        var bottomLeft = (Location) context.deserialize(object.get("bottomLeft"), Location.class);
-        var topRight = (Location) context.deserialize(object.get("topRight"), Location.class);
-        return Rectangle.fromLocations(bottomLeft, topRight);
-    }
+        var bottomLeft = serialize(value.bottomLeft());
+        var topRight = serialize(value.topRight());
 
-    @Override
-    protected JsonElement toJson(JsonSerializationContext context, Rectangle value)
-    {
-        var bottomLeft = context.serialize(value.bottomLeft());
-        var topRight = context.serialize(value.topRight());
         var object = new JsonObject();
+
         object.add("bottomLeft", bottomLeft);
         object.add("topRight", topRight);
-        return context.serialize(object);
+
+        return object;
+    }
+
+    @Override
+    protected Rectangle toValue(JsonElement json)
+    {
+        var bottomLeft = (Location) deserialize(json, "bottomLeft", Location.class);
+        var topRight = (Location) deserialize(json, "topRight", Location.class);
+
+        return Rectangle.fromLocations(bottomLeft, topRight);
     }
 }
