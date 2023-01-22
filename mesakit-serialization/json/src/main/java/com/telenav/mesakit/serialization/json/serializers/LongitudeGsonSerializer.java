@@ -18,10 +18,10 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.gson.serializers.BaseGsonValueSerializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonSerializer;
 import com.telenav.mesakit.map.geography.Longitude;
 
-public class LongitudeGsonSerializer extends BaseGsonValueSerializer<Longitude, Double>
+public class LongitudeGsonSerializer extends BaseGsonSerializer<Longitude, Double>
 {
     public LongitudeGsonSerializer()
     {

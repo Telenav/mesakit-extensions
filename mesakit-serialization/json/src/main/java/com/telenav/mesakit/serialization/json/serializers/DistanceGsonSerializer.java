@@ -18,7 +18,7 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.telenav.kivakit.serialization.gson.serializers.BaseGsonValueSerializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonSerializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
 
@@ -28,7 +28,7 @@ import com.telenav.mesakit.map.measurements.geographic.Distance;
  * @author jonathanl (shibo)
  */
 @LexakaiJavadoc(complete = true)
-public class DistanceGsonSerializer extends BaseGsonValueSerializer<Distance, String>
+public class DistanceGsonSerializer extends BaseGsonSerializer<Distance, String>
 {
     public DistanceGsonSerializer()
     {

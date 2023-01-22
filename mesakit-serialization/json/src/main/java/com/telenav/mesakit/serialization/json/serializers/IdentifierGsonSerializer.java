@@ -19,9 +19,9 @@
 package com.telenav.mesakit.serialization.json.serializers;
 
 import com.telenav.kivakit.core.value.identifier.Identifier;
-import com.telenav.kivakit.serialization.gson.serializers.BaseGsonValueSerializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonSerializer;
 
-public class IdentifierGsonSerializer extends BaseGsonValueSerializer<Identifier, Long>
+public class IdentifierGsonSerializer extends BaseGsonSerializer<Identifier, Long>
 {
     public IdentifierGsonSerializer()
     {
