@@ -1,16 +1,11 @@
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonElementSerializer;
 import com.telenav.lexakai.annotations.LexakaiJavadoc;
 import com.telenav.mesakit.map.geography.Location;
-
-import java.lang.reflect.Type;
 
 /**
  * Serializes {@link Location} objects to and from JSON.
@@ -18,24 +13,29 @@ import java.lang.reflect.Type;
  * @author junwei
  */
 @LexakaiJavadoc(complete = true)
-public class LocationGsonSerializer implements JsonSerializerDeserializer<Location>
+public class LocationGsonSerializer extends BaseGsonElementSerializer<Location>
 {
-    @Override
-    public Location deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException
+    public LocationGsonSerializer()
     {
-        var location = json.getAsJsonObject();
-        return Location.degrees(
-                location.get("latitude").getAsDouble(),
-                location.get("longitude").getAsDouble());
+        super(Location.class);
     }
 
     @Override
-    public JsonElement serialize(Location src, Type typeOfSrc, JsonSerializationContext context)
+    protected JsonElement toJson(Location value)
     {
         var location = new JsonObject();
-        location.add("latitude", new JsonPrimitive(src.latitudeInDegrees()));
-        location.add("longitude", new JsonPrimitive(src.longitudeInDegrees()));
+
+        location.add("latitude", new JsonPrimitive(value.latitudeInDegrees()));
+        location.add("longitude", new JsonPrimitive(value.longitudeInDegrees()));
+
         return location;
+    }
+
+    @Override
+    protected Location toValue(JsonElement json)
+    {
+        return Location.degrees(
+            deserialize(json, "latitude", Double.class),
+            deserialize(json, "longitude", Double.class));
     }
 }
