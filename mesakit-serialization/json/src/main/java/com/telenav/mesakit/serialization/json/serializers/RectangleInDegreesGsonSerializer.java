@@ -18,38 +18,39 @@
 
 package com.telenav.mesakit.serialization.json.serializers;
 
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.telenav.kivakit.serialization.gson.factory.JsonSerializerDeserializer;
+import com.telenav.kivakit.serialization.gson.serializers.BaseGsonElementSerializer;
 import com.telenav.mesakit.map.geography.Location;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 
-import java.lang.reflect.Type;
-
-public class RectangleInDegreesGsonSerializer implements JsonSerializerDeserializer<Rectangle>
+public class RectangleInDegreesGsonSerializer extends BaseGsonElementSerializer<Rectangle>
 {
-    @Override
-    public Rectangle deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException
+    public RectangleInDegreesGsonSerializer()
     {
-        var object = json.getAsJsonObject();
-        var bottomLeft = (Location) context.deserialize(object.get("bottomLeft"), Location.class);
-        var topRight = (Location) context.deserialize(object.get("topRight"), Location.class);
-        return Rectangle.fromLocations(bottomLeft, topRight);
+        super(Rectangle.class);
     }
 
     @Override
-    public JsonElement serialize(Rectangle rectangle, Type typeOfSrc,
-                                 JsonSerializationContext context)
+    protected JsonElement toJson(Rectangle value)
     {
-        var bottomLeft = context.serialize(rectangle.bottomLeft());
-        var topRight = context.serialize(rectangle.topRight());
+        var bottomLeft = serialize(value.bottomLeft());
+        var topRight = serialize(value.topRight());
+
         var object = new JsonObject();
+
         object.add("bottomLeft", bottomLeft);
         object.add("topRight", topRight);
-        return context.serialize(object);
+
+        return object;
+    }
+
+    @Override
+    protected Rectangle toValue(JsonElement json)
+    {
+        var bottomLeft = (Location) deserialize(json, "bottomLeft", Location.class);
+        var topRight = (Location) deserialize(json, "topRight", Location.class);
+
+        return Rectangle.fromLocations(bottomLeft, topRight);
     }
 }

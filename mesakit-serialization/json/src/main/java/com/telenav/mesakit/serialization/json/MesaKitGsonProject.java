@@ -6,21 +6,14 @@ import com.telenav.kivakit.conversion.core.value.BytesConverter;
 import com.telenav.kivakit.core.project.Project;
 import com.telenav.kivakit.core.project.ProjectTrait;
 import com.telenav.kivakit.core.string.Separators;
-import com.telenav.kivakit.core.time.LocalTime;
-import com.telenav.kivakit.core.time.Time;
-import com.telenav.kivakit.core.value.count.Bytes;
-import com.telenav.kivakit.core.value.count.Count;
-import com.telenav.kivakit.core.value.identifier.Identifier;
-import com.telenav.kivakit.serialization.gson.factory.GsonFactory;
-import com.telenav.kivakit.serialization.gson.serializers.CountGsonSerializer;
+import com.telenav.kivakit.serialization.gson.GsonFactory;
+import com.telenav.kivakit.serialization.gson.serializers.value.CountGsonSerializer;
 import com.telenav.mesakit.core.BaseMesaKitProject;
 import com.telenav.mesakit.graph.identifiers.collections.NodeIdentifierList;
 import com.telenav.mesakit.graph.identifiers.collections.WayIdentifierList;
 import com.telenav.mesakit.graph.map.MapEdgeIdentifier;
 import com.telenav.mesakit.graph.metadata.DataBuild;
-import com.telenav.mesakit.map.geography.Latitude;
 import com.telenav.mesakit.map.geography.Location;
-import com.telenav.mesakit.map.geography.Longitude;
 import com.telenav.mesakit.map.geography.shape.rectangle.Rectangle;
 import com.telenav.mesakit.map.measurements.geographic.Distance;
 import com.telenav.mesakit.map.measurements.motion.Speed;
@@ -29,8 +22,6 @@ import com.telenav.mesakit.map.region.regions.Continent;
 import com.telenav.mesakit.map.region.regions.Country;
 import com.telenav.mesakit.map.region.regions.MetropolitanArea;
 import com.telenav.mesakit.map.region.regions.State;
-import com.telenav.mesakit.map.road.model.RoadName;
-import com.telenav.mesakit.map.road.model.SpeedCategory;
 import com.telenav.mesakit.map.road.model.converters.RoadNameConverter;
 import com.telenav.mesakit.serialization.json.serializers.IdentifierGsonSerializer;
 import com.telenav.mesakit.serialization.json.serializers.LatitudeGsonSerializer;
@@ -51,27 +42,27 @@ public class MesaKitGsonProject extends BaseMesaKitProject
     {
         // Add serializers and deserializers to whatever GsonFactory is registered
         require(GsonFactory.class)
-            .addConvertingSerializer(Bytes.class, new BytesConverter(this))
-            .addConvertingSerializer(Continent.class, new Continent.Converter<>(this, Continent.class))
-            .addConvertingSerializer(Country.class, new Region.Converter<>(this, Country.class))
-            .addConvertingSerializer(DataBuild.class, new DataBuild.Converter(this))
-            .addConvertingSerializer(Distance.class, new Distance.Converter(this))
-            .addConvertingSerializer(Time.class, new IsoDateTimeConverter(this))
-            .addConvertingSerializer(LocalTime.class, new IsoLocalDateTimeConverter(this))
-            .addConvertingSerializer(Location.class, new Location.DegreesConverter(this))
-            .addConvertingSerializer(MapEdgeIdentifier.class, new MapEdgeIdentifier.Converter(this))
-            .addConvertingSerializer(MetropolitanArea.class, new MetropolitanArea.Converter<>(this, MetropolitanArea.class))
-            .addConvertingSerializer(NodeIdentifierList.class, new NodeIdentifierList.Converter(this, Separators.DEFAULT))
-            .addConvertingSerializer(Rectangle.class, new Rectangle.Converter(this))
-            .addConvertingSerializer(RoadName.class, new RoadNameConverter(this))
-            .addConvertingSerializer(Speed.class, new Speed.Converter(this))
-            .addConvertingSerializer(State.class, new State.Converter<>(this, State.class))
-            .addConvertingSerializer(WayIdentifierList.class, new WayIdentifierList.Converter(this, Separators.DEFAULT))
-            .addJsonSerializerDeserializer(Count.class, new CountGsonSerializer())
-            .addJsonSerializerDeserializer(Identifier.class, new IdentifierGsonSerializer())
-            .addJsonSerializerDeserializer(Latitude.class, new LatitudeGsonSerializer())
-            .addJsonSerializerDeserializer(Longitude.class, new LongitudeGsonSerializer())
-            .addJsonSerializerDeserializer(SpeedCategory.class, new SpeedCategoryGsonSerializer());
+            .addSerializer(new BytesConverter())
+            .addSerializer(new Continent.Converter<>(this, Continent.class))
+            .addSerializer(new Region.Converter<>(this, Country.class))
+            .addSerializer(new DataBuild.Converter(this))
+            .addSerializer(new Distance.Converter(this))
+            .addSerializer(new IsoDateTimeConverter(this))
+            .addSerializer(new IsoLocalDateTimeConverter(this))
+            .addSerializer(new Location.DegreesConverter(this))
+            .addSerializer(new MapEdgeIdentifier.Converter(this))
+            .addSerializer(new MetropolitanArea.Converter<>(this, MetropolitanArea.class))
+            .addSerializer(new NodeIdentifierList.Converter(this, Separators.DEFAULT))
+            .addSerializer(new Rectangle.Converter(this))
+            .addSerializer(new RoadNameConverter(this))
+            .addSerializer(new Speed.Converter(this))
+            .addSerializer(new State.Converter<>(this, State.class))
+            .addSerializer(new WayIdentifierList.Converter(this, Separators.DEFAULT))
+            .addSerializer(new CountGsonSerializer())
+            .addSerializer(new IdentifierGsonSerializer())
+            .addSerializer(new LatitudeGsonSerializer())
+            .addSerializer(new LongitudeGsonSerializer())
+            .addSerializer(new SpeedCategoryGsonSerializer());
     }
 }
 
