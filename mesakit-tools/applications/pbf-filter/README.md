@@ -20,14 +20,14 @@ This module contains a command line tool that filters entities out of PBF files
 
 ### Dependencies <a name="dependencies"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/dependencies-32.png" srcset="https://telenav.github.io/telenav-assets/images/icons/dependencies-32-2x.png 2x"/>
 
-[*Dependency Diagram*](https://www.mesakit.org/0.13.0/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-filter/documentation/diagrams/dependencies.svg)
+[*Dependency Diagram*](https://www.mesakit.org/0.14.0/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-filter/documentation/diagrams/dependencies.svg)
 
 #### Maven Dependency
 
     <dependency>
         <groupId>com.telenav.mesakit</groupId>
         <artifactId>mesakit-tools-applications-pbf-filter</artifactId>
-        <version>0.13.0</version>
+        <version>0.14.0</version>
     </dependency>
 
 <img src="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128.png" srcset="https://telenav.github.io/telenav-assets/images/separators/horizontal-line-128-2x.png 2x"/>
@@ -62,14 +62,14 @@ None
 
 ### Package Diagrams <a name="package-diagrams"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/box-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/box-24-2x.png 2x"/>
 
-[*com.telenav.mesakit.tools.applications.pbf.filter*](https://www.mesakit.org/0.13.0/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-filter/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.filter.svg)
+[*com.telenav.mesakit.tools.applications.pbf.filter*](https://www.mesakit.org/0.14.0/lexakai/mesakit-extensions/mesakit-tools/applications/pbf-filter/documentation/diagrams/com.telenav.mesakit.tools.applications.pbf.filter.svg)
 
 ### Javadoc <a name="code-quality"></a> &nbsp;&nbsp; <img src="https://telenav.github.io/telenav-assets/images/icons/books-24.png" srcset="https://telenav.github.io/telenav-assets/images/icons/books-24-2x.png 2x"/>
 
 | Class | Documentation Sections  |
 |-------|-------------------------|
-| [*PbfFilterApplication*](https://www.mesakit.org/0.13.0/javadoc/mesakit-extensions/mesakit-tools-applications-pbf-filter/com/telenav/mesakit/tools/applications/pbf/filter/PbfFilterApplication.html) |  |  
-| [*PbfFilterApplication.Statistics*](https://www.mesakit.org/0.13.0/javadoc/mesakit-extensions/mesakit-tools-applications-pbf-filter/com/telenav/mesakit/tools/applications/pbf/filter/PbfFilterApplication.Statistics.html) |  |  
+| [*PbfFilterApplication*](https://www.mesakit.org/0.14.0/javadoc/mesakit-extensions/mesakit-tools-applications-pbf-filter/com/telenav/mesakit/tools/applications/pbf/filter/PbfFilterApplication.html) |  |  
+| [*PbfFilterApplication.Statistics*](https://www.mesakit.org/0.14.0/javadoc/mesakit-extensions/mesakit-tools-applications-pbf-filter/com/telenav/mesakit/tools/applications/pbf/filter/PbfFilterApplication.Statistics.html) |  |  
 
 [//]: # (start-user-text)
 
