@@ -58,57 +58,62 @@ public class PbfMetadataApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser(this, "Input PBF file")
-                    .required()
-                    .build();
+        fileArgumentParser(this, "Input PBF file")
+            .required()
+            .build();
 
     private final SwitchParser<Boolean> VIEW =
-            booleanSwitchParser(this, "view", "View existing metadata")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "view", "View existing metadata")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<Boolean> ADD =
-            booleanSwitchParser(this, "add", "Add or replace metadata")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "add", "Add or replace metadata")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<PbfFileMetadataAnnotator.Mode> MODE =
-            enumSwitchParser(this, "mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
-                    .optional()
-                    .defaultValue(PbfFileMetadataAnnotator.Mode.STRIP_UNREFERENCED_NODES)
-                    .build();
+        enumSwitchParser(this, "mode", "Omit nodes that are not places or referenced by a way or relation", PbfFileMetadataAnnotator.Mode.class)
+            .optional()
+            .defaultValue(PbfFileMetadataAnnotator.Mode.STRIP_UNREFERENCED_NODES)
+            .build();
 
     private final SwitchParser<String> DATA_DESCRIPTOR =
-            stringSwitchParser(this, "data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
-                    .optional()
-                    .build();
+        stringSwitchParser(this, "data-descriptor", "Data descriptor such as HERE-UniDb-PBF-North_America-2020Q1")
+            .optional()
+            .build();
 
     private final SwitchParser<Precision> DATA_PRECISION =
-            precisionSwitchParser()
-                    .optional()
-                    .build();
+        precisionSwitchParser()
+            .optional()
+            .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser(this)
-                    .optional()
-                    .build();
+        wayFilterSwitchParser(this)
+            .optional()
+            .build();
 
     private final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser(this)
-                    .optional()
-                    .build();
+        relationFilterSwitchParser(this)
+            .optional()
+            .build();
 
     private PbfMetadataApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SwitchStatementWithTooFewBranches" })
@@ -165,14 +170,14 @@ public class PbfMetadataApplication extends Application
                     var annotator = listenTo(new PbfFileMetadataAnnotator(input, get(MODE), wayFilter, relationFilter));
 
                     var metadata = annotator.read()
-                            .withDataPrecision(get(DATA_PRECISION))
-                            .withMetadata(metadataFromDescriptor);
+                        .withDataPrecision(get(DATA_PRECISION))
+                        .withMetadata(metadataFromDescriptor);
 
                     boolean replace = existingMetadata != null;
                     if (annotator.write(metadata))
                     {
                         console().println(AsciiArt.textBox((replace ? "Replaced Metadata in " : "Added Metadata to ")
-                                + input.fileName(), "$", metadata));
+                            + input.fileName(), "$", metadata));
                     }
                     else
                     {
