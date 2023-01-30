@@ -26,10 +26,10 @@ import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.value.count.Count;
 import com.telenav.kivakit.filesystem.File;
 import com.telenav.kivakit.filesystem.Folder;
+import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.map.cutter.PbfRegionCutter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.filters.WayFilter;
 import com.telenav.mesakit.map.data.formats.pbf.processing.readers.SerialPbfReader;
-import com.telenav.mesakit.map.region.RegionProject;
 import com.telenav.mesakit.map.region.RegionSet;
 
 import static com.telenav.kivakit.commandline.SwitchParsers.threadCountSwitchParser;
@@ -55,39 +55,44 @@ public class PbfRegionExtractorApplication extends Application
     private final SwitchParser<Count> THREADS = threadCountSwitchParser(this, Count._16);
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser(this, "The input PBF file to process")
-                    .required()
-                    .build();
+        fileArgumentParser(this, "The input PBF file to process")
+            .required()
+            .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser(this, "output-folder", "Output folder")
-                    .optional()
-                    .build();
+        folderSwitchParser(this, "output-folder", "Output folder")
+            .optional()
+            .build();
 
     private final SwitchParser<RegionSet> EXTRACT =
-            regionListSwitchParser(this, "extract", "Comma separated list of region patterns to extract")
-                    .optional()
-                    .build();
+        regionListSwitchParser(this, "extract", "Comma separated list of region patterns to extract")
+            .optional()
+            .build();
 
     private final SwitchParser<RegionSet> EXTRACT_UNDER =
-            regionListSwitchParser(this, "extractUnder", "Comma separated list of region patterns to extract under (includes the region itself)")
-                    .optional()
-                    .build();
+        regionListSwitchParser(this, "extractUnder", "Comma separated list of region patterns to extract under (includes the region itself)")
+            .optional()
+            .build();
 
     private final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser(this)
-                    .required()
-                    .build();
+        wayFilterSwitchParser(this)
+            .required()
+            .build();
 
     protected PbfRegionExtractorApplication()
     {
-        addProject(RegionProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @Override

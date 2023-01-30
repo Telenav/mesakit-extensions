@@ -1,6 +1,5 @@
 package com.telenav.mesakit.plugins.josm.graph.view.tabs.tags;
 
-import com.telenav.kivakit.core.messaging.MessageFormat;
 import com.telenav.kivakit.core.string.Formatter;
 import com.telenav.kivakit.ui.desktop.component.Components;
 import com.telenav.kivakit.ui.desktop.component.searchlist.SearchList;
@@ -52,7 +51,7 @@ public class TagPanel extends JPanel
     {
         this.graphPanel = graphPanel;
 
-        indexer.addListener(message -> graphPanel.status(message.formatted(MessageFormat.WITH_EXCEPTION)));
+        indexer.addListener(message -> graphPanel.status(message.formatted()));
 
         Borders.insideMarginsOf(Margins.of(10)).apply(this);
 
@@ -64,12 +63,12 @@ public class TagPanel extends JPanel
         var columns = new JPanel();
 
         new HorizontalBoxLayout(columns, Spacing.AUTOMATIC_SPACING)
-                .add(new KeysColumn(this))
-                .add(new ValuesColumn(this));
+            .add(new KeysColumn(this))
+            .add(new ValuesColumn(this));
 
         new VerticalBoxLayout(this)
-                .add(columns)
-                .add(Layouts.leftJustify(searchViewAreaOnly));
+            .add(columns)
+            .add(Layouts.leftJustify(searchViewAreaOnly));
     }
 
     public void layer(GraphLayer layer)
@@ -95,8 +94,8 @@ public class TagPanel extends JPanel
             if (hasTags)
             {
                 var bounds = searchViewAreaOnly.isSelected()
-                        ? layer.activeLayer().model().bounds()
-                        : Rectangle.MAXIMUM;
+                    ? layer.activeLayer().model().bounds()
+                    : Rectangle.MAXIMUM;
 
                 var outer = this;
                 var request = new TagIndexRequest(graph(), bounds, index ->

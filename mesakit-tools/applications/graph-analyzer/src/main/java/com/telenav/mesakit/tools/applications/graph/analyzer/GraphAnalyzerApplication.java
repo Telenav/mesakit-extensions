@@ -94,26 +94,26 @@ public class GraphAnalyzerApplication extends Application
     }
 
     private final SwitchParser<Boolean> BY_HIGHWAY_TYPE =
-            booleanSwitchParser(this, "byHighwayType", "Show lengths by highway type")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "byHighwayType", "Show lengths by highway type")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final ArgumentParser<SmartGraphLoader> GRAPH_RESOURCE =
-            graphArgumentParser(this, "The graph(s) to analyze")
-                    .oneOrMore()
-                    .build();
+        graphArgumentParser(this, "The graph(s) to analyze")
+            .oneOrMore()
+            .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser(this, "output-folder", "Output folder")
-                    .optional()
-                    .build();
+        folderSwitchParser(this, "output-folder", "Output folder")
+            .optional()
+            .build();
 
     private final SwitchParser<Boolean> PRINT =
-            booleanSwitchParser(this, "print", "Print output to the console")
-                    .optional()
-                    .defaultValue(true)
-                    .build();
+        booleanSwitchParser(this, "print", "Print output to the console")
+            .optional()
+            .defaultValue(true)
+            .build();
 
     private final Set<EdgeRelation> all = new HashSet<>();
 
@@ -121,13 +121,18 @@ public class GraphAnalyzerApplication extends Application
 
     protected GraphAnalyzerApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(GRAPH_RESOURCE);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -378,14 +383,14 @@ public class GraphAnalyzerApplication extends Application
             result.add(RoadType.forIdentifier(i).toString(), miles(ofType[i], total));
         }
         result.add("FREEWAY + HIGHWAY",
-                miles(ofType[RoadType.FREEWAY.identifier()] + ofType[RoadType.HIGHWAY.identifier()], total));
+            miles(ofType[RoadType.FREEWAY.identifier()] + ofType[RoadType.HIGHWAY.identifier()], total));
         result.add("FREEWAY + HIGHWAY + THROUGHWAY", miles(ofType[RoadType.FREEWAY.identifier()]
-                + ofType[RoadType.HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
+            + ofType[RoadType.HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
         result.add("FREEWAY + HIGHWAY + URBAN_HIGHWAY + THROUGHWAY",
-                miles(ofType[RoadType.FREEWAY.identifier()] + ofType[RoadType.HIGHWAY.identifier()]
-                        + ofType[RoadType.URBAN_HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
+            miles(ofType[RoadType.FREEWAY.identifier()] + ofType[RoadType.HIGHWAY.identifier()]
+                + ofType[RoadType.URBAN_HIGHWAY.identifier()] + ofType[RoadType.THROUGHWAY.identifier()], total));
         result.add("LOCAL_ROAD + LOW_SPEED_ROAD", miles(
-                ofType[RoadType.LOCAL_ROAD.identifier()] + ofType[RoadType.LOW_SPEED_ROAD.identifier()], total));
+            ofType[RoadType.LOCAL_ROAD.identifier()] + ofType[RoadType.LOW_SPEED_ROAD.identifier()], total));
         result.add("NO LEFT TURN", Count.count(noLeftTurn).asCommaSeparatedString());
         result.add("NO RIGHT TURN", Count.count(noRightTurn).asCommaSeparatedString());
         result.add("NO U-TURN", Count.count(noUTurn).asCommaSeparatedString());
@@ -396,9 +401,9 @@ public class GraphAnalyzerApplication extends Application
         result.add("OTHER TURN RESTRICTIONS", Count.count(otherTurnRestriction).asCommaSeparatedString());
         result.add("TURN RESTRICTIONS", Count.count(turnRestrictions).asCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.turnRestrictions()",
-                Count.count(turnRestrictionsByEdgeTurnRestrictions).asCommaSeparatedString());
+            Count.count(turnRestrictionsByEdgeTurnRestrictions).asCommaSeparatedString());
         result.add("TURN RESTRICTIONS BY Edge.getRelations()",
-                Count.count(turnRestrictionsByEdgeGetRelations).asCommaSeparatedString());
+            Count.count(turnRestrictionsByEdgeGetRelations).asCommaSeparatedString());
 
         all.removeAll(restrictions);
         var i = 0;

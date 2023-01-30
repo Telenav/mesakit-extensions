@@ -66,26 +66,31 @@ public class GraphVerifierApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser(this, "The graph to verify")
-                    .required()
-                    .build();
+        fileArgumentParser(this, "The graph to verify")
+            .required()
+            .build();
 
     private final SwitchParser<File> SUB_GRAPH =
-            fileSwitchParser(this, "sub-graph", "The sub-graph to verify against the input graph")
-                    .optional()
-                    .build();
+        fileSwitchParser(this, "sub-graph", "The sub-graph to verify against the input graph")
+            .optional()
+            .build();
 
     private final GeoJsonDocument document = new GeoJsonDocument();
 
     private GraphVerifierApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -162,10 +167,10 @@ public class GraphVerifierApplication extends Application
                 if (differences.isDifferent())
                 {
                     warning("$ edge $ is different from $ edge $: $", edge.graph().name(), edge,
-                            worldEdge.graph().name(), worldEdge, differences);
+                        worldEdge.graph().name(), worldEdge, differences);
                     var feature = new GeoJsonFeature();
                     feature.title(
-                            "Edge " + edge.identifierAsLong() + " != " + worldEdge.identifierAsLong() + ": " + differences);
+                        "Edge " + edge.identifierAsLong() + " != " + worldEdge.identifierAsLong() + ": " + differences);
                     feature.add(new GeoJsonPolyline(edge.roadShape()));
                     feature.add(new GeoJsonPolyline(worldEdge.roadShape()));
                     document.add(feature);
@@ -218,7 +223,7 @@ public class GraphVerifierApplication extends Application
                         if (!differences.compare("tags", vertex.tagList(), node.tagList()))
                         {
                             System.out.println("node " + node.identifier() + " (index = " + vertex.index()
-                                    + ", id = " + vertex.mapIdentifier() + ") differs: " + differences);
+                                + ", id = " + vertex.mapIdentifier() + ") differs: " + differences);
                             nodeTagDifferences.increment();
                         }
                         nodes.increment();
@@ -250,7 +255,7 @@ public class GraphVerifierApplication extends Application
 
         information("Checked " + nodes + " nodes against " + graph.vertexCount() + " graph vertexes");
         information("Checked " + Count.parseCount(this, ways.size() + " ways against " + graph.edgeCount()
-                + " graph edges derived from " + graph.wayCount() + " ways"));
+            + " graph edges derived from " + graph.wayCount() + " ways"));
 
         information("Way tags had " + wayTagDifferences + " differences");
         information("Node tags had " + nodeTagDifferences + " differences");

@@ -64,70 +64,75 @@ public class CodecGeneratorApplication extends Application
     }
 
     public final ArgumentParser<File> INPUT =
-            fileArgumentParser(this, "The input .graph or .osm.pbf file")
-                    .required()
-                    .build();
+        fileArgumentParser(this, "The input .graph or .osm.pbf file")
+            .required()
+            .build();
 
     public final SwitchParser<WayFilter> WAY_FILTER =
-            wayFilterSwitchParser(this)
-                    .optional()
-                    .build();
+        wayFilterSwitchParser(this)
+            .optional()
+            .build();
 
     public final SwitchParser<RelationFilter> RELATION_FILTER =
-            relationFilterSwitchParser(this)
-                    .optional()
-                    .build();
+        relationFilterSwitchParser(this)
+            .optional()
+            .build();
 
     public final SwitchParser<Integer> TAG_CODEC_SAMPLE_FREQUENCY =
-            integerSwitchParser(this, "tag-codec-sample-frequency", "Only use every nth entity to build codecs to improve performance")
-                    .optional()
-                    .defaultValue(1)
-                    .build();
+        integerSwitchParser(this, "tag-codec-sample-frequency", "Only use every nth entity to build codecs to improve performance")
+            .optional()
+            .defaultValue(1)
+            .build();
 
     public final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM =
-            maximumSwitchParser(this, "tag-codec-strings-maximum", "The maximum number of strings in a string codec")
-                    .optional()
-                    .defaultValue(Maximum._256)
-                    .build();
+        maximumSwitchParser(this, "tag-codec-strings-maximum", "The maximum number of strings in a string codec")
+            .optional()
+            .defaultValue(Maximum._256)
+            .build();
 
     public final SwitchParser<Maximum> TAG_CODEC_STRINGS_MAXIMUM_BITS =
-            maximumSwitchParser(this, "tag-codec-strings-maximum-bits", "The maximum number of bits for a symbol in a string codec")
-                    .optional()
-                    .defaultValue(Maximum._12)
-                    .build();
+        maximumSwitchParser(this, "tag-codec-strings-maximum-bits", "The maximum number of bits for a symbol in a string codec")
+            .optional()
+            .defaultValue(Maximum._12)
+            .build();
 
     public final SwitchParser<Minimum> TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES =
-            minimumSwitchParser(this, "tag-codec-strings-minimum-occurrences", "The minimum number of occurrences for a string to be included in a string codec")
-                    .optional()
-                    .defaultValue(Minimum._1024)
-                    .build();
+        minimumSwitchParser(this, "tag-codec-strings-minimum-occurrences", "The minimum number of occurrences for a string to be included in a string codec")
+            .optional()
+            .defaultValue(Minimum._1024)
+            .build();
 
     public final SwitchParser<Maximum> TAG_CODEC_CHARACTERS_MAXIMUM_BITS =
-            maximumSwitchParser(this, "tag-codec-characters-maximum-bits", "The maximum number of bits for a symbol in an ASCII character codec")
-                    .optional()
-                    .defaultValue(Maximum._12)
-                    .build();
+        maximumSwitchParser(this, "tag-codec-characters-maximum-bits", "The maximum number of bits for a symbol in an ASCII character codec")
+            .optional()
+            .defaultValue(Maximum._12)
+            .build();
 
     public final SwitchParser<Minimum> TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES =
-            minimumSwitchParser(this, "tag-codec-characters-minimum-occurrences", "The minimum number of occurrences for an ASCII character to be included in a character codec")
-                    .optional()
-                    .defaultValue(Minimum._1024)
-                    .build();
+        minimumSwitchParser(this, "tag-codec-characters-minimum-occurrences", "The minimum number of occurrences for an ASCII character to be included in a character codec")
+            .optional()
+            .defaultValue(Minimum._1024)
+            .build();
 
     private final SwitchParser<Type> TYPE =
-            enumSwitchParser(this, "type", "The type of codec(s) to generate", Type.class)
-                    .required()
-                    .build();
+        enumSwitchParser(this, "type", "The type of codec(s) to generate", Type.class)
+            .required()
+            .build();
 
     protected CodecGeneratorApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -152,15 +157,15 @@ public class CodecGeneratorApplication extends Application
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
         return set(
-                TYPE,
-                WAY_FILTER,
-                RELATION_FILTER,
-                TAG_CODEC_SAMPLE_FREQUENCY,
-                TAG_CODEC_STRINGS_MAXIMUM,
-                TAG_CODEC_STRINGS_MAXIMUM_BITS,
-                TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES,
-                TAG_CODEC_CHARACTERS_MAXIMUM_BITS,
-                TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES,
-                QUIET);
+            TYPE,
+            WAY_FILTER,
+            RELATION_FILTER,
+            TAG_CODEC_SAMPLE_FREQUENCY,
+            TAG_CODEC_STRINGS_MAXIMUM,
+            TAG_CODEC_STRINGS_MAXIMUM_BITS,
+            TAG_CODEC_STRINGS_MINIMUM_OCCURRENCES,
+            TAG_CODEC_CHARACTERS_MAXIMUM_BITS,
+            TAG_CODEC_CHARACTERS_MINIMUM_OCCURRENCES,
+            QUIET);
     }
 }
