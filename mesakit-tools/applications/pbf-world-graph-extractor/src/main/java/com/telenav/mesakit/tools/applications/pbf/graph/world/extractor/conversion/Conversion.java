@@ -19,7 +19,7 @@
 package com.telenav.mesakit.tools.applications.pbf.graph.world.extractor.conversion;
 
 import com.telenav.kivakit.commandline.CommandLine;
-import com.telenav.kivakit.core.ensure.EnsureProblem;
+import com.telenav.kivakit.core.ensure.EnsureFailure;
 import com.telenav.kivakit.core.messaging.repeaters.BaseRepeater;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.core.progress.reporters.BroadcastingProgressReporter;
@@ -191,7 +191,7 @@ public class Conversion extends BaseRepeater
         converter.addListener(message ->
         {
             // We don't want to show all the validation failures unless DEBUG mode is on
-            if (!(message instanceof EnsureProblem) || isDebugOn())
+            if (!(message instanceof EnsureFailure) || isDebugOn())
             {
                 outer.receive(message);
             }
