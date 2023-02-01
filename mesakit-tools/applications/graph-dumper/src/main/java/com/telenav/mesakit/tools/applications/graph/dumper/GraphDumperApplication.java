@@ -66,66 +66,71 @@ public class GraphDumperApplication extends Application
     }
 
     private final SwitchParser<Boolean> DUMP_EDGE_IDENTIFIERS =
-            booleanSwitchParser(this, "all-edge-identifiers", "Dump all edge identifiers to the console")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "all-edge-identifiers", "Dump all edge identifiers to the console")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<File> DUMP_HEAP =
-            fileSwitchParser(this, "dump-heap-to", "Force load all data and dump graph heap to the given file")
-                    .optional()
-                    .build();
+        fileSwitchParser(this, "dump-heap-to", "Force load all data and dump graph heap to the given file")
+            .optional()
+            .build();
 
     private final SwitchParser<EdgeIdentifier> EDGE =
-            edgeIdentifierSwitchParser(this, "edge", "A specific edge identifier to dump")
-                    .optional()
-                    .build();
+        edgeIdentifierSwitchParser(this, "edge", "A specific edge identifier to dump")
+            .optional()
+            .build();
 
     private final ArgumentParser<SmartGraphLoader> INPUT =
-            graphArgumentParser(this, "The graph to dump")
-                    .required()
-                    .build();
+        graphArgumentParser(this, "The graph to dump")
+            .required()
+            .build();
 
     private final SwitchParser<Count> LIMIT =
-            countSwitchParser(this, "entity-limit", "The maximum number of edges, vertexes and relations to dump")
-                    .optional()
-                    .defaultValue(Count.MAXIMUM)
-                    .build();
+        countSwitchParser(this, "entity-limit", "The maximum number of edges, vertexes and relations to dump")
+            .optional()
+            .defaultValue(Count.MAXIMUM)
+            .build();
 
     private final SwitchParser<PlaceIdentifier> PLACE =
-            placeIdentifierSwitchParser(this, "place", "A specific place identifier to dump")
-                    .optional()
-                    .build();
+        placeIdentifierSwitchParser(this, "place", "A specific place identifier to dump")
+            .optional()
+            .build();
 
     private final SwitchParser<RelationIdentifier> RELATION =
-            relationIdentifierSwitchParser(this, "relation", "A specific relation identifier to dump")
-                    .optional()
-                    .build();
+        relationIdentifierSwitchParser(this, "relation", "A specific relation identifier to dump")
+            .optional()
+            .build();
 
     private final SwitchParser<Boolean> SPATIAL_INDEX =
-            booleanSwitchParser(this, "spatial-index", "Dump the spatial index")
-                    .optional()
-                    .build();
+        booleanSwitchParser(this, "spatial-index", "Dump the spatial index")
+            .optional()
+            .build();
 
     private final SwitchParser<VertexIdentifier> VERTEX =
-            vertexIdentifierSwitchParser(this, "vertex", "A specific vertex identifier to dump")
-                    .optional()
-                    .build();
+        vertexIdentifierSwitchParser(this, "vertex", "A specific vertex identifier to dump")
+            .optional()
+            .build();
 
     private final SwitchParser<PbfWayIdentifier> WAY =
-            pbfWayIdentifierSwitchParser(this, "way", "A specific way identifier to dump")
-                    .optional()
-                    .build();
+        pbfWayIdentifierSwitchParser(this, "way", "A specific way identifier to dump")
+            .optional()
+            .build();
 
     protected GraphDumperApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "SpellCheckingInspection" })
@@ -196,16 +201,16 @@ public class GraphDumperApplication extends Application
     protected ObjectSet<SwitchParser<?>> switchParsers()
     {
         return set(
-                WAY,
-                EDGE,
-                VERTEX,
-                RELATION,
-                PLACE,
-                LIMIT,
-                SPATIAL_INDEX,
-                DUMP_EDGE_IDENTIFIERS,
-                DUMP_HEAP,
-                QUIET);
+            WAY,
+            EDGE,
+            VERTEX,
+            RELATION,
+            PLACE,
+            LIMIT,
+            SPATIAL_INDEX,
+            DUMP_EDGE_IDENTIFIERS,
+            DUMP_HEAP,
+            QUIET);
     }
 
     private void dump(GraphElement element)

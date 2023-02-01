@@ -23,8 +23,8 @@ import com.telenav.kivakit.commandline.SwitchParser;
 import com.telenav.kivakit.core.collections.set.ObjectSet;
 import com.telenav.kivakit.core.progress.ProgressReporter;
 import com.telenav.kivakit.filesystem.File;
-import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.kivakit.resource.Extension;
+import com.telenav.kivakit.resource.compression.codecs.GzipCodec;
 import com.telenav.mesakit.graph.GraphProject;
 import com.telenav.mesakit.graph.io.archive.GraphArchive;
 import com.telenav.mesakit.graph.io.load.SmartGraphLoader;
@@ -50,21 +50,26 @@ public class GraphSlicerApplication extends Application
     }
 
     private final SwitchParser<SmartGraphLoader> GRAPH_RESOURCE =
-            graphSwitchParser(this, "graph", "The input graph to slice")
-                    .required()
-                    .build();
+        graphSwitchParser(this, "graph", "The input graph to slice")
+            .required()
+            .build();
 
     private final SwitchParser<File> OUTPUT =
-            fileSwitchParser(this, "output", "The output file")
-                    .required()
-                    .build();
+        fileSwitchParser(this, "output", "The output file")
+            .required()
+            .build();
 
     private final SwitchParser<Rectangle> BOUNDS =
-            rectangleSwitchParser(this, "bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
-                    .required()
-                    .build();
+        rectangleSwitchParser(this, "bounds", "The rectangle to slice to as minimumLatitude,minimumLongitude:maximumLatitude,maximumLongitude")
+            .required()
+            .build();
 
     protected GraphSlicerApplication()
+    {
+    }
+
+    @Override
+    protected void onInitialize()
     {
         addProject(GraphProject.class);
     }

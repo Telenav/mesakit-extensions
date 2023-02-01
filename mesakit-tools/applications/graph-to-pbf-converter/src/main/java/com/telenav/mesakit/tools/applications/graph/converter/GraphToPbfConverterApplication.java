@@ -54,14 +54,14 @@ public class GraphToPbfConverterApplication extends Application
     }
 
     private final ArgumentParser<File> INPUT =
-            fileArgumentParser(this, "The graph to convert to PBF")
-                    .required()
-                    .build();
+        fileArgumentParser(this, "The graph to convert to PBF")
+            .required()
+            .build();
 
     private final SwitchParser<Folder> OUTPUT_FOLDER =
-            folderSwitchParser(this, "output-folder", "Folder in which the output files are to be saved")
-                    .optional()
-                    .build();
+        folderSwitchParser(this, "output-folder", "Folder in which the output files are to be saved")
+            .optional()
+            .build();
 
     private final List<File> converted = new ArrayList<>();
 
@@ -69,13 +69,18 @@ public class GraphToPbfConverterApplication extends Application
 
     public GraphToPbfConverterApplication()
     {
-        addProject(GraphProject.class);
     }
 
     @Override
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(INPUT);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(GraphProject.class);
     }
 
     @Override
@@ -154,7 +159,7 @@ public class GraphToPbfConverterApplication extends Application
         else
         {
             outputFile = outputFolder.file(input.relativeTo(folder)).withoutCompoundExtension()
-                    .withExtension(OSM_PBF);
+                .withExtension(OSM_PBF);
         }
         outputFile.parent().ensureExists();
         return outputFile;

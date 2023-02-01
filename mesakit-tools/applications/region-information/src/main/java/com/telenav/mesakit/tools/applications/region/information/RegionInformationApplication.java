@@ -53,56 +53,62 @@ public class RegionInformationApplication extends Application
     }
 
     private final ArgumentParser<String> REGION =
-            stringArgumentParser(this, "A pattern matching the MesaKit code of the region to give information on")
-                    .required()
-                    .build();
+        stringArgumentParser(this, "A pattern matching the MesaKit code of the region to give information on")
+            .required()
+            .build();
 
     private final SwitchParser<Boolean> PARENT =
-            booleanSwitchParser(this, "parent", "Show the parent of the given region")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "parent", "Show the parent of the given region")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<Boolean> CODE =
-            booleanSwitchParser(this, "code", "Show only the region code")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "code", "Show only the region code")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<Boolean> FOLDER =
-            booleanSwitchParser(this, "folder", "Show only the region repository folder")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "folder", "Show only the region repository folder")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     @SuppressWarnings("SpellCheckingInspection")
     private final SwitchParser<Boolean> URI =
-            booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "uri", "The URI on Geofabrik where this region can be downloaded")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<Boolean> ALL =
-            booleanSwitchParser(this, "all", "Show all attributes for the region")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "all", "Show all attributes for the region")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     private final SwitchParser<Boolean> RECURSE =
-            booleanSwitchParser(this, "recurse", "Show sub-regions")
-                    .optional()
-                    .defaultValue(false)
-                    .build();
+        booleanSwitchParser(this, "recurse", "Show sub-regions")
+            .optional()
+            .defaultValue(false)
+            .build();
 
     public RegionInformationApplication()
     {
-        addProject(RegionProject.class);
     }
 
     @Override
+
     protected ObjectList<ArgumentParser<?>> argumentParsers()
     {
         return list(REGION);
+    }
+
+    @Override
+    protected void onInitialize()
+    {
+        addProject(RegionProject.class);
     }
 
     @Override
@@ -168,7 +174,7 @@ public class RegionInformationApplication extends Application
         if (matches.size() > 1)
         {
             commandLine.exit(
-                    "The pattern '" + name + "' was ambiguous. It matches:\n*" + AsciiArt.bulleted(matches, "*   - "));
+                "The pattern '" + name + "' was ambiguous. It matches:\n*" + AsciiArt.bulleted(matches, "*   - "));
         }
         return matches.first();
     }
